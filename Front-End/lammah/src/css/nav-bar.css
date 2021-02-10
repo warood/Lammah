@@ -1,0 +1,39 @@
+/* Select NavBar Page */
+.NavBar{
+    margin-top: 10px;
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+
+/*  NavBar Items */
+/* ========================= */
+.NavBar .logo,.NavBar .menu a{
+    cursor: pointer;
+
+}
+.NavBar .logo{
+    margin-left: 10%;
+}
+.NavBar .menu{
+margin-left: 10%;
+display: flex;
+justify-content: space-between;
+}
+
+.NavBar .menu a{
+  margin-left: 30%;
+  padding: 5%;
+}
+
+.NavBar .menu a:hover{
+border-bottom: 2px solid #ffffff;
+}
+/* ========================= */
+/* ========================= */
