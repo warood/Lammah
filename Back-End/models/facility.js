@@ -30,7 +30,7 @@ const facilitySchema = new mongoose.Schema({
         type :String , 
        
     } , 
-    appointment: {type: mongoose.Schema.Types.ObjectId, ref: 'appointment'},
+    appointment: [{type: mongoose.Schema.Types.ObjectId, ref: 'appointment'}],
     
 
 } , {timestamps :true})
