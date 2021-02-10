@@ -52,10 +52,6 @@ function App() {
           <Facilities setSelectFacility={setSelectFacility} />
         </Route>
 
-        <Route path='/facilities/:id'>
-          <OneFacility selectFacility={selectFacility} />
-        </Route>
-
       </Router>
     </div>
   );
