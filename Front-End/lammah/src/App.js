@@ -41,9 +41,9 @@ function App() {
             <NewFacility  />
         </Route>
 
-        <Route loginCallback={userLogin} auth={auth} path="/login">
+        <Route  path="/login">
 
-            <Login  />
+            <Login loginCallback={userLogin} auth={auth}  />
         </Route>
     </Router>
   );

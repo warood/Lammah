@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import { Link, useHistory } from 'react-router-dom'
-import {Button, Form, Container, Row, Modal } from "react-bootstrap";
+import {Button, Form, Container, Row, Modal , Col } from "react-bootstrap";
 
 
 export default function Login(props) {
@@ -27,24 +27,24 @@ export default function Login(props) {
     //login 
     const onSubmit = (event) => {
         event.preventDefault();
-        // axios
-        //   .post(`${API_URL}/api/auth/login`, credentials)
-        //   .then((res) => {
-        //     console.log("Express backend /login response", res);
+        axios
+          .post("http://localhost:5000/api/user/login", credentials)
+          .then((res) => {
+            console.log("Express backend /login response", res);
     
-        //     const token = res.data.token;
-        //     const msg = res.data.msg;
+            const token = res.data.token;
+            const msg = res.data.msg;
     
-        //     if (token) {
-        //       localStorage.setItem("jwtToken", token);
-        //       props.loginCallback();
-        //       console.log('props.loginCallback();',props.loginCallback())
-        //       console.log('before navigating to the profile')
-        //       history.push("/home");
-        //     } else {
-        //       console.log("Login error: ", msg);
-        //     }
-        //   });
+            if (token) {
+              localStorage.setItem("jwtToken", token);
+              props.loginCallback();
+              console.log('props.loginCallback();',props.loginCallback())
+              console.log('before navigating to the profile')
+              history.push("/home");
+            } else {
+              console.log("Login error: ", msg);
+            }
+          });
       };
 
 
@@ -80,10 +80,20 @@ export default function Login(props) {
             <Form.Group as={Row} controlId="formPlaintextPassword">
               <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                 Password
-          </Form.Label>
+              </Form.Label>
 
               <Form.Control name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
 
+            </Form.Group>
+
+            <Form.Group>
+            <Col md={12}>
+          <p> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
+            Register
+          </Link> </p>
+
+          <Button style={{marginLeft:"150px"}} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
+          </Col>
             </Form.Group>
            
           </Form>
@@ -93,7 +103,7 @@ export default function Login(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
+          
         </Modal.Footer>
       </Modal>
 

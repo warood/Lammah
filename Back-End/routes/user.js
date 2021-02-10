@@ -30,7 +30,7 @@ router.post("/register", (req, res) => {
      email: req.body.email,
      password: req.body.password,
      name: req.body.name,
-     phone: req.body.name,
+     phone: req.body.phone,
    };
 
    newUser.email = newUser.email.toLowerCase();

@@ -10,33 +10,33 @@ import * as Yup from 'yup';
 const validtionSchima = Yup.object({
   name: Yup.string().required("This Field is Reqiured"),
   email: Yup.string().required(" This Field is Reqiured!!").email("example@example.com"),
-  password: Yup.string().required("This Field is Reqiured!!").min(8, "must be more than 8 ").max(20, "whatEver")
+  phone: Yup.string().required("This Field is Reqiured!!").min(10, "must be more than 10 ").max(10),
+  password: Yup.string().required("This Field is Reqiured!!").min(8, "must be more than 8 ").max(20)
 })
 
 export default function SignUp() {
-
+  
   const history = useHistory();
 
   // to show aleart
   const [register, setRegister] = useState(true);
 
   // user info
-  const [user, setUser] = useState(false ? "" : { name: "", email: "", password: "" });
+  const [user, setUser] = useState(false ? "" : { name: "", email: "", password: "" , phone:"" });
 
   // to add the user info to database
-  const onSubmit = (user) => {
+  const onSubmit = (values) => {
     console.log("test")
 
     axios
-      .post("http://localhost:5000/api/user/register", user)
+      .post("http://localhost:5000/api/user/register", values)
       .then((res) => {
-
+        const user = res.data.user;
         if (user) {
           history.push("/login");
         } else {
-
           setTimeout(() => {
-            setRegister(true);
+            setRegister(false);
           }, 3000);
         }
 
@@ -52,7 +52,6 @@ export default function SignUp() {
         </Alert>
       )}
 
-
       <Formik
         initialValues={user}
         validationSchema={validtionSchima}
@@ -61,39 +60,54 @@ export default function SignUp() {
       >
 
         <Container className="justify-content-center" className=" pt-5" style={{ width: "70%", padding: "270px" }}>
+          <FormikForm className="mt-5">
+            <Col>
 
-          <Col>
-            <FormikForm className="mt-5">
 
               <Form.Group as={Row} controlId="formPlaintextName">
                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Name
-          </Form.Label>
+               </Form.Label>
 
-                <Form.Control as={Field} name="name" placeholder="Your Name" />
+                <Form.Control as={Field}
+                  placeholder="First name"
+                  name="name" />
+                <ErrorMessage name="name" render={(msg) => <Alert variant={"danger"}>
+                  {msg}
+                </Alert>} />
 
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextPhone">
                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Phone Number
-          </Form.Label>
+              </Form.Label>
 
                 <Form.Control as={Field} name="phone" placeholder="05XXXXXXXX" />
+                <ErrorMessage name="phone" render={(msg) => <Alert variant={"danger"}>
+                  {msg}
+                </Alert>} />
 
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextEmail">
                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Email
-          </Form.Label>
+              </Form.Label>
 
-                <Form.Control as={Field} name="email" placeholder="email@example.com" />
+                <Form.Control as={Field}
+                  type="email"
+                  placeholder="Enter email"
+                  name="email" />
+
+                <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
+                  {msg}
+                </Alert>} />
 
               </Form.Group>
 
               <Form.Group as={Row} controlId="formPlaintextPassword">
                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Password
-          </Form.Label>
+              </Form.Label>
 
                 <Form.Control as={Field} name="password" type="password" placeholder="Password" />
 
@@ -101,17 +115,25 @@ export default function SignUp() {
               <Form.Group as={Row} controlId="formPlaintextConfirmPassword">
                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Confirm Password
-          </Form.Label>
+                </Form.Label>
 
                 <Form.Control as={Field} name="password" type="password" placeholder="confirm password" />
 
-              </Form.Group>
-            </FormikForm>
-          </Col>
-          <Button type="submit" style={{ fontFamily: "serif", marginLeft: "140px" }} variant="secondary" active>
-            SignUp
-          </Button>
+                <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
+                  {msg}
+                </Alert>} />
 
+                <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
+                  {msg}
+                </Alert>} />
+
+              </Form.Group>
+
+            </Col>
+            <Button type="submit" style={{ fontFamily: "serif", marginLeft: "140px" }} variant="secondary" active>
+              SignUp
+          </Button>
+          </FormikForm>
         </Container>
 
       </Formik>
