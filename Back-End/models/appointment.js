@@ -11,7 +11,7 @@ const appointmentSchema = new mongoose.Schema({
         default:"inactive"
     } , 
     
-    user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
+    user: [{type: mongoose.Schema.Types.ObjectId, ref: 'user'}],
     
 
 } , {timestamps :true})
