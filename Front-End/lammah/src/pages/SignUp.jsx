@@ -59,13 +59,13 @@ export default function SignUp() {
 
       >
 
-        <Container className="justify-content-center" className=" pt-5" style={{ width: "70%", padding: "270px" }}>
+        <Container className="justify-content-center  pt-5"  style={{ width: "70%", padding: "270px" }}>
           <FormikForm className="mt-5">
             <Col>
 
 
               <Form.Group as={Row} controlId="formPlaintextName">
-                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Name
                </Form.Label>
 
@@ -78,7 +78,7 @@ export default function SignUp() {
 
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextPhone">
-                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{color:"black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Phone Number
               </Form.Label>
 
@@ -89,7 +89,7 @@ export default function SignUp() {
 
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextEmail">
-                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Email
               </Form.Label>
 
@@ -105,30 +105,16 @@ export default function SignUp() {
               </Form.Group>
 
               <Form.Group as={Row} controlId="formPlaintextPassword">
-                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
                   Password
               </Form.Label>
 
                 <Form.Control as={Field} name="password" type="password" placeholder="Password" />
-
-              </Form.Group>
-              <Form.Group as={Row} controlId="formPlaintextConfirmPassword">
-                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                  Confirm Password
-                </Form.Label>
-
-                <Form.Control as={Field} name="password" type="password" placeholder="confirm password" />
-
-                <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
-                  {msg}
-                </Alert>} />
-
                 <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
                   {msg}
                 </Alert>} />
-
               </Form.Group>
-
+              
             </Col>
             <Button type="submit" style={{ fontFamily: "serif", marginLeft: "140px" }} variant="secondary" active>
               SignUp
