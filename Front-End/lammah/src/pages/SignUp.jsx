@@ -44,7 +44,7 @@ export default function SignUp() {
   };
 
   return (
-    <>
+    <div style={{width:"60%"}}>
 
       {!register && (
         <Alert variant={"danger"}>
@@ -59,7 +59,7 @@ export default function SignUp() {
 
       >
 
-        <Container className="justify-content-center" className=" pt-5" style={{ width: "70%", padding: "270px" }}>
+        <Container className="justify-content-center  pt-5"  style={{ width: "70%", padding: "270px" }}>
           <FormikForm className="mt-5">
             <Col>
 
@@ -137,6 +137,6 @@ export default function SignUp() {
         </Container>
 
       </Formik>
-    </>
+    </div>
   )
 }

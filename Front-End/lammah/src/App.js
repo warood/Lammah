@@ -10,6 +10,7 @@ import jwt_decode from "jwt-decode";
 //Pages
 import Facilities from './pages/Facilities';
 import { Home } from "./pages/Home";
+import MyPage from './pages/MyPage'
 
 //Styles
 import './style/facilities.css';
@@ -42,10 +43,13 @@ function App() {
 
   useEffect(userLogin, []);
   return (
+
     <div className="App">
+
+{dataLoading &&
       <Router>
         {/* Nav Bar */}
-        <NavBar />
+        {/* <NavBar /> */}
 
         
           {/* Home Page */}
@@ -63,7 +67,6 @@ function App() {
 
 
           <Route path="/login">
-
             <Login loginCallback={userLogin} auth={auth} />
           </Route>
 
@@ -71,8 +74,13 @@ function App() {
             <Facilities setSelectFacility={setSelectFacility} />
           </Route>
 
+          <Route path='/mypage'>
+          <MyPage auth={auth} />
+          </Route>
+
 
         </Router>
+}
     </div>
   );
 }
