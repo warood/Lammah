@@ -1,3 +1,4 @@
+// Others
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from 'react';
@@ -8,10 +9,18 @@ import jwt_decode from "jwt-decode";
 
 //Pages
 import Facilities from './pages/Facilities';
+import { Home } from "./pages/Home";
 
 //Styles
 import './style/facilities.css';
-import OneFacility from "./pages/OneFacility";
+
+// components
+import { NavBar } from './components/NavBar'
+
+// styles
+import "./css/home.css";
+import "./css/nav-bar.css";
+
 
 function App() {
   const [selectFacility, setSelectFacility] = useState({})
@@ -35,27 +44,35 @@ function App() {
   return (
     <div className="App">
       <Router>
+        {/* Nav Bar */}
+        <NavBar />
 
-        <Route path="/signup">
-          <SignUp />
-        </Route>
+        
+          {/* Home Page */}
+          <Route exact path="/">
+            <Home />
+          </Route>
 
-        <Route path="/new-facility">
-          <NewFacility setAuth={setAuth} auth={auth}/>
-        </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+
+          <Route path="/new-facility">
+            <NewFacility setAuth={setAuth} auth={auth} />
+          </Route>
 
 
-        <Route  path="/login">
+          <Route path="/login">
 
-            <Login loginCallback={userLogin} auth={auth}  />
-        </Route>
+            <Login loginCallback={userLogin} auth={auth} />
+          </Route>
 
-        <Route path='/facilities'>
-          <Facilities setSelectFacility={setSelectFacility} />
+          <Route path='/facilities'>
+            <Facilities setSelectFacility={setSelectFacility} />
+          </Route>
 
-        </Route>
 
-      </Router>
+        </Router>
     </div>
   );
 }

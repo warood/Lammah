@@ -1,0 +1,107 @@
+/* Apply Style For The whole App*/
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+}
+/* ========================= */
+
+
+/* Select Home Page */
+.Home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    
+}
+
+/* The Header */
+.Home .header{  
+    width: 100%;
+    height: 700px;
+    background-image: url(/src/imges/home-header.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0px;
+    padding: 0px;
+
+
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items:  center;
+}
+
+/* Hart of the header "Description" */
+.Home .container{
+    margin-top: 8%;
+    width: 80%;
+    height: 500px;
+    font-size: 2em;
+}
+/* ========================= */
+
+
+
+
+/* Main Section */
+.Home .section{
+    color:black;
+    margin-top: 3%;
+    width: 65%;
+    height: 1000px;
+    display:flex;
+    flex-direction: column;
+}
+
+/* Top Facilities 1st Section */
+.Home .top-facilities{
+    display:flex;
+    flex-wrap: wrap;
+
+}
+
+.Home .tf-description{
+    margin: 5%;
+    max-width: 500px;
+    padding: 3px;
+}
+.Home .tf-description p{
+   max-width: 100%;
+}
+
+.Home .tf-title{
+padding: 5px;
+margin: 3%;
+font-size: 1em;
+}
+.Home .tf-img{
+    display:flex;
+    justify-content: center;
+}
+.Home .tf-img img{
+    max-height: 300px;
+}
+.Home .tf-items{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.Home .tf-items img{
+width: 230px;
+min-width: 150px;
+height: 400px;
+object-fit: cover;
+object-position: 50% 50%;
+margin: 5px;
+}
+
+.Home .tf-items .item2,.Home .tf-items .item4{
+    margin: 50px 30px 0 30px;
+}
+
+/* ========================= */
+/* ========================= */
+/* ========================= */
