@@ -15,6 +15,7 @@ import ManageBrand from "./pages/ManageBrand";
 //Styles
 import './style/facilities.css';
 import './style/manage-brand.css';
+import './style/new-facility.css';
 
 // components
 import { NavBar } from './components/NavBar'
