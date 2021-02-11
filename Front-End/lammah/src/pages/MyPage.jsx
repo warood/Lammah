@@ -27,18 +27,29 @@ export default function MyPage(props) {
     //to show edit Modal
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
     //take userinformation
     useEffect(() => {
         axios.get(`http://localhost:5000/api/user/my-page/${_id}`)
 
             .then((res) => {
-                setApointments(res.data.userAppointments)
-                setUserInformation(res.data.user)
-                console.log(res.data.user)
-                setEditProfile(res.data.user)
+                // setApointments(res.data.userAppointments)
+                setUserInformation(res.data.data.user_info)
+                console.log(res.data.data)
+                setEditProfile(res.data.data.user_info)
             })
+
+            //get user apointments
+            axios.get(`/my-page/appointment/${_id}`)
+            .then((res) => {
+               // setApointments(res.data.userAppointments)
+                console.log(res)
+                
+            })
+
+
     }, [])
+
+  //  /my-page/appointment/:userId
 
 
     //take change 
@@ -60,14 +71,14 @@ export default function MyPage(props) {
     }
 
     //show all user aponintments
-    const allApointment = apointments.map((apointment, index) => {
-        return <OneCardOfApointment
-            apointmentsDate={apointment.date}
-            status={apointment.status}
-            apointmentId={apointment._id}
-            facilityName={apointment.facility.name }
-        />
-    })
+    // const allApointment = apointments.map((apointment, index) => {
+    //     return <OneCardOfApointment
+    //         apointmentsDate={apointment.date}
+    //         status={apointment.status}
+    //         apointmentId={apointment._id}
+    //         facilityName={apointment.facility.name }
+    //     />
+    // })
 
 
 
@@ -80,9 +91,9 @@ export default function MyPage(props) {
                         <Image src="" width="100%" />
                     </Col>
                     <Col xs={4} xl={6} md={4}>
-                        <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Name:{userInformation.name}  </h4>
-                        <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email :{userInformation.email} </h4>
-                        <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone :{userInformation.phone} </h4>
+                        <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Name :  {userInformation.name}  </h4>
+                        <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email :  {userInformation.email} </h4>
+                        <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone :  {userInformation.phone} </h4>
 
                     </Col>
                     <Col className="pt-5" >
@@ -96,7 +107,7 @@ export default function MyPage(props) {
                     <h1 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> All Apointments </h1>
                 </Row>
                 <Row>
-                {allApointment}
+                {/* {allApointment} */}
 
                 </Row>
             </Container>
