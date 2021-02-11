@@ -10,9 +10,11 @@ import jwt_decode from "jwt-decode";
 //Pages
 import Facilities from './pages/Facilities';
 import { Home } from "./pages/Home";
+import ManageBrand from "./pages/ManageBrand";
 
 //Styles
 import './style/facilities.css';
+import './style/manage-brand.css';
 
 // components
 import { NavBar } from './components/NavBar'
@@ -45,7 +47,7 @@ function App() {
     <div className="App">
       <Router>
         {/* Nav Bar */}
-        <NavBar />
+        {/* <NavBar /> */}
 
         
           {/* Home Page */}
@@ -71,6 +73,9 @@ function App() {
             <Facilities setSelectFacility={setSelectFacility} />
           </Route>
 
+          <Route path='/manage-brand'>
+            <ManageBrand />
+          </Route>
 
         </Router>
     </div>

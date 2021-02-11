@@ -14,15 +14,16 @@ const validationSchema = Yup.object({
     price: Yup.string().required("Facility price is required "),
   })
 
-export default function NewFacility(props) {
+export default function NewFacility() {
 
     const [facility, setFacility] = useState({name: "", description:"", location:"", city:"", price:"", type:""});
     const history = useHistory();
     const onSubmit = (values) => {
 
          axios
-             .post(`http://localhost:5000/api/facility/new-facility`, { ...values, id: props.auth.currentUser._id })
+             .post('http://localhost:5000/api/facility/new-facility', values)
              .then((res) => {
+                 console.log(res)
                  history.push("/facilities"); 
              })
              .catch((err) => console.log(err));
@@ -50,7 +51,7 @@ export default function NewFacility(props) {
                                 Name
                             </Form.Label>
 
-                            <Form.Control as={Field} placeholder="Facility Name" name="name" />
+                            <Form.Control as={Field} placeholder="Facility Name" name="name" type="text" />
 
                         </Form.Group>
 
@@ -74,7 +75,7 @@ export default function NewFacility(props) {
                                 Location
                             </Form.Label>
 
-                            <Form.Control placeholder="Add Location Link" name="location"/>
+                            <Form.Control placeholder="Add Location Link" name="location" type="text"/>
 
                         </Form.Group>
 
@@ -83,11 +84,11 @@ export default function NewFacility(props) {
                                 City
                             </Form.Label>
 
-                            <Form.Control as="select" name="city">
+                            <Field as="select" name="city">
                                 <option>Riyadh</option>
                                 <option>Jeddah</option>
                                 <option>Dammam</option>
-                            </Form.Control>
+                            </Field>
 
                         </Form.Group>
                         <ErrorMessage name="city" render={(msg) =>  <Alert variant={"danger"}>
@@ -99,10 +100,10 @@ export default function NewFacility(props) {
                                 Type
                             </Form.Label>
 
-                            <Form.Control as="select" name="type">
+                            <Field as="select" name="type">
                                 <option>Chalet</option>
                                 <option>Camp</option>
-                            </Form.Control>
+                            </Field>
 
                         </Form.Group>
                         <ErrorMessage name="type" render={(msg) =>  <Alert variant={"danger"}>
@@ -113,7 +114,7 @@ export default function NewFacility(props) {
                                 Price
                             </Form.Label>
 
-                            <Form.Control as={Field} placeholder="SR" name="price"/>
+                            <Form.Control as={Field} placeholder="SR" name="price" type="text"/>
 
 
                         </Form.Group>
@@ -126,13 +127,13 @@ export default function NewFacility(props) {
                             <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">Desciption</Form.Label>
                             <Form.Control as="textarea" rows={3} name="desciption"/>
                         </Form.Group>
-
+                <Button style={{ fontFamily: "serif", marginLeft: "140px" }} variant="secondary" type="submit">
+                    Submite
+                </Button>
                     </Form>
                     </Formik>
                 </Col>
-                <Button style={{ fontFamily: "serif", marginLeft: "140px" }} variant="secondary" type="submit" active>
-                    Submite
-                </Button>
+
 
             </Container>
         </>
