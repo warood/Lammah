@@ -11,9 +11,13 @@ import jwt_decode from "jwt-decode";
 import Facilities from './pages/Facilities';
 import { Home } from "./pages/Home";
 import MyPage from './pages/MyPage'
+import ManageBrand from "./pages/ManageBrand";
+
 
 //Styles
 import './style/facilities.css';
+import './style/manage-brand.css';
+import './style/new-facility.css';
 
 // components
 import { NavBar } from './components/NavBar'
@@ -74,8 +78,14 @@ function App() {
             <Facilities setSelectFacility={setSelectFacility} />
           </Route>
 
+
           <Route path='/mypage'>
           <MyPage auth={auth} />
+          </Route>
+
+
+          <Route path='/manage-brand'>
+            <ManageBrand />
           </Route>
 
 
