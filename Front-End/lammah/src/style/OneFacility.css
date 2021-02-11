@@ -1,0 +1,13 @@
+
+.OneFacility{
+    width :60%;
+    margin: 0 auto ;
+}
+.OneFacility p,h1,h2,h3{
+    color:black;
+}
+
+.OneFacility .smallIMG{
+    width: 20px;
+    height: 20px;
+}
