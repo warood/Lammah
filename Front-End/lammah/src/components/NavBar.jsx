@@ -9,8 +9,14 @@ export const NavBar = () => {
 
             {/* The Menu */}
             <div className="menu">
-                <a as={Link} to="/">HOME</a>
-                <a as={Link} to="/facilities">FACILITIES</a>  
+                <Link to="/" className="menu-element"
+                 >HOME</Link>
+                 
+                <Link to="/facilities" className="menu-element">FACILITIES</Link>
+
+                <Link to="/manage-brand" className="menu-element">BRAND</Link>  
+
+                <Link to="/new-facility" className="menu-element">NEW FACILITY</Link>  
             </div>
             
         </div>

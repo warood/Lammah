@@ -1,7 +1,7 @@
 /* Select NavBar Page */
 .NavBar{
     margin-top: 10px;
-    position: absolute;
+    position: static;
     width: 100%;
     height: 50px;
     background-color: rgba(255, 255, 255, 0);
@@ -9,6 +9,8 @@
     align-items: center;
     font-weight: bold;
     font-size: 1em;
+    color: black;
+    border-bottom: 2px solid black;
 }
 
 
@@ -24,16 +26,20 @@
 .NavBar .menu{
 margin-left: 10%;
 display: flex;
-justify-content: space-between;
+width: 100%;
+
 }
 
-.NavBar .menu a{
-  margin-left: 30%;
-  padding: 5%;
-}
 
 .NavBar .menu a:hover{
-border-bottom: 2px solid #ffffff;
+border-bottom: 2px solid #000000;
 }
 /* ========================= */
 /* ========================= */
+
+
+.NavBar .menu-element{
+    text-decoration: none;
+    color: black;
+    margin-left: 10%;
+}

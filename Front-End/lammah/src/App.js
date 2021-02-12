@@ -53,7 +53,7 @@ function App() {
 {dataLoading &&
       <Router>
         {/* Nav Bar */}
-        {/* <NavBar /> */}
+        <NavBar />
 
         
           {/* Home Page */}
