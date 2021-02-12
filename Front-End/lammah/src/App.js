@@ -11,11 +11,17 @@ import jwt_decode from "jwt-decode";
 //Pages
 import Facilities from './pages/Facilities';
 import { Home } from "./pages/Home";
+
+import MyPage from './pages/MyPage'
+import ManageBrand from "./pages/ManageBrand";
 import Facility from "./pages/OneFacility";
 
 //Styles
 import './style/facilities.css';
+import './style/manage-brand.css';
+import './style/new-facility.css';
 import './style/OneFacility.css'
+
 // components
 import { NavBar } from './components/NavBar'
 
@@ -44,10 +50,13 @@ function App() {
 
   useEffect(userLogin, []);
   return (
+
     <div className="App">
+
+{dataLoading &&
       <Router>
         {/* Nav Bar */}
-        <NavBar />
+        {/* <NavBar /> */}
 
         
           {/* Home Page */}
@@ -65,19 +74,31 @@ function App() {
 
 
           <Route path="/login">
-
             <Login loginCallback={userLogin} auth={auth} />
+          </Route>
+
+          <Route path='/facilities/:id'>
+            <Facility setSelectFacility={setSelectFacility} />
           </Route>
 
           <Route path='/facilities'>
             <Facilities setSelectFacility={setSelectFacility} />
           </Route>
 
-          <Route path='/facility'>
-            <Facility  />
+          
+
+          <Route path='/mypage'>
+          <MyPage auth={auth} />
           </Route>
 
+
+          <Route path='/manage-brand'>
+            <ManageBrand />
+          </Route>
+
+
         </Router>
+}
     </div>
   );
 }

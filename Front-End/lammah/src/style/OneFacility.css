@@ -8,6 +8,11 @@
 }
 
 .OneFacility .smallIMG{
-    width: 20px;
-    height: 20px;
+    width: 60px;
+    height: 60px;
+} 
+
+.OneFacility .mainIMG{
+    width: 350px;
+    height: 300px;
 }

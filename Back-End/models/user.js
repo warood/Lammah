@@ -25,7 +25,6 @@ const userSchema = new mongoose.Schema({
         
     },
     
-    facility: [{type: mongoose.Schema.Types.ObjectId, ref: 'facility'}],
 
 
 } , {timestamps :true})

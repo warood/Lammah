@@ -7,32 +7,32 @@ import { Button, Col, Container, Row, Form ,Modal} from "react-bootstrap";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 export default function OneFacility(props) {
-  const [date, setDate] = useState(new Date());
+   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-//   const { id } = useParams();
-//  // const [Facility, setFacility] = useState({});
-// //   const [selectFacility, setSelectFacility] = useState(props.selectFacility);
+  const { id } = useParams();
+  const [Facility, setFacility] = useState({});
+  const [selectFacility, setSelectFacility] = useState(props.selectFacility);
 
-//   //const { name ,images , location, description , city , price ,type , appointment} = selectFacility;
-//   const userId = props.auth.currentUser;
-  const onChange = date =>{setDate(date)};
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-//   useEffect(() => {
-//    // if (!name) {
-//       axios.get(`api/facility/facilities/?=${id}`)
-//       .then(res => {
-//         console.log(res.data.msg)
-//         // let facility = res.data.msg.find((ele) => ele._id == id);
-//         // setSelectProduct(facility);
-//       })
-//   //  }
+  const { name ,images , location, description , city , price ,type , appointment} = selectFacility;
+ 
+ const onChange = date =>{setDate(date)};
+ const handleClose = () => setShow(false);
+ const handleShow = () => setShow(true);
+  useEffect(() => {
+    if (!city) {
+      axios.get(`api/facility/facilities/?=${id}`)
+      .then(res => {
+        console.log(res.data.msg)
+         let facility = res.data.msg.find((ele) => ele._id == id);
+        setSelectFacility(facility);
+      })
+   }
       
-//   }, []);
+  }, []);
 
-//   const onChangeInput = ({ target: { name, value } }) => {
-//     setProduct({ ...facility, [name]: value });
-//   };
+  // const onChangeInput = ({ target: { name, value } }) => {
+  //   setFacility({ ...facility, [name]: value });
+  // };
 
      
  
@@ -47,15 +47,22 @@ let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115
       <Container className="mt-5 ">
         <Row style={{marginBottom: "500px"}}>
   
-
+        <Col col-md-3>
+            
+            <Row><img className="smallIMG"  src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+            <Row><img className="smallIMG"  src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+            <Row><img className="smallIMG"  src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+          </Col>
 
           {/* main image */}
     
-          <Col md="6">
+          <Col col-md-6>
             <img className="mainIMG" width="100%" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" />
-          </Col>
+          </Col> 
+
+
           {/* facility details */}
-          <Col md="6">
+          <Col col-md-3>
             <h1> name: </h1>
             <p>type: camp</p>
             <p> descreption: This unit for families and singles consists of a main council that can accommodate up to 20 people, an outdoor session for 10 people, an external extension that can accommodate 10 people, 2 toilets, a kitchen with an oven, and many facilities such as speakers, a wood stove, a projector, a grooming session, Two parts and the total area of ​​1000 m </p>
