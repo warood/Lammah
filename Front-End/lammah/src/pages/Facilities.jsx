@@ -9,7 +9,7 @@ export default function Facilities(props) {
     useEffect(() => {
         axios.get('http://localhost:5000/api/facility/facilities')
             .then(res => {
-                setFacilities(res.data.msg)                 //store all facilities in the variable (facilities)
+                setFacilities(res.data.facilities)                 //store all facilities in the variable (facilities)
             })
     }, [])
 

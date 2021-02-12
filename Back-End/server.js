@@ -21,6 +21,7 @@ app.use(express.json());
 //routes
 app.use("/api/user", require("./routes/user"));
 app.use("/api/facility", require("./routes/facility"));
+app.use("/api/appointment", require("./routes/appointment"));
 
 
 

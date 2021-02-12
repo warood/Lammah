@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const Appointment = require("../models/appointment");
+const Facility = require('../models/facility')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -8,14 +10,17 @@ require("dotenv").config();
 
 //for authentication
 router.get("/", (req, res) => {
-    User.find()
+  User.find()
     .then((users) => {
       res.json({ msg: users });
     })
     .catch((err) => res.json({ msg: err }));
 });
+// ====================
 
 
+
+// Display All users
 router.get("/users", (req, res) => {
   User.find()
     .then((users) => {
@@ -23,21 +28,24 @@ router.get("/users", (req, res) => {
     })
     .catch((err) => res.json({ msg: err }));
 });
+// ====================
+
+
 
 // sign up
 router.post("/register", (req, res) => {
-   const newUser = {
-     email: req.body.email,
-     password: req.body.password,
-     name: req.body.name,
-     phone: req.body.phone,
-   };
+  const newUser = {
+    email: req.body.email,
+    password: req.body.password,
+    name: req.body.name,
+    phone: req.body.phone,
+  };
 
-   newUser.email = newUser.email.toLowerCase();
-   User.findOne({ email: newUser.email })
-     .then((user) => {
+  newUser.email = newUser.email.toLowerCase();
+  User.findOne({ email: newUser.email })
+    .then((user) => {
       // if the email exist
-     if (user) {
+      if (user) {
         res.json({
           msg: "This email already exist !",
         });
@@ -48,20 +56,21 @@ router.post("/register", (req, res) => {
         newUser.password = bcrypt.hashSync(req.body.password, salt);
         newUser.email = newUser.email.toLowerCase();
         User.create(newUser).then((user) => {
-        res.json({ msg: "User has been registerd", user: user });
+          res.json({ msg: "User has been registerd", user: user });
         });
       }
     })
     .catch((err) => res.json({ msg: err }));
 });
+// ====================
 
 
 //login
 router.post("/login", async (req, res) => {
-   let { email, password } = req.body;
- 
-   email = email.toLowerCase();
-   const user = await User.findOne({ email: email }); 
+  let { email, password } = req.body;
+
+  email = email.toLowerCase();
+  const user = await User.findOne({ email: email });
 
   // if the email doesn't exist
   if (!user) {
@@ -74,7 +83,7 @@ router.post("/login", async (req, res) => {
       user.password = undefined;
       let payload = { user };
       let token = jwt.sign(payload, process.env.SECRET_KEY, {
-        expiresIn:   60 * 60 * 60 * 1000 * 60 * 60,
+        expiresIn: 60 * 60 * 60 * 1000 * 60 * 60,
       }); // to the user info
       res.json({ msg: "User login ", token });
     }
@@ -84,59 +93,100 @@ router.post("/login", async (req, res) => {
     }
   }
 });
+// ====================
 
-
+// auth password steps
 router.get("/:token", (req, res) => {
   let token = req.params.token;
   jwt.verify(token, process.env.SECRET_KEY, (err, decode) => {
     if (err) return res.json({ msg: err });
-      let user = decode;
-      res.json({ msg: "User decoded", user });
+    let user = decode;
+    res.json({ msg: "User decoded", user });
   });
-}); 
+});
+// ====================
 
 
 //forgot password
-router.post('/forgot' , (req,res)=>{
+router.post('/forgot', (req, res) => {
 
-  User.findOne({email: req.body.email}, function (err, foundUser) {
+  User.findOne({ email: req.body.email }, function (err, foundUser) {
 
     password = req.body.password;
     console.log(foundUser);
     bcrypt.genSalt((err, salt) => {
       // changes every time
-          console.log("bcrypt salt:", salt);
-          bcrypt.hash(password, salt, (err, passwordHash) => {
-          console.log("password:", password);
-          console.log("passwordHash:", passwordHash);
-          User.updateOne({ email :req.body.email },{password: passwordHash }, (err, newUser) => {
-            
-          });
+      console.log("bcrypt salt:", salt);
+      bcrypt.hash(password, salt, (err, passwordHash) => {
+        console.log("password:", password);
+        console.log("passwordHash:", passwordHash);
+        User.updateOne({ email: req.body.email }, { password: passwordHash }, (err, newUser) => {
+
+        });
       });
-  });
+    });
     if (!foundUser) {
       console.log('No user with email ' + email);
-    }  
+    }
   })
 })
+// ====================
+
+
+// GET User User Info & All has appointments 
+router.get("/my-page/:userId", (req, res) => {
+  let userId = req.params.userId
+  User.findById(userId)
+    .then((user_info) => {
+      Appointment.find({ user: userId })
+        .then((appointments) => {
+          //send info without password
+          user_info.password = undefined
+          res.json({ msg: "User Info & Appointments ", user_info, appointments })
+
+        })
+    })
+
+})
+// =====================
+
+// Edit User Info 
+router.put('/:userId', (req, res) => {
+  const userId = req.params.userId
+  const updateUserInfo = {
+    email: req.body.email,
+    name: req.body.name,
+    phone: req.body.phone,
+  };
+
+
+  User.updateOne({ _id: userId }, updateUserInfo, (err, userInfo) => {
+
+    res.json({ msg: "User Info Updated!" })
+  });
+
+})
+// =====================
+
+
+
+// Manage Brand ( Info of All Facilities )
+router.get("/manage-brand/:userId", (req, res) => {
+  let userId = req.params.userId
+
+
+  Facility.find({ user: userId }).populate('appointment')
+    .then((facilities) => {
+      res.json({ msg: "User Info Updated!", facilities })
+    })
+})
+
+// =====================
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
 
 
