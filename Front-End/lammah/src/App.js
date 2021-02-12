@@ -1,3 +1,4 @@
+
 // Others
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,14 +11,16 @@ import jwt_decode from "jwt-decode";
 //Pages
 import Facilities from './pages/Facilities';
 import { Home } from "./pages/Home";
+
 import MyPage from './pages/MyPage'
 import ManageBrand from "./pages/ManageBrand";
-
+import Facility from "./pages/OneFacility";
 
 //Styles
 import './style/facilities.css';
 import './style/manage-brand.css';
 import './style/new-facility.css';
+import './style/OneFacility.css'
 
 // components
 import { NavBar } from './components/NavBar'
@@ -74,10 +77,15 @@ function App() {
             <Login  />
           </Route>
 
+          <Route path='/facilities/:id'>
+            <Facility selectFacility={selectFacility} />
+          </Route>
+
           <Route path='/facilities'>
             <Facilities setSelectFacility={setSelectFacility} />
           </Route>
 
+          
 
           <Route path='/mypage'>
           <MyPage auth={auth} />
@@ -96,3 +104,4 @@ function App() {
 }
 
 export default App;
+
