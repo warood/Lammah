@@ -19,20 +19,19 @@ export default function OneFacility(props) {
  const handleClose = () => setShow(false);
  const handleShow = () => setShow(true);
   useEffect(() => {
+
     if (!city) {
       axios.get(`api/facility/facilities/?=${id}`)
       .then(res => {
-        console.log(res.data.msg)
-         let facility = res.data.msg.find((ele) => ele._id == id);
-        setSelectFacility(facility);
+        console.log( "from one facility" + res.data);
+         let facility = res.data.find((ele) => ele._id == id);
+         setSelectFacility(Facility);
       })
    }
       
   }, []);
 
-  // const onChangeInput = ({ target: { name, value } }) => {
-  //   setFacility({ ...facility, [name]: value });
-  // };
+ 
 
      
  
@@ -63,12 +62,12 @@ let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115
 
           {/* facility details */}
           <Col col-md-3>
-            <h1> name: </h1>
-            <p>type: camp</p>
-            <p> descreption: This unit for families and singles consists of a main council that can accommodate up to 20 people, an outdoor session for 10 people, an external extension that can accommodate 10 people, 2 toilets, a kitchen with an oven, and many facilities such as speakers, a wood stove, a projector, a grooming session, Two parts and the total area of ​​1000 m </p>
-            <p>City: jeddah</p>
-            <p>location:<a href="#"> check in google map</a></p>
-            <p>Price: 500 SR</p>
+            <h1> name: {name} </h1>
+            <p>type: {type} </p>
+            <p> descreption: {description} </p>
+            <p>City: {city}</p>
+            <p>location:<a href="#"> {location}</a></p>
+            <p>Price: {price} SR</p>
 
      
             <button onClick={handleShow}>Book</button>

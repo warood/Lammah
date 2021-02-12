@@ -78,7 +78,7 @@ function App() {
           </Route>
 
           <Route path='/facilities/:id'>
-            <Facility setSelectFacility={setSelectFacility} />
+            <Facility selectFacility={selectFacility} />
           </Route>
 
           <Route path='/facilities'>
