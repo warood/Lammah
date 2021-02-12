@@ -34,7 +34,7 @@ export default function NewFacility() {
         console.log(e.target.files[0])
         var format = new FormData()
         format.append("image", e.target.files[0])
-        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID 1ce6786b554a029" } })
+        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID c5d679f9edcd982" } })
             .then(data => {
                 console.log(data)
                 setUpdateFacilityImg(data.data.data.link)
