@@ -32,10 +32,9 @@ export default function MyPage(props) {
         axios.get(`http://localhost:5000/api/user/my-page/${_id}`)
 
             .then((res) => {
-                // setApointments(res.data.userAppointments)
-                setUserInformation(res.data.data.user_info)
-                console.log(res.data.data)
-                setEditProfile(res.data.data.user_info)
+                setUserInformation(res.data.user_info)
+                setEditProfile(res.data.user_info)
+                console.log('res ', res)
             })
 
             //get user apointments

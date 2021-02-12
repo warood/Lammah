@@ -61,7 +61,7 @@ function App() {
         
           {/* Home Page */}
           <Route exact path="/">
-            <Home />
+            <Home loginCallback={userLogin} auth={auth} />
           </Route>
 
           <Route path="/signup">
@@ -74,7 +74,7 @@ function App() {
 
 
           <Route path="/login">
-            <Login loginCallback={userLogin} auth={auth} />
+            <Login  />
           </Route>
 
           <Route path='/facilities/:id'>

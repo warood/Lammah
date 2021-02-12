@@ -34,7 +34,7 @@ export default function NewFacility() {
         console.log(e.target.files[0])
         var format = new FormData()
         format.append("image", e.target.files[0])
-        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID 218eb66b0d739ed" } })
+        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID 1ce6786b554a029" } })
             .then(data => {
                 console.log(data)
                 setUpdateFacilityImg(data.data.data.link)
@@ -73,7 +73,8 @@ export default function NewFacility() {
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                                     Images
                                 </Form.Label>
-                                <Form.Control type="file" name="images" onChange={uploadImageHundler} />
+                                <Form.Control type="file" multiple name="images" onChange={uploadImageHundler} />
+                                <Form.Control as={Field} placeholder="www.image.com" name="images" type="text" />
                             </Form.Group>
 
                             <Form.Group as={Row} controlId="formPlaintextNameLocation">

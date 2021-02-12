@@ -16,8 +16,11 @@ router.get("/", (req, res) => {
     })
     .catch((err) => res.json({ msg: err }));
 });
+// ====================
 
 
+
+// Display All users
 router.get("/users", (req, res) => {
   User.find()
     .then((users) => {
@@ -25,6 +28,9 @@ router.get("/users", (req, res) => {
     })
     .catch((err) => res.json({ msg: err }));
 });
+// ====================
+
+
 
 // sign up
 router.post("/register", (req, res) => {
@@ -56,6 +62,7 @@ router.post("/register", (req, res) => {
     })
     .catch((err) => res.json({ msg: err }));
 });
+// ====================
 
 
 //login
@@ -86,8 +93,9 @@ router.post("/login", async (req, res) => {
     }
   }
 });
+// ====================
 
-
+// auth password steps
 router.get("/:token", (req, res) => {
   let token = req.params.token;
   jwt.verify(token, process.env.SECRET_KEY, (err, decode) => {
@@ -96,6 +104,7 @@ router.get("/:token", (req, res) => {
     res.json({ msg: "User decoded", user });
   });
 });
+// ====================
 
 
 //forgot password
@@ -121,21 +130,19 @@ router.post('/forgot', (req, res) => {
     }
   })
 })
+// ====================
 
 
-// GET User Info
+// GET User User Info & All has appointments 
 router.get("/my-page/:userId", (req, res) => {
   let userId = req.params.userId
   User.findById(userId)
-    .then((userInfo) => {
-      Facility.find({ user: userId })
-        .then((user_facilities) => {
-          userInfo.password = undefined
-          data = {
-            user_info: userInfo,
-            user_facilities: user_facilities
-          }
-          res.json({ msg: "User info ", data })
+    .then((user_info) => {
+      Appointment.find({ user: userId })
+        .then((appointments) => {
+          //send info without password
+          user_info.password = undefined
+          res.json({ msg: "User Info & Appointments ", user_info, appointments })
 
         })
     })
@@ -143,22 +150,7 @@ router.get("/my-page/:userId", (req, res) => {
 })
 // =====================
 
-
-// GET User Info
-router.get("/my-page/appointment/:userId", (req, res) => {
-  let userId = req.params.userId
-  Appointment.find({ user: userId })
-    .then((appointments) => {
-      res.json({ msg: "User Appointments ", appointments })
-
-    })
-
-})
-// =====================
-
-
-
-// Update User Info
+// Edit User Info 
 router.put('/:userId', (req, res) => {
   const userId = req.params.userId
   const updateUserInfo = {
@@ -178,32 +170,16 @@ router.put('/:userId', (req, res) => {
 
 
 
-
-// router.get("/manage-brand/:userId", (req, res) => {
-//   let userId = req.params.userId
-//   // const { name ,images , location, description , city , price ,type , userId} = req.body;
-
-
-//   Appointment.find().populate('user').populate('facility')
-//     .then((appointments) => {
-//       data = [{}]
-//       appointments.map((appointment)=>{
-//         data.push({
-
-//             facility: appointment.facility,
-//             _id: appointment._id,
-//             date: appointment.date,
-            
-          
-//           })
-//       })
-//       res.json({ msg: "User Appointments ", data })
+// Manage Brand ( Info of All Facilities )
+router.get("/manage-brand/:userId", (req, res) => {
+  let userId = req.params.userId
 
 
-//     })
-// })
-
-
+  Facility.find({ user: userId }).populate('appointment')
+    .then((facilities) => {
+      res.json({ msg: "User Info Updated!", facilities })
+    })
+})
 
 // =====================
 
