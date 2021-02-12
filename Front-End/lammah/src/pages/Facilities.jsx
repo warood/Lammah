@@ -21,15 +21,15 @@ export default function Facilities(props) {
                 to={`/facilities/${facility._id}`}
                 style={{ textDecoration: "none" }}>
                 <Card className="facility-card" >
-                    <Card.Img variant="top" src={facility.imgages} />
+                    <Card.Img variant="top" src={facility.images} />
                     <Card.Body>
                         <Card.Title>{facility.name}</Card.Title>
                         <Card.Text>
-                            {facility.description}
+                            {facility.city}
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">{facility.price}</small>
+                        <small className="text-muted">{facility.price} SR</small>
                     </Card.Footer>
                 </Card>
             </Link>

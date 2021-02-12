@@ -1,21 +1,29 @@
 .Facilities .container{
     margin-top: 5%;
+    color: black;
 }
 
-.Facilities .container .facility-row .facility-col{
+.Facilities .facility-col{
     display: flex;
     flex-wrap: wrap;
 }
 
-.Facilities .container .facility-row .facility-col .facility-card{
+.Facilities .facility-card{
     display: flex;
     flex: 1 0 300px;
     box-sizing: border-box;
     margin: 0 20px 40px 20px;
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 330px;
+    height: 350px;
 }
 
-.Facilities .container .facility-row .facility-col .facility-card:hover {
+.Facilities .facility-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
+}
+
+.Facilities img{
+    height: 200px;
+    background-size: cover;
+}
