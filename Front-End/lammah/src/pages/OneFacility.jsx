@@ -7,17 +7,21 @@ import { Button, Col, Container, Row, Form ,Modal} from "react-bootstrap";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 export default function OneFacility(props) {
-   const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const { id } = useParams();
   const [Facility, setFacility] = useState({});
   const [selectFacility, setSelectFacility] = useState(props.selectFacility);
+  const [apointment , setApointment ] = useState({})
+  const [userId , setUserId] = useState(props.auth.currentUser._id)
 
   const { name ,images , location, description , city , price ,type , appointment} = selectFacility;
  
- const onChange = date =>{setDate(date)};
  const handleClose = () => setShow(false);
- const handleShow = () => setShow(true);
+ const handleShow = () => {  
+  setShow(true)
+  setApointment({date: date ,facility :selectFacility ,status : "waiting"  , userId : userId   })
+};
   useEffect(() => {
 
     if (!city) {
@@ -30,6 +34,31 @@ export default function OneFacility(props) {
    }
       
   }, []);
+
+  
+ const onChange = date =>{
+  setDate(date)
+  setApointment({date: date ,facility :selectFacility ,status : "waiting"  , userId : userId } )
+ };
+
+
+  //booking function 
+ const onsubmit =()=>{
+
+     
+        
+       //console.log('newAppointment',apointment)
+
+        axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
+        .then((res) => {
+        console.log(res)
+        })
+        .catch((err) => console.log(err));
+
+
+        //to close the modal after book
+        setShow(false);
+ }
 
  
 
@@ -92,6 +121,10 @@ let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115
 
         </Modal.Body>
         <Modal.Footer>
+        <Button variant="secondary"   onClick={onsubmit}>
+          Book   
+          </Button>
+
         <Button variant="secondary" onClick={handleClose}>
             Close
          </Button>

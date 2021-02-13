@@ -1,9 +1,14 @@
 import React from 'react'
-import { Col, Card, Row, Modal, Form } from 'react-bootstrap'
+import { Col, Card, Row, Modal, Form , Button } from 'react-bootstrap'
 import Moment from 'react-moment';
 
 export default function OneCardOfApointment(props) {
 
+
+    const onSubmit = (e) =>{
+        console.log(e)
+
+    }
 
 
     //chane date format 
@@ -15,7 +20,7 @@ export default function OneCardOfApointment(props) {
                 <Card className="ml-5" style={{ width: "900px" }}>
                     <Row style={{ height: "100%" }} >
                         <Col xs={6} md={5}  >
-                            <Card.Img style={{ width: "100%" }} variant="top" src="" />
+                            <Card.Img style={{ width: "100%" }} variant="top" src={props.facilityImage} />
 
                         </Col>
                         <Col style={{ width: "300px", left: "150px" }} className="pl-5 mt-2" >
@@ -49,7 +54,9 @@ export default function OneCardOfApointment(props) {
                                         </Card.Text>
                                     </Col>
                                 </Row>
-
+                                {props.status == "waiting" ? <> <Button onClick={() => {onSubmit(props.apointmentId)}}> delete  </Button> </>:
+                                <></>
+                                }
                             </Card.Body>
 
                         </Col>
