@@ -34,21 +34,12 @@ export default function MyPage(props) {
             .then((res) => {
                 setUserInformation(res.data.user_info)
                 setEditProfile(res.data.user_info)
-                console.log('res ', res)
-            })
-
-            //get user apointments
-            axios.get(`/my-page/appointment/${_id}`)
-            .then((res) => {
-               // setApointments(res.data.userAppointments)
-                console.log(res)
-                
+                setApointments(res.data.appointments)
             })
 
 
     }, [])
 
-  //  /my-page/appointment/:userId
 
 
     //take change 
@@ -70,14 +61,15 @@ export default function MyPage(props) {
     }
 
     //show all user aponintments
-    // const allApointment = apointments.map((apointment, index) => {
-    //     return <OneCardOfApointment
-    //         apointmentsDate={apointment.date}
-    //         status={apointment.status}
-    //         apointmentId={apointment._id}
-    //         facilityName={apointment.facility.name }
-    //     />
-    // })
+    const allApointment = apointments.map((apointment, index) => {
+        return <OneCardOfApointment
+            apointmentsDate={apointment.date}
+            status={apointment.status}
+            apointmentId={apointment._id}
+           facilityName={apointment.facility.name }
+           facilityImage = {apointment.facility.images}
+        />
+    })
 
 
 
@@ -106,7 +98,7 @@ export default function MyPage(props) {
                     <h1 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> All Apointments </h1>
                 </Row>
                 <Row>
-                {/* {allApointment} */}
+                {allApointment}
 
                 </Row>
             </Container>
