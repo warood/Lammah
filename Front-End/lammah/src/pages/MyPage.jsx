@@ -74,6 +74,8 @@ export default function MyPage(props) {
             apointmentId={apointment._id}
            facilityName={apointment.facility.name }
            facilityImage = {apointment.facility.images}
+           facilityId = {apointment.facility._id}
+
         />
     })
 
