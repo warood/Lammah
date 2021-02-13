@@ -15,13 +15,14 @@ import { Home } from "./pages/Home";
 import MyPage from './pages/MyPage'
 import ManageBrand from "./pages/ManageBrand";
 import Facility from "./pages/OneFacility";
+import Admin from "./pages/Admin";
 
 //Styles
 import './style/facilities.css';
 import './style/manage-brand.css';
 import './style/new-facility.css';
-import './style/OneFacility.css'
-
+import './style/OneFacility.css';
+import "./style/admin.css";
 // components
 import { NavBar } from './components/NavBar'
 
@@ -96,6 +97,10 @@ function App() {
             <ManageBrand auth={auth}/>
           </Route>
 
+          <Route path="/admin" >
+            <Admin 
+            auth={auth}/>
+          </Route>
 
         </Router>
 }
