@@ -26,6 +26,7 @@ export default function NewFacility(props) {
             .then((res) => {
                 console.log(res)
                 history.push("/facilities");
+             alert("Wait for our confirmation to add your facility.Tank You !!");
             })
             .catch((err) => console.log(err));
     }

@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import { Link, useHistory } from 'react-router-dom'
 import { Button, Form, Container, Row, Modal, Col, Alert } from "react-bootstrap";
@@ -74,20 +75,15 @@ export const NavBar = (props) => {
                         <Link to="/manage-brand" className="menu-element">BRAND</Link>
                         :
                         <></>}
-
                     {props.auth.isLoggedIn ?
                         <Link to="/my-page" className="menu-element">MY PAGE</Link>
                         :
                         <></>}
-
                     {props.auth.isLoggedIn ?
                         <Link to="/new-facility" className="menu-element">NEW FACILITY</Link>
 
                         :
                         <></>}
-
-
-
                     {props.auth.isLoggedIn ?
                         <></>
                         :
@@ -149,8 +145,6 @@ export const NavBar = (props) => {
                                                 {msg}
                                             </Alert>} />
                                         </Form.Group>
-
-
                                         <Form.Group as={Row} controlId="formPlaintextPassword">
                                             <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
                                                 Password
@@ -161,7 +155,6 @@ export const NavBar = (props) => {
                                                 {msg}
                                             </Alert>} />
                                         </Form.Group>
-
                                         <Form.Group>
                                             <Col md={12}>
                                                 <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
@@ -176,7 +169,6 @@ export const NavBar = (props) => {
                                     </FormikForm>
                                 </Container>
                             </Formik>
-
                         </Modal.Body>
 
                         <Modal.Footer>
@@ -186,7 +178,6 @@ export const NavBar = (props) => {
 
                         </Modal.Footer>
                     </Modal>
-
                 </>
                 {/* ==================== */}
 

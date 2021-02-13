@@ -25,7 +25,7 @@ export default function OneFacility(props) {
   useEffect(() => {
 
     if (!city) {
-      axios.get(`api/facility/facilities/?=${id}`)
+      axios.get(`http://localhost:5000api/facility/facilities/?=${id}`)
       .then(res => {
         console.log( "from one facility" + res.data);
          let facility = res.data.find((ele) => ele._id == id);
