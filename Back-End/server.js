@@ -22,7 +22,7 @@ app.use(express.json());
 app.use("/api/user", require("./routes/user"));
 app.use("/api/facility", require("./routes/facility"));
 app.use("/api/appointment", require("./routes/appointment"));
-
+app.use("/api/admin", require("./routes/admin"));
 
 
 app.listen(PORT, () => console.log(`server running in ${PORT}`));
