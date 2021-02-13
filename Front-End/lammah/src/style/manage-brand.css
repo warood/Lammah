@@ -4,22 +4,27 @@
     color: black;
 }
 
+.ManageBrand h3{
+    color: rgb(221, 24, 73);
+    font-weight: bold;
+}
+
 .ManageBrand .card-container{
     margin-bottom: 20px;
 }
 
-.ManageBrand .card-container .card-body{
+.ManageBrand .card-body{
     display: flex;
 }
 
-.ManageBrand .card-container .card-body img{
+.ManageBrand .card-body img{
     display: flex;
     width: 200px;
     flex: 10%;
     margin-right: 50px;
 }
 
-.ManageBrand .card-container .card-content{
+.ManageBrand .card-content{
     display: flex;
     flex-direction: column;
     flex: 50%;
@@ -35,6 +40,7 @@
 .ManageBrand .card-container button{
     width: 100px;
     margin-top: 20px;
+    display: flex;
 }
 
 /* Responsive layout - makes a one column layout instead of a three-column layout */

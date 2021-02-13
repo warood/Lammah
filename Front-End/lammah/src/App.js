@@ -66,7 +66,7 @@ function App() {
           </Route>
 
           <Route path="/new-facility">
-            <NewFacility setAuth={setAuth} auth={auth} />
+            <NewFacility auth={auth} />
           </Route>
 
 
@@ -85,7 +85,7 @@ function App() {
 
 
           <Route path='/manage-brand'>
-            <ManageBrand />
+            <ManageBrand auth={auth}/>
           </Route>
 
 

@@ -40,7 +40,7 @@ router.get("/facilities/:id", (req,res)=>{
 // =====================
 
 
-// Delete ×ne Facility  by id
+// Delete one Facility  by id
 router.delete('/:facilityId', (req, res) => {
     
     let facilityId = req.params.facilityId

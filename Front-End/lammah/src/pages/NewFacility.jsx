@@ -14,8 +14,8 @@ const validationSchema = Yup.object({
     price: Yup.string().required("Facility price is required "),
 })
 
-export default function NewFacility() {
-
+export default function NewFacility(props) {
+    const userId = props.auth.currentUser._id;
     const history = useHistory();
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
 
@@ -48,7 +48,7 @@ export default function NewFacility() {
             <Container className="justify-content-center" className=" pt-5" style={{ width: "70%", padding: "270px" }}>
                 <Col>
                     <Formik
-                        initialValues={{ name: "", description: "", location: "", city: "", price: "", type: "", images:updateFacilityImg }}
+                        initialValues={{ name: "", description: "", location: "", city: "", price: "", type: "", images:updateFacilityImg, userId: userId }}
                         validationSchema={validationSchema}
                         onSubmit={values => onSubmit(values)}
                     >
