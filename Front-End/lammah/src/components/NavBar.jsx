@@ -63,6 +63,11 @@ export const NavBar = (props) => {
                 <></>}
                 
                 {props.auth.isLoggedIn?
+                <Link to="/my-page" className="menu-element">MY PAGE</Link>
+                : 
+                <></>}
+
+                {props.auth.isLoggedIn?
                 <Link to="/new-facility" className="menu-element">NEW FACILITY</Link>
                 
                 : 

@@ -86,8 +86,8 @@ function App() {
           </Route>
 
           
-
-          <Route exact path='/mypage'>
+          
+          <Route exact path='/my-page'>
           <MyPage auth={auth} />
           </Route>
 
