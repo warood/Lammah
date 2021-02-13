@@ -50,7 +50,7 @@ export default function Admin(props) {
      const confirmFacility = (facility) => {
        
         const facilityId = facility._id;
-       console.log("front end status" + facility.status)
+     
         axios.put(`http://localhost:5000/api/admin/${facilityId}/status`)
             .then(data => {
                
