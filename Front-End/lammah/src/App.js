@@ -78,7 +78,7 @@ function App() {
           </Route>
 
           <Route exact path='/facilities/:id'>
-            <Facility selectFacility={selectFacility} />
+            <Facility auth={auth} selectFacility={selectFacility} />
           </Route>
 
           <Route exact path='/facilities'>

@@ -4,8 +4,6 @@ import Moment from 'react-moment';
 
 export default function OneCardOfApointment(props) {
 
-
-
     //chane date format 
     const dateToFormat = props.apointmentsDate;
 
@@ -15,7 +13,7 @@ export default function OneCardOfApointment(props) {
                 <Card className="ml-5" style={{ width: "900px" }}>
                     <Row style={{ height: "100%" }} >
                         <Col xs={6} md={5}  >
-                            <Card.Img style={{ width: "100%" }} variant="top" src="" />
+                            <Card.Img style={{ width: "100%" }} variant="top" src={props.facilityImage} />
 
                         </Col>
                         <Col style={{ width: "300px", left: "150px" }} className="pl-5 mt-2" >

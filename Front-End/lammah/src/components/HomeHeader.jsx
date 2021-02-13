@@ -54,8 +54,7 @@ export default function HomeHeader(props) {
               console.log("Logging Out!");
               localStorage.removeItem("jwtToken");
               props.loginCallback() 
-              history.push(`/`)
-              ;
+              history.push(`/`);
             }}>
                     Logout
                 </Link>
