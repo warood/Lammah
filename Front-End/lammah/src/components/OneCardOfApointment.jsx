@@ -1,8 +1,15 @@
 import React from 'react'
-import { Col, Card, Row, Modal, Form } from 'react-bootstrap'
+import { Col, Card, Row, Modal, Form , Button } from 'react-bootstrap'
 import Moment from 'react-moment';
 
 export default function OneCardOfApointment(props) {
+
+
+    const onSubmit = (e) =>{
+        console.log(e)
+
+    }
+
 
     //chane date format 
     const dateToFormat = props.apointmentsDate;
@@ -47,7 +54,9 @@ export default function OneCardOfApointment(props) {
                                         </Card.Text>
                                     </Col>
                                 </Row>
-
+                                {props.status == "waiting" ? <> <Button onClick={() => {onSubmit(props.apointmentId)}}> delete  </Button> </>:
+                                <></>
+                                }
                             </Card.Body>
 
                         </Col>
