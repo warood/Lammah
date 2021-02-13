@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
-
-export default function ManageBrand() {
+import React, {  useEffect} from "react";
+import { useHistory } from "react-router-dom";
+export default function ManageBrand(props) {
+    const history = useHistory();
     useEffect(() => {
 
 
     }, [])
 
     return (
+        <>
+        {props.auth.isLoggedIn?
         <div className="ManageBrand">
             <h1>Reservation Management</h1>
             <hr />
@@ -79,5 +82,11 @@ export default function ManageBrand() {
             </Card>
 
         </div>
+    :<>
+    {
+    history.push(`/`)
+      }
+    </>}
+    </>
     )
 }
