@@ -85,7 +85,7 @@ let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115
           {/* main image */}
     
           <Col col-md-6>
-            <img className="mainIMG" width="100%" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" />
+            <img className="mainIMG" width="100%" src={images} alt="" srcset="" />
           </Col> 
 
 
