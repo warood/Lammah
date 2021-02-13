@@ -35,7 +35,7 @@ export default function Admin(props) {
     const changeUserPermission = (e, user) =>{
        
         const isAdmin = user.isAdmin
-        console.log(isAdmin)
+       
         if(e==false&&isAdmin==true || e==true&&isAdmin==false){
             axios.put(`http://localhost:5000/api/admin/${user._id}`, {isAdmin: isAdmin})
             .then(res=>{
@@ -46,11 +46,24 @@ export default function Admin(props) {
 
     
 
+     /*    *****    CONFIRM Facility    *****       */
+     const confirmFacility = (facility) => {
+       
+        const facilityId = facility._id;
+       console.log("front end status" + facility.status)
+        axios.put(`http://localhost:5000/api/admin/${facilityId}/status`)
+            .then(data => {
+               
+                setChangeAfterDelete(!changeAfterDelete)
+            })
+    }
+
+
     /*    *****    DELETE Facility    *****       */
     const deleteFacility = (facility) => {
        
         const facilityId = facility._id;
-        axios.delete(`http://localhost:5000/api/admin/${facilityId}`)
+        axios.delete(`http://localhost:5000/api/admin/${facilityId}/deleteFacility`)
             .then(data => {
                 // console.log(data)
                 setChangeAfterDelete(!changeAfterDelete)
@@ -70,7 +83,7 @@ export default function Admin(props) {
 
     
 
-    /*    *****    MAP ALL PRODUCTS    *****       */
+    /*    *****    MAP ALL Facilities    *****       */
     const allFacilities = facilities.map(facility => {
 
         return (
@@ -117,6 +130,29 @@ export default function Admin(props) {
     })
 
 
+
+    /*    *****    MAP ALL NEW  ADDED FACILITIES     *****       */
+
+
+    let newAdd = facilities.filter(function (facility) { 
+        return facility.status == 0; 
+    }).map(function (facility) { 
+        return (
+            <>
+                <div className='content-container'>
+                    <img
+                        src={facility.images[0]}
+                        alt=""
+                    />
+                    <h5 className="container-title">{facility.name}</h5>
+                    <p className="admin-confirm-btn" onClick={() => confirmFacility(facility)}>&#x2714;</p>
+                    <p className="admin-delete-btn" onClick={() => deleteFacility(facility)}>X</p>
+                </div>
+            </>
+        ) 
+    }) 
+
+
     /*    *****    RENDER ADMIN PAGE    *****       */
 
     if (!props.auth.isLoggedIn) {
@@ -154,7 +190,7 @@ export default function Admin(props) {
 
                 <h1>Confirm addition of facility</h1>
                 <div className='admin-container'>
-                  
+                         {newAdd}
                 </div>
                 
             </div>
