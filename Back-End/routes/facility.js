@@ -39,6 +39,20 @@ router.get("/facilities/:id", (req,res)=>{
 })
 // =====================
 
+// Edit Facility  
+router.put("/:facilityId/edit", (req,res)=>{
+    let facilityId = req.params.facilityId
+    const {name, description, images, location, price} = req.body;
+
+  Facility.findOne({_id: facilityId})
+  .then(facility=>{
+    Facility.updateOne({_id: facilityId}, {name :name , description:description , images:images, location:location, price:price}, (err, updateFacility)=>{
+      res.json({msg: "updated facility", updateFacility})
+    })
+     })
+ })
+ // =====================
+
 
 // Delete one Facility  by id
 router.delete('/:facilityId', (req, res) => {

@@ -1,3 +1,4 @@
+
 // Others
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,14 +11,16 @@ import jwt_decode from "jwt-decode";
 //Pages
 import Facilities from './pages/Facilities';
 import { Home } from "./pages/Home";
+
 import MyPage from './pages/MyPage'
 import ManageBrand from "./pages/ManageBrand";
-
+import Facility from "./pages/OneFacility";
 
 //Styles
 import './style/facilities.css';
 import './style/manage-brand.css';
 import './style/new-facility.css';
+import './style/OneFacility.css'
 
 // components
 import { NavBar } from './components/NavBar'
@@ -53,7 +56,7 @@ function App() {
 {dataLoading &&
       <Router>
         {/* Nav Bar */}
-        {/* <NavBar /> */}
+        <NavBar />
 
         
           {/* Home Page */}
@@ -61,25 +64,30 @@ function App() {
             <Home loginCallback={userLogin} auth={auth} />
           </Route>
 
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignUp />
           </Route>
 
-          <Route path="/new-facility">
-            <NewFacility auth={auth} />
+          <Route exact path="/new-facility">
+            <NewFacility setAuth={setAuth} auth={auth} />
           </Route>
 
 
-          <Route path="/login">
+          <Route exact path="/login">
             <Login  />
           </Route>
 
-          <Route path='/facilities'>
+          <Route exact path='/facilities/:id'>
+            <Facility selectFacility={selectFacility} />
+          </Route>
+
+          <Route exact path='/facilities'>
             <Facilities setSelectFacility={setSelectFacility} />
           </Route>
 
+          
 
-          <Route path='/mypage'>
+          <Route exact path='/mypage'>
           <MyPage auth={auth} />
           </Route>
 
@@ -96,3 +104,4 @@ function App() {
 }
 
 export default App;
+
