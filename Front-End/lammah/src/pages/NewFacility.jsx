@@ -14,8 +14,8 @@ const validationSchema = Yup.object({
     price: Yup.string().required("Facility price is required "),
 })
 
-export default function NewFacility() {
-
+export default function NewFacility(props) {
+    const userId = props.auth.currentUser._id;
     const history = useHistory();
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
 
@@ -34,7 +34,7 @@ export default function NewFacility() {
         console.log(e.target.files[0])
         var format = new FormData()
         format.append("image", e.target.files[0])
-        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID 1ce6786b554a029" } })
+        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID c5d679f9edcd982" } })
             .then(data => {
                 console.log(data)
                 setUpdateFacilityImg(data.data.data.link)
@@ -54,7 +54,7 @@ export default function NewFacility() {
                   }}>
                 <Col>
                     <Formik
-                        initialValues={{ name: "", description: "", location: "", city: "", price: "", type: "", images:updateFacilityImg }}
+                        initialValues={{ name: "", description: "", location: "", city: "", price: "", type: "", images:updateFacilityImg, userId: userId }}
                         validationSchema={validationSchema}
                         onSubmit={values => onSubmit(values)}
                     >
