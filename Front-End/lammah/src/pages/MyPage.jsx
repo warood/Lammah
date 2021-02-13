@@ -4,11 +4,15 @@ import axios from "axios";
 import { Row, Col, Image, Button, Container, Modal , Form} from "react-bootstrap";
 import { GearFill } from 'react-bootstrap-icons';
 import OneCardOfApointment from '../components/OneCardOfApointment'
-
+import { useHistory } from "react-router-dom";
 
 
 
 export default function MyPage(props) {
+    const history = useHistory();
+        
+       
+          
     
     const  {_id} = props.auth.currentUser;
 
@@ -28,7 +32,7 @@ export default function MyPage(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     //take userinformation
-    useEffect(() => {
+    useEffect(() => {  
         axios.get(`http://localhost:5000/api/user/my-page/${_id}`)
 
             .then((res) => {
@@ -61,6 +65,7 @@ export default function MyPage(props) {
 
     }
 
+
     //show all user aponintments
     const allApointment = apointments.map((apointment, index) => {
         return <OneCardOfApointment
@@ -76,7 +81,8 @@ export default function MyPage(props) {
 
     return (
         <>
-
+        {props.auth.isLoggedIn?
+        <>
             <Container className="pt-5"  >
                 <Row>
                     <Col xs={4} xl={3} md={4}>
@@ -143,7 +149,12 @@ export default function MyPage(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
+          
         </>
+        : <>{
+            history.push(`/`)
+              }
+              </>}
+       </>
     )
 }

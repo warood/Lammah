@@ -56,12 +56,12 @@ function App() {
 {dataLoading &&
       <Router>
         {/* Nav Bar */}
-        <NavBar />
+        <NavBar loginCallback={userLogin} auth={auth}/>
 
         
           {/* Home Page */}
           <Route exact path="/">
-            <Home loginCallback={userLogin} auth={auth} />
+            <Home />
           </Route>
 
           <Route exact path="/signup">
@@ -86,14 +86,14 @@ function App() {
           </Route>
 
           
-
-          <Route exact path='/mypage'>
+          
+          <Route exact path='/my-page'>
           <MyPage auth={auth} />
           </Route>
 
 
           <Route exact path='/manage-brand'>
-            <ManageBrand />
+            <ManageBrand auth={auth}/>
           </Route>
 
 

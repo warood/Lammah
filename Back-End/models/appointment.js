@@ -13,7 +13,7 @@ const appointmentSchema = new mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
     facility :{type : mongoose.Schema.Types.ObjectId , ref : 'facility' }
 
-
+    
 
 } , {timestamps :true})
 
