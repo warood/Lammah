@@ -45,7 +45,13 @@ export default function NewFacility() {
     return (
         <>
         <div className="NewFacility">
-            <Container className="justify-content-center" className=" pt-5" style={{ width: "70%", padding: "270px" }}>
+            <Container className="justify-content-center" className=" pt-5" style={{
+                  height: '1000px',
+                  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+                  padding: "10% 10% 1050px 10%",
+                  margin: '50px auto 400px auto',
+                  maxWidth: '700px'
+                  }}>
                 <Col>
                     <Formik
                         initialValues={{ name: "", description: "", location: "", city: "", price: "", type: "", images:updateFacilityImg }}
@@ -55,7 +61,7 @@ export default function NewFacility() {
                         <Form as={FormikForm} className="form">
 
                             <Form.Group as={Row} controlId="formPlaintextName">
-                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", fontSize: "25px" }} sm="2">
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", fontSize: "25px"  , textAlign: 'center'}} sm="2">
                                     Facility Information :
                             </Form.Label>
                             </Form.Group>
@@ -64,17 +70,18 @@ export default function NewFacility() {
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                                     Name
                             </Form.Label>
-                                <Form.Control as={Field} placeholder="Facility Name" name="name" type="text" />
+                                <Form.Control as={Field}
+                                placeholder="Facility Name" name="name" type="text" />
                             </Form.Group>
 
                             <ErrorMessage name="name" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
 
-                            <Form.Group as={Row} controlId="formPlaintextName">
+                            <Form.Group as={Row} controlId="formPlaintextName" >
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                                     Images
                                 </Form.Label>
                                 <Form.Control type="file" multiple name="images" onChange={uploadImageHundler} />
-                                <Form.Control as={Field} placeholder="www.image.com" name="images" type="text" />
+                                <Form.Control as={Field} placeholder="www.image.com" name="images" type="text" style={{ marginTop: '5%'}}/>
                             </Form.Group>
 
                             <Form.Group as={Row} controlId="formPlaintextNameLocation">
@@ -85,7 +92,7 @@ export default function NewFacility() {
                             </Form.Group>
 
                             <Form.Group as={Row} controlId="formPlaintextCity">
-                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" , minWidth: '100%'}} sm="2">
                                     City 
                                 </Form.Label>
                                 <Field size="mm" as="select" name="city">
@@ -99,7 +106,7 @@ export default function NewFacility() {
                             <ErrorMessage name="city" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
 
                             <Form.Group as={Row} controlId="formPlaintextType">
-                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold"  , minWidth: '100%'}} sm="2">
                                     Type
                             </Form.Label>
                                 <Field as="select" name="type">
@@ -119,16 +126,21 @@ export default function NewFacility() {
                             </Form.Group>
 
                             <ErrorMessage name="price" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
-
+                                
                             <Form.Group as={Row} controlId="ControlDesciption">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">Desciption</Form.Label>
-                                <Field as="textarea" cols={70} rows={10} name="description" />
+                                <Field as="textarea" cols={70} rows={10} name="description"
+                                style={{ minWidth: '100%'}} />
                             </Form.Group>
+                            <Row>
+                            <Button style={{
+                                 fontFamily: "serif",
+                                  margin: "50px auto 50px auto" ,
 
-                            <Button style={{ fontFamily: "serif", marginLeft: "140px" }} variant="secondary" type="submit">
+                                  }} variant="secondary" type="submit">
                                 Submite
                             </Button>
-
+                           </Row>
                         </Form>
                     </Formik>
                 </Col>
