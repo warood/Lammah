@@ -10,8 +10,13 @@ import * as Yup from 'yup';
 const validtionSchima = Yup.object({
   name: Yup.string().required("This Field is Reqiured"),
   email: Yup.string().required(" This Field is Reqiured!!").email("example@example.com"),
-  phone: Yup.string().required("This Field is Reqiured!!").min(10, "must be more than 10 ").max(10),
-  password: Yup.string().required("This Field is Reqiured!!").min(8, "must be more than 8 ").max(20)
+  phone: Yup.string().required("This Field is Reqiured!!").min(10, "must be 10 numbers ").max(10),
+  password: Yup.string().required('Please Enter your password')
+  .matches(
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  ),confirmPassword: Yup.string().required().oneOf([Yup.ref("password"), null], "Passwords not match")
+
 })
 
 export default function SignUp() {
@@ -26,14 +31,13 @@ export default function SignUp() {
 
   // to add the user info to database
   const onSubmit = (values) => {
-    console.log("test")
 
     axios
       .post("http://localhost:5000/api/user/register", values)
       .then((res) => {
         const user = res.data.user;
         if (user) {
-          history.push("/login");
+          history.push("/");
         } else {
           setTimeout(() => {
             setRegister(false);
@@ -111,6 +115,18 @@ export default function SignUp() {
 
                 <Form.Control as={Field} name="password" type="password" placeholder="Password" />
                 <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
+                  {msg}
+                </Alert>} />
+              </Form.Group>
+
+
+              <Form.Group as={Row} controlId="formPlaintextPassword">
+                <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                Confirm Password
+              </Form.Label>
+
+                <Form.Control as={Field} name="confirmPassword" type="password" placeholder="Password" />
+                <ErrorMessage name="confirmPassword" render={(msg) => <Alert variant={"danger"}>
                   {msg}
                 </Alert>} />
               </Form.Group>

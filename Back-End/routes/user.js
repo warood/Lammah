@@ -138,7 +138,7 @@ router.get("/my-page/:userId", (req, res) => {
   let userId = req.params.userId
   User.findById(userId)
     .then((user_info) => {
-      Appointment.find({ user: userId })
+      Appointment.find({ user: userId }).populate("facility")
         .then((appointments) => {
           //send info without password
           user_info.password = undefined
