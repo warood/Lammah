@@ -65,7 +65,7 @@ export default function MyPage(props) {
 
     }
 
-
+     
     //show all user aponintments
     const allApointment = apointments.map((apointment, index) => {
         return <OneCardOfApointment
