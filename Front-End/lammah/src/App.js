@@ -64,35 +64,35 @@ function App() {
             <Home loginCallback={userLogin} auth={auth} />
           </Route>
 
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignUp />
           </Route>
 
-          <Route path="/new-facility">
+          <Route exact path="/new-facility">
             <NewFacility setAuth={setAuth} auth={auth} />
           </Route>
 
 
-          <Route path="/login">
+          <Route exact path="/login">
             <Login  />
           </Route>
 
-          <Route path='/facilities/:id'>
+          <Route exact path='/facilities/:id'>
             <Facility selectFacility={selectFacility} />
           </Route>
 
-          <Route path='/facilities'>
+          <Route exact path='/facilities'>
             <Facilities setSelectFacility={setSelectFacility} />
           </Route>
 
           
 
-          <Route path='/mypage'>
+          <Route exact path='/mypage'>
           <MyPage auth={auth} />
           </Route>
 
 
-          <Route path='/manage-brand'>
+          <Route exact path='/manage-brand'>
             <ManageBrand />
           </Route>
 

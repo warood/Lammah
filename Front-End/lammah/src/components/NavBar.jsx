@@ -5,12 +5,10 @@ export const NavBar = () => {
     return (
         <div className="NavBar">
             {/* Brand Logo */}
-            <div className="logo">LAMMAH</div>
+            <Link to="/" className="logo menu-element">LAMMAH</Link>
 
             {/* The Menu */}
             <div className="menu">
-                <Link to="/" className="menu-element"
-                 >HOME</Link>
                  
                 <Link to="/facilities" className="menu-element">FACILITIES</Link>
 
