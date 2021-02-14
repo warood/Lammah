@@ -19,12 +19,17 @@ export default function OneCardOfApointment(props) {
         axios.delete(`http://localhost:5000/api/appointment/${apointmentId}/${props.facilityId}`)
         .then()
         setShow(false)
-
     }
-
 
     //chane date format 
     const dateToFormat = props.apointmentsDate;
+    //chane date format
+    // var dateObj = new Date(props.apointmentsDate) ;
+    // var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    // var day = dateObj.getUTCDate();
+    // var year = dateObj.getUTCFullYear();
+
+    // var newdate = year + "/ " + month + "/ " + day;
 
     return (
         <>
@@ -49,6 +54,7 @@ export default function OneCardOfApointment(props) {
 
                                             <h6>  Date :</h6>
                                             <Moment date={dateToFormat} />
+                                            {/* {newdate} */}
 
                                         </Card.Text>
                                     </Col >

@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 
 
 const validationSchema = Yup.object({
-    email: Yup.string().required(" Enter your email "),
+    email: Yup.string().required(" Enter your email ").email("example@example.com"),
     password: Yup.string().required(" Enter password "),
 })
 
@@ -136,7 +136,9 @@ export const NavBar = (props) => {
                             <Modal.Title>Login</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <Formik validationSchema={validationSchema}>
+                            <Formik 
+                            validationSchema={validationSchema}
+                            >
                                 <Container>
                                     <FormikForm>
                                         <Form.Group as={Row} controlId="formPlaintextEmail">
