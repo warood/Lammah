@@ -25,12 +25,12 @@ import './style/new-facility.css';
 import './style/OneFacility.css';
 import "./style/admin.css";
 import "./style/my-page.css";
-import './style/theme.scss'
-import './App.scss';
+
+
 
 // components
 import { NavBar } from './components/NavBar'
-import { Button } from './components/button/ button';
+
 // styles
 import "./css/home.css";
 import "./css/nav-bar.css";
@@ -57,7 +57,6 @@ function App() {
   const [selectFacility, setSelectFacility] = useState({})
   const [dataLoading, setDataloading] = useState(false)
   const [auth, setAuth] = useState({ currentUser: null, isLoggedIn: false });
-  // const [theme, setTheme] = useState('dark');
   const [theme, setTheme] = useState("light")
 
   const userLogin = () => {
@@ -108,10 +107,10 @@ function App() {
           </Route>
 
           <Route exact path='/facilities'>
-            <Facilities setSelectFacility={setSelectFacility} />
+          <ThemeProvider theme={themes[theme]}>
+            <Facilities theme={theme} setTheme={setTheme}  setSelectFacility={setSelectFacility} />
+          </ThemeProvider>
           </Route>
-
-          
           
           <Route exact path='/my-page'>
           <MyPage auth={auth} />
@@ -122,10 +121,18 @@ function App() {
             <ManageBrand auth={auth}/>
           </Route>
 
-          <Route path="/admin" >
-            <Admin 
-            auth={auth}/>
-          </Route>
+
+
+
+         <Route path="/admin" >
+  
+         <ThemeProvider theme={themes[theme]}>
+         <Admin  theme={theme} setTheme={setTheme} auth={auth} />
+        </ThemeProvider>
+
+         </Route>
+
+          
 
         </Router>
 } 
