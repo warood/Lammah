@@ -9,7 +9,7 @@ import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 
 
-export default function OneFacility(props) {
+function OneFacility(props) {
 
   const [loadingDate, setLoadingDate] = useState(false);
 
@@ -94,10 +94,13 @@ export default function OneFacility(props) {
     //to close the modal after book
     setShow(false);
   }
-
+ const loction = "https://www.google.com.sa/maps/place/Legend+Tower,+%D8%B7%D8%B1%D9%8A%D9%82+%D8%A7%D9%84%D9%85%D9%84%D9%83+%D9%81%D9%87%D8%AF%D8%8C+%D8%A7%D9%84%D8%B9%D9%84%D9%8A%D8%A7%D8%8C+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6+12313%E2%80%AD/@24.6937266,46.6827579,17z/data=!3m1!4b1!4m5!3m4!1s0x3e2f0339f942ede5:0xc55a00fdf29f39d1!8m2!3d24.6937217!4d46.6805692"
 
   let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115683.jpg", "https://www.visitsaudi.com/content/dam/no-dynamic-media-folder/manifest-newarticles-batch2/a-guide-to-al-ula/guide_to_al_ula_horiz_article_4.jpg", "https://sahary-al-ola-camp-villa.hotels-saudi-arabia.com/data/Photos/767x460/10098/1009837/1009837849.JPEG"]
-
+  const mapStyles = {
+    width: '100%',
+    height: '100%',
+  };
 
   return (
 
@@ -168,17 +171,14 @@ export default function OneFacility(props) {
 
               </Modal.Footer>
             </Modal>
-
-
           </Col>
-
-
         </Row>
       </Container>
+
       <Map
-          google={this.props.google}
+          // google={this.props.google}
           zoom={8}
-          style={mapStyles}
+          style={{mapStyles}}
           initialCenter={{ lat: 47.444, lng: -122.176}}
         />
 
@@ -186,3 +186,7 @@ export default function OneFacility(props) {
     </div>
   );
 }
+
+export default GoogleApiWrapper({
+  apiKey: 'TOKEN HERE'
+})(OneFacility);
