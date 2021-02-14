@@ -35,6 +35,7 @@ const facilitySchema = new mongoose.Schema({
 
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
 
+    rating: [{type: mongoose.Schema.Types.ObjectId, ref: 'rating'}],
     status : {
         type: Number,
         default :0 , 

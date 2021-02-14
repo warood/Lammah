@@ -15,6 +15,8 @@ export default function Facilities(props) {
 
     //Map (facilities) 
     let allFacilities = facilities.map((facility, i) => {
+
+        if (facility.status == 1){
         return (
             <Link key={i}
                 onClick={() => props.setSelectFacility(facility)}
@@ -76,6 +78,7 @@ export default function Facilities(props) {
                 </Card>
             </Link>
         )
+        }
     })
 
     //Render Facilities page
