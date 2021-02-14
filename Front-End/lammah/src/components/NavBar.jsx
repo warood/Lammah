@@ -4,17 +4,16 @@ import { Link, useHistory } from 'react-router-dom'
 import { Button, Form, Container, Row, Modal, Col, Alert } from "react-bootstrap";
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Formik, Form as FormikForm, Field, ErrorMessage  } from 'formik';
+import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+
 const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid email format').required(" Enter your email "),
+    email: Yup.string().required(" Enter your email ").email("example@example.com"),
     password: Yup.string().required(" Enter password "),
 })
 
 export const NavBar = (props) => {
-
-    
     // Login functional
     const history = useHistory();
 
@@ -27,12 +26,19 @@ export const NavBar = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    
+    const onChangeInput = (event) => {
+        const { name, value } = event.target;
+        setCredentials({
+            ...credentials,
+            [name]: value,
+        });
+    };
+
     //login function
-    const onSubmit = (values) => {
-       
+    const onSubmit = (event) => {
+        event.preventDefault();
         axios
-            .post(`${API_URL}/api/user/login`, values)
+            .post(`${API_URL}/api/user/login`, credentials)
             .then((res) => {
 
                 const token = res.data.token;
@@ -126,40 +132,46 @@ export const NavBar = (props) => {
                             <Modal.Title>Login</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                        <Formik
-          initialValues={credentials}
-          validationSchema={validationSchema}
-          onSubmit={values => onSubmit(values)}
-        >
-          <Form>
-            <div >
-              <label>Email address</label>
-              <Field type="email" className="form-control" name="email" placeholder="Enter email" />
-            </div>
-            <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
-              {msg}
-            </Alert>} />
-            <div >
-              <label>Password</label>
-              <Field type="password" name="password" className="form-control" placeholder="Enter password" />
-            </div>
-            <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
-              {msg}
-            </Alert>} />
+                            <Formik 
+                            validationSchema={validationSchema}
+                            >
+                                <Container>
+                                    <FormikForm>
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                                Email
+                                     </Form.Label>
 
-            <button className="btn" type="submit"  >Login</button>
+                                            <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
+                                            <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
+                                                {msg}
+                                            </Alert>} />
+                                        </Form.Group>
+                                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                                            <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                                Password
+                                    </Form.Label>
 
-
-
-            <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link  onClick={handleClose} eventKey={2} as={Link} to="/signup">
+                                            <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
+                                            <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
+                                                {msg}
+                                            </Alert>} />
+                                        </Form.Group>
+                                        <Form.Group>
+                                            <Col md={12}>
+                                                <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
                                                     Register
                                        </Link>
                                                 </p>
-          </Form>
-        </Formik>
+
+                                                <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
+                                            </Col>
+                                        </Form.Group>
+
+                                    </FormikForm>
+                                </Container>
+                            </Formik>
                         </Modal.Body>
-
-
 
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
