@@ -16,7 +16,8 @@ mongoose.connect(
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
+const path = require('path')
+app.use(express.static(path.join(__dirname , "build")));
 
 //routes
 app.use("/api/user", require("./routes/user"));
@@ -24,8 +25,7 @@ app.use("/api/facility", require("./routes/facility"));
 app.use("/api/appointment", require("./routes/appointment"));
 app.use("/api/admin", require("./routes/admin"));
 
-const path = require('path')
-app.use(express.static(path.join(__dirname , "build")));
+
 
 app.get("*" , (req,res ) =>{
 
