@@ -10,7 +10,6 @@ export default function ManageBrand(props) {
     const userId = props.auth.currentUser._id;
     const [facilities, setFacilities] = useState([]);
 
-    const [afterUpdateFacility, setAfterUpdateFacility] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
@@ -21,7 +20,7 @@ export default function ManageBrand(props) {
                 history.push('/manage-brand')
             })
 
-    }, [afterUpdateFacility])
+    }, [])
 
     //Render Manage-Brand Page
     return (
@@ -31,12 +30,11 @@ export default function ManageBrand(props) {
             <h1>Reservation Management</h1>
             <hr />
 
-            <ManageAppointments auth={props.auth}/>
+            <ManageAppointments auth={props.auth} />
  
-            <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility}/>
+            <ManageFacilities auth={props.auth} />
             <br />
 
-            
             <ConfirmAppointment auth={props.auth} facilities={facilities}/>
 
         </div>

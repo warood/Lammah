@@ -1,7 +1,7 @@
 import API_URL from './apiConfig.js'
 
 // Others
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect,   useState } from 'react';
 import SignUp from './pages/SignUp'
@@ -91,6 +91,7 @@ function App() {
           </Route>
 
           
+          {auth.isLoggedIn?<>
           
           <Route exact path='/my-page'>
           <MyPage auth={auth} />
@@ -105,6 +106,13 @@ function App() {
             <Admin 
             auth={auth}/>
           </Route>
+          
+          
+          </>: <>
+          <Redirect to='/' />
+          
+          </>}
+          
 
         </Router>
 }

@@ -20,7 +20,7 @@ export default function OneFacility(props) {
   const [Facility, setFacility] = useState({});
   const [selectFacility, setSelectFacility] = useState(props.selectFacility);
   const [apointment, setApointment] = useState({})
-  const [userId, setUserId] = useState(props.auth.currentUser._id)
+  // const [userId, setUserId] = useState(props.auth.currentUser._id)
 
 
   //apointment date for one facility
@@ -75,7 +75,7 @@ export default function OneFacility(props) {
 
   const onChange = date => {
     setDate(date)
-    setApointment({ date: date, facility: selectFacility, status: "waiting", userId: userId })
+    setApointment({ date: date, facility: selectFacility, status: "waiting", userId: props.auth.currentUser._id })
   };
 
   //booking function 

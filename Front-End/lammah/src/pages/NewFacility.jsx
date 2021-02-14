@@ -12,7 +12,7 @@ const validationSchema = Yup.object({
     name: Yup.string().required(" Facility name is required "),
     city: Yup.string().required("You must choose one "),
     type: Yup.string().required("You must choose one "),
-    price: Yup.string().required("Facility price is required "),
+    price: Yup.number().required("Facility price is required "),
 })
 
 export default function NewFacility(props) {
@@ -98,10 +98,10 @@ export default function NewFacility(props) {
                                     City 
                                 </Form.Label>
                                 <Field size="mm" as="select" name="city">
-                                    <option>Choose City</option>
-                                    <option>Riyadh</option>
-                                    <option>Jeddah</option>
-                                    <option>Dammam</option>
+                                    <option value="">Choose City</option>
+                                    <option value="Riyadh">Riyadh</option>
+                                    <option value="Jeddah">Jeddah</option>
+                                    <option value="Dammam">Dammam</option>
                                 </Field>
                             </Form.Group>
 
@@ -112,9 +112,9 @@ export default function NewFacility(props) {
                                     Type
                             </Form.Label>
                                 <Field as="select" name="type">
-                                    <option>Choose one</option>
-                                    <option>Chalet</option>
-                                    <option>Camp</option>
+                                    <option value="">Choose one</option>
+                                    <option value="Chalet">Chalet</option>
+                                    <option value="Camp">Camp</option>
                                 </Field>
                             </Form.Group>
 
