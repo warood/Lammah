@@ -175,16 +175,13 @@ router.get("/manage-brand/:userId", (req, res) => {
   let userId = req.params.userId
 
 
-  Facility.find({ user: userId }).populate('appointment')
+  Facility.find({ user: userId }).populate('appointment').populate('user')
     .then((facilities) => {
       res.json({ msg: "User Info Updated!", facilities })
     })
 })
 
 // =====================
-
-
-
 
 
 

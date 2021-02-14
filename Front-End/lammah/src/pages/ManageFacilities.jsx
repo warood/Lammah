@@ -13,7 +13,6 @@ export default function ManageFacilities(props) {
                 // console.log(res)
                 setFacilities(res.data.facilities)
             })
-
     }, [])
 
 
@@ -21,7 +20,6 @@ export default function ManageFacilities(props) {
     const allFacilities = facilities.map((facility, i) => {
         return (
             <ManageOneFacility key={i} facility={facility} auth={props.auth} afterUpdateFacility={props.afterUpdateFacility} setAfterUpdateFacility={props.setAfterUpdateFacility}/>
-
         )
     })
 
