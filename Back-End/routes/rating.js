@@ -32,7 +32,7 @@ router.get('/:facilityId/ratings', (req, res) => {
         })
     })
   });
-  //edit
+
 
   //delete
   router.delete('/:ratingId/:facilityId', (req, res) => {
