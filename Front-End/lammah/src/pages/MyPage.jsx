@@ -11,27 +11,23 @@ import { useHistory } from "react-router-dom";
 
 export default function MyPage(props) {
     const history = useHistory();
-
-
-
+    
 
     const { _id } = props.auth.currentUser;
 
     const [userInformation, setUserInformation] = useState({});
     const [editProfile, setEditProfile] = useState({});
     const [apointments, setApointments] = useState([])
-
-
-
-
+    const [deleteAppointment, setDeleteAppointment] = useState(false);
+    const [infoUpdate, setInfoUpdate] = useState(false);
 
     //to show edit Modal
     const [show, setShow] = useState(false);
 
-
     //to show edit Modal
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     //take userinformation
     useEffect(() => {
         axios.get(`${API_URL}/api/user/my-page/${_id}`)
@@ -42,11 +38,9 @@ export default function MyPage(props) {
                 //   console.log('res ', res.data.appointments[0].facility.images)
                 setApointments(res.data.appointments)
             })
+    }, [deleteAppointment, infoUpdate])
 
-
-    }, [])
-
-
+    
 
     //take change 
     const onChangeInput = (e) => {
@@ -64,6 +58,17 @@ export default function MyPage(props) {
 
         setShow(false);
 
+
+        //to show new changes in user profile 
+        axios.get(`http://localhost:5000/api/user/my-page/${_id}`)
+
+            .then((res) => {
+                setUserInformation(res.data.user_info)
+                setEditProfile(res.data.user_info)
+                //   console.log('res ', res.data.appointments[0].facility.images)
+                setApointments(res.data.appointments)
+            })
+
     }
 
 
@@ -76,7 +81,8 @@ export default function MyPage(props) {
             facilityName={apointment.facility.name}
             facilityImage={apointment.facility.images}
             facilityId={apointment.facility._id}
-
+            setDeleteAppointment={setDeleteAppointment}
+            deleteAppointment={deleteAppointment}
         />
     })
 
@@ -193,7 +199,10 @@ export default function MyPage(props) {
                                 <Button variant="secondary" onClick={handleClose}>
                                     Close
                     </Button>
-                                <Button variant="secondary" onClick={(e) => onSubmit(e)}>
+                                <Button variant="secondary" onClick={(e) =>{
+                                    onSubmit(e);
+                                    setInfoUpdate(!infoUpdate);
+                                }}>
                                     Save Changes
                     </Button>
                             </Modal.Footer>

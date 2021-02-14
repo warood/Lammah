@@ -9,23 +9,18 @@ export default function OneCardOfApointment(props) {
 
 
     const [show, setShow] = useState(false);
+    
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
 
 
     const onSubmit = (apointmentId) => {
-        // console.log(e , props.facilityId)
 
         axios.delete(`${API_URL}/api/appointment/${apointmentId}/${props.facilityId}`)
             .then()
         setShow(false)
-
     }
-
-
-    //chane date format 
-    const dateToFormat = props.apointmentsDate;
 
     return (
         <>
@@ -63,8 +58,10 @@ export default function OneCardOfApointment(props) {
                                         bottom: '0',
                                         right: '0',
                                         fontSize: '0.7em',
-                                    }}>2/14/2021</p>
-                                    {/* <p><Moment date={dateToFormat} /></p> */}
+                                    }}><Moment format="YYYY/MM/DD">
+                                    {props.apointmentsDate}
+                                </Moment></p>
+                                    
                                 </Row>
                                 <Row>
                                     <p style={{
@@ -92,7 +89,9 @@ export default function OneCardOfApointment(props) {
                           {props.status == "waiting" ? <>
                           <p 
                           className="delete-appointment-btn"
-                           variant="danger" onClick={handleShow} > X  </p> </> :
+                           variant="danger" onClick={()=>{
+                            setShow(true);
+                           }} > X  </p> </> :
                                     <></>
                                 }
                         </div>
@@ -105,23 +104,25 @@ export default function OneCardOfApointment(props) {
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
-                keyboard={false}
-            >
+                keyboard={false}>
+
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
+                    <Modal.Title></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     Are You Sure Want To Cancel This Appointment ?
-        </Modal.Body>
+                </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleClose}>
                         No
-          </Button>
-                    <Button variant="primary" onClick={() => { onSubmit(props.apointmentId) }}>Yes Cancel It</Button>
+                </Button>
+                    <Button variant="primary" onClick={() => {
+                         onSubmit(props.apointmentId);
+                         props.setDeleteAppointment(!props.deleteAppointment);
+
+                         }}>Yes Cancel It</Button>
                 </Modal.Footer>
             </Modal>
         </>
-
-
     )
 }
