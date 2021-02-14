@@ -86,106 +86,122 @@ export default function MyPage(props) {
         <>
             {props.auth.isLoggedIn ?
                 <>
-                    <Container className="pt-5"  >
-                        <Row
-                            style={{
-
+                    <div className="MyPage">
+                        <Container >
+                            <Row style={{
+                                marginBottom: '5%',
                             }}>
-                            <Col xs={4} xl={3} md={4}
-                                style={{
-                                    maxWidth: '150px',
+                            <h1 style={{
+                                     fontWeight: 'bold',
+                                     fontSize: '1.7em',
 
-
-                                }}>
-                                <Image src="" width="100%" />
-                            </Col>
-                            <Col xs={4} xl={6} md={4}
-                                style={{
-
-                                }}>
-                                <h4 style={{
-                                    color: "black",
-                                    fontFamily: "serif",
-                                    fontWeight: "bold"
-                                }}> Name :  {userInformation.name}  </h4>
-                                <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email :  {userInformation.email} </h4>
-                                <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone :  {userInformation.phone} </h4>
-
-                            </Col>
-                            <Col className="pt-5"
-                                style={{
-                                    position: 'relative',
-                                    right: '0',
-                                    maxWidth: '100px',
-                                    paddingBottom: '0',
-
-                                }}>
-                                <Button onClick={handleShow} variant="white"
+                                     }}>Personal Info</h1>
+                            </Row>
+                            <Row
+                            >
+                                <Col xs={4} xl={3} md={4}
                                     style={{
-                                        position: 'relative',
-                                        top: '0',
-                                        margin: '0',
-                                        padding: '0',
-                                        width: '100%',
+                                        maxWidth: '150px',
 
 
                                     }}>
-                                    <GearFill color="" size={30}/>
+                                    <Image src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon.png" width="100%" />
+                                </Col>
+                                <Col xs={4} xl={6} md={4}
+                                    style={{
 
-                                </Button>
-                            </Col>
-                        </Row>
-                        <hr />
-                        <Row className="justify-content-md-center">
-                            <h1 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> All Apointments </h1>
-                        </Row>
-                        <Row>
-                            {allApointment}
+                                    }}>
+                                    <h4 style={{
+                                        color: "black",
+                                        fontFamily: "serif",
+                                        fontWeight: "bold",
+                                        flexGrow: '1',
+                                    }}> Name :  {userInformation.name}  </h4>
+                                    <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email :  {userInformation.email} </h4>
+                                    <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone :  {userInformation.phone} </h4>
 
-                        </Row>
-                    </Container>
+                                </Col>
+                                <Col className="pt-5"
+                                    style={{
+                                        position: 'realtive',
+                                        right: '0',
+                                        paddingBottom: '0',
+                                        width: '100%',
+
+                                    }}>
+                                    <Button onClick={handleShow} variant="white"
+                                        style={{
+                                            position: 'relative',
+                                            top: '0',
+                                            margin: '0',
+                                            padding: '0',
+                                            width: '100%',
 
 
 
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton >
-                            <Modal.Title style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}>Edit Your Information</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Form.Group as={Col}>
-                                <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Name : </h4>
-                                <Form.Control name="name"
-                                    onChange={(e) => onChangeInput(e)}
-                                    defaultValue={userInformation.name}
-                                    type="text" />
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email : </h4>
-                                <Form.Control
-                                    name="email"
-                                    onChange={(e) => onChangeInput(e)}
-                                    defaultValue={userInformation.email}
-                                    type="text" />
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone : </h4>
-                                <Form.Control name="phone"
-                                    onChange={(e) => onChangeInput(e)}
-                                    defaultValue={userInformation.phone}
-                                    type="text" />
-                            </Form.Group>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Close
+                                        }}>
+                                        <GearFill color="" size={30} />
+
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <hr />
+                            <Row className="justify-content-md-center">
+                                <h1 style={{
+                                     marginTop: '5%',
+                                     fontWeight: 'bold',
+                                     fontSize: '1.6em',
+                                     }}> My Apointments </h1>
+                            </Row>
+                            <Row>
+                                {allApointment}
+
+                            </Row>
+                        </Container>
+
+
+
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton >
+                                <Modal.Title style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}>Edit Your Information</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form.Group as={Col}>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Name : </h4>
+                                    <Form.Control name="name"
+                                        onChange={(e) => onChangeInput(e)}
+                                        defaultValue={userInformation.name}
+                                        type="text" />
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email : </h4>
+                                    <Form.Control
+                                        name="email"
+                                        onChange={(e) => onChangeInput(e)}
+                                        defaultValue={userInformation.email}
+                                        type="text" />
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone : </h4>
+                                    <Form.Control name="phone"
+                                        onChange={(e) => onChangeInput(e)}
+                                        defaultValue={userInformation.phone}
+                                        type="text" />
+                                </Form.Group>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
                     </Button>
-                            <Button variant="secondary" onClick={(e) => onSubmit(e)}>
-                                Save Changes
+                                <Button variant="secondary" onClick={(e) => onSubmit(e)}>
+                                    Save Changes
                     </Button>
-                        </Modal.Footer>
-                    </Modal>
-
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
                 </>
+
+
                 : <>{
                     history.push(`/`)
                 }

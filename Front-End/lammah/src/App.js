@@ -24,6 +24,9 @@ import './style/manage-brand.css';
 import './style/new-facility.css';
 import './style/OneFacility.css';
 import "./style/admin.css";
+import "./style/my-page.css";
+
+
 // components
 import { NavBar } from './components/NavBar'
 

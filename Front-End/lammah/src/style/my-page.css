@@ -1,0 +1,14 @@
+.MyPage {
+  width: 65%;
+  margin: 80px auto 0 auto;
+  color: black;
+}
+
+.MyPage .delete-appointment-btn {
+  color: rgb(223, 4, 4);                          
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.MyPage .delete-appointment-btn:hover {
+    color: rgb(250, 42, 42);                          
+}

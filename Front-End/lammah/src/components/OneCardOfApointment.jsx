@@ -18,7 +18,7 @@ export default function OneCardOfApointment(props) {
         // console.log(e , props.facilityId)
 
         axios.delete(`${API_URL}/api/appointment/${apointmentId}/${props.facilityId}`)
-        .then()
+            .then()
         setShow(false)
 
     }
@@ -29,54 +29,77 @@ export default function OneCardOfApointment(props) {
 
     return (
         <>
-            <Col className="mt-5 m-0 " style={{ left: "80px", width: "1000px" }}  >
-                <Card className="ml-5" style={{ width: "900px" }}>
-                    <Row style={{ height: "100%" }} >
+            <Row className="mt-5" style={{
+                width: "100%",
+                justifyContent: 'center',
+                display: 'flex',
+
+            }}  >
+                <Card style={{
+                    width: "100%",
+                    maxWidth: '800px',
+
+                }}>
+                    <Row style={{
+                        height: "100%",
+                        width: '100%',
+                    }} >
                         <Col xs={6} md={5}  >
-                            <Card.Img style={{ width: "100%" }} variant="top" src={props.facilityImage} />
+                            <Card.Img style={{
+                                width: "100%",
+                                objectFit: 'cover',
+                                objectPosition: '50% 50%',
+                                flexGrow: '1',
+                            }} variant="top" src={props.facilityImage} />
 
                         </Col>
-                        <Col style={{ width: "300px", left: "150px" }} className="pl-5 mt-2" >
+                        <Col >
                             <Card.Body>
-                                <Row style={{ height: "100%" }}>
-                                    <Col className="pr-5" style={{ width: "200px", left: "-200px" }}>
-                                        <Card.Text  >
-                                            <h6>  Facility Name :</h6>
-                                            {props.facilityName}
-                                        </Card.Text>
-                                    </Col >
-                                    <Col style={{ width: "500px", left: "-200px" }}>
-                                        <Card.Text  >
-
-                                            <h6>  Date :</h6>
-                                            <Moment date={dateToFormat} />
-
-                                        </Card.Text>
-                                    </Col >
+                                <Row >
+                                                  
+                                    <p>{props.facilityName}</p>
+                                    <p style={{
+                                        position: 'absolute',
+                                        bottom: '0',
+                                        right: '0',
+                                        fontSize: '0.7em',
+                                    }}>2/14/2021</p>
+                                    {/* <p><Moment date={dateToFormat} /></p> */}
+                                </Row>
+                                <Row>
+                                    <p style={{
+                                        fontSize: '0.8em'
+                                    }}>Status: {props.status}</p>
+                                </Row>
+                                <Row>
+                                    <p style={{
+                                        fontSize: '0.8em'
+                                    }}>Apointment ID: {props.apointmentId}</p>
+                                    
                                 </Row>
 
-                                <Row className="pt-3" style={{ height: "100%" }}>
-                                    <Col className="pr-0" style={{ width: "200px", left: "-200px" }}>
-                                        <Card.Text >
-                                            <h6>Apointment ID:</h6>  {props.apointmentId}
-                                        </Card.Text>
-                                    </Col >
-                                    <Col className="pt-1" style={{ left: "-175px" }}>
-                                        <Card.Text  >
-                                            <h6>  status :  {props.status}</h6>
-                                        </Card.Text>
-                                    </Col>
-                                </Row>
-                                {props.status == "waiting" ? <> <Button style={{ marginLeft: "200px" }} variant="danger" onClick={handleShow} > delete  </Button> </> :
-                                    <></>
-                                }
+                                
+                               
                             </Card.Body>
 
                         </Col>
+                        <div style={{
+                            position: 'absolute',
+                            top: '1%',
+                            right: '1%',
+                            
+                        }}>
+                          {props.status == "waiting" ? <>
+                          <p 
+                          className="delete-appointment-btn"
+                           variant="danger" onClick={handleShow} > X  </p> </> :
+                                    <></>
+                                }
+                        </div>
                     </Row>
 
                 </Card>
-            </Col>
+            </Row>
 
             <Modal
                 show={show}

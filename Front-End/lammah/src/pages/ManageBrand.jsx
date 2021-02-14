@@ -1,11 +1,10 @@
 import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Accordion, Collapse } from 'react-bootstrap';
 import axios from "axios";
-import { Link } from 'react-router-dom';
 import ManageFacilities from './ManageFacilities';
 import { useHistory } from "react-router-dom";
 import ManageAppointments from './ManageAppointments';
+import ConfirmAppointment from './ConfirmAppointment';
 
 export default function ManageBrand(props) {
     const userId = props.auth.currentUser._id;
@@ -33,25 +32,12 @@ export default function ManageBrand(props) {
             <hr />
 
             <ManageAppointments auth={props.auth}/>
-            <br />
-
-
+ 
             <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility}/>
-
-
             <br />
-            <h3>Confirmed Reservations:</h3>
-            <Card className="card-container">
-                <Card.Header as="h5">Facility Name</Card.Header>
-                <Card.Body className="card-body">
-                    <Card.Img variant="null" src="https://cf.bstatic.com/images/hotel/max1024x768/220/220546381.jpg" />
-                    <div className="card-content">
-                        <Card.Title>User name</Card.Title>
-                        <Card.Text> Appointement date </Card.Text>
-                        <Card.Text> User phone </Card.Text>
-                    </div>
-                </Card.Body>
-            </Card>
+
+            
+            <ConfirmAppointment auth={props.auth} facilities={facilities}/>
 
         </div>
     :<>

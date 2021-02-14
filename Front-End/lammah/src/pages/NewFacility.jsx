@@ -23,7 +23,7 @@ export default function NewFacility(props) {
     const onSubmit = (values) => {
         
         axios
-            .post(`${API_URL}/facility/new-facility`, values)
+            .post(`${API_URL}/api/facility/new-facility`, values)
             .then((res) => {
                 console.log(res)
                 history.push("/facilities");
