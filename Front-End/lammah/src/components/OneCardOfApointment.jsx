@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from "react";
 import { Col, Card, Row, Modal, Form, Button } from 'react-bootstrap'
 import Moment from 'react-moment';
@@ -16,7 +17,7 @@ export default function OneCardOfApointment(props) {
     const onSubmit = (apointmentId) => {
         // console.log(e , props.facilityId)
 
-        axios.delete(`http://localhost:5000/api/appointment/${apointmentId}/${props.facilityId}`)
+        axios.delete(`${API_URL}/api/appointment/${apointmentId}/${props.facilityId}`)
         .then()
         setShow(false)
 

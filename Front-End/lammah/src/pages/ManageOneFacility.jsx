@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Accordion, Modal } from 'react-bootstrap';
 import axios from "axios";
@@ -39,7 +40,7 @@ export default function ManageOneFacility(props) {
 
     //Edit Facility
     const editFacility = (facilityId) => {
-        axios.put(`http://localhost:5000/api/facility/${facilityId}/edit`, updateFacility)
+        axios.put(`${API_URL}/api/facility/${facilityId}/edit`, updateFacility)
             .then(data => {
                 console.log("update facility")
                 props.setAfterUpdateFacility(!(props.afterUpdateFacility))
@@ -50,7 +51,7 @@ export default function ManageOneFacility(props) {
     //Delete Facility
     const deleteFacility = (facilityId) => {
 
-        axios.delete(`http://localhost:5000/api/facility/${facilityId}`)
+        axios.delete(`${API_URL}/api/facility/${facilityId}`)
             .then(data => {
 
                 history.push('/manage-brand')

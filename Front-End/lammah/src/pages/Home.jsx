@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React from "react";
 import HomeHeader from '../components/HomeHeader'
 import HomeSection from '../components/HomeSection'

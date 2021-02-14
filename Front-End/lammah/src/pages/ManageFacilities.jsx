@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import ManageOneFacility from './ManageOneFacility';
@@ -8,7 +9,7 @@ export default function ManageFacilities(props) {
     const [facilities, setFacilities] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/user/manage-brand/${userId}`)
+        axios.get(`${API_URL}/api/user/manage-brand/${userId}`)
             .then((res) => {
                 // console.log(res)
                 setFacilities(res.data.facilities)

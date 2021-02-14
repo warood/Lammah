@@ -1,4 +1,4 @@
-
+import API_URL from '../apiConfig.js'
 import axios from "axios";
 import { Link, useHistory } from 'react-router-dom'
 import { Button, Form, Container, Row, Modal, Col, Alert } from "react-bootstrap";
@@ -38,7 +38,7 @@ export const NavBar = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
         axios
-            .post("http://localhost:5000/api/user/login", credentials)
+            .post(`${API_URL}/api/user/login`, credentials)
             .then((res) => {
 
                 const token = res.data.token;

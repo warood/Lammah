@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
@@ -33,7 +34,7 @@ export default function MyPage(props) {
     const handleShow = () => setShow(true);
     //take userinformation
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/user/my-page/${_id}`)
+        axios.get(`${API_URL}/api/user/my-page/${_id}`)
 
             .then((res) => {
                 setUserInformation(res.data.user_info)
@@ -58,7 +59,7 @@ export default function MyPage(props) {
     //change user informaation 
     const onSubmit = () => {
 
-        axios.put(`http://localhost:5000/api/user/${_id}`, editProfile)
+        axios.put(`${API_URL}/api/user/${_id}`, editProfile)
             .then(res => console.log('from backend i recieved ', res))
 
         setShow(false);

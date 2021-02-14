@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Col, Container, Row } from 'react-bootstrap';
@@ -7,7 +8,7 @@ export default function Facilities(props) {
     const [facilities, setFacilities] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/facility/facilities')
+        axios.get(`${API_URL}/api/facility/facilities`)
             .then(res => {
                 setFacilities(res.data.facilities)                 //store all facilities in the variable (facilities)
             })

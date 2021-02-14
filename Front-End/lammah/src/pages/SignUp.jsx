@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React, { useState, useEffect } from "react";
 import { Row, Form, Col, Button, Container, Alert } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -33,7 +34,7 @@ export default function SignUp() {
   const onSubmit = (values) => {
 
     axios
-      .post("http://localhost:5000/api/user/register", values)
+      .post(`${API_URL}/api/user/register`, values)
       .then((res) => {
         const user = res.data.user;
         if (user) {

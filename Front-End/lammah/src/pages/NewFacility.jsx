@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React from "react";
 import { Row, Form, Col, Button, Container, Alert } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,7 +23,7 @@ export default function NewFacility(props) {
     const onSubmit = (values) => {
         
         axios
-            .post('http://localhost:5000/api/facility/new-facility', values)
+            .post(`${API_URL}/facility/new-facility`, values)
             .then((res) => {
                 console.log(res)
                 history.push("/facilities");

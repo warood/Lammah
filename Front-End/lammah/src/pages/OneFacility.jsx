@@ -1,4 +1,4 @@
-
+import API_URL from '../apiConfig.js'
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -25,7 +25,7 @@ export default function OneFacility(props) {
   useEffect(() => {
 
     if (!city) {
-      axios.get(`http://localhost:5000api/facility/facilities/?=${id}`)
+      axios.get(`${API_URL}/api/facility/facilities/?=${id}`)
       .then(res => {
         console.log( "from one facility" + res.data);
          let facility = res.data.find((ele) => ele._id == id);
@@ -49,7 +49,7 @@ export default function OneFacility(props) {
 
     //console.log('newAppointment',apointment)
 
-    axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
+    axios.post(`${API_URL}/api/appointment/new-appointment`, apointment)
       .then((res) => {
         console.log(res)
       })

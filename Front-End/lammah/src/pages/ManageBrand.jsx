@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Accordion, Collapse } from 'react-bootstrap';
 import axios from "axios";
@@ -14,7 +15,7 @@ export default function ManageBrand(props) {
     const history = useHistory();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/user/manage-brand/${userId}`)
+        axios.get(`${API_URL}/api/user/manage-brand/${userId}`)
             .then((res) => {
                 // console.log(res)
                 setFacilities(res.data.facilities)
