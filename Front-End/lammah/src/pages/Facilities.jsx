@@ -3,58 +3,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import styled from "styled-components";
-import { CgSun } from "react-icons/cg";
-import { HiMoon } from "react-icons/hi";
 
-const Toggle = styled.button`
-    cursor: pointer;
-    height: 50px;
-    width: 50px;   
-    border-radius: 50%;
-    border: none;
-    background-color: ${props => props.theme.titleColor};
-    color: ${props => props.theme.pageBackground};
-    &:focus {
-        outline: none;
-    }
-    transition: all .5s ease;
-`;
-
-const Page = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-  background-color: ${props => props.theme.pageBackground};
-  transition: all .5s ease;
-`;
-
-
-
-const Title = styled.h1`
-    color: ${props => props.theme.titleColor};
-    transition: all .5s ease;
-`;
-
-const TagLine = styled.span`
-    color: ${props => props.theme.tagLineColor};
-    font-size: 18px;
-    transition: all .5s ease;
-`;
 
 export default function Facilities(props) {
     const [facilities, setFacilities] = useState([])
-    function changeTheme() {
-        if (props.theme === "light") {
-            props.setTheme("dark");
-        } else {
-            props.setTheme("light");
-        }
-    };
 
-    const icon = props.theme === "light" ? <HiMoon size={40} /> : <CgSun size={40} />;
     useEffect(() => {
         axios.get(`${API_URL}/api/facility/facilities`)
             .then(res => {
@@ -133,13 +86,6 @@ export default function Facilities(props) {
     //Render Facilities page
     return (
         <div className="Facilities">
-
-             <Page>
-            <Container>
-                <Toggle onClick={changeTheme}>
-                    {icon}
-                </Toggle>
-               
             <Container className="container">
 
                 <Row className="justify-content-md-center facility-row" >
@@ -230,8 +176,7 @@ export default function Facilities(props) {
                 </Row>
 
             </Container>
-            </Container>
-        </Page>
+            
         </div>
     )
 }
