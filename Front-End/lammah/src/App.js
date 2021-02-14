@@ -25,20 +25,40 @@ import './style/new-facility.css';
 import './style/OneFacility.css';
 import "./style/admin.css";
 import "./style/my-page.css";
-
+import './style/theme.scss'
+import './App.scss';
 
 // components
 import { NavBar } from './components/NavBar'
-
+import { Button } from './components/button/ button';
 // styles
 import "./css/home.css";
 import "./css/nav-bar.css";
+import { ThemeProvider } from "styled-components";
 
+const LightTheme = {
+  pageBackground: "white",
+  titleColor: "#dc658b",
+  tagLineColor: "black"
+};
+
+const DarkTheme = {
+  pageBackground: "#282c36",
+  titleColor: "lightpink",
+  tagLineColor: "lavender"
+}
+
+const themes = {
+  light: LightTheme,
+  dark: DarkTheme,
+}
 
 function App() {
   const [selectFacility, setSelectFacility] = useState({})
   const [dataLoading, setDataloading] = useState(false)
   const [auth, setAuth] = useState({ currentUser: null, isLoggedIn: false });
+  // const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState("light")
 
   const userLogin = () => {
     if (localStorage.jwtToken) {
@@ -59,6 +79,7 @@ function App() {
     <div className="App">
 
 {dataLoading &&
+
       <Router>
         {/* Nav Bar */}
         <NavBar loginCallback={userLogin} auth={auth}/>
@@ -107,7 +128,11 @@ function App() {
           </Route>
 
         </Router>
-}
+} 
+
+
+
+
     </div>
   );
 }
