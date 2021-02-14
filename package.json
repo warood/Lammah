@@ -1,0 +1,16 @@
+{
+  "name": "lammah",
+  "version": "1.0.0",
+  "description": "A website that displays chalets and camps. The website acts as an intermediary between the owner of the facility and the customer, users can Review details and book appointments to get a great camping experience.",
+  "main": "Back-End/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./Back-End/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.generalassemb.ly/Project-4-Explorers/Lammah.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
