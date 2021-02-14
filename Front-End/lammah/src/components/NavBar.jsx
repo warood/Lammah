@@ -27,14 +27,7 @@ export const NavBar = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // const onChangeInput = (event) => {
-    //     const { name, value } = event.target;
-    //     setCredentials({
-    //         ...credentials,
-    //         [name]: value,
-    //     });
-    // };
-
+    
     //login function
     const onSubmit = (values) => {
        
@@ -154,11 +147,11 @@ export const NavBar = (props) => {
               {msg}
             </Alert>} />
 
-            <button className="btn" type="submit" >Login</button>
+            <button className="btn" type="submit"  >Login</button>
 
 
 
-            <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
+            <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link  onClick={handleClose} eventKey={2} as={Link} to="/signup">
                                                     Register
                                        </Link>
                                                 </p>
