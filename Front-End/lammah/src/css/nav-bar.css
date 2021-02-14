@@ -13,6 +13,7 @@
 }
 
 
+
 /*  NavBar Items */
 /* ========================= */
 .NavBar .logo,.NavBar .menu a{
@@ -41,4 +42,17 @@ border-bottom: 2px solid #000000;
     text-decoration: none;
     color: black;
     margin-left: 10%;
+}
+
+
+@media only screen and (max-width: 500px) {
+    .NavBar{
+        font-size: 5.5px;
+    }
+    body{
+        font-size: 0.7em;
+    }
+    h1{
+        font-size: 2em;
+    }
 }

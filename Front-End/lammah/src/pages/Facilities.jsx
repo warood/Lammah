@@ -21,16 +21,58 @@ export default function Facilities(props) {
                 to={`/facilities/${facility._id}`}
                 style={{ textDecoration: "none" }}>
                 <Card className="facility-card" >
-                    <Card.Img variant="top" src={facility.images} />
-                    <Card.Body>
-                        <Card.Title>{facility.name}</Card.Title>
-                        <Card.Text>
-                            {facility.city}
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                        <small className="text-muted">{facility.price} SR</small>
-                    </Card.Footer>
+                    <Card.Img variant="top"
+                        style={{
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: '50% 50%',
+
+                        }}
+                        src={facility.images} />
+
+                    <Card.Title
+                        style={{
+                            position: 'absolute',
+                            bottom: '20%',
+                            color: 'white',
+                            padding: '0 5% 0 5%',
+                            width: '70%',
+                            backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                            fontWeight: 'bold',
+                            fontSize: '1.3em',
+                            maxHeight: '50px',
+                            overflow: 'hidden',
+
+                        }}>{facility.name}</Card.Title>
+                    <Card.Text
+ 
+                        style={{
+                            position: 'absolute',
+                            bottom: '10%',
+                            color: 'white',
+                            padding: '0 5% 0 5%',
+                            backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                            fontWeight: 'bold',
+                            fontSize: '0.9em',
+                        }}
+                    >
+
+                        {facility.city}
+                    </Card.Text>
+
+
+                    <small
+                        style={{
+                            position: 'absolute',
+                            bottom: '3%',
+                            color: 'white',
+                            padding: '0 5% 0 5%',
+                            backgroundColor: 'rgba(255, 0, 0, 0.623)',
+                            fontWeight: 'bold',
+                            fontSize: '1.5em',
+
+                        }}>{facility.price} SR</small>
+
                 </Card>
             </Link>
         )
@@ -42,7 +84,8 @@ export default function Facilities(props) {
             <Container className="container">
 
                 <Row className="justify-content-md-center facility-row" >
-                    <Col className="facility-col">
+                    <Col className="facility-col" 
+                    style={{justifyContent: 'center'}}>
 
                         {allFacilities}
                         {/* <Card className="facility-card" >
@@ -128,6 +171,7 @@ export default function Facilities(props) {
                 </Row>
 
             </Container>
+            
         </div>
     )
 }
