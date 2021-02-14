@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 
 
 export default function MyPage(props) {
-    
+
     const history = useHistory();
 
 
@@ -56,16 +56,16 @@ export default function MyPage(props) {
 
         setShow(false);
 
-        
+
         //to show new changes in user profile 
         axios.get(`http://localhost:5000/api/user/my-page/${_id}`)
 
-        .then((res) => {
-            setUserInformation(res.data.user_info)
-            setEditProfile(res.data.user_info)
-            //   console.log('res ', res.data.appointments[0].facility.images)
-            setApointments(res.data.appointments)
-        })
+            .then((res) => {
+                setUserInformation(res.data.user_info)
+                setEditProfile(res.data.user_info)
+                //   console.log('res ', res.data.appointments[0].facility.images)
+                setApointments(res.data.appointments)
+            })
 
     }
 

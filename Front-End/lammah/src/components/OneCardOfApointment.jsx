@@ -14,22 +14,11 @@ export default function OneCardOfApointment(props) {
 
 
     const onSubmit = (apointmentId) => {
-        // console.log(e , props.facilityId)
 
         axios.delete(`http://localhost:5000/api/appointment/${apointmentId}/${props.facilityId}`)
-        .then()
+            .then()
         setShow(false)
     }
-
-    //chane date format 
-    const dateToFormat = props.apointmentsDate;
-    //chane date format
-    // var dateObj = new Date(props.apointmentsDate) ;
-    // var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    // var day = dateObj.getUTCDate();
-    // var year = dateObj.getUTCFullYear();
-
-    // var newdate = year + "/ " + month + "/ " + day;
 
     return (
         <>
@@ -53,8 +42,9 @@ export default function OneCardOfApointment(props) {
                                         <Card.Text  >
 
                                             <h6>  Date :</h6>
-                                            <Moment date={dateToFormat} />
-                                            {/* {newdate} */}
+                                            <Moment format="YYYY/MM/DD">
+                                                {props.apointmentsDate}
+                                            </Moment>
 
                                         </Card.Text>
                                     </Col >
@@ -87,23 +77,21 @@ export default function OneCardOfApointment(props) {
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
-                keyboard={false}
-            >
+                keyboard={false}>
+
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
+                    <Modal.Title></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     Are You Sure Want To Cancel This Appointment ?
-        </Modal.Body>
+                </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={handleClose}>
                         No
-          </Button>
+                </Button>
                     <Button variant="primary" onClick={() => { onSubmit(props.apointmentId) }}>Yes Cancel It</Button>
                 </Modal.Footer>
             </Modal>
         </>
-
-
     )
 }

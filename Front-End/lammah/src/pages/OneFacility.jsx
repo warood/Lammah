@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
@@ -6,6 +5,8 @@ import axios from "axios";
 import { Button, Col, Container, Row, Form, Modal } from "react-bootstrap";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { Map, GoogleApiWrapper } from 'google-maps-react';
+
 
 
 export default function OneFacility(props) {
@@ -31,7 +32,6 @@ export default function OneFacility(props) {
 
 
   const handleShow = () => {
-
 
     setShow(true);
     // setApointment({ date: date, facility: selectFacility, status: "waiting", userId: userId })
@@ -144,9 +144,7 @@ export default function OneFacility(props) {
               </Modal.Header>
               <Modal.Body>
 
-
                 <Calendar onChange={onChange} value={date} minDate={new Date()}
-
                   tileDisabled={({ date, view }) =>
                     (view === 'month') && // Block day tiles only
                     dateOfAllApointment.some(disabledDate =>
@@ -177,6 +175,12 @@ export default function OneFacility(props) {
 
         </Row>
       </Container>
+      <Map
+          google={this.props.google}
+          zoom={8}
+          style={mapStyles}
+          initialCenter={{ lat: 47.444, lng: -122.176}}
+        />
 
 
     </div>
