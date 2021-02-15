@@ -21,7 +21,7 @@ export const NavBar = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     //for show alert 
     const [login, setLogin] = useState(true);
-
+    const [searchTerm, setSearchTerm] = useState("");
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -60,8 +60,11 @@ export const NavBar = (props) => {
     //=================
     return (
         <>
-
-
+         <button onClick={props.themeToggler}> switch mode</button>
+          <input
+           style={{margin: 'auto 30px auto auto' , height: '30px'}}
+           type="text" name="search" placeholder="Search"  onChange={event =>{props.ToSetSearch(event.target.value)
+            }}></input>
             <div className="NavBar">
                 {/* Brand Logo */}
                 <Link to="/" className="logo menu-element">LAMMAH</Link>
