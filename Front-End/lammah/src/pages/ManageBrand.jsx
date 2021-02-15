@@ -11,7 +11,6 @@ import { Tabs, Tab } from 'react-bootstrap';
 export default function ManageBrand(props) {
     const userId = props.auth.currentUser._id;
     const [facilities, setFacilities] = useState([]);
-
     const [afterUpdateFacility, setAfterUpdateFacility] = useState(false);
     const [key, setKey] = useState('home');
 
@@ -25,7 +24,7 @@ export default function ManageBrand(props) {
                 history.push('/manage-brand')
             })
 
-    }, [afterUpdateFacility])
+    }, [])
 
 
 
@@ -41,9 +40,6 @@ export default function ManageBrand(props) {
                 <div className="ManageBrand">
                     <h1>Reservation Management</h1>
                     <hr />
-
-
-
                     <Tabs
                         id="controlled-tab-example"
                         activeKey={key}

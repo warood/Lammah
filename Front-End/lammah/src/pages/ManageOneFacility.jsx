@@ -1,13 +1,12 @@
 import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Accordion, Modal, Tabs, Row, Tab} from 'react-bootstrap';
+import { Card, Button, Accordion, Modal, Tabs, Row, Tab } from 'react-bootstrap';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 export default function ManageOneFacility(props) {
 
     const history = useHistory();
-
 
     //Facility Edit button
     const [showEdit, setShowEdit] = useState(false);
@@ -37,14 +36,12 @@ export default function ManageOneFacility(props) {
         });
     };
 
-
     //Edit Facility
     const editFacility = (facilityId) => {
         axios.put(`${API_URL}/api/facility/${facilityId}/edit`, updateFacility)
             .then(data => {
-                console.log("update facility")
-                props.setAfterUpdateFacility(!(props.afterUpdateFacility))
-
+                props.setAfterUpdateFacility(!props.afterUpdateFacility)
+                history.push('/manage-brand')
             })
     }
 
@@ -53,7 +50,7 @@ export default function ManageOneFacility(props) {
 
         axios.delete(`${API_URL}/api/facility/${facilityId}`)
             .then(data => {
-
+                props.setAfterDeleteFacility(!props.afterDeleteFacility)
                 history.push('/manage-brand')
             })
     }
@@ -61,26 +58,26 @@ export default function ManageOneFacility(props) {
 
 
     return (
-        
+
         <div>
             <Accordion>
                 <Card>
                     <Card.Header
-                     style={{
-                            backgroundColor:'white'
+                        style={{
+                            backgroundColor: 'white'
                         }}>
                         <Accordion.Toggle as={Button} variant="link" eventKey="i"
-                        style={{
-                            color: 'black',
-                            textDecoration: 'none',
+                            style={{
+                                color: 'black',
+                                textDecoration: 'none',
 
-                        }}>
+                            }}>
                             {props.facility.name}
                         </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey="i" className="card-container"
-                    
-                >
+
+                    >
                         <Row>
                             <Card.Body
                                 style={{
