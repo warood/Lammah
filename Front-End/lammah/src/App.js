@@ -8,7 +8,11 @@ import SignUp from './pages/SignUp'
 import NewFacility from './pages/NewFacility'
 import Login from './pages/Login'
 import jwt_decode from "jwt-decode";
-
+import {ThemeProvider} from "styled-components";
+import { GlobalStyles } from "./components/GlobalStyles";
+import { lightTheme, darkTheme } from "./components/Themes"
+import { CgSun } from "react-icons/cg";
+import { HiMoon } from "react-icons/hi";
 //Pages
 import Facilities from './pages/Facilities';
 import { Home } from "./pages/Home";
@@ -27,6 +31,7 @@ import "./style/admin.css";
 import "./style/my-page.css";
 
 
+
 // components
 import { NavBar } from './components/NavBar'
 
@@ -34,12 +39,31 @@ import { NavBar } from './components/NavBar'
 import "./css/home.css";
 import "./css/nav-bar.css";
 
+const LightTheme = {
+  pageBackground: "white",
+  titleColor: "#dc658b",
+  tagLineColor: "black"
+};
+
+const DarkTheme = {
+  pageBackground: "#282c36",
+  titleColor: "lightpink",
+  tagLineColor: "lavender"
+}
+
+const themes = {
+  light: LightTheme,
+  dark: DarkTheme,
+}
 
 function App() {
   const [selectFacility, setSelectFacility] = useState({})
   const [dataLoading, setDataloading] = useState(false)
   const [auth, setAuth] = useState({ currentUser: null, isLoggedIn: false });
-
+  const [theme, setTheme] = useState('light');
+  const themeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+}
   const userLogin = () => {
     if (localStorage.jwtToken) {
       const jwtToken = localStorage.jwtToken;
@@ -56,9 +80,15 @@ function App() {
   useEffect(userLogin, []);
   return (
 
-    <div className="App">
-
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+    <>
+    
+    <GlobalStyles/>
+      <div className="App">
+        <button onClick={themeToggler}> switch mode</button>
+        
 {dataLoading &&
+
       <Router>
         {/* Nav Bar */}
         <NavBar loginCallback={userLogin} auth={auth}/>
@@ -82,7 +112,9 @@ function App() {
           </Route>
 
           <Route exact path='/facilities'>
-            <Facilities setSelectFacility={setSelectFacility} />
+          {/* <ThemeProvider theme={themes[theme]}> */}
+            <Facilities  setSelectFacility={setSelectFacility} />
+          {/* </ThemeProvider> */}
           </Route>
 
           
@@ -97,10 +129,18 @@ function App() {
             <ManageBrand auth={auth}/>
           </Route>
 
-          <Route path="/admin" >
-            <Admin 
-            auth={auth}/>
-          </Route>
+
+
+
+         <Route path="/admin" >
+  
+         {/* <ThemeProvider theme={themes[theme]}> */}
+         <Admin   auth={auth} />
+        {/* </ThemeProvider> */}
+
+         </Route>
+
+          
 
           <Route exact path="/new-facility">
             <NewFacility setAuth={setAuth} auth={auth} />
@@ -114,8 +154,15 @@ function App() {
           
 
         </Router>
-}
-    </div>
+} 
+
+
+
+
+    </div> 
+
+    </>
+    </ThemeProvider>
   );
 }
 

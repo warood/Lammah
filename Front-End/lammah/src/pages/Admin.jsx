@@ -100,8 +100,6 @@ export default function Admin(props) {
             </>
         )
     })
-
-
     /*    *****    MAP ALL USERS    *****       */
     const allUsers = users.map(user => {
 
@@ -128,9 +126,6 @@ export default function Admin(props) {
             </>
         )
     })
-
-
-
     /*    *****    MAP ALL NEW  ADDED FACILITIES     *****       */
 
 
@@ -151,8 +146,6 @@ export default function Admin(props) {
             </>
         ) 
     }) 
-
-
     /*    *****    RENDER ADMIN PAGE    *****       */
 
     if (!props.auth.isLoggedIn) {
@@ -176,18 +169,15 @@ export default function Admin(props) {
     else {
         return (
             <div className="dashboard-container ">
-
             
                 <h1>Facilities</h1>
                 <div className='admin-container'>
                     {allFacilities}
                 </div> <br />
-
                 <h1>Users</h1>
                 <div className='admin-container'>
                     {allUsers}
                 </div>
-
                 <h1>Confirm addition of facility</h1>
                 <div className='admin-container'>
                          {newAdd}
@@ -196,5 +186,4 @@ export default function Admin(props) {
             </div>
         )
     }
-
 }
