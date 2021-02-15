@@ -11,8 +11,9 @@ export default function ConfirmAppointment(props) {
     })
 
     return (
-        <div>
-            <h3>Confirmed Reservations:</h3>
+        <div style={{
+            marginTop: '5%'
+        }}>
             {allFacilities}
         </div>
     )
