@@ -35,7 +35,7 @@ export default function MyPage(props) {
             .then((res) => {
                 setUserInformation(res.data.user_info)
                 setEditProfile(res.data.user_info)
-                //   console.log('res ', res.data.appointments[0].facility.images)
+                //   console.log('res ', res.data.appointments[0].facility)
                 setApointments(res.data.appointments)
             })
     }, [deleteAppointment, infoUpdate])
@@ -81,6 +81,7 @@ export default function MyPage(props) {
             facilityName={apointment.facility.name}
             facilityImage={apointment.facility.images}
             facilityId={apointment.facility._id}
+            facility = {apointment.facility}
             setDeleteAppointment={setDeleteAppointment}
             deleteAppointment={deleteAppointment}
         />

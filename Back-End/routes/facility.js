@@ -32,7 +32,7 @@ router.post("/new-facility", (req, res) => {
 // Show One Facility  
 router.get("/facilities/:id", (req,res)=>{
    let id = req.params.id
-   Facility.findById(id).populate('appointment')
+   Facility.findById(id).populate('appointment').populate('user')
     .then(facility=>{
        res.json({facility})
     })

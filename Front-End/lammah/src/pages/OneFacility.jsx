@@ -13,6 +13,7 @@ import 'react-calendar/dist/Calendar.css';
 export default function OneFacility(props) {
 
   const [loadingDate, setLoadingDate] = useState(false);
+  const [showOnerInfo, setShowOnerInfo] = useState(false);
 
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
@@ -27,7 +28,7 @@ export default function OneFacility(props) {
   const [dateOfAllApointment, setDateOfAllApointment] = useState([])
 
 
-  const { name, images, location, description, city, price, type, appointment } = selectFacility;
+  const { name, images, location, description, city, price, type, appointment, user } = selectFacility;
 
   const handleClose = () => setShow(false);
 
@@ -59,7 +60,6 @@ export default function OneFacility(props) {
           //let facility = res.data.find((ele) => ele._id == id);
           setSelectFacility(res.data.facility);
           setFacility(res.data.facility._id);
-
           const addDate = res.data.facility.appointment.map((ele) => {
 
             return new Date(ele.date);
@@ -70,8 +70,7 @@ export default function OneFacility(props) {
         })
     }
 
-  }, []);
-
+  }, [showOnerInfo]);
 
   const onChange = date => {
     setDate(date)
@@ -89,11 +88,12 @@ export default function OneFacility(props) {
       .then((res) => {
         //console.log(res)
         // window.location.reload()
+
       })
       .catch((err) => console.log(err));
-
     //to close the modal after book
     setShow(false);
+    setShowOnerInfo(true)
   }
 
 
@@ -164,7 +164,8 @@ export default function OneFacility(props) {
               <Modal.Header closeButton>
                 <Modal.Title></Modal.Title>
               </Modal.Header>
-              <Modal.Body style={{display: "flex", justifyContent: 'center', margin: '5%'}}>
+
+              <Modal.Body style={{ display: "flex", justifyContent: 'center', margin: '5%' }}>
 
                 <Calendar onChange={onChange} value={date} minDate={new Date()}
                   tileDisabled={({ date, view }) =>
@@ -174,13 +175,13 @@ export default function OneFacility(props) {
                       date.getMonth() === disabledDate.getMonth() &&
                       date.getDate() === disabledDate.getDate()
                     )}
-                    
+
                 />
 
 
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={onsubmit}>
+                <Button variant="secondary" onClick={onsubmit} >
                   Book
           </Button>
 
@@ -189,17 +190,30 @@ export default function OneFacility(props) {
          </Button>
 
               </Modal.Footer>
+
             </Modal>
 
 
           </Col>
 
+          {(showOnerInfo) ?
 
+            <>
+              <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">If you want to contant facility owner</h4>
+
+                <p>Go to your Page and you can find his contact information</p>
+                {/* <p>Name: {user.name}</p>
+                <p class="mb-0">Phone: {user.phone}</p> */}
+              </div>
+
+            </> : <></>
+          }
         </Row>
         <hr style={{
           marginTop: "100px",
           width: '100%'
-          }}/>
+        }} />
         <Row>
           <p style={{
             padding: '3%',

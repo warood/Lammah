@@ -9,10 +9,26 @@ export default function OneCardOfApointment(props) {
 
 
     const [show, setShow] = useState(false);
-    
+    const [allUsers, setAllUsers] = useState([]);
+    const [allUsersA, setAllUsersA] = useState(false);
 
     const handleClose = () => setShow(false);
 
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/user/users')
+            .then((res) => {
+                // console.log(res.data.msg)
+                setAllUsers(res.data.msg)
+                setAllUsersA(true)
+            })
+    }, [])
+
+    const findUser = (userId) => {
+
+        const userInfo = allUsers.filter(user => user._id == userId)
+
+        return userInfo
+    }
 
 
     const onSubmit = (apointmentId) => {
@@ -23,6 +39,8 @@ export default function OneCardOfApointment(props) {
     }
 
     return (
+        <>
+        {allUsersA &&
         <>
             <Row className="mt-5" style={{
                 width: "100%",
@@ -68,6 +86,18 @@ export default function OneCardOfApointment(props) {
                                         fontSize: '0.8em'
                                     }}>Status: {props.status}</p>
                                 </Row>
+                               
+                                <Row>
+                                    <p style={{
+                                        fontSize: '0.8em'
+                                    }}>Owner: {findUser(props.facility.user)[0].name}</p>
+                                </Row>
+                                <Row>
+                                    <p style={{
+                                        fontSize: '0.8em'
+                                    }}>Phone: {findUser(props.facility.user)[0].phone}</p>
+                                </Row>
+
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
@@ -124,5 +154,7 @@ export default function OneCardOfApointment(props) {
                 </Modal.Footer>
             </Modal>
         </>
+    }
+    </>
     )
 }

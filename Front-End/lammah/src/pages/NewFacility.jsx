@@ -21,7 +21,7 @@ export default function NewFacility(props) {
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
 
     const onSubmit = (values) => {
-        
+        console.log(values)
         axios
             .post(`${API_URL}/api/facility/new-facility`, values)
             .then((res) => {
@@ -35,11 +35,12 @@ export default function NewFacility(props) {
     const uploadImageHundler = (e) => {
         console.log(e.target.files[0])
         var format = new FormData()
-        format.append("image", e.target.files[0])
-        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID c5d679f9edcd982" } })
+        format.append("file", e.target.files[0])
+        format.append('upload_preset', 'lammah')
+        axios.post("https://api.cloudinary.com/v1_1/dwyky6yt6/image/upload", format)
             .then(data => {
                 console.log(data)
-                setUpdateFacilityImg(data.data.data.link)
+                setUpdateFacilityImg(data.data.url)
             })
     }
 
@@ -58,7 +59,7 @@ export default function NewFacility(props) {
                     <Formik
                         initialValues={{ name: "", description: "", location: "", city: "", price: "", type: "", images:updateFacilityImg, userId: userId }}
                         validationSchema={validationSchema}
-                        onSubmit={values => onSubmit(values)}
+                        onSubmit={values => onSubmit({...values, images: updateFacilityImg})}
                     >
                         <Form as={FormikForm} className="form">
 
@@ -83,6 +84,7 @@ export default function NewFacility(props) {
                                     Images
                                 </Form.Label>
                                 <Form.Control type="file" multiple name="images" onChange={uploadImageHundler} />
+                                <img src={updateFacilityImg} alt=""/>
                                 <Form.Control as={Field} placeholder="www.image.com" name="images" type="text" style={{ marginTop: '5%'}}/>
                             </Form.Group>
 
