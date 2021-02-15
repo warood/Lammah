@@ -20,7 +20,16 @@ router.post("/new-appointment", (req, res) => {
 });
 // ====================
 
-
+//Update one Appointment from waiting to confirmed
+router.put("/:appointmentId/confirm", (req, res)=>{
+  let appointmentId = req.params.appointmentId
+  Appointment.findOne({_id: appointmentId})
+  .then(appointment=>{
+    Appointment.updateOne({_id: appointmentId}, {status:"confirmed"}, (err, updateAppointment)=>{
+      res.json({msg: "updated facility", updateAppointment})
+    })
+     })
+})
 
 
 

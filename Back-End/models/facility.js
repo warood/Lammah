@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 
+
 const facilitySchema = new mongoose.Schema({
     name : {
         type :String , 
@@ -10,7 +11,7 @@ const facilitySchema = new mongoose.Schema({
         ,
      
     location : {
-        type :String , 
+        type:Object , 
        
     } , 
     description : {
@@ -35,6 +36,7 @@ const facilitySchema = new mongoose.Schema({
 
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
 
+    rating: [{type: mongoose.Schema.Types.ObjectId, ref: 'rating'}],
     status : {
         type: Number,
         default :0 , 

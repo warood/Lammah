@@ -1,6 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function HomeSection() {
+
+    const [image , setImage] = useState({})
+
+    useEffect(() => {
+
+        axios.get("http://localhost:5000/api/facility/facilities")
+        .then(res=>{
+            console.log(res.data.facilities[0].images)
+
+            setImage(res.data.facilities)
+            
+        })
+       
+    }, [])
+
+
+
     return (
         <div className="section">
 
@@ -32,14 +50,14 @@ export default function HomeSection() {
             {/* ========================================= */}         
             <div className="tf-items">
                 <div className="item1">
-                    <img src="https://q-xx.bstatic.com/images/hotel/max1024x768/265/265080438.jpg" />
+                    <img src={image[0].images} />
                 </div>
                 <div className="item2">
-                    <img src="https://mostaql.hsoubcdn.com/uploads/thumbnails/621911/5f83610450284/1.jpg" />
+                    <img src={image[1].images} />
                 </div><div className="item3">
-                    <img src="https://cf.bstatic.com/images/hotel/max1024x768/236/236605809.jpg" />
+                    <img src={image[0].images} />
                 </div><div className="item4">
-                    <img src="https://cf.bstatic.com/images/hotel/max1024x768/257/257562657.jpg" />
+                    <img src={image[2].images} />
                 </div>
             </div>
             {/* ========================================= */}

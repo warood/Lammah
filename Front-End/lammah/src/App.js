@@ -1,8 +1,9 @@
+import API_URL from './apiConfig.js'
 
 // Others
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,   useState } from 'react';
 import SignUp from './pages/SignUp'
 import NewFacility from './pages/NewFacility'
 import Login from './pages/Login'
@@ -23,6 +24,9 @@ import './style/manage-brand.css';
 import './style/new-facility.css';
 import './style/OneFacility.css';
 import "./style/admin.css";
+import "./style/my-page.css";
+
+
 // components
 import { NavBar } from './components/NavBar'
 
@@ -39,7 +43,7 @@ function App() {
   const userLogin = () => {
     if (localStorage.jwtToken) {
       const jwtToken = localStorage.jwtToken;
-      const currentUser = jwt_decode(jwtToken, "SECRET").user;
+      const currentUser = jwt_decode(jwtToken, process.env.SECRET_KEY).user;
       setAuth({ currentUser, isLoggedIn: true });
     } else {
       setAuth({ currentUser: null, isLoggedIn: false });

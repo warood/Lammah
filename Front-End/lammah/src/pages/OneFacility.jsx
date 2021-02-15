@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
@@ -5,11 +6,49 @@ import axios from "axios";
 import { Button, Col, Container, Row, Form, Modal } from "react-bootstrap";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+
+
+function Map() {
+  let [adress, setAdress] = useState({ lat: 25.095042882671507, lng: 46.12474465486534 })
+  const myLocation = "https://goo.gl/maps/JZS6aSpaY2hLbGdq7"
+
+
+  useEffect(() => {
+    const id = "602aa11355888512448627af"
+
+    axios.get(`http://localhost:5000/api/facility/facilities/${id}`).then(data => {
+      
+      console.log(data.data.facility.location)
+
+      setAdress(data.data.facility.location)
+      
+    })
+
+  }, [])
+
+
+  console.log("here", adress.lat)
+  return (<GoogleMap defaultZoom={12}
+    defaultCenter={{ lat: adress.lat, lng: adress.lng }}
+  >
+
+    <Marker position={{ lat: adress.lat , lng: adress.lng }} />
+  </GoogleMap>
+  );
+
+}
+
+
+const WrappedMap = withScriptjs(withGoogleMap(Map));
 
 
 
-function OneFacility(props) {
+
+
+
+
+export default function OneFacility(props) {
 
   const [loadingDate, setLoadingDate] = useState(false);
 
@@ -49,25 +88,25 @@ function OneFacility(props) {
   };
 
 
-
   useEffect(() => {
 
-    if (!city) {
-      axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
-        .then(res => {
-          //let facility = res.data.find((ele) => ele._id == id);
-          setSelectFacility(res.data.facility);
-          setFacility(res.data.facility._id);
+    // if (!city) {
+    //   axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
+    //     .then(res => {
+    //      // let facility = res.data.find((ele) => ele._id == id);
+    //      setSelectFacility(res.data.facility);
+    //      setFacility(res.data.facility._id);
+    //       console.log("from axios" )
 
-          const addDate = res.data.facility.appointment.map((ele) => {
+    //       const addDate = res.data.facility.appointment.map((ele) => {
 
-            return new Date(ele.date);
+    //         return new Date(ele.date);
 
-          })
-          setDateOfAllApointment(addDate)
+    //       })
+    //       setDateOfAllApointment(addDate)
 
-        })
-    }
+    //     })
+    // }
 
   }, []);
 
@@ -79,9 +118,6 @@ function OneFacility(props) {
 
   //booking function 
   const onsubmit = () => {
-
-
-
     //console.log('newAppointment',apointment)
 
     axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
@@ -94,13 +130,16 @@ function OneFacility(props) {
     //to close the modal after book
     setShow(false);
   }
- const loction = "https://www.google.com.sa/maps/place/Legend+Tower,+%D8%B7%D8%B1%D9%8A%D9%82+%D8%A7%D9%84%D9%85%D9%84%D9%83+%D9%81%D9%87%D8%AF%D8%8C+%D8%A7%D9%84%D8%B9%D9%84%D9%8A%D8%A7%D8%8C+%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6+12313%E2%80%AD/@24.6937266,46.6827579,17z/data=!3m1!4b1!4m5!3m4!1s0x3e2f0339f942ede5:0xc55a00fdf29f39d1!8m2!3d24.6937217!4d46.6805692"
 
   let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115683.jpg", "https://www.visitsaudi.com/content/dam/no-dynamic-media-folder/manifest-newarticles-batch2/a-guide-to-al-ula/guide_to_al_ula_horiz_article_4.jpg", "https://sahary-al-ola-camp-villa.hotels-saudi-arabia.com/data/Photos/767x460/10098/1009837/1009837849.JPEG"]
   const mapStyles = {
     width: '100%',
     height: '100%',
   };
+
+
+
+
 
   return (
 
@@ -118,16 +157,36 @@ function OneFacility(props) {
 
           {/* main image */}
 
-          <Col col-md-6>
-            <img className="mainIMG" width="100%" src={images} alt="" srcset="" />
+          <Col col-md-6
+            style={{
+              minWidth: '300px',
+              maxWidth: '500px',
+              padding: '0',
+              width: '100%'
+
+            }}>
+            <img className="mainIMG" src={images} alt="" srcset=""
+              style={{
+                width: '100%',
+                marginBottom: '10%',
+              }}
+            />
           </Col>
 
 
           {/* facility details */}
-          <Col col-md-3>
-            <h1> name: {name} </h1>
-            <p>type: {type} </p>
-            <p> descreption: {description} </p>
+          <Col col-md-3 style={{
+            minWidth: '250px',
+            maxWidth: '500px',
+            padding: '0 2% 2% 2%',
+            margin: '0 2% 2% 2%',
+            width: '100%'
+
+          }}>
+            <h1> {name} </h1>
+            <hr />
+            <p>Faclity: {type} </p>
+
             <p>City: {city}</p>
             <p>location:<a href="#"> {location}</a></p>
             <p>Price: {price} SR</p>
@@ -145,7 +204,7 @@ function OneFacility(props) {
               <Modal.Header closeButton>
                 <Modal.Title></Modal.Title>
               </Modal.Header>
-              <Modal.Body>
+              <Modal.Body style={{ display: "flex", justifyContent: 'center', margin: '5%' }}>
 
                 <Calendar onChange={onChange} value={date} minDate={new Date()}
                   tileDisabled={({ date, view }) =>
@@ -155,8 +214,8 @@ function OneFacility(props) {
                       date.getMonth() === disabledDate.getMonth() &&
                       date.getDate() === disabledDate.getDate()
                     )}
+
                 />
-                <p>  {date.toString()} </p>
 
 
               </Modal.Body>
@@ -172,21 +231,43 @@ function OneFacility(props) {
               </Modal.Footer>
             </Modal>
           </Col>
+          <div style={{ height: "100vw", width: "100vh" }}>
+
+            <WrappedMap
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+            />
+          </div>
         </Row>
+
+
+        <hr style={{
+          marginTop: "100px",
+          width: '100%'
+        }} />
+
+
+        <Row>
+          <p style={{
+            padding: '3%',
+            width: '100%',
+            maxWidth: '90%',
+            overflow: 'hidden',
+            wordWrap: "break-word",
+
+          }}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat nostrum autem adipisci similique, sed nihil corrupti labore nisi beatae perferendis dolor quisquam dolore vitae accusamus non omnis officiis unde! Quis.{description} </p>
+
+
+        </Row>
+
+
       </Container>
 
-      <Map
-          // google={this.props.google}
-          zoom={8}
-          style={{mapStyles}}
-          initialCenter={{ lat: 47.444, lng: -122.176}}
-        />
 
 
     </div>
   );
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'TOKEN HERE'
-})(OneFacility);

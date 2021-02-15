@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import axios from "axios";
 import { Link, useHistory } from 'react-router-dom'
 import { Button, Form, Container, Row, Modal, Col, Alert } from "react-bootstrap";
@@ -35,9 +36,9 @@ export const NavBar = (props) => {
 
     //login function
     const onSubmit = (event) => {
-        event.preventDefault();
-        axios
-            .post("http://localhost:5000/api/user/login", credentials)
+
+
+        axios.post(`${API_URL}/api/user/login`, credentials)
             .then((res) => {
 
                 const token = res.data.token;
@@ -74,20 +75,15 @@ export const NavBar = (props) => {
                         <Link to="/manage-brand" className="menu-element">BRAND</Link>
                         :
                         <></>}
-
                     {props.auth.isLoggedIn ?
                         <Link to="/my-page" className="menu-element">MY PAGE</Link>
                         :
                         <></>}
-
                     {props.auth.isLoggedIn ?
                         <Link to="/new-facility" className="menu-element">NEW FACILITY</Link>
 
                         :
                         <></>}
-
-
-
                     {props.auth.isLoggedIn ?
                         <></>
                         :
@@ -137,7 +133,11 @@ export const NavBar = (props) => {
                         </Modal.Header>
                         <Modal.Body>
                             <Formik 
+                            initialValues ={{email:"" , password:""}}
                             validationSchema={validationSchema}
+                            validateOnBlur = {false}
+                            validateOnChange={false}
+                            onSubmit = {(e) => onSubmit(e)}
                             >
                                 <Container>
                                     <FormikForm>
@@ -146,24 +146,21 @@ export const NavBar = (props) => {
                                                 Email
                                      </Form.Label>
 
-                                            <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
+                                            <Form.Control as={Field} name="email" onKeyUp={(e) => onChangeInput(e)} placeholder="email@example.com" />
                                             <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
                                                 {msg}
                                             </Alert>} />
                                         </Form.Group>
-
-
                                         <Form.Group as={Row} controlId="formPlaintextPassword">
                                             <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
                                                 Password
                                     </Form.Label>
 
-                                            <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
+                                            <Form.Control as={Field} name="password" onKeyUp={(e) => onChangeInput(e)} type="password" placeholder="Password" />
                                             <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
                                                 {msg}
                                             </Alert>} />
                                         </Form.Group>
-
                                         <Form.Group>
                                             <Col md={12}>
                                                 <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
@@ -171,14 +168,13 @@ export const NavBar = (props) => {
                                        </Link>
                                                 </p>
 
-                                                <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
+                                                <Button type="submit" style={{ marginLeft: "150px" }} variant="secondary">Login</Button>
                                             </Col>
                                         </Form.Group>
 
                                     </FormikForm>
                                 </Container>
                             </Formik>
-
                         </Modal.Body>
 
                         <Modal.Footer>
@@ -188,7 +184,6 @@ export const NavBar = (props) => {
 
                         </Modal.Footer>
                     </Modal>
-
                 </>
                 {/* ==================== */}
 

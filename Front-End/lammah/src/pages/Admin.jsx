@@ -1,4 +1,4 @@
-
+import API_URL from '../apiConfig.js'
 import React from 'react';
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -16,14 +16,14 @@ export default function Admin(props) {
         
 
         /*     *****    GET ALL Facilities    *****      */
-        axios.get('http://localhost:5000/api/facility/facilities')
+        axios.get(`${API_URL}/api/facility/facilities`)
             .then(res => {
                 setFacilities(res.data.facilities) 
             })
 
 
         /*     *****    GET ALL USERS    *****      */
-        axios.get(`http://localhost:5000/api/admin/users`)
+        axios.get(`${API_URL}/api/admin/users`)
             .then(res => {
               
                 console.log("api admin users "+res.data)
@@ -37,7 +37,7 @@ export default function Admin(props) {
         const isAdmin = user.isAdmin
        
         if(e==false&&isAdmin==true || e==true&&isAdmin==false){
-            axios.put(`http://localhost:5000/api/admin/${user._id}`, {isAdmin: isAdmin})
+            axios.put(`${API_URL}/api/admin/${user._id}`, {isAdmin: isAdmin})
             .then(res=>{
                 console.log(res)
             })
@@ -51,7 +51,7 @@ export default function Admin(props) {
        
         const facilityId = facility._id;
      
-        axios.put(`http://localhost:5000/api/admin/${facilityId}/status`)
+        axios.put(`${API_URL}/api/admin/${facilityId}/status`)
             .then(data => {
                
                 setChangeAfterDelete(!changeAfterDelete)
@@ -63,7 +63,7 @@ export default function Admin(props) {
     const deleteFacility = (facility) => {
        
         const facilityId = facility._id;
-        axios.delete(`http://localhost:5000/api/admin/${facilityId}/deleteFacility`)
+        axios.delete(`${API_URL}/api/admin/${facilityId}/deleteFacility`)
             .then(data => {
                 // console.log(data)
                 setChangeAfterDelete(!changeAfterDelete)
@@ -73,7 +73,7 @@ export default function Admin(props) {
     const deleteUser = (user) => {
        
         const userId = user._id;
-        axios.delete(`http://localhost:5000/api/admin/${userId}/deleteuser`)
+        axios.delete(`${API_URL}/api/admin/${userId}/deleteuser`)
             .then(data => {
                 // console.log(data)
                 setChangeAfterDelete(!changeAfterDelete)

@@ -2,15 +2,16 @@
 .NavBar{
     position: static;
     width: 100%;
-    height: 50px;
+    height: 30px;
     background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 0.8em;
     color: black;
     border-bottom: 1px solid rgba(128, 128, 128, 0.144);
 }
+
 
 
 /*  NavBar Items */
@@ -41,4 +42,17 @@ border-bottom: 2px solid #000000;
     text-decoration: none;
     color: black;
     margin-left: 10%;
+}
+
+
+@media only screen and (max-width: 500px) {
+    .NavBar{
+        font-size: 5.5px;
+    }
+    body{
+        font-size: 0.7em;
+    }
+    h1{
+        font-size: 2em;
+    }
 }
