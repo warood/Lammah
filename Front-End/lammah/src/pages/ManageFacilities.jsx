@@ -25,8 +25,9 @@ export default function ManageFacilities(props) {
     })
 
     return (
-        <div>
-            <h3>Your Facilities:</h3>
+        <div style={{
+            marginTop: '5%'
+        }}>
             {allFacilities}
             {/* <Card className="card-container">
                 <Card.Body className="card-body">

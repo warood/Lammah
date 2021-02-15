@@ -28,8 +28,9 @@ export default function ManageAppointments(props) {
 
 
     return (
-        <div>
-            <h3>Recent Appointement:</h3>
+        <div style={{
+            marginTop: '5%'
+        }}>
             {allFacilities}
         </div>
     )

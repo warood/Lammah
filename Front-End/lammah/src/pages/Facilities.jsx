@@ -75,7 +75,7 @@ export default function Facilities(props) {
                             fontWeight: 'bold',
                             fontSize: '1.5em',
 
-                        }}>{facility.price} SR</small>
+                        }}>{facility.price} SAR</small>
 
                 </Card>
             </Link>

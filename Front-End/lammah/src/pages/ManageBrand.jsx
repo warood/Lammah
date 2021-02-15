@@ -5,12 +5,16 @@ import ManageFacilities from './ManageFacilities';
 import { useHistory } from "react-router-dom";
 import ManageAppointments from './ManageAppointments';
 import ConfirmAppointment from './ConfirmAppointment';
+import { Tabs, Tab } from 'react-bootstrap';
+
 
 export default function ManageBrand(props) {
     const userId = props.auth.currentUser._id;
     const [facilities, setFacilities] = useState([]);
 
     const [afterUpdateFacility, setAfterUpdateFacility] = useState(false);
+    const [key, setKey] = useState('home');
+
     const history = useHistory();
 
     useEffect(() => {
@@ -23,28 +27,58 @@ export default function ManageBrand(props) {
 
     }, [afterUpdateFacility])
 
+
+
+
+
+
+
+
     //Render Manage-Brand Page
     return (
         <>
-        {props.auth.isLoggedIn?
-        <div className="ManageBrand">
-            <h1>Reservation Management</h1>
-            <hr />
+            {props.auth.isLoggedIn ?
+                <div className="ManageBrand">
+                    <h1>Reservation Management</h1>
+                    <hr />
 
-            <ManageAppointments auth={props.auth}/>
- 
-            <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility}/>
-            <br />
 
-            
-            <ConfirmAppointment auth={props.auth} facilities={facilities}/>
 
-        </div>
-    :<>
-    {
-    history.push(`/`)
-      }
-    </>}
-    </>
+                    <Tabs
+                        id="controlled-tab-example"
+                        activeKey={key}
+                        onSelect={(k) => setKey(k)}
+                        style={{
+                            backgroundColor: 'white',
+                        }}
+                    >
+                        <Tab eventKey="home" title="Recent Appointement"
+                            style={{
+                                color: 'white',
+                                textDecoration: 'none',
+
+                            }}
+                        >
+
+                            <ManageAppointments auth={props.auth} />
+
+                        </Tab>
+                        <Tab eventKey="profile" title="Your Facilities">
+                            <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility} />
+                            <br />
+                        </Tab>
+                        <Tab eventKey="contact" title="Confirmed Reservations" >
+                            <ConfirmAppointment auth={props.auth} facilities={facilities} />
+                        </Tab>
+                    </Tabs>
+
+
+                </div>
+                : <>
+                    {
+                        history.push(`/`)
+                    }
+                </>}
+        </>
     )
 }
