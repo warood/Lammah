@@ -116,7 +116,7 @@ function App() {
           </Route>
 
           <Route exact path='/facilities'>
-            <Facilities  search={search} setSelectFacility={setSelectFacility} />
+            <Facilities  search={search} setSelectFacility={setSelectFacility} ToSetSearch={ToSetSearch}/>
           </Route>
 
           
