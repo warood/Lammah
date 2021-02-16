@@ -21,7 +21,7 @@ export const NavBar = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     //for show alert 
     const [login, setLogin] = useState(true);
-
+    const [searchTerm, setSearchTerm] = useState("");
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -62,17 +62,23 @@ export const NavBar = (props) => {
         <>
             <div className="NavBar">
                 <div className="frist-row">
+                    
                     {/* Brand Logo */}
                     <Link to="/" className="logo menu-element">
-                    
-                        </Link>
 
-                    <input className="menu-element"
-                    style={{height: '20px'}}/>
+                    </Link>
+
+                    <input
+                        style={{ height: '20px' }}
+                        type="text" name="search" placeholder="Search" onChange={event => {
+                            props.ToSetSearch(event.target.value)
+                        }}></input>
 
                     <div className="menu-element" >ENG</div>
                     <div className="menu-element">ACCOUNT</div>
                     <div className="menu-element">MY REQUESTS</div>
+                    <button onClick={props.themeToggler}> switch mode</button>
+
                 </div>
                 <div className="sec-row">
 

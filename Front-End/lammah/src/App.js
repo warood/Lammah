@@ -62,6 +62,7 @@ function App() {
   const [dataLoading, setDataloading] = useState(false)
   const [auth, setAuth] = useState({ currentUser: null, isLoggedIn: false });
   const [theme, setTheme] = useState('light');
+  const [search, setSearch] = useState("");
   const themeToggler = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
 }
@@ -78,6 +79,8 @@ function App() {
   };
   console.log("The current User is: ", auth.currentUser, "data loading", dataLoading);
   useEffect(userLogin, []);
+
+  const ToSetSearch = (text)=>{ setSearch(text)}
   return (
 
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -85,13 +88,14 @@ function App() {
     
     <GlobalStyles/>
       <div className="App">
-        {/* <button onClick={themeToggler}> switch mode</button> */}
+       
         
 {dataLoading &&
 
       <Router>
         {/* Nav Bar */}
-        <NavBar loginCallback={userLogin} auth={auth}/>
+        <NavBar loginCallback={userLogin} auth={auth} ToSetSearch={ToSetSearch}
+        themeToggler={themeToggler}/>
 
         
           {/* Home Page */}
@@ -112,9 +116,7 @@ function App() {
           </Route>
 
           <Route exact path='/facilities'>
-          {/* <ThemeProvider theme={themes[theme]}> */}
-            <Facilities  setSelectFacility={setSelectFacility}  />
-          {/* </ThemeProvider> */}
+            <Facilities  search={search} setSelectFacility={setSelectFacility} ToSetSearch={ToSetSearch}/>
           </Route>
 
           
@@ -133,11 +135,7 @@ function App() {
 
 
          <Route path="/admin" >
-  
-         {/* <ThemeProvider theme={themes[theme]}> */}
          <Admin   auth={auth} />
-        {/* </ThemeProvider> */}
-
          </Route>
 
           
