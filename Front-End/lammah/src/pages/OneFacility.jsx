@@ -7,6 +7,7 @@ import { Button, Col, Container, Row, Form, Modal } from "react-bootstrap";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 // import { Map, GoogleApiWrapper } from 'google-maps-react';
+import DOMPurify from 'dompurify';
 
 
 
@@ -50,7 +51,11 @@ export default function OneFacility(props) {
       })
   };
 
-
+  const createMarkup = (html) => {
+    return  {
+      __html: DOMPurify.sanitize(html)
+    }
+  }
 
   useEffect(() => {
 
@@ -70,7 +75,7 @@ export default function OneFacility(props) {
         })
     }
 
-  }, [showOnerInfo]);
+  }, []);
 
   const onChange = date => {
     setDate(date)
@@ -222,7 +227,9 @@ export default function OneFacility(props) {
             overflow: 'hidden',
             wordWrap: "break-word",
 
-          }}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat nostrum autem adipisci similique, sed nihil corrupti labore nisi beatae perferendis dolor quisquam dolore vitae accusamus non omnis officiis unde! Quis.{description} </p>
+          }}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat nostrum autem adipisci similique, sed nihil corrupti labore nisi beatae perferendis dolor quisquam dolore vitae accusamus non omnis officiis unde! Quis.</p>
+
+<div className="preview" dangerouslySetInnerHTML={createMarkup(description)}></div>
         </Row>
       </Container>
       {/* <Map

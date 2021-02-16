@@ -9,11 +9,14 @@ const appointmentSchema = new mongoose.Schema({
     status : {
         type :String , 
         default:"inactive"
-    } , 
+    },
+    createdDate: {
+        type: Date,
+        default: Date.now()
+    }, 
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
-    facility :{type : mongoose.Schema.Types.ObjectId , ref : 'facility' }
+    facility :{type : mongoose.Schema.Types.ObjectId , ref : 'facility' },
 
-    
 
 } , {timestamps :true})
 
