@@ -141,69 +141,102 @@ export default function Facilities(props) {
         let cityWithTerm = cities.filter(facility => facility.name.toLowerCase().includes(term.toLowerCase()) )
          allFacilities = cityWithTerm.map((facility, i) => {
     
-            if (facility.status == 1) {
-                return (
-                    <Link key={i}
-                        onClick={() => props.setSelectFacility(facility)}
-                        to={`/facilities/${facility._id}`}
-                        style={{ textDecoration: "none" }}>
-                        <Card className="facility-card" >
-                            <Card.Img variant="top"
-                                style={{
-                                    height: '100%',
-                                    objectFit: 'cover',
-                                    objectPosition: '50% 50%',
-    
-                                }}
-                                src={facility.images} />
-    
-                            <Card.Title
-                                style={{
-                                    position: 'absolute',
-                                    bottom: '20%',
-                                    color: 'white',
-                                    padding: '0 5% 0 5%',
-                                    width: '70%',
-                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                    fontWeight: 'bold',
-                                    fontSize: '1.3em',
-                                    maxHeight: '50px',
-                                    overflow: 'hidden',
-    
-                                }}>{facility.name}</Card.Title>
-                            <Card.Text
-    
-                                style={{
-                                    position: 'absolute',
-                                    bottom: '10%',
-                                    color: 'white',
-                                    padding: '0 5% 0 5%',
-                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                    fontWeight: 'bold',
-                                    fontSize: '0.9em',
-                                }}
-                            >
-    
-                                {facility.city}
-                            </Card.Text>
-    
-    
-                            <small
-                                style={{
-                                    position: 'absolute',
-                                    bottom: '3%',
-                                    color: 'white',
-                                    padding: '0 5% 0 5%',
-                                    backgroundColor: 'rgba(255, 0, 0, 0.623)',
-                                    fontWeight: 'bold',
-                                    fontSize: '1.5em',
-    
-                                }}>{facility.price} SR</small>
-    
-                        </Card>
-                    </Link>
-                )
-            }
+            
+        if (facility.status == 1) {
+            return (
+                <Link key={i}
+                    onClick={() => props.setSelectFacility(facility)}
+                    to={`/facilities/${facility._id}`}
+                    style={{ textDecoration: "none" }}>
+                    <Card className="facility-card" >
+                        <Card.Img variant="top"
+                            style={{
+                                height: '100%',
+                                objectFit: 'cover',
+                                objectPosition: '50% 50%',
+
+                            }}
+                            src={facility.images} />
+
+                        <Card.Title
+                            style={{
+                                position: 'absolute',
+                                bottom: '20%',
+                                color: 'white',
+                                padding: '0 5% 0 5%',
+                                maxWidth: '70%',
+                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                fontWeight: 'bold',
+                                fontSize: '1.3em',
+                                maxHeight: '50px',
+                                overflow: 'hidden',
+
+                            }}>{facility.name}</Card.Title>
+                        <Card.Text
+
+                            style={{
+                                position: 'absolute',
+                                bottom: '10%',
+                                color: 'white',
+                                padding: '0 5% 0 5%',
+                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                fontWeight: 'bold',
+                                fontSize: '0.9em',
+                            }}
+                        >
+
+                            {facility.city}
+                        </Card.Text>
+
+
+                        <small
+                            style={{
+                                position: 'absolute',
+                                bottom: '3%',
+                                color: 'white',
+                                padding: '0 5% 0 5%',
+                                backgroundColor: 'rgba(255, 0, 0, 0.623)',
+                                fontWeight: 'bold',
+                                fontSize: '1.5em',
+
+                            }}>{facility.price} SR</small>
+
+                        <Card.Text
+
+                            style={{
+                                position: 'absolute',
+                                top: '2%', left: '0',
+                                color: 'white',
+                                padding: '0 1% 0 5%',
+                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                fontWeight: 'bold',
+                                fontSize: '0.9em',
+                            }}
+                        >
+
+                            <Rating readOnly value={facility.stars} />
+                        </Card.Text>
+
+                        <Card.Text
+
+                            style={{
+                                position: 'absolute',
+                                top: '12%', left: '0',
+                                color: 'white',
+                                padding: '0 1% 0 5%',
+                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                fontWeight: 'bold',
+                                fontSize: '0.9em',
+                            }}
+                        >
+
+                            <span /><EyeFill color="white" size={20} /> {facility.views}
+                        </Card.Text>
+
+                    </Card>
+                </Link>
+            )
+        }
         })
     
         }
@@ -286,6 +319,7 @@ export default function Facilities(props) {
         || facility.description.toLowerCase().includes(term.toLowerCase()));
          allFacilities = result.map((facility, i) => {
 
+
             if (facility.status == 1) {
                 return (
                     <Link key={i}
@@ -308,7 +342,7 @@ export default function Facilities(props) {
                                     bottom: '20%',
                                     color: 'white',
                                     padding: '0 5% 0 5%',
-                                    width: '70%',
+                                    maxWidth: '70%',
                                     backgroundColor: 'rgba(0, 0, 0, 0.623)',
                                     fontWeight: 'bold',
                                     fontSize: '1.3em',
@@ -344,6 +378,38 @@ export default function Facilities(props) {
                                     fontSize: '1.5em',
     
                                 }}>{facility.price} SR</small>
+    
+                            <Card.Text
+    
+                                style={{
+                                    position: 'absolute',
+                                    top: '2%', left: '0',
+                                    color: 'white',
+                                    padding: '0 1% 0 5%',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                    fontWeight: 'bold',
+                                    fontSize: '0.9em',
+                                }}
+                            >
+    
+                                <Rating readOnly value={facility.stars} />
+                            </Card.Text>
+    
+                            <Card.Text
+    
+                                style={{
+                                    position: 'absolute',
+                                    top: '12%', left: '0',
+                                    color: 'white',
+                                    padding: '0 1% 0 5%',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                    fontWeight: 'bold',
+                                    fontSize: '0.9em',
+                                }}
+                            >
+    
+                                <span /><EyeFill color="white" size={20} /> {facility.views}
+                            </Card.Text>
     
                         </Card>
                     </Link>

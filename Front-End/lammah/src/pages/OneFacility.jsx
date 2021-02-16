@@ -5,6 +5,8 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Button, Col, Container, Row, Form, Modal } from "react-bootstrap";
 import OneComment from '../components/OneComment'
+// import { Map, GoogleApiWrapper } from 'google-maps-react';
+import DOMPurify from 'dompurify';
 
 // material-ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,7 +43,14 @@ export default function OneFacility(props) {
   const [commentChange, setCommentChange] = useState("")
   const [refreshPage, setRefreshPage] = useState(false)
   const [displayAllComments, setdisplayAllComments] = useState([])
+  const [showOnerInfo, setShowOnerInfo] = useState(false);
 
+
+  const createMarkup = (html) => {
+    return  {
+      __html: DOMPurify.sanitize(html)
+    }
+  }
   // material-ui
   const classes = useStyles();
   // const [userId, setUserId] = useState(props.auth.currentUser._id)
@@ -147,10 +156,13 @@ export default function OneFacility(props) {
 
     //to close the modal after book
     setShow(false);
+    setShowOnerInfo(true)
+
   }
 
 
   let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115683.jpg", "https://www.visitsaudi.com/content/dam/no-dynamic-media-folder/manifest-newarticles-batch2/a-guide-to-al-ula/guide_to_al_ula_horiz_article_4.jpg", "https://sahary-al-ola-camp-villa.hotels-saudi-arabia.com/data/Photos/767x460/10098/1009837/1009837849.JPEG"]
+
 
 
   const allComments = displayAllComments.map((comment, i) => {
@@ -265,14 +277,17 @@ return (
         width: '100%'
       }} />
       <Row>
-        <p style={{
+
+        <div className="preview" dangerouslySetInnerHTML={createMarkup(description)}
+        style={{
           padding: '3%',
           width: '100%',
           maxWidth: '90%',
           overflow: 'hidden',
           wordWrap: "break-word",
 
-        }}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat nostrum autem adipisci similique, sed nihil corrupti labore nisi beatae perferendis dolor quisquam dolore vitae accusamus non omnis officiis unde! Quis.{description} </p>
+        }}></div>
+
       </Row>
       <h1>FeedBack</h1>
       <Row style={{

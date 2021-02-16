@@ -4,8 +4,21 @@ const router = express.Router()
 const Appointment = require('../models/appointment')
 const Facility = require('../models/facility')
 
+const checkExpiredAppointments = async (req, res, next) =>{
+  try{
+    let response = await Appointment.deleteMany({createdAt: {
+      $lte: new Date(new Date().getTime()-60*120*1000).toISOString()
+   }, status: "waiting"})
+    console.log('deleted appointments last 5 min', response.deletedCount)
+    next()
+  }catch(err){
+    res.json({msg: "unknown server error"})
+  }
+  // console.log(new Date().toISOString())
+ }
+
 // Add New Appointment API 
-router.post("/new-appointment", (req, res) => {
+router.post("/new-appointment", checkExpiredAppointments, (req, res) => {
   console.log(req.body);
   const { date, status, userId, facility } = req.body;
 
@@ -17,24 +30,51 @@ router.post("/new-appointment", (req, res) => {
         res.json({ msg: "You added a new appointment", newAppointment })
       })
   })
+
+  
+
+ 
 });
 // ====================
 
 //Update one Appointment from waiting to confirmed
-router.put("/:appointmentId/confirm", (req, res)=>{
+router.put("/:appointmentId/confirm", checkExpiredAppointments, (req, res)=>{
   let appointmentId = req.params.appointmentId
   Appointment.findOne({_id: appointmentId})
   .then(appointment=>{
-    Appointment.updateOne({_id: appointmentId}, {status:"confirmed"}, (err, updateAppointment)=>{
+    console.log(appointment)
+    Appointment.updateOne({_id: appointmentId}, {status:"confirmed", expireAt: null}, (err, updateAppointment)=>{
       res.json({msg: "updated facility", updateAppointment})
     })
      })
 })
 
 
+//Update one Appointment from waiting to confirmed
+// router.put("/:appointmentId/confirm", checkExpiredAppointments, async (req, res)=>{
+//   try{
+//     let appointmentId = req.params.appointmentId
+//     let appointment = await Appointment.findById(appointmentId)
+//     appointment.status = "confirmed"
+//     appointment.save()
+
+//   }catch(err){
+//     res.status(500).json({msg: "error"})
+//   }
+  
+//   Appointment.findOne({_id: appointmentId})
+//   .then(appointment=>{
+//     console.log(appointment)
+//     Appointment.updateOne({_id: appointmentId}, {status:"confirmed", expireAt: null}, (err, updateAppointment)=>{
+//       res.json({msg: "updated facility", updateAppointment})
+//     })
+//      })
+// })
+
+
 
 // All Appointments API ( may don't need it )
-router.get("/appointments", (req, res) => {
+router.get("/appointments", checkExpiredAppointments, (req, res) => {
   Appointment.find().populate('user').sort({ updatedAt: -1 }).exec()
     .then((appointments) => {
 

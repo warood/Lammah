@@ -52,7 +52,7 @@ router.post("/new-facility", (req, res) => {
 router.get("/facilities/:id", (req, res) => {
   let id = req.params.id;
   Facility.findById(id)
-    .populate("appointment")
+    .populate("appointment").populate('user')
     .then((facility) => {
       var views = 1
       views += facility.views

@@ -7,6 +7,11 @@ import * as Yup from 'yup';
 import axios from "axios";
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { EditorState } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { convertToHTML } from 'draft-convert';
+import DOMPurify from 'dompurify';
 
 const validationSchema = Yup.object({
     name: Yup.string().required(" Facility name is required "),
@@ -20,14 +25,33 @@ export default function NewFacility(props) {
     const history = useHistory();
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
 
+    //For Text Editor
+    const [editorState, setEditorState] = useState(
+        () => EditorState.createEmpty(),
+      );
+      const  [convertedContent, setConvertedContent] = useState(null);
+      const handleEditorChange = (state) => {
+        setEditorState(state);
+        convertContentToHTML();
+      }
+      const convertContentToHTML = () => {
+        let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+        setConvertedContent(currentContentAsHTML);
+      }
+      const createMarkup = (html) => {
+        return  {
+          __html: DOMPurify.sanitize(html)
+        }
+      }
+
     const onSubmit = (values) => {
-        
+        console.log(values)
         axios
             .post(`${API_URL}/api/facility/new-facility`, values)
             .then((res) => {
                 console.log(res)
                 history.push("/facilities");
-             alert("Wait for our confirmation to add your facility.Tank You !!");
+             alert("Wait for our confirmation to add your facility.Thank You !!");
             })
             .catch((err) => console.log(err));
     }
@@ -35,11 +59,12 @@ export default function NewFacility(props) {
     const uploadImageHundler = (e) => {
         console.log(e.target.files[0])
         var format = new FormData()
-        format.append("image", e.target.files[0])
-        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID c5d679f9edcd982" } })
+        format.append("file", e.target.files[0])
+        format.append('upload_preset', 'lammah')
+        axios.post("https://api.cloudinary.com/v1_1/dwyky6yt6/image/upload", format)
             .then(data => {
                 console.log(data)
-                setUpdateFacilityImg(data.data.data.link)
+                setUpdateFacilityImg(data.data.url)
             })
     }
 
@@ -48,7 +73,7 @@ export default function NewFacility(props) {
         <>
         <div className="NewFacility">
             <Container className="justify-content-center" className=" pt-5" style={{
-                  height: '1000px',
+                  height: '1200px',
                   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
                   padding: "10% 10% 1050px 10%",
                   margin: '50px auto 400px auto',
@@ -56,9 +81,9 @@ export default function NewFacility(props) {
                   }}>
                 <Col>
                     <Formik
-                        initialValues={{ name: "", description: "", location: "", city: "", price: "", type: "", images:updateFacilityImg, userId: userId }}
+                        initialValues={{ name: "", description: convertedContent, location: "", city: "", price: "", type: "", images:updateFacilityImg, userId: userId }}
                         validationSchema={validationSchema}
-                        onSubmit={values => onSubmit(values)}
+                        onSubmit={values => onSubmit({...values, images: updateFacilityImg, description: convertedContent})}
                     >
                         <Form as={FormikForm} className="form">
 
@@ -83,6 +108,7 @@ export default function NewFacility(props) {
                                     Images
                                 </Form.Label>
                                 <Form.Control type="file" multiple name="images" onChange={uploadImageHundler} />
+                                <img src={updateFacilityImg} height='100px' width='100px' alt=""/>
                                 <Form.Control as={Field} placeholder="www.image.com" name="images" type="text" style={{ marginTop: '5%'}}/>
                             </Form.Group>
 
@@ -131,13 +157,19 @@ export default function NewFacility(props) {
                                 
                             <Form.Group as={Row} controlId="ControlDesciption">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">Desciption</Form.Label>
-                                <Field as="textarea" cols={70} rows={10} name="description"
-                                style={{ minWidth: '100%'}} />
+                                <Editor as={Field} name="description"
+                                        editorState={editorState}
+                                        onEditorStateChange={handleEditorChange}
+                                        style={{ minWidth: '100%', maxHeight: '500px'}}
+                                />
+                                 
+                                {/* <Field as="textarea" cols={70} rows={10} name="description"
+                                style={{ minWidth: '100%'}} /> */}
                             </Form.Group>
                             <Row>
                             <Button style={{
                                  fontFamily: "serif",
-                                  margin: "50px auto 50px auto" ,
+                                  margin: "160px auto 50px auto" ,
 
                                   }} variant="secondary" type="submit">
                                 Submite
