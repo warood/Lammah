@@ -60,17 +60,31 @@ export const NavBar = (props) => {
     //=================
     return (
         <>
-         <button onClick={props.themeToggler}> switch mode</button>
-          <input
-           style={{margin: 'auto 30px auto auto' , height: '30px'}}
-           type="text" name="search" placeholder="Search"  onChange={event =>{props.ToSetSearch(event.target.value)
-            }}></input>
             <div className="NavBar">
-                {/* Brand Logo */}
-                <Link to="/" className="logo menu-element">LAMMAH</Link>
+                <div className="frist-row">
+                    
+                    {/* Brand Logo */}
+                    <Link to="/" className="logo menu-element">
 
-                {/* The Menu */}
-                <div className="menu">
+                    </Link>
+
+                    <input
+                        style={{ height: '20px' }}
+                        type="text" name="search" placeholder="Search" onChange={event => {
+                            props.ToSetSearch(event.target.value)
+                        }}></input>
+
+                    <div className="menu-element" >ENG</div>
+                    <div className="menu-element">ACCOUNT</div>
+                    <div className="menu-element">MY REQUESTS</div>
+                    <button onClick={props.themeToggler}> switch mode</button>
+
+                </div>
+                <div className="sec-row">
+
+
+                    {/* The Menu */}
+
 
                     <Link to="/facilities" className="menu-element">FACILITIES</Link>
 
@@ -103,7 +117,7 @@ export const NavBar = (props) => {
                     {props.auth.isLoggedIn ?
                         <Link
                             className="menu-element"
-                            style={{ color: "black" }} onClick={() => {
+                            onClick={() => {
 
                                 localStorage.removeItem("jwtToken");
                                 props.loginCallback()
@@ -113,7 +127,6 @@ export const NavBar = (props) => {
                             LOGOUT
                 </Link>
                         : <></>}
-                </div>
 
 
                 {/* Login pop-up model */}
@@ -169,27 +182,28 @@ export const NavBar = (props) => {
                                                 <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link onClick={handleClose} eventKey={2} as={Link} to="/signup">
                                                     Register
                                        </Link>
-                                                </p>
+                                                    </p>
 
                                                 <Button type="submit" style={{ marginLeft: "150px" }} variant="secondary">Login</Button>
                                             </Col>
                                         </Form.Group>
 
-                                    </FormikForm>
-                                </Container>
-                            </Formik>
-                        </Modal.Body>
+                                        </FormikForm>
+                                    </Container>
+                                </Formik>
+                            </Modal.Body>
 
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Close
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
                         </Button>
 
-                        </Modal.Footer>
-                    </Modal>
-                </>
-                {/* ==================== */}
+                            </Modal.Footer>
+                        </Modal>
+                    </>
+                    {/* ==================== */}
 
+                </div>
             </div>
         </>
     )

@@ -9,10 +9,26 @@ export default function OneCardOfApointment(props) {
 
 
     const [show, setShow] = useState(false);
-    
+    const [allUsers, setAllUsers] = useState([]);
+    const [allUsersA, setAllUsersA] = useState(false);
 
     const handleClose = () => setShow(false);
 
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/user/users')
+            .then((res) => {
+                // console.log(res.data.msg)
+                setAllUsers(res.data.msg)
+                setAllUsersA(true)
+            })
+    }, [])
+
+    const findUser = (userId) => {
+
+        const userInfo = allUsers.filter(user => user._id == userId)
+
+        return userInfo
+    }
 
 
     const onSubmit = (apointmentId) => {
@@ -23,6 +39,8 @@ export default function OneCardOfApointment(props) {
     }
 
     return (
+        <>
+        {allUsersA &&
         <>
             <Row className="mt-5" style={{
                 width: "100%",
@@ -51,7 +69,7 @@ export default function OneCardOfApointment(props) {
                         <Col >
                             <Card.Body>
                                 <Row >
-                                                  
+
                                     <p>{props.facilityName}</p>
                                     <p style={{
                                         position: 'absolute',
@@ -59,24 +77,36 @@ export default function OneCardOfApointment(props) {
                                         right: '0',
                                         fontSize: '0.7em',
                                     }}><Moment format="YYYY/MM/DD">
-                                    {props.apointmentsDate}
-                                </Moment></p>
-                                    
+                                            {props.apointmentsDate}
+                                        </Moment></p>
+
                                 </Row>
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
                                     }}>Status: {props.status}</p>
                                 </Row>
+                               
+                                <Row>
+                                    <p style={{
+                                        fontSize: '0.8em'
+                                    }}>Owner: {findUser(props.facility.user)[0].name}</p>
+                                </Row>
+                                <Row>
+                                    <p style={{
+                                        fontSize: '0.8em'
+                                    }}>Phone: {findUser(props.facility.user)[0].phone}</p>
+                                </Row>
+
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
                                     }}>Apointment ID: {props.apointmentId}</p>
-                                    
+
                                 </Row>
 
-                                
-                               
+
+
                             </Card.Body>
 
                         </Col>
@@ -84,16 +114,16 @@ export default function OneCardOfApointment(props) {
                             position: 'absolute',
                             top: '1%',
                             right: '1%',
-                            
+
                         }}>
-                          {props.status == "waiting" ? <>
-                          <p 
-                          className="delete-appointment-btn"
-                           variant="danger" onClick={()=>{
-                            setShow(true);
-                           }} > X  </p> </> :
-                                    <></>
-                                }
+                            {props.status == "waiting" ? <>
+                                <p
+                                    className="delete-appointment-btn"
+                                    variant="danger" onClick={() => {
+                                        setShow(true);
+                                    }} > X  </p> </> :
+                                <></>
+                            }
                         </div>
                     </Row>
 
@@ -113,16 +143,18 @@ export default function OneCardOfApointment(props) {
                     Are You Sure Want To Cancel This Appointment ?
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleClose}>
                         No
                 </Button>
                     <Button variant="primary" onClick={() => {
-                         onSubmit(props.apointmentId);
-                         props.setDeleteAppointment(!props.deleteAppointment);
+                        onSubmit(props.apointmentId);
+                        props.setDeleteAppointment(!props.deleteAppointment);
 
-                         }}>Yes Cancel It</Button>
+                    }}>Yes Cancel It</Button>
                 </Modal.Footer>
             </Modal>
         </>
+    }
+    </>
     )
 }

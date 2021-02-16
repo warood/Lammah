@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import axios from 'axios';
+import Moment from 'react-moment';
 
 export default function ShowConfirmApp(props) {
 
@@ -25,40 +26,59 @@ export default function ShowConfirmApp(props) {
     }
 
     return (
-        <div>
-            <Card className="card-container">
-                
-                {props.facility.appointment.map((app, i) => {
-                    return (
-                        <div className="card-body">
-                            <div className="card-content">
+        <>
 
-                                {allUsersA &&
-                                    <>
-                                        {(app.status == "confirmed") ?
-                                            <>
+            {props.facility.appointment.slice(0).reverse().map((app, i) => {
+                return (
+                        <>
+                        <>
 
-                                                <Card.Header as="h5">{props.facility.name} </Card.Header>
-                                                <Card.Body> 
-                                                    <Card.Img variant="null" src={props.facility.images} />
-                                                    <Card.Title>User name {findUser(app.user)[0].name}</Card.Title> 
-                                                    <Card.Text> Email: {findUser(app.user)[0].email} </Card.Text>
-                                                    <Card.Text> User phone {findUser(app.user)[0].phone} </Card.Text>
-                                                </Card.Body>
-                                            </>
+                            {allUsersA &&
+                                <>
+                                    {(app.status == "confirmed") ?
+
+                                            <tr
+                                            style={{
+                                                textAlign: 'center'
+                                            }}>
+                                                <td
+                                                style={{
+                                                    border: '1px solid black',
+                                                    paddingLeft: '10px'
+                                                }}>{props.facility.name}</td>
+                                                <td
+                                                style={{
+                                                    border: '1px solid black',
+                                                    paddingLeft: '10px'
+                                                }}>{findUser(app.user)[0].name}</td>
+                                                <td
+                                                style={{
+                                                    border: '1px solid black',
+                                                    paddingLeft: '10px'
+                                                }}>{findUser(app.user)[0].email} </td>
+                                                <td
+                                                style={{
+                                                    border: '1px solid black',
+                                                    paddingLeft: '10px'
+                                                }}>{findUser(app.user)[0].phone} </td>
+                                                <td
+                                                style={{
+                                                    border: '1px solid black',
+                                                    paddingLeft: '10px'
+                                                }}>{<Moment format="YYYY/MM/DD">{app.date}</Moment>} </td>
+                                            </tr>
                                             : <></>}
                                     </>
                                 }
 
-                            </div>
-                        </div>
+                                        </>
+                        </>
                     )
                 })}
 
 
 
 
-            </Card>
-        </div>
+                        </>
     )
 }

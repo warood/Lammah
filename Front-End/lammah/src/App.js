@@ -29,15 +29,16 @@ import './style/new-facility.css';
 import './style/OneFacility.css';
 import "./style/admin.css";
 import "./style/my-page.css";
-
-
-
-// components
-import { NavBar } from './components/NavBar'
+import "./style/OneComment.css";
 
 // styles
 import "./css/home.css";
 import "./css/nav-bar.css";
+
+// components
+import { NavBar } from './components/NavBar'
+
+
 
 const LightTheme = {
   pageBackground: "white",
@@ -77,7 +78,6 @@ function App() {
     setDataloading(true)
   };
   console.log("The current User is: ", auth.currentUser, "data loading", dataLoading);
-
   useEffect(userLogin, []);
 
   const ToSetSearch = (text)=>{ setSearch(text)}
@@ -116,7 +116,7 @@ function App() {
           </Route>
 
           <Route exact path='/facilities'>
-            <Facilities  search={search} setSelectFacility={setSelectFacility} />
+            <Facilities  search={search} setSelectFacility={setSelectFacility} ToSetSearch={ToSetSearch}/>
           </Route>
 
           

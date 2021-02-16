@@ -1,14 +1,20 @@
 import API_URL from '../apiConfig.js'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Collapse } from 'react-bootstrap';
+import { Button, Modal, Collapse, Table } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
+import Moment from 'react-moment';
+
 
 export default function ManageOneAppointments(props) {
     const history = useHistory();
     const [open, setOpen] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
     const [allUsersA, setAllUsersA] = useState(false);
+    
+
+
+    var numberOfApoointmentWaiting = 0;
 
     //Appointment Confirm button
     const [showConfirm, setShowConfirm] = useState(false);
@@ -45,8 +51,7 @@ export default function ManageOneAppointments(props) {
     const confirmAppointment = (appointmentId) => {
         axios.put(`http://localhost:5000/api/appointment/${appointmentId}/confirm`)
             .then(data => {
-                console.log(data)
-
+                props.setAfterConfirm(!props.afterConfirm);
             })
 
     }
@@ -55,91 +60,233 @@ export default function ManageOneAppointments(props) {
     const deleteAppointment = (facilityId, appointmentId) => {
         axios.delete(`http://localhost:5000/api/appointment/${appointmentId}/${facilityId}`)
             .then(data => {
-                console.log(data)
-                history.push('/manage-brand')
+                props.setAfterCancel(!props.afterCancel)
             })
     }
 
-    return (
-        <div>
+    const numOfAppointmentStateWaiting = props.facility.appointment.forEach((appointment) => {
+        if (appointment.status == 'waiting') {
+            numberOfApoointmentWaiting += 1;
 
-            <Button
+        }
+
+
+    })
+    return (
+        <div
+            style={{ color: 'black' }}>
+
+            <div
                 onClick={() => setOpen(!open)}
                 aria-controls="example-collapse-text"
                 aria-expanded={open}
+                style={{
+                    borderBottom: '1px solid gray',
+                    display: 'flex',
+                    alignItems: 'center',
+                    backgroundColor: '#282C36',
+                    color: "white",
+                    borderRadius: '5px'
+
+                }}
             >
-                {props.facility.name}
-            </Button>
+                <p
+                    style={{
+                        margin: '1%',
+                        backgroundColor: 'red',
+                        width: '30px',
+                        borderRadius: '3px',
+                        textAlign: 'center',
+
+                    }}
+                >{numberOfApoointmentWaiting}</p>
+                <p style={{
+                    margin: '1%'
+                }}>{props.facility.name}</p>
+
+            </div>
             <Collapse in={open}>
                 <div>
                     <br />
-                    {props.facility.appointment.map((app, i) => {
-                        return (
-                            <div>
-                                {allUsersA &&
-                                    <>
-                                        {(app.status == "waiting") ?
-                                            <>
-                                                User name: {findUser(app.user)[0].name} <br />
-                                                Phone: {findUser(app.user)[0].phone} <br />
-                                                Email: {findUser(app.user)[0].email}
+                    <table style={{
+                        width: "100%",
+                        border: '1px solid #282C36',
+                        borderCollapse: 'collapse',
 
-                                                <Button variant="success" onClick={handleShowConfirm}>Confirm</Button>
-                                                <Button variant="danger" onClick={handleShow}>Cancel</Button>
-                                                <br />  <hr />
 
-                                                {/* Confirm Modal */}
-                                                <Modal show={showConfirm} onHide={handleCloseConfirm}>
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>Confirm Reservation</Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body>Are you sure you want to accept this reservation</Modal.Body>
-                                                    <Modal.Footer>
-                                                        <Button variant="secondary" onClick={handleCloseConfirm}>
-                                                            Close
-                                                        </Button>
-                                                        <Button variant="primary" onClick={() => {
-                                                            confirmAppointment(app._id);
-                                                            handleCloseConfirm();
-                                                            props.setAfterConfirm(!props.afterConfirm)
-                                                        }}>
-                                                            Confirm
-                                                        </Button>
-                                                    </Modal.Footer>
-                                                </Modal>
+                    }}>
+                        <tr
+                            style={{
+                                textAlign: 'center',
+                                backgroundColor: '#282C36',
+                                border: '1px solid #282C36',
+                                color: 'white',
+                            }}>
+                            <th
+                                style={{
+                                    border: '1px solid #282C36',
 
-                                                {/* Cancel Modal */}
-                                                <Modal show={show} onHide={handleClose}>
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>Confirm Delete</Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body>Are you sure you want to delete this reservation</Modal.Body>
-                                                    <Modal.Footer>
-                                                        <Button variant="secondary" onClick={handleClose}>
-                                                            Close
-                                                        </Button>
-                                                        <Button variant="primary" onClick={() => {
-                                                            deleteAppointment(props.facility._id, app._id);
-                                                            handleClose();
-                                                            props.setAfterCancel(!props.afterCancel)
-                                                        }}>
-                                                            Delete
-                                                        </Button>
-                                                    </Modal.Footer>
-                                                </Modal>
+                                }}>User</th>
+                            <th
+                                style={{
+                                    border: '1px solid #282C36',
+                                }}
+                            >Phone</th>
+                            <th
+                                style={{
+                                    border: '1px solid #282C36',
+                                }}
+                            >Email</th>
+                            <th
+                                style={{
+                                    border: '1px solid #282C36',
+                                }}
+                            >Date</th>
+                            <th
+                                colspan="2"
+                                style={{
 
-                                            </>
-                                            : <></>}
-                                    </>
-                                }
+                                }}
+                            >Accept/Cancel</th>
 
-                            </div>
-                        )
-                    })}
+                        </tr>
+                        {props.facility.appointment.slice(0).reverse().map((app, i) => {
+                            return (
+                                <>
+                                    {allUsersA &&
+                                        <>
+                                            {(app.status == "waiting") ?
+                                                <>
+
+                                                    <tr style={{
+                                                        textAlign: 'center'
+                                                    }}>
+                                                        <td
+                                                            style={{
+                                                                border: '1px solid #282C36',
+                                                                paddingLeft: '10px'
+                                                            }}
+
+                                                        > {findUser(app.user)[0].name}</td>
+                                                        <td
+                                                            style={{
+                                                                border: '1px solid #282C36',
+                                                                paddingLeft: '10px'
+                                                            }}
+
+                                                        >{findUser(app.user)[0].phone}</td>
+                                                        <td
+
+                                                            style={{
+                                                                border: '1px solid #282C36',
+                                                                paddingLeft: '10px'
+                                                            }}
+
+                                                        >{findUser(app.user)[0].email}</td>
+                                                        <td
+
+                                                            style={{
+                                                                border: '1px solid #282C36',
+                                                                paddingLeft: '10px'
+                                                            }}
+
+                                                        ><Moment format="YYYY/MM/DD">
+                                                                {
+                                                                    app.date
+                                                                }</Moment></td>
+                                                        <td
+                                                            variant="success"
+                                                            onClick={() => {
+                                                                props.setIdOfAppointment(app._id)
+                                                                handleShowConfirm()
+                                                            }}
+                                                            style={{
+                                                                border: '1px solid #282C36',
+                                                                paddingLeft: '10px',
+                                                                backgroundColor: 'rgb(66, 235, 51)',
+                                                                cursor: 'pointer',
+                                                            }}
+
+                                                        >Confirm</td>
+                                                        <td
+                                                            variant="danger"
+                                                             onClick={()=>{
+                                                                props.setIdOfAppointment(app._id);
+                                                                handleShow();
+                                                             }}
+                                                            style={{
+                                                                border: '1px solid #282C36',
+                                                                paddingLeft: '10px',
+                                                                backgroundColor: 'red',
+                                                                cursor: 'pointer',
+                                                            }}
+
+                                                        >Cancel</td>
+
+                                                    </tr>
+
+
+
+
+
+
+
+                                                </>
+                                                : <></>}
+                                        </>
+                                    }
+
+
+                                </>
+                            )
+                        })}
+                    </table>
                 </div>
             </Collapse> <br />
 
             <br />
+
+            {/* Confirm Modal */}
+            <Modal show={showConfirm} onHide={handleCloseConfirm}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Reservation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to accept this reservation</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseConfirm}>
+                        Close
+                                                        </Button>
+                    <Button variant="primary" onClick={() => {
+                        confirmAppointment(props.IdOfAppointment);
+                        handleCloseConfirm();
+
+                    }}>
+                        Confirm
+                                                        </Button>
+                </Modal.Footer>
+
+            </Modal>
+            {/* Cancel Modal */}
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to delete this reservation</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                                                        </Button>
+                    <Button variant="primary" onClick={() => {
+                        deleteAppointment(props.facility._id,props.IdOfAppointment);
+                        handleClose();
+
+                    }}>
+                        Delete
+                                                        </Button>
+                </Modal.Footer>
+            </Modal>
+
+
 
         </div>
     )

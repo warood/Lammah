@@ -1,50 +1,69 @@
 /* Select NavBar Page */
-.NavBar{
-    position: static;
-    width: 100%;
-    height: 30px;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 0.8em;
-    color: black;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.144);
+.NavBar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  
 }
 
-
-
-/*  NavBar Items */
-/* ========================= */
-.NavBar .logo,.NavBar .menu a{
-    cursor: pointer;
-
-}
-.NavBar .logo{
-    margin-left: 10%;
-}
-.NavBar .menu{
-margin-left: 10%;
-display: flex;
-width: 100%;
-
+.NavBar .frist-row {
+  display: flex;
+  width: 100%;
+  background-color: #1b1d22;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  height: 40px;
 }
 
+ /* @media only screen and (max-width: 1400px) {
+    .NavBar .frist-row{
+        font-size: 1.3em;
+    }
 
-.NavBar .menu a:hover{
-border-bottom: 2px solid #000000;
+    /* body{
+        font-size: 0.7em;
+    }
+    h1{
+        font-size: 2em;
+    }  
+} */
+
+
+
+.NavBar .frist-row .menu-element {
+  margin: 20px;
+  min-width: 200px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 0.8em;
 }
-/* ========================= */
-/* ========================= */
 
-
-.NavBar .menu-element{
-    text-decoration: none;
-    color: black;
-    margin-left: 10%;
+.NavBar .frist-row .logo {
+  margin: 0 10% 0 5%;
+  background-image: url('../imges/lammah-logo-eng.png');
+  width: 160px;
+  height: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  
 }
 
+.NavBar .sec-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background-color: #2a2f35;
+  max-height: 5vh;
+}
 
+.NavBar .sec-row .menu-element {
+    color: #ffffff;
+    font-size: 0.7em;
+
+}
+/* 
 @media only screen and (max-width: 500px) {
     .NavBar{
         font-size: 5.5px;
@@ -55,4 +74,4 @@ border-bottom: 2px solid #000000;
     h1{
         font-size: 2em;
     }
-}
+} */

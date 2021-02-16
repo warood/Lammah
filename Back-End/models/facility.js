@@ -32,11 +32,21 @@ const facilitySchema = new mongoose.Schema({
        
     } , 
 
+    views : {
+        type :Number , 
+        default: 0,
+       
+    } , 
+    stars : {
+        type :Number , 
+        default: 0,
+       
+    } , 
+
     appointment: [{type: mongoose.Schema.Types.ObjectId, ref: 'appointment'}],
 
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
 
-    rating: [{type: mongoose.Schema.Types.ObjectId, ref: 'rating'}],
     status : {
         type: Number,
         default :0 , 

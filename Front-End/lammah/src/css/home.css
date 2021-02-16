@@ -1,7 +1,7 @@
 /* Apply Style For The whole App*/
 body{
     font-family: Arial, Helvetica, sans-serif;
-    
+    height: 100vh;
 
 }
 /* ========================= */
@@ -49,7 +49,7 @@ body{
 
 /* Main Section */
 .Home .section{
-    color:black;
+    
     margin-top: 3%;
     width: 65%;
     height: 1000px;
@@ -98,7 +98,10 @@ object-fit: cover;
 object-position: 50% 50%;
 margin: 5px;
 }
+.Home{
+    color: rgba(255, 255, 255, 0.5)
 
+}
 .Home .tf-items .item2,.Home .tf-items .item4{
     margin: 50px 30px 0 30px;
 }

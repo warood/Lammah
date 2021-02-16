@@ -60,107 +60,97 @@ export default function ManageOneFacility(props) {
     return (
 
         <div>
-            <Accordion>
-                <Card>
-                    <Card.Header
+
+            <Row style={{
+                display: 'flex',
+                border: '1px solid gray',
+                flexWrap: 'nowrap',
+                maxWidth: '800px',
+                margin: '0 0 15px 0 ',
+                background: `url('${props.facility.images}')`,
+                backgroundSize: 'cover',
+                objectPosition: '10% 50%',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                justifyContent: 'flex-end',
+                minWidth: '800px',
+                flexWrap: 'wrap',
+
+            }}>
+
+                <div style={{
+                    maxWidth: '40%'
+                }}>
+
+                    {/* <img src={`${props.facility.images}`}
                         style={{
-                            backgroundColor: 'white'
-                        }}>
-                        <Accordion.Toggle as={Button} variant="link" eventKey="i"
-                            style={{
-                                color: 'black',
-                                textDecoration: 'none',
+                            width: '100%',
+                            objectFit: 'cover',
+                            objectPosition: '50% 50%',
+                            height: '100%',
+                        }} /> */}
 
-                            }}>
-                            {props.facility.name}
-                        </Accordion.Toggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="i" className="card-container"
-
-                    >
-                        <Row>
-                            <Card.Body
-                                style={{
-                                    display: 'flex', flexDirection: 'column', margin: '8%', alignItems: 'center', maxWidth: '70%', margin: 'auto',
-                                }}>
-                                <Row style={{
-                                    display: 'flex',
-                                    border: '1px solid gray',
-                                    flexWrap: 'nowrap',
-
-                                }}>
-
-                                    <div style={{
-                                        backgroundColor: 'blue',
-                                        maxWidth: '40%'
-                                    }}>
-
-                                        <img src={`${props.facility.images}`}
-                                            style={{
-                                                width: '100%',
-                                                objectFit: 'cover',
-                                                objectPosition: '50% 50%',
-                                                height: '100%',
-                                            }} />
-
-                                    </div>
+                </div>
 
 
-                                    <div style={{
-                                        position: 'relative',
-                                        flexGrow: '1',
-                                    }}>
-                                        <div style={{
-                                            padding: '3%'
-                                        }}>
-                                            <p>Name: {props.facility.name}</p>
-                                            <p>Description: {props.facility.description}</p>
-                                            <p>Location: {props.facility.location}</p>
-                                            <p>Requests: {props.facility.appointment.length}</p>
-                                            <p>Cost: {props.facility.price} SAR</p>
+                <div style={{
+                    position: 'relative',
+                    maxWidth: '80%',
+                    minWidth: '80%',
+                }}>
+                    <div style={{
+                       
+                        backgroundColor: 'rgba(40, 44, 54, 0.9)',
+                        color: 'white',
+                        padding: '3%',
+                    }}>
+                        <p>Name: {props.facility.name}</p>
+                        <p style={{
+                            maxWidth: '100%'
+                        }}>Description: {props.facility.description}</p>
+                        <p>Location: {props.facility.location}</p>
+                        <p>Requests: {props.facility.appointment.length}</p>
+                        <p>Cost: {props.facility.price} SAR</p>
 
-                                        </div>
-                                        <button
-                                            style={{
-                                                position: 'absolute',
-                                                right: '0',
-                                                bottom: '5%',
-                                                maxWidth: '100px',
-                                                border: 'none',
-                                                background: 'black',
-                                                color: 'white',
+                    </div>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            right: '0',
+                            bottom: '5%',
+                            maxWidth: '150px',
+                            minWidth: '100px',
+                            borderBottom: '1px solid white',
+                            borderTop: '1px solid white',
+                            color: 'red',
+                            textAlign: 'center',
+                            cursor: 'pointer',
 
-                                            }}
-                                            variant="success" onClick={handleShowEdit}>
-                                            Edit</button>
-                                        <p
-                                            style={{
-                                                position: 'absolute',
-                                                right: '3%', top: '3%',
-                                                color: 'red',
-                                                cursor: 'pointer',
-                                                border: '1px solid gray',
-                                                padding: '0 10px 0 10px'
+                        }}
+                        variant="success" onClick={handleShowEdit}>
+                        Edit</div>
+                    <p
+                        style={{
+                            position: 'absolute',
+                            right: '1%', top: '2%',
+                            color: 'red',
+                            cursor: 'pointer',
+                            border: '1px solid gray',
+                            padding: '0 10px 0 10px'
 
-                                            }}
-                                            onClick={handleShow}>X</p>
-                                    </div>
-                                </Row>
-                                <Row
-                                    style={{
-                                        backgroundColor: 'yellow',
-                                        display: 'flex',
-                                        flexDirection: 'column',
+                        }}
+                        onClick={handleShow}>X</p>
+                </div>
+            </Row>
+            <Row
+                style={{
+                    backgroundColor: 'yellow',
+                    display: 'flex',
+                    flexDirection: 'column',
 
-                                    }}>
+                }}>
 
-                                </Row>
-                            </Card.Body>
-                        </Row>
-                    </Accordion.Collapse>
-                </Card>
-            </Accordion>
-
+            </Row>
 
             {/* Edit Modal */}
             <Modal size="lg" show={showEdit} onHide={handleCloseEdit}>

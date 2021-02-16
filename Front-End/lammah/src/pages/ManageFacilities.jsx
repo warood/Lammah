@@ -32,7 +32,12 @@ export default function ManageFacilities(props) {
 
     return (
         <div style={{
-            marginTop: '5%'
+            marginTop: '5%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+
         }}>
             {allFacilities}
         </div>
