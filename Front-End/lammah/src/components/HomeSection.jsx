@@ -1,25 +1,32 @@
+import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function HomeSection() {
 
-    const [image , setImage] = useState({})
+    const [dataLoading , setDataLoading] =useState (false)
+
+    const [image, setImage] = useState({})
 
     useEffect(() => {
 
-        axios.get("http://localhost:5000/api/facility/facilities")
-        .then(res=>{
-            console.log(res.data.facilities[0].images)
+        axios.get(`${API_URL}/api/facility/facilities`)
+            .then(res => {
+                console.log(res)
 
-            setImage(res.data.facilities)
-            
-        })
-       
+                setImage(res.data)
+                setDataLoading(true)
+            })
+
     }, [])
 
 
 
     return (
+        <>
+        { dataLoading ? <>
+            
+            
         <div className="section">
 
             {/* ========================================= */}
@@ -34,35 +41,39 @@ export default function HomeSection() {
                 </div>
                 <div className="tf-description">
                     <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum
-                        beatae possimus saepe sequi accusantium, repellat, iusto similique
-                        blanditiis asperiores, doloremque qui. Deleniti obcaecati, quos
-                        amet aperiam hic doloribus laboriosam recusandae.
+                    Because we Know how social life is important, so Lammah gives you 
+                    the opportunity to access more than 100 chalets and camps around 
+                    Kingdom of Saudi Arabia in an easy way to get comfortable meetings 
+                    with your families and your friends .
                         </p>
 
                 </div>
             </div>
             {/* ========================================= */}
 
-   
+
             {/* ========================================= */}
             {/* 1st section "Top Facilities" 2st Row */}
-            {/* ========================================= */}         
+            {/* ========================================= */}
             <div className="tf-items">
                 <div className="item1">
-                    <img src={image[0].images} />
+                    <img src={image.facilities[0].images} />
                 </div>
                 <div className="item2">
-                    <img src={image[1].images} />
+                    <img src={image.facilities[0].images} />
                 </div><div className="item3">
-                    <img src={image[0].images} />
+                    <img src={image.facilities[0].images} />
                 </div><div className="item4">
-                    <img src={image[2].images} />
+                    <img src={image.facilities[0].images} />
                 </div>
             </div>
             {/* ========================================= */}
 
-            
+
         </div>
+        </>
+        :
+        <></>}
+        </>
     )
 }

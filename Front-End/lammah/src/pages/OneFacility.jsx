@@ -14,18 +14,18 @@ function Map() {
   const myLocation = "https://goo.gl/maps/JZS6aSpaY2hLbGdq7"
 
 
-  useEffect(() => {
-    const id = "602aa11355888512448627af"
+  // useEffect(() => {
+  //   const id = "602aa11355888512448627af"
 
-    axios.get(`http://localhost:5000/api/facility/facilities/${id}`).then(data => {
-      
-      console.log(data.data.facility.location)
+  //   axios.get(`http://localhost:5000/api/facility/facilities/${id}`).then(data => {
 
-      setAdress(data.data.facility.location)
-      
-    })
+  //     console.log(data.data.facility.location)
 
-  }, [])
+  //     setAdress(data.data.facility.location)
+
+  //   })
+
+  // }, [])
 
 
   console.log("here", adress.lat)
@@ -33,7 +33,7 @@ function Map() {
     defaultCenter={{ lat: adress.lat, lng: adress.lng }}
   >
 
-    <Marker position={{ lat: adress.lat , lng: adress.lng }} />
+    <Marker position={{ lat: adress.lat, lng: adress.lng }} />
   </GoogleMap>
   );
 
@@ -58,7 +58,7 @@ export default function OneFacility(props) {
   const [Facility, setFacility] = useState({});
   const [selectFacility, setSelectFacility] = useState(props.selectFacility);
   const [apointment, setApointment] = useState({})
-  const [userId, setUserId] = useState(props.auth.currentUser._id)
+  // const [userId, setUserId] = useState(props.auth.currentUser._id)
 
 
   //apointment date for one facility
@@ -90,30 +90,31 @@ export default function OneFacility(props) {
 
   useEffect(() => {
 
-    // if (!city) {
-    //   axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
-    //     .then(res => {
-    //      // let facility = res.data.find((ele) => ele._id == id);
-    //      setSelectFacility(res.data.facility);
-    //      setFacility(res.data.facility._id);
-    //       console.log("from axios" )
+    if (!city) {
+      axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
+        .then(res => {
+         // let facility = res.data.find((ele) => ele._id == id);
+         console.log(res.data.facility)
+         setSelectFacility(res.data.facility);
+          setFacility(res.data.facility._id);
+          console.log("from axios" )
 
-    //       const addDate = res.data.facility.appointment.map((ele) => {
+          const addDate = res.data.facility.appointment.map((ele) => {
 
-    //         return new Date(ele.date);
+            return new Date(ele.date);
 
-    //       })
-    //       setDateOfAllApointment(addDate)
+          })
+          setDateOfAllApointment(addDate)
 
-    //     })
-    // }
+        })
+    }
 
   }, []);
 
 
   const onChange = date => {
     setDate(date)
-    setApointment({ date: date, facility: selectFacility, status: "waiting", userId: userId })
+    setApointment({ date: date, facility: selectFacility, status: "waiting", userId: props.auth.currentUser._id })
   };
 
   //booking function 
@@ -123,7 +124,6 @@ export default function OneFacility(props) {
     axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
       .then((res) => {
         //console.log(res)
-        // window.location.reload()
       })
       .catch((err) => console.log(err));
 
@@ -188,7 +188,7 @@ export default function OneFacility(props) {
             <p>Faclity: {type} </p>
 
             <p>City: {city}</p>
-            <p>location:<a href="#"> {location}</a></p>
+            {/* <p>location:<a href="#"> {location}</a></p> */}
             <p>Price: {price} SR</p>
 
 

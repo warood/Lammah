@@ -8,6 +8,8 @@ import axios from "axios";
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import Image from '../components/Images'
+
 
 var address = {}
 
@@ -26,9 +28,9 @@ function Map() {
         latNew = address.latLng.lat();
         lngNew = address.latLng.lng();
         address = address
-        localStorage.setItem("address" , JSON.stringify({ lat: address.latLng.lat(), lng: address.latLng.lng()}))
+        localStorage.setItem("address", JSON.stringify({ lat: address.latLng.lat(), lng: address.latLng.lng() }))
         console.log(address.latLng.lat(), address.latLng.lng())
-        
+
     }
 
     return (<GoogleMap
@@ -54,19 +56,52 @@ const validationSchema = Yup.object({
     name: Yup.string().required(" Facility name is required "),
     city: Yup.string().required("You must choose one "),
     type: Yup.string().required("You must choose one "),
-    price: Yup.string().required("Facility price is required "),
+    price: Yup.number().required("Facility price is required "),
 })
 
 export default function NewFacility(props) {
     const [address, setaddress] = useState({});
 
+    //for upload array of images 
+    var arrayImages = [] ;
+
+    const [array , setArray] = useState([])
+
+
+
+    const [updateLink , setUpdateLink] = useState([])
+    const [image, setImages] = useState([]);
+  
+  //.......................
+  
+//     const onChangeImage = (e) => {
+//         if(e.target.value !="" && e.target.value.includes("http")){
+//         arrayImages.push(e.target.value);
+//         console.log(e.target.value);
+//         console.log("array of image" , arrayImages);
+//         }
+//         // to clear input field after push link in array
+//         e.target.value = ""
+//     };
+//     console.log("from map" , updateLink)
+//    const allImages = arrayImages.map(ele=> {
+       
+//         return (<Image imageLink={ele}/>);
+         
+//         })
+    //................//
+
+    
+
+
     const userId = props.auth.currentUser._id;
     const history = useHistory();
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
 
+    
     const onSubmit = (values) => {
 
-            console.log(values)
+        console.log(values)
         axios
             .post(`${API_URL}/api/facility/new-facility`, values)
             .then((res) => {
@@ -76,17 +111,27 @@ export default function NewFacility(props) {
             })
             .catch((err) => console.log(err));
     }
+ 
+
+
     const uploadImageHundler = (e) => {
-        console.log(e.target.files[0])
+        e.preventDefault();
+        console.log( e.target.files[0])
         var format = new FormData()
-        format.append("image", e.target.files[0])
-        axios.post("https://api.imgur.com/3/image/", format, { headers: { "Authorization": "Client-ID c5d679f9edcd982" } })
+        format.append("file", e.target.files[0])
+        format.append('upload_preset', 'lammah')
+        axios.post("https://api.cloudinary.com/v1_1/dwyky6yt6/image/upload", format)
             .then(data => {
-                console.log(data)
-                setUpdateFacilityImg(data.data.data.link)
+                console.log("fffff" ,data.data.url)
+                setUpdateFacilityImg(data.data.url)
+                arrayImages=[...arrayImages , data.data.url ]
+                console.log(arrayImages)
+                setArray([...array , data.data.url])
+                console.log(array)
             })
+            
+            
     }
-    console.log("adress", address)
 
 
     //Render NewFacility page
@@ -102,9 +147,9 @@ export default function NewFacility(props) {
                 }}>
                     <Col>
                         <Formik
-                            initialValues={{ name: "", description: "", city: "", price: "", type: "", images: updateFacilityImg, userId: userId }}
+                            initialValues={{ name: "", description: "", city: "", price: "", type: "", userId: userId }}
                             validationSchema={validationSchema}
-                            onSubmit={values => onSubmit({...values ,  location: JSON.parse(localStorage.getItem("address"))}) }
+                            onSubmit={values => onSubmit({ ...values, location: JSON.parse(localStorage.getItem("address")), images: array })}
                         >
                             <Form as={FormikForm} className="form">
 
@@ -123,14 +168,19 @@ export default function NewFacility(props) {
                                 </Form.Group>
 
                                 <ErrorMessage name="name" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
-
                                 <Form.Group as={Row} controlId="formPlaintextName" >
-                                    <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                        Images
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                    Images
                                 </Form.Label>
-                                    <Form.Control type="file" multiple name="images" onChange={uploadImageHundler} />
-                                    <Form.Control as={Field} placeholder="www.image.com" name="images" type="text" style={{ marginTop: '5%' }} />
-                                </Form.Group>
+                                <Form.Control  type="file" multiple name="images" onChange={uploadImageHundler} />
+                                {/* <Form.Control onChange={(e)=> onChangeImage(e)} as={Field} placeholder="www.image.com" name="images" type="text" style={{ marginTop: '5%'}}/> */}
+                                   
+                            </Form.Group>
+                            
+                           {/* <h1>{allImages}</h1> */}
+                           
+     
+                              
 
                                 <Form.Group as={Row} controlId="formPlaintextNameLocation">
                                     <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
@@ -199,8 +249,13 @@ export default function NewFacility(props) {
                                 </Row>
                             </Form>
                         </Formik>
+
                     </Col>
                 </Container>
+
+
+                
+
             </div>
         </>
     )

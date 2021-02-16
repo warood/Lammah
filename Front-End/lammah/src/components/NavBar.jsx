@@ -21,7 +21,7 @@ export const NavBar = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     //for show alert 
     const [login, setLogin] = useState(true);
-
+    const [searchTerm, setSearchTerm] = useState("");
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -60,8 +60,11 @@ export const NavBar = (props) => {
     //=================
     return (
         <>
-
-
+         <button onClick={props.themeToggler}> switch mode</button>
+          <input
+           style={{margin: 'auto 30px auto auto' , height: '30px'}}
+           type="text" name="search" placeholder="Search"  onChange={event =>{props.ToSetSearch(event.target.value)
+            }}></input>
             <div className="NavBar">
                 {/* Brand Logo */}
                 <Link to="/" className="logo menu-element">LAMMAH</Link>
@@ -163,7 +166,7 @@ export const NavBar = (props) => {
                                         </Form.Group>
                                         <Form.Group>
                                             <Col md={12}>
-                                                <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
+                                                <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link onClick={handleClose} eventKey={2} as={Link} to="/signup">
                                                     Register
                                        </Link>
                                                 </p>
