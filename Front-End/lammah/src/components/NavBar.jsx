@@ -60,14 +60,25 @@ export const NavBar = (props) => {
     //=================
     return (
         <>
-
-
             <div className="NavBar">
-                {/* Brand Logo */}
-                <Link to="/" className="logo menu-element">LAMMAH</Link>
+                <div className="frist-row">
+                    {/* Brand Logo */}
+                    <Link to="/" className="logo menu-element">
+                    
+                        </Link>
 
-                {/* The Menu */}
-                <div className="menu">
+                    <input className="menu-element"
+                    style={{height: '20px'}}/>
+
+                    <div className="menu-element" >ENG</div>
+                    <div className="menu-element">ACCOUNT</div>
+                    <div className="menu-element">MY REQUESTS</div>
+                </div>
+                <div className="sec-row">
+
+
+                    {/* The Menu */}
+
 
                     <Link to="/facilities" className="menu-element">FACILITIES</Link>
 
@@ -100,7 +111,7 @@ export const NavBar = (props) => {
                     {props.auth.isLoggedIn ?
                         <Link
                             className="menu-element"
-                            style={{ color: "black" }} onClick={() => {
+                            onClick={() => {
 
                                 localStorage.removeItem("jwtToken");
                                 props.loginCallback()
@@ -110,79 +121,80 @@ export const NavBar = (props) => {
                             LOGOUT
                 </Link>
                         : <></>}
-                </div>
 
 
-                {/* Login pop-up model */}
-                <>
+
+                    {/* Login pop-up model */}
+                    <>
 
 
-                    <Modal
-                        show={show}
-                        onHide={handleClose}
-                        backdrop="static"
-                        keyboard={false}
-                    >
-                        {!login && (
-                            <Alert variant={"danger"}>
-                                Your email or password is wrong
-                            </Alert>
-                        )}
-                        <Modal.Header closeButton>
-                            <Modal.Title>Login</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Formik 
-                            validationSchema={validationSchema}
-                            >
-                                <Container>
-                                    <FormikForm>
-                                        <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                Email
+                        <Modal
+                            show={show}
+                            onHide={handleClose}
+                            backdrop="static"
+                            keyboard={false}
+                        >
+                            {!login && (
+                                <Alert variant={"danger"}>
+                                    Your email or password is wrong
+                                </Alert>
+                            )}
+                            <Modal.Header closeButton>
+                                <Modal.Title>Login</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Formik
+                                    validationSchema={validationSchema}
+                                >
+                                    <Container>
+                                        <FormikForm>
+                                            <Form.Group as={Row} controlId="formPlaintextEmail">
+                                                <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                                    Email
                                      </Form.Label>
 
-                                            <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
-                                            <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
-                                                {msg}
-                                            </Alert>} />
-                                        </Form.Group>
-                                        <Form.Group as={Row} controlId="formPlaintextPassword">
-                                            <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                Password
+                                                <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
+                                                <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
+                                                    {msg}
+                                                </Alert>} />
+                                            </Form.Group>
+                                            <Form.Group as={Row} controlId="formPlaintextPassword">
+                                                <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                                    Password
                                     </Form.Label>
 
-                                            <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
-                                            <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
-                                                {msg}
-                                            </Alert>} />
-                                        </Form.Group>
-                                        <Form.Group>
-                                            <Col md={12}>
-                                                <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
-                                                    Register
+                                                <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
+                                                <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
+                                                    {msg}
+                                                </Alert>} />
+                                            </Form.Group>
+                                            <Form.Group>
+                                                <Col md={12}>
+                                                    <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
+                                                        Register
                                        </Link>
-                                                </p>
+                                                    </p>
 
-                                                <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
-                                            </Col>
-                                        </Form.Group>
+                                                    <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
+                                                </Col>
+                                            </Form.Group>
 
-                                    </FormikForm>
-                                </Container>
-                            </Formik>
-                        </Modal.Body>
+                                        </FormikForm>
+                                    </Container>
+                                </Formik>
+                            </Modal.Body>
 
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Close
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
                         </Button>
 
-                        </Modal.Footer>
-                    </Modal>
-                </>
-                {/* ==================== */}
+                            </Modal.Footer>
+                        </Modal>
+                    </>
+                    {/* ==================== */}
 
+                </div>
             </div>
         </>
     )

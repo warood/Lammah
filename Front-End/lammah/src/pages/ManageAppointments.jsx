@@ -26,6 +26,8 @@ export default function ManageAppointments(props) {
                 setAfterCancel={setAfterCancel}
                 afterConfirm={afterConfirm}
                 setAfterConfirm={setAfterConfirm}
+                setIdOfAppointment={props.setIdOfAppointment}
+                IdOfAppointment={props.IdOfAppointment}
             />
         )
 

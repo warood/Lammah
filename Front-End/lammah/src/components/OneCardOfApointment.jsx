@@ -9,7 +9,7 @@ export default function OneCardOfApointment(props) {
 
 
     const [show, setShow] = useState(false);
-    
+
 
     const handleClose = () => setShow(false);
 
@@ -51,7 +51,7 @@ export default function OneCardOfApointment(props) {
                         <Col >
                             <Card.Body>
                                 <Row >
-                                                  
+
                                     <p>{props.facilityName}</p>
                                     <p style={{
                                         position: 'absolute',
@@ -59,9 +59,9 @@ export default function OneCardOfApointment(props) {
                                         right: '0',
                                         fontSize: '0.7em',
                                     }}><Moment format="YYYY/MM/DD">
-                                    {props.apointmentsDate}
-                                </Moment></p>
-                                    
+                                            {props.apointmentsDate}
+                                        </Moment></p>
+
                                 </Row>
                                 <Row>
                                     <p style={{
@@ -72,11 +72,11 @@ export default function OneCardOfApointment(props) {
                                     <p style={{
                                         fontSize: '0.8em'
                                     }}>Apointment ID: {props.apointmentId}</p>
-                                    
+
                                 </Row>
 
-                                
-                               
+
+
                             </Card.Body>
 
                         </Col>
@@ -84,16 +84,16 @@ export default function OneCardOfApointment(props) {
                             position: 'absolute',
                             top: '1%',
                             right: '1%',
-                            
+
                         }}>
-                          {props.status == "waiting" ? <>
-                          <p 
-                          className="delete-appointment-btn"
-                           variant="danger" onClick={()=>{
-                            setShow(true);
-                           }} > X  </p> </> :
-                                    <></>
-                                }
+                            {props.status == "waiting" ? <>
+                                <p
+                                    className="delete-appointment-btn"
+                                    variant="danger" onClick={() => {
+                                        setShow(true);
+                                    }} > X  </p> </> :
+                                <></>
+                            }
                         </div>
                     </Row>
 
@@ -113,14 +113,14 @@ export default function OneCardOfApointment(props) {
                     Are You Sure Want To Cancel This Appointment ?
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleClose}>
                         No
                 </Button>
                     <Button variant="primary" onClick={() => {
-                         onSubmit(props.apointmentId);
-                         props.setDeleteAppointment(!props.deleteAppointment);
+                        onSubmit(props.apointmentId);
+                        props.setDeleteAppointment(!props.deleteAppointment);
 
-                         }}>Yes Cancel It</Button>
+                    }}>Yes Cancel It</Button>
                 </Modal.Footer>
             </Modal>
         </>

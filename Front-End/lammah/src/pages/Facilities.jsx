@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Rating from '@material-ui/lab/Rating';
+import { ArrowRight, EyeFill } from 'react-bootstrap-icons';
+
 
 
 export default function Facilities(props) {
@@ -40,7 +43,7 @@ export default function Facilities(props) {
                                 bottom: '20%',
                                 color: 'white',
                                 padding: '0 5% 0 5%',
-                                width: '70%',
+                                maxWidth: '70%',
                                 backgroundColor: 'rgba(0, 0, 0, 0.623)',
                                 fontWeight: 'bold',
                                 fontSize: '1.3em',
@@ -76,6 +79,38 @@ export default function Facilities(props) {
                                 fontSize: '1.5em',
 
                             }}>{facility.price} SR</small>
+
+                        <Card.Text
+
+                            style={{
+                                position: 'absolute',
+                                top: '2%', left: '0',
+                                color: 'white',
+                                padding: '0 1% 0 5%',
+                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                fontWeight: 'bold',
+                                fontSize: '0.9em',
+                            }}
+                        >
+
+                            <Rating readOnly value={facility.stars} />
+                        </Card.Text>
+
+                        <Card.Text
+
+                            style={{
+                                position: 'absolute',
+                                top: '12%', left: '0',
+                                color: 'white',
+                                padding: '0 1% 0 5%',
+                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                fontWeight: 'bold',
+                                fontSize: '0.9em',
+                            }}
+                        >
+
+                            <span /><EyeFill color="white" size={20} /> {facility.views}
+                        </Card.Text>
 
                     </Card>
                 </Link>

@@ -4,10 +4,27 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Button, Col, Container, Row, Form, Modal } from "react-bootstrap";
+import OneComment from '../components/OneComment'
+
+// material-ui
+import { makeStyles } from '@material-ui/core/styles';
+import Rating from '@material-ui/lab/Rating';
+
+
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 // import { Map, GoogleApiWrapper } from 'google-maps-react';
 
+// material-ui
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& > * + *': {
+      marginTop: theme.spacing(1),
+    },
+  },
+}));
 
 
 export default function OneFacility(props) {
@@ -20,8 +37,14 @@ export default function OneFacility(props) {
   const [Facility, setFacility] = useState({});
   const [selectFacility, setSelectFacility] = useState(props.selectFacility);
   const [apointment, setApointment] = useState({})
-  // const [userId, setUserId] = useState(props.auth.currentUser._id)
+  const [rating, setRating] = useState("")
+  const [commentChange, setCommentChange] = useState("")
+  const [refreshPage, setRefreshPage] = useState(false)
+  const [displayAllComments, setdisplayAllComments] = useState([])
 
+  // material-ui
+  const classes = useStyles();
+  // const [userId, setUserId] = useState(props.auth.currentUser._id)
 
   //apointment date for one facility
   const [dateOfAllApointment, setDateOfAllApointment] = useState([])
@@ -29,6 +52,28 @@ export default function OneFacility(props) {
 
   const { name, images, location, description, city, price, type, appointment } = selectFacility;
 
+
+  const handleChange = (e) => {
+    setRating(e.target.value)
+  }
+
+  const handleCommentChange = (e) => {
+    setCommentChange(e.target.value)
+
+  }
+
+  const onSubmitRating = (e) => {
+    e.preventDefault()
+    axios.post(`http://localhost:5000/api/rating/${id}/new-rating`,
+      { stars: rating, comment: commentChange, userId: props.auth.currentUser._id })
+      .then(res => {
+        // make comment areatext empty
+        document.forms['rating-form'].reset()
+        setRefreshPage(!refreshPage)
+
+      })
+
+  }
   const handleClose = () => setShow(false);
 
 
@@ -68,9 +113,17 @@ export default function OneFacility(props) {
           setDateOfAllApointment(addDate)
 
         })
+    
     }
-
-  }, []);
+    axios.get(`http://localhost:5000/api/rating/${id}/ratings`)
+    .then(res => {
+      setdisplayAllComments(res.data.ratings)
+    })
+    axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
+    .then(res => {
+    })
+    
+  }, [refreshPage]);
 
 
   const onChange = date => {
@@ -79,7 +132,7 @@ export default function OneFacility(props) {
   };
 
   //booking function 
-  const onsubmit = () => {
+  const onSubmit = () => {
 
 
 
@@ -100,118 +153,168 @@ export default function OneFacility(props) {
   let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115683.jpg", "https://www.visitsaudi.com/content/dam/no-dynamic-media-folder/manifest-newarticles-batch2/a-guide-to-al-ula/guide_to_al_ula_horiz_article_4.jpg", "https://sahary-al-ola-camp-villa.hotels-saudi-arabia.com/data/Photos/767x460/10098/1009837/1009837849.JPEG"]
 
 
+  const allComments = displayAllComments.map((comment, i) => {
+    return (
+      <OneComment
+        comment={comment} key={i}
+      />
+    )
+})
 
-  return (
-
-
-    <div className="OneFacility" >
-      <Container className="mt-5 ">
-        <Row style={{ marginBottom: "500px" }}>
-
-          <Col col-md-3>
-
-            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-          </Col>
-
-          {/* main image */}
-
-          <Col col-md-6
-            style={{
-              minWidth: '300px',
-              maxWidth: '500px',
-              padding: '0',
-              width: '100%'
-
-            }}>
-            <img className="mainIMG" src={images} alt="" srcset=""
-              style={{
-                width: '100%',
-                marginBottom: '10%',
-              }}
-            />
-          </Col>
+return (
 
 
-          {/* facility details */}
-          <Col col-md-3 style={{
-            minWidth: '250px',
+  <div className="OneFacility" >
+    <Container className="mt-5" style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    }}>
+      <Row style={{ marginBottom: "50px" }}>
+
+        <Col col-md-3>
+
+          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+        </Col>
+
+        {/* main image */}
+
+        <Col col-md-6
+          style={{
+            minWidth: '300px',
             maxWidth: '500px',
-            padding: '0 2% 2% 2%',
-            margin: '0 2% 2% 2%',
+            padding: '0',
             width: '100%'
 
           }}>
-            <h1> {name} </h1>
-            <hr />
-            <p>Faclity: {type} </p>
-
-            <p>City: {city}</p>
-            <p>location:<a href="#"> {location}</a></p>
-            <p>Price: {price} SR</p>
-
-
-            <button onClick={handleShow}>Book</button>
+          <img className="mainIMG" src={images} alt="" srcset=""
+            style={{
+              width: '100%',
+              marginBottom: '10%',
+            }}
+          />
+        </Col>
 
 
-            <Modal
-              show={show}
-              onHide={handleClose}
-              backdrop="static"
-              keyboard={false}
-            >
-              <Modal.Header closeButton>
-                <Modal.Title></Modal.Title>
-              </Modal.Header>
-              <Modal.Body style={{display: "flex", justifyContent: 'center', margin: '5%'}}>
+        {/* facility details */}
+        <Col col-md-3 style={{
+          minWidth: '250px',
+          maxWidth: '500px',
+          padding: '0 2% 2% 2%',
+          margin: '0 2% 2% 2%',
+          width: '100%'
 
-                <Calendar onChange={onChange} value={date} minDate={new Date()}
-                  tileDisabled={({ date, view }) =>
-                    (view === 'month') && // Block day tiles only
-                    dateOfAllApointment.some(disabledDate =>
-                      date.getFullYear() === disabledDate.getFullYear() &&
-                      date.getMonth() === disabledDate.getMonth() &&
-                      date.getDate() === disabledDate.getDate()
-                    )}
-                    
-                />
+        }}>
+          <h1> {name} </h1>
+          <hr />
+          <p>Faclity: {type} </p>
+
+          <p>City: {city}</p>
+          <p>location:<a href="#"> {location}</a></p>
+          <p>Price: {price} SR</p>
 
 
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={onsubmit}>
-                  Book
+          <button onClick={handleShow}>Book</button>
+
+
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title></Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ display: "flex", justifyContent: 'center', margin: '5%' }}>
+
+              <Calendar onChange={onChange} value={date} minDate={new Date()}
+                tileDisabled={({ date, view }) =>
+                  (view === 'month') && // Block day tiles only
+                  dateOfAllApointment.some(disabledDate =>
+                    date.getFullYear() === disabledDate.getFullYear() &&
+                    date.getMonth() === disabledDate.getMonth() &&
+                    date.getDate() === disabledDate.getDate()
+                  )}
+
+              />
+
+
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={onSubmit}>
+                Book
           </Button>
 
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
+              <Button variant="secondary" onClick={handleClose}>
+                Close
          </Button>
 
-              </Modal.Footer>
-            </Modal>
+            </Modal.Footer>
+          </Modal>
 
 
-          </Col>
+        </Col>
 
 
-        </Row>
-        <hr style={{
-          marginTop: "100px",
-          width: '100%'
-          }}/>
-        <Row>
-          <p style={{
-            padding: '3%',
+      </Row>
+      <hr style={{
+        marginTop: "0px",
+        width: '100%'
+      }} />
+      <Row>
+        <p style={{
+          padding: '3%',
+          width: '100%',
+          maxWidth: '90%',
+          overflow: 'hidden',
+          wordWrap: "break-word",
+
+        }}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat nostrum autem adipisci similique, sed nihil corrupti labore nisi beatae perferendis dolor quisquam dolore vitae accusamus non omnis officiis unde! Quis.{description} </p>
+      </Row>
+      <h1>FeedBack</h1>
+      <Row style={{
+        margin: '50px 0 100px 0',
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: '100%'
+      }}>
+        {allComments}
+      </Row>
+
+      <Row style={{
+        margin: '0 0 200px 0',
+      }}>
+        <form
+          name="rating-form"
+          style={{
             width: '100%',
-            maxWidth: '90%',
-            overflow: 'hidden',
-            wordWrap: "break-word",
+            padding: '3%',
+            boxShadow:' 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19)',
+          }}>
+          <label for="fname">Rating</label><br></br>
+          <div className={classes.root}>
+            <Rating name="size-medium" defaultValue={2} value={rating} onChange={handleChange} />
+          </div>
+          <label for="comment">Comment (optional)</label><br></br>
+          <textarea
+            name="comment"
+            type="text"
+            onChange={handleCommentChange}
+            style={{
+              width: '100%',
+              minHeight: '200px'
 
-          }}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat nostrum autem adipisci similique, sed nihil corrupti labore nisi beatae perferendis dolor quisquam dolore vitae accusamus non omnis officiis unde! Quis.{description} </p>
-        </Row>
-      </Container>
-      {/* <Map
+            }} />
+          <input 
+          s type="submit" value="Submit" onClick={(e) => onSubmitRating(e)} />
+        </form>
+
+      </Row>
+    </Container>
+    {/* <Map
           google={this.props.google}
           zoom={8}
           style={mapStyles}
@@ -219,6 +322,6 @@ export default function OneFacility(props) {
         /> */}
 
 
-    </div>
-  );
+  </div>
+);
 }

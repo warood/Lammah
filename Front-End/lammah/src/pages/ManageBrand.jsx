@@ -13,6 +13,8 @@ export default function ManageBrand(props) {
     const [facilities, setFacilities] = useState([]);
     const [afterUpdateFacility, setAfterUpdateFacility] = useState(false);
     const [key, setKey] = useState('home');
+    const [IdOfAppointment, setIdOfAppointment] = useState("");
+
 
     const history = useHistory();
 
@@ -56,7 +58,11 @@ export default function ManageBrand(props) {
                             }}
                         >
 
-                            <ManageAppointments auth={props.auth} />
+                            <ManageAppointments 
+                            auth={props.auth}
+                            setIdOfAppointment={setIdOfAppointment}
+                            IdOfAppointment={IdOfAppointment}
+                             />
 
                         </Tab>
                         <Tab eventKey="profile" title="Your Facilities">

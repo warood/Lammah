@@ -29,15 +29,16 @@ import './style/new-facility.css';
 import './style/OneFacility.css';
 import "./style/admin.css";
 import "./style/my-page.css";
-
-
-
-// components
-import { NavBar } from './components/NavBar'
+import "./style/OneComment.css";
 
 // styles
 import "./css/home.css";
 import "./css/nav-bar.css";
+
+// components
+import { NavBar } from './components/NavBar'
+
+
 
 const LightTheme = {
   pageBackground: "white",
@@ -76,7 +77,6 @@ function App() {
     setDataloading(true)
   };
   console.log("The current User is: ", auth.currentUser, "data loading", dataLoading);
-
   useEffect(userLogin, []);
   return (
 
@@ -85,7 +85,7 @@ function App() {
     
     <GlobalStyles/>
       <div className="App">
-        <button onClick={themeToggler}> switch mode</button>
+        {/* <button onClick={themeToggler}> switch mode</button> */}
         
 {dataLoading &&
 
@@ -113,7 +113,7 @@ function App() {
 
           <Route exact path='/facilities'>
           {/* <ThemeProvider theme={themes[theme]}> */}
-            <Facilities  setSelectFacility={setSelectFacility} />
+            <Facilities  setSelectFacility={setSelectFacility}  />
           {/* </ThemeProvider> */}
           </Route>
 
