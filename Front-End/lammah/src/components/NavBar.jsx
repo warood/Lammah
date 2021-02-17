@@ -6,7 +6,8 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
+import { useTranslation } from "react-i18next";
+import LanguageSelect from "./LanguageSelect";
 
 const validationSchema = Yup.object({
     email: Yup.string().required(" Enter your email ").email("example@example.com"),
@@ -16,6 +17,9 @@ const validationSchema = Yup.object({
 export const NavBar = (props) => {
     // Login functional
     const history = useHistory();
+
+    //For Translation
+    const { t } = useTranslation();
 
     const [show, setShow] = useState(false);
     const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -74,7 +78,10 @@ export const NavBar = (props) => {
                             props.ToSetSearch(event.target.value)
                         }}></input>
 
-                    <div className="menu-element" >ENG</div>
+                    {/* <div className="menu-element" >ENG</div> */}
+                    <div className="language-select">
+                        <LanguageSelect />
+                    </div>
                     <div className="menu-element">ACCOUNT</div>
                     <div className="menu-element">MY REQUESTS</div>
                     <button onClick={props.themeToggler}> switch mode</button>
@@ -85,19 +92,18 @@ export const NavBar = (props) => {
 
                     {/* The Menu */}
 
-
-                    <Link to="/facilities" className="menu-element">FACILITIES</Link>
+                    <Link to="/facilities" className="menu-element">{t("facilities")}</Link>
 
                     {props.auth.isLoggedIn ?
-                        <Link to="/manage-brand" className="menu-element">BRAND</Link>
+                        <Link to="/manage-brand" className="menu-element">{t("my_requests")}</Link>
                         :
                         <></>}
                     {props.auth.isLoggedIn ?
-                        <Link to="/my-page" className="menu-element">MY PAGE</Link>
+                        <Link to="/my-page" className="menu-element">{t("my_page")}</Link>
                         :
                         <></>}
                     {props.auth.isLoggedIn ?
-                        <Link to="/new-facility" className="menu-element">NEW FACILITY</Link>
+                        <Link to="/new-facility" className="menu-element">{t("new_facility")}</Link>
 
                         :
                         <></>}
@@ -110,7 +116,7 @@ export const NavBar = (props) => {
                                 handleShow()
                                 props.loginCallback()
                             }}>
-                            LOGIN
+                            {t("login")}
                 </Link>}
                     {console.log(props.auth)}
 
@@ -124,7 +130,7 @@ export const NavBar = (props) => {
                                 history.push(`/`)
                                     ;
                             }}>
-                            LOGOUT
+                            {t("logout")}
                 </Link>
                         : <></>}
 
@@ -146,7 +152,7 @@ export const NavBar = (props) => {
                                 </Alert>
                             )}
                             <Modal.Header closeButton>
-                                <Modal.Title>Login</Modal.Title>
+                                <Modal.Title>{t("login")}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                                 <Formik
@@ -156,7 +162,7 @@ export const NavBar = (props) => {
                                         <FormikForm>
                                             <Form.Group as={Row} controlId="formPlaintextEmail">
                                                 <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                    Email
+                                                    {t("email")}
                                      </Form.Label>
 
                                                 <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
@@ -166,7 +172,7 @@ export const NavBar = (props) => {
                                             </Form.Group>
                                             <Form.Group as={Row} controlId="formPlaintextPassword">
                                                 <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                    Password
+                                                    {t("password")}
                                     </Form.Label>
 
                                                 <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
@@ -176,12 +182,12 @@ export const NavBar = (props) => {
                                             </Form.Group>
                                             <Form.Group>
                                                 <Col md={12}>
-                                                    <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
-                                                        Register
+                                                    <p style={{ color: "black", fontFamily: "serif" }}> {t("you_dont_have_account")} <Link eventKey={2} as={Link} to="/signup">
+                                                        {t("register")}
                                        </Link>
                                                     </p>
 
-                                                    <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
+                                                    <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">{t("login")}</Button>
                                                 </Col>
                                             </Form.Group>
 
@@ -192,7 +198,7 @@ export const NavBar = (props) => {
 
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>
-                                    Close
+                                    {t("close")}
                         </Button>
 
                             </Modal.Footer>

@@ -12,15 +12,21 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
+import { useTranslation } from "react-i18next";
 
-const validationSchema = Yup.object({
-    name: Yup.string().required(" Facility name is required "),
-    city: Yup.string().required("You must choose one "),
-    type: Yup.string().required("You must choose one "),
-    price: Yup.number().required("Facility price is required "),
-})
+
 
 export default function NewFacility(props) {
+
+        //For Translation
+        const { t } = useTranslation();
+
+    const validationSchema = Yup.object({
+        name: Yup.string().required(t("facility_name_is_required")),
+        city: Yup.string().required(t("you_must_choose_one")),
+        type: Yup.string().required(t("you_must_choose_one")),
+        price: Yup.number().required(t("facility_price_is_required")),
+    })
     const userId = props.auth.currentUser._id;
     const history = useHistory();
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
@@ -89,13 +95,13 @@ export default function NewFacility(props) {
 
                             <Form.Group as={Row} controlId="formPlaintextName">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", fontSize: "25px"  , textAlign: 'center'}} sm="2">
-                                    Facility Information :
+                                    {t("facility_info")} :
                             </Form.Label>
                             </Form.Group>
 
                             <Form.Group as={Row} controlId="formPlaintextName">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                    Name
+                                    {t("name")}
                             </Form.Label>
                                 <Form.Control as={Field}
                                 placeholder="Facility Name" name="name" type="text" />
@@ -105,7 +111,7 @@ export default function NewFacility(props) {
 
                             <Form.Group as={Row} controlId="formPlaintextName" >
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                    Images
+                                    {t("images")}
                                 </Form.Label>
                                 <Form.Control type="file" multiple name="images" onChange={uploadImageHundler} />
                                 <img src={updateFacilityImg} height='100px' width='100px' alt=""/>
@@ -121,13 +127,13 @@ export default function NewFacility(props) {
 
                             <Form.Group as={Row} controlId="formPlaintextCity">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" , minWidth: '100%'}} sm="2">
-                                    City 
+                                    {t("city")} 
                                 </Form.Label>
                                 <Field size="mm" as="select" name="city">
-                                    <option value="">Choose City</option>
-                                    <option value="Riyadh">Riyadh</option>
-                                    <option value="Jeddah">Jeddah</option>
-                                    <option value="Dammam">Dammam</option>
+                                    <option value="">{t("choose_city")}</option>
+                                    <option value="Riyadh">{t("riyadh")}</option>
+                                    <option value="Jeddah">{t("jeddah")}</option>
+                                    <option value="Dammam">{t("dammam")}</option>
                                 </Field>
                             </Form.Group>
 
@@ -135,12 +141,12 @@ export default function NewFacility(props) {
 
                             <Form.Group as={Row} controlId="formPlaintextType">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold"  , minWidth: '100%'}} sm="2">
-                                    Type
+                                    {t("type")}
                             </Form.Label>
                                 <Field as="select" name="type">
-                                    <option value="">Choose one</option>
-                                    <option value="Chalet">Chalet</option>
-                                    <option value="Camp">Camp</option>
+                                    <option value="">{t("choose_one")}</option>
+                                    <option value="Chalet">{t("chalet")}</option>
+                                    <option value="Camp">{t("camp")}</option>
                                 </Field>
                             </Form.Group>
 
@@ -148,7 +154,7 @@ export default function NewFacility(props) {
 
                             <Form.Group as={Row} controlId="formPlaintextPrice">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                    Price
+                                    {t("price")}
                             </Form.Label>
                                 <Form.Control as={Field} placeholder="SR" name="price" type="text" />
                             </Form.Group>
@@ -156,7 +162,7 @@ export default function NewFacility(props) {
                             <ErrorMessage name="price" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
                                 
                             <Form.Group as={Row} controlId="ControlDesciption">
-                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">Desciption</Form.Label>
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">{t("desciption")}</Form.Label>
                                 <Editor as={Field} name="description"
                                         editorState={editorState}
                                         onEditorStateChange={handleEditorChange}
@@ -172,7 +178,7 @@ export default function NewFacility(props) {
                                   margin: "160px auto 50px auto" ,
 
                                   }} variant="secondary" type="submit">
-                                Submite
+                                {t("submit")}
                             </Button>
                            </Row>
                         </Form>

@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import ManageAppointments from './ManageAppointments';
 import ConfirmAppointment from './ConfirmAppointment';
 import { Tabs, Tab } from 'react-bootstrap';
-
+import { useTranslation } from "react-i18next";
 
 export default function ManageBrand(props) {
     const userId = props.auth.currentUser._id;
@@ -15,6 +15,8 @@ export default function ManageBrand(props) {
     const [key, setKey] = useState('home');
     const [IdOfAppointment, setIdOfAppointment] = useState("");
 
+    //For Translation
+    const { t } = useTranslation();
 
     const history = useHistory();
 
@@ -29,18 +31,12 @@ export default function ManageBrand(props) {
     }, [])
 
 
-
-
-
-
-
-
     //Render Manage-Brand Page
     return (
         <>
             {props.auth.isLoggedIn ?
                 <div className="ManageBrand">
-                    <h1>Reservation Management</h1>
+                    <h1>{t("my_requests")}</h1>
                     <hr />
                     <Tabs
                         id="controlled-tab-example"
@@ -50,7 +46,7 @@ export default function ManageBrand(props) {
                             backgroundColor: 'white',
                         }}
                     >
-                        <Tab eventKey="home" title="Recent Appointement"
+                        <Tab eventKey="home" title={t("recent_appointement")}
                             style={{
                                 color: 'white',
                                 textDecoration: 'none',
@@ -65,11 +61,11 @@ export default function ManageBrand(props) {
                              />
 
                         </Tab>
-                        <Tab eventKey="profile" title="Your Facilities">
+                        <Tab eventKey="profile" title={t("your_facilities")}>
                             <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility} />
                             <br />
                         </Tab>
-                        <Tab eventKey="contact" title="Confirmed Reservations" >
+                        <Tab eventKey="contact" title={t("confirmed_reservations")} >
                             <ConfirmAppointment auth={props.auth} facilities={facilities} />
                         </Tab>
                     </Tabs>

@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Col, Card, Row, Modal, Form, Button } from 'react-bootstrap'
 import Moment from 'react-moment';
 import axios from "axios";
-
+import { useTranslation } from "react-i18next";
 
 export default function OneCardOfApointment(props) {
 
+    //For Select Language
+    const { t } = useTranslation();
 
     const [show, setShow] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
@@ -84,24 +86,24 @@ export default function OneCardOfApointment(props) {
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
-                                    }}>Status: {props.status}</p>
+                                    }}>{t("status")}: {props.status}</p>
                                 </Row>
                                
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
-                                    }}>Owner: {findUser(props.facility.user)[0].name}</p>
+                                    }}>{t("owner")}: {findUser(props.facility.user)[0].name}</p>
                                 </Row>
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
-                                    }}>Phone: {findUser(props.facility.user)[0].phone}</p>
+                                    }}>{t("phone")}: {findUser(props.facility.user)[0].phone}</p>
                                 </Row>
 
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
-                                    }}>Apointment ID: {props.apointmentId}</p>
+                                    }}>{t("apointment_id")}: {props.apointmentId}</p>
 
                                 </Row>
 
@@ -137,20 +139,20 @@ export default function OneCardOfApointment(props) {
                 keyboard={false}>
 
                 <Modal.Header closeButton>
-                    <Modal.Title></Modal.Title>
+                    <Modal.Title>{t("confirm_delete")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Are You Sure Want To Cancel This Appointment ?
+                    {t("are_you_sure_to_delete_reservation")}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        No
+                        {t("no")}
                 </Button>
                     <Button variant="primary" onClick={() => {
                         onSubmit(props.apointmentId);
                         props.setDeleteAppointment(!props.deleteAppointment);
 
-                    }}>Yes Cancel It</Button>
+                    }}>{t("yes")}</Button>
                 </Modal.Footer>
             </Modal>
         </>

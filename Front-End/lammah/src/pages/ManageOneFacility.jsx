@@ -3,10 +3,22 @@ import React, { useEffect, useState } from 'react';
 import { Card, Button, Accordion, Modal, Tabs, Row, Tab } from 'react-bootstrap';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import DOMPurify from 'dompurify';
+import { useTranslation } from "react-i18next";
 
 export default function ManageOneFacility(props) {
 
     const history = useHistory();
+
+    //For Translation
+    const { t } = useTranslation();
+
+      //To display text as stored with styling
+    const createMarkup = (html) => {
+    return  {
+      __html: DOMPurify.sanitize(html)
+     }
+    }
 
     //Facility Edit button
     const [showEdit, setShowEdit] = useState(false);
@@ -104,13 +116,13 @@ export default function ManageOneFacility(props) {
                         color: 'white',
                         padding: '3%',
                     }}>
-                        <p>Name: {props.facility.name}</p>
+                        <p>{t("name")}: {props.facility.name}</p>
                         <p style={{
                             maxWidth: '100%'
-                        }}>Description: {props.facility.description}</p>
-                        <p>Location: {props.facility.location}</p>
-                        <p>Requests: {props.facility.appointment.length}</p>
-                        <p>Cost: {props.facility.price} SAR</p>
+                        }}>{t("desciption")}: </p> <span dangerouslySetInnerHTML={createMarkup(props.facility.description)} ></span>
+                        <p>{t("location")}: {props.facility.location}</p>
+                        <p>{t("requests")}: {props.facility.appointment.length}</p>
+                        <p>{t("cost")}: {props.facility.price} {t("sr")}</p>
 
                     </div>
                     <div
@@ -128,7 +140,7 @@ export default function ManageOneFacility(props) {
 
                         }}
                         variant="success" onClick={handleShowEdit}>
-                        Edit</div>
+                        {t("edit")}</div>
                     <p
                         style={{
                             position: 'absolute',
@@ -155,24 +167,24 @@ export default function ManageOneFacility(props) {
             {/* Edit Modal */}
             <Modal size="lg" show={showEdit} onHide={handleCloseEdit}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Facility</Modal.Title>
+                    <Modal.Title>{t("edit")} {t( "facility")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Name:  <input type="text" name="name" size="80" defaultValue={props.facility.name} onChange={(e) => onChangeFacility(e)} /> <br /> <br />
-                                   Description: <textarea rows="8" cols="80" type="text" name="description" defaultValue={props.facility.description} onChange={(e) => onChangeFacility(e)} /> <br /> <br />
-                                   Location: <input type="text" name="location" size="80" defaultValue={props.facility.location} onChange={(e) => onChangeFacility(e)} /> <br /> <br />
-                                   Price: <input type="text" name="price" size="80" defaultValue={props.facility.price} onChange={(e) => onChangeFacility(e)} /> <br /> <br />
-                                   Photos: <input type="text" size="80" name="images" defaultValue={props.facility.images} onChange={(e) => onChangeFacility(e)} />
+                    {t("name")}:  <input type="text" name="name" size="80" defaultValue={props.facility.name} onChange={(e) => onChangeFacility(e)} /> <br /> <br />
+                                   {t("desciption")}: <textarea rows="8" cols="80" type="text" name="description" defaultValue={props.facility.description} onChange={(e) => onChangeFacility(e)} /> <br /> <br />
+                                   {t("location")}: <input type="text" name="location" size="80" defaultValue={props.facility.location} onChange={(e) => onChangeFacility(e)} /> <br /> <br />
+                                   {t("price")}: <input type="text" name="price" size="80" defaultValue={props.facility.price} onChange={(e) => onChangeFacility(e)} /> <br /> <br />
+                                   {t("photos")}: <input type="text" size="80" name="images" defaultValue={props.facility.images} onChange={(e) => onChangeFacility(e)} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseEdit}>
-                        Close
+                        {t("close")}
                                     </Button>
                     <Button variant="primary" onClick={() => {
                         editFacility(props.facility._id);
                         handleCloseEdit();
                     }}>
-                        Edit
+                        {t("edit")}
                                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -180,18 +192,18 @@ export default function ManageOneFacility(props) {
             {/* Delete Modal */}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm Delete</Modal.Title>
+                    <Modal.Title>{t("confirm_delete")}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to delete this facility</Modal.Body>
+                <Modal.Body>{t("are_you_sure_delete_this")}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        {t("close")}
                                 </Button>
                     <Button variant="primary" onClick={() => {
                         deleteFacility(props.facility._id);
                         handleClose()
                     }}>
-                        Delete
+                        {t("delete")}
                                 </Button>
                 </Modal.Footer>
             </Modal>

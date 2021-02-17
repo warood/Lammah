@@ -7,13 +7,16 @@ import { Link } from 'react-router-dom';
 import Rating from '@material-ui/lab/Rating';
 import { ArrowRight, EyeFill } from 'react-bootstrap-icons';
 import { Radio } from 'react-bootstrap';
+import { useTranslation } from "react-i18next";
 
 
 export default function Facilities(props) {
     const [facilities, setFacilities] = useState([])
     const [Radiocity, setRadioCity] = useState("");
     let term = props.search;
- 
+    
+    //For Translation
+    const { t } = useTranslation();
 
     const Radiocomponent = ({ value, setGender }) => ( 
         <div onChange={setGender.bind(this)}>
@@ -92,7 +95,7 @@ export default function Facilities(props) {
                                 fontWeight: 'bold',
                                 fontSize: '1.5em',
 
-                            }}>{facility.price} SR</small>
+                            }}>{facility.price} {t("sr")}</small>
 
                         <Card.Text
 
@@ -199,7 +202,7 @@ export default function Facilities(props) {
                                 fontWeight: 'bold',
                                 fontSize: '1.5em',
 
-                            }}>{facility.price} SR</small>
+                            }}>{facility.price} {t("sr")}</small>
 
                         <Card.Text
 
@@ -303,7 +306,7 @@ export default function Facilities(props) {
                                 fontWeight: 'bold',
                                 fontSize: '1.5em',
 
-                            }}>{facility.price} SR</small>
+                            }}>{facility.price} {t("sr")}</small>
 
                     </Card>
                 </Link>
@@ -377,7 +380,7 @@ export default function Facilities(props) {
                                     fontWeight: 'bold',
                                     fontSize: '1.5em',
     
-                                }}>{facility.price} SR</small>
+                                }}>{facility.price} {t("sr")}</small>
     
                             <Card.Text
     
@@ -431,13 +434,13 @@ export default function Facilities(props) {
        
        
          <input type="radio" id="jeddah" name="city" value="jeddah" onChange={(e)=>{setRadioCity(e.target.value)}}/>
-             <label for="jeddah">Jeddah</label> 
+             <label for="jeddah">{t("jeddah")}</label> 
             <input type="radio" id="dammam" name="city" value="dammam" onChange={(e)=>{setRadioCity(e.target.value)}}/>
-           <label for="dammam">Dammam</label> 
+           <label for="dammam">{t("dammam")}</label> 
            <input type="radio" id="riyadh" name="city" value="riyadh" onChange={(e)=>{setRadioCity(e.target.value)}}/>
-            <label for="riyadh">Riyadh</label> 
+            <label for="riyadh">{t("riyadh")}</label> 
             <input type="radio" id="all" name="city" value="" onChange={(e)=>{setRadioCity(e.target.value)}}/>
-            <label for="all">All</label> 
+            <label for="all">{t("all")}</label> 
                     
             <Container className="container">
             

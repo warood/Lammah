@@ -1,7 +1,11 @@
 import React from 'react';
 import ShowConfirmApp from './ShowConfirmApp';
+import { useTranslation } from "react-i18next";
 
 export default function ConfirmAppointment(props) {
+
+    //For Translation
+    const { t } = useTranslation();
 
     //Get all facilities belong to user
     const allFacilities = props.facilities.map((facility, i) => {
@@ -33,27 +37,27 @@ export default function ConfirmAppointment(props) {
                     style={{
                         border: '1px solid #282C36',
                         
-                    }}>Facility</th>
+                    }}>{t("facility")}</th>
                     <th
                     style={{
                         border: '1px solid #282C36',
                         
-                    }}>User</th>
+                    }}>{t("user")}</th>
                     <th
                     style={{
                         border: '1px solid #282C36',
                         
-                    }} >Email</th>
+                    }} >{t("email")}</th>
                     <th
                     style={{
                         border: '1px solid #282C36',
                         
-                    }} >Phone</th>
+                    }} >{t("phone")}</th>
                      <th
                     style={{
                         border: '1px solid #282C36',
                         
-                    }} >Date</th>
+                    }} >{t("date")}</th>
                 </tr>
                 {allFacilities}
 
