@@ -41,12 +41,13 @@ body {
 /* ========================= */
 
 /* Main Section */
-.Home .section {
-  margin-top: 3%;
-  width: 65%;
-  height: 1000px;
-  display: flex;
-  flex-direction: column;
+.Home .section{
+    
+    margin-top: 3%;
+    width: 85%;
+    height: 1000px;
+    display:flex;
+    flex-direction: column;
 }
 
 /* Top Facilities 1st Section */

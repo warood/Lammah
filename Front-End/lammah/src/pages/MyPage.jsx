@@ -6,7 +6,7 @@ import { Row, Col, Image, Button, Container, Modal, Form } from "react-bootstrap
 import { GearFill } from 'react-bootstrap-icons';
 import OneCardOfApointment from '../components/OneCardOfApointment'
 import { useHistory } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 
 
 export default function MyPage(props) {
@@ -20,6 +20,9 @@ export default function MyPage(props) {
     const [apointments, setApointments] = useState([])
     const [deleteAppointment, setDeleteAppointment] = useState(false);
     const [infoUpdate, setInfoUpdate] = useState(false);
+
+    //For Translation
+    const { t } = useTranslation();
 
     //to show edit Modal
     const [show, setShow] = useState(false);
@@ -88,44 +91,29 @@ export default function MyPage(props) {
     })
 
 
-
     return (
         <>
             {props.auth.isLoggedIn ?
                 <>
                     <div className="MyPage">
                         <Container >
-                            <Row style={{
-                                marginBottom: '5%',
-                            }}>
-                            <h1 style={{
-                                     fontWeight: 'bold',
-                                     fontSize: '1.7em',
-
-                                     }}>Personal Info</h1>
+                            <Row className="personal-info">
+                            <h1>{t("personal_info")}</h1>
                             </Row>
-                            <Row
-                            >
-                                <Col xs={4} xl={3} md={4}
+                            <Row className="info-container" style={{display: 'flex',
+                        flexWrap: 'wrap',}}>
+                                <Col className="img-container"xs={4} xl={3} md={4}>
+                                    <Image src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon.png"
                                     style={{
-                                        maxWidth: '150px',
-
-
-                                    }}>
-                                    <Image src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon.png" width="100%" />
+                                        width: '100%',
+                                        maxWidth: '100%',   
+                                    }}
+                                     />
                                 </Col>
-                                <Col xs={4} xl={6} md={4}
-                                    style={{
-
-                                    }}>
-                                    <h4 style={{
-                                        color: "black",
-                                        fontFamily: "serif",
-                                        fontWeight: "bold",
-                                        flexGrow: '1',
-                                    }}> Name :  {userInformation.name}  </h4>
-                                    <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email :  {userInformation.email} </h4>
-                                    <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone :  {userInformation.phone} </h4>
+                                <Col className="user-info" xs={4} xl={6} md={4}>
+                                    <p className='user-name'><b>{t("name")} : </b>{userInformation.name}  </p>
+                                    <p className="user-email"><b>{t("email")} : </b> {userInformation.email} </p>
+                                    <p className="user-phone"><b> {t("phone")} : </b>  {userInformation.phone} </p>
 
                                 </Col>
                                 <Col className="pt-5"
@@ -154,13 +142,9 @@ export default function MyPage(props) {
                             </Row>
                             <hr />
                             <Row className="justify-content-md-center">
-                                <h1 style={{
-                                     marginTop: '5%',
-                                     fontWeight: 'bold',
-                                     fontSize: '1.6em',
-                                     }}> My Apointments </h1>
+                                <h1 className="my-appoinment">{t("my_appointments")} </h1>
                             </Row>
-                            <Row>
+                            <Row >
                                 {allApointment}
 
                             </Row>
@@ -170,18 +154,18 @@ export default function MyPage(props) {
 
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton >
-                                <Modal.Title style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}>Edit Your Information</Modal.Title>
+                                <Modal.Title style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}>{t("edit_your_info")}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                                 <Form.Group as={Col}>
-                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Name : </h4>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("name")} : </h4>
                                     <Form.Control name="name"
                                         onChange={(e) => onChangeInput(e)}
                                         defaultValue={userInformation.name}
                                         type="text" />
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email : </h4>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("email")} : </h4>
                                     <Form.Control
                                         name="email"
                                         onChange={(e) => onChangeInput(e)}
@@ -189,7 +173,7 @@ export default function MyPage(props) {
                                         type="text" />
                                 </Form.Group>
                                 <Form.Group as={Col}>
-                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone : </h4>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("phone")} : </h4>
                                     <Form.Control name="phone"
                                         onChange={(e) => onChangeInput(e)}
                                         defaultValue={userInformation.phone}
@@ -198,13 +182,13 @@ export default function MyPage(props) {
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>
-                                    Close
+                                    {t("close")}
                     </Button>
                                 <Button variant="secondary" onClick={(e) =>{
                                     onSubmit(e);
                                     setInfoUpdate(!infoUpdate);
                                 }}>
-                                    Save Changes
+                                    {t("save_changes")}
                     </Button>
                             </Modal.Footer>
                         </Modal>

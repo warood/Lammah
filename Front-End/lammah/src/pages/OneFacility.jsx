@@ -5,18 +5,19 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Button, Col, Container, Row, Form, Modal } from "react-bootstrap";
 import OneComment from '../components/OneComment'
+// import { Map, GoogleApiWrapper } from 'google-maps-react';
 import DOMPurify from 'dompurify';
+import { useTranslation } from "react-i18next";
 
 // material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
+import WrappedMap from '../components/GoooglMap'
 
 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import WrappedMap from '../components/GoooglMap'
-
-
+// import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 // material-ui
 const useStyles = makeStyles((theme) => ({
@@ -46,12 +47,17 @@ export default function OneFacility(props) {
   const [displayAllComments, setdisplayAllComments] = useState([])
   const [showOnerInfo, setShowOnerInfo] = useState(false);
 
+  //For Translation
+  const { t } = useTranslation();
+  const [mainimage, setMainImage] = useState("")
 
+  //To display text as stored with styling
   const createMarkup = (html) => {
     return {
       __html: DOMPurify.sanitize(html)
     }
   }
+
   // material-ui
   const classes = useStyles();
   // const [userId, setUserId] = useState(props.auth.currentUser._id)
@@ -94,6 +100,7 @@ export default function OneFacility(props) {
 
     axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
       .then(res => {
+        //console.log(res)
         const addDate = res.data.facility.appointment.map((ele) => {
 
           return new Date(ele.date);
@@ -104,12 +111,13 @@ export default function OneFacility(props) {
   };
 
 
+
   useEffect(() => {
 
     if (!city) {
       axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
         .then(res => {
-          // let facility = res.data.find((ele) => ele._id == id);
+          //let facility = res.data.find((ele) => ele._id == id);
           setSelectFacility(res.data.facility);
           setFacility(res.data.facility._id);
 
@@ -130,8 +138,9 @@ export default function OneFacility(props) {
     axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
       .then(res => {
       })
-
+    // setMainImage(images[0]);
   }, [refreshPage]);
+
 
 
   const onChange = date => {
@@ -142,8 +151,13 @@ export default function OneFacility(props) {
   //booking function 
   const onSubmit = () => {
 
+
+
+    //console.log('newAppointment',apointment)
+
     axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
       .then((res) => {
+        //console.log(res)
       })
       .catch((err) => console.log(err));
 
@@ -153,11 +167,9 @@ export default function OneFacility(props) {
 
   }
 
+
   let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115683.jpg", "https://www.visitsaudi.com/content/dam/no-dynamic-media-folder/manifest-newarticles-batch2/a-guide-to-al-ula/guide_to_al_ula_horiz_article_4.jpg", "https://sahary-al-ola-camp-villa.hotels-saudi-arabia.com/data/Photos/767x460/10098/1009837/1009837849.JPEG"]
-  const mapStyles = {
-    width: '100%',
-    height: '100%',
-  };
+
 
 
   const allComments = displayAllComments.map((comment, i) => {
@@ -167,6 +179,10 @@ export default function OneFacility(props) {
       />
     )
   })
+
+  // let allFacilities = images.map((image, i) => {
+  //   <Row><img className="smallIMG" src={image[i]} alt="" srcset="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
+  // })
 
   return (
 
@@ -180,23 +196,22 @@ export default function OneFacility(props) {
         <Row style={{ marginBottom: "50px" }}>
 
           <Col col-md-3>
-
-            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+            {/* {allFacilities} */}
           </Col>
 
           {/* main image */}
 
-          <Col col-md-6
+          <Col col-md-6 className="main-img-container"
             style={{
               minWidth: '300px',
               maxWidth: '500px',
               padding: '0',
-              width: '100%'
-
+              width: '100%',
             }}>
-            <img className="mainIMG" src={images} alt="" srcset=""
+
+
+
+            <img className="mainIMG" src={mainimage} alt="" srcset=""
               style={{
                 width: '100%',
                 marginBottom: '10%',
@@ -216,12 +231,16 @@ export default function OneFacility(props) {
           }}>
             <h1> {name} </h1>
             <hr />
-            <p>Faclity: {type} </p>
+            <p>{t("facility")} : {type} </p>
 
-            <p>City: {city}</p>
-            <p>Price: {price} SR</p>
+            <p>{t("city")} : {city}</p>
+            <p>{t("location")} : <a href="#"> {location}</a></p>
+            <p>{t("price")} : {price} {t("sr")}</p>
 
-            <button onClick={handleShow}>Book</button>
+
+            <button onClick={handleShow}>{t("book")}</button>
+
+
             <Modal
               show={show}
               onHide={handleClose}
@@ -243,19 +262,24 @@ export default function OneFacility(props) {
                     )}
 
                 />
+
+
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={onSubmit}>
-                  Book
-          </Button>
+                  {t("book")}
+                </Button>
 
                 <Button variant="secondary" onClick={handleClose}>
-                  Close
-         </Button>
+                  {t("close")}
+                </Button>
 
               </Modal.Footer>
             </Modal>
+
+
           </Col>
+
           <div style={{ height: "100vw", width: "100vh" }}>
             <WrappedMap
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
@@ -263,10 +287,8 @@ export default function OneFacility(props) {
               containerElement={<div style={{ height: `400px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
 
-            />
-            <p>{localStorage.getItem("address")}</p>
+            /></div>
 
-          </div>
         </Row>
         <hr style={{
           marginTop: "0px",
@@ -285,7 +307,7 @@ export default function OneFacility(props) {
             }}></div>
 
         </Row>
-        <h1>FeedBack</h1>
+        <h1>{t("feedback")}</h1>
         <Row style={{
           margin: '50px 0 100px 0',
           display: 'flex',
@@ -294,7 +316,6 @@ export default function OneFacility(props) {
         }}>
           {allComments}
         </Row>
-
 
         <Row style={{
           margin: '0 0 200px 0',
@@ -306,11 +327,11 @@ export default function OneFacility(props) {
               padding: '3%',
               boxShadow: ' 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19)',
             }}>
-            <label for="fname">Rating</label><br></br>
+            <label for="fname">{t("rating")}</label><br></br>
             <div className={classes.root}>
               <Rating name="size-medium" defaultValue={2} value={rating} onChange={handleChange} />
             </div>
-            <label for="comment">Comment (optional)</label><br></br>
+            <label for="comment">{t("comment")}</label><br></br>
             <textarea
               name="comment"
               type="text"
@@ -321,11 +342,19 @@ export default function OneFacility(props) {
 
               }} />
             <input
-              s type="submit" value="Submit" onClick={(e) => onSubmitRating(e)} />
+              s type="submit" value={t("submit")} onClick={(e) => onSubmitRating(e)} />
           </form>
 
         </Row>
       </Container>
+      {/* <Map
+          google={this.props.google}
+          zoom={8}
+          style={mapStyles}
+          initialCenter={{ lat: 47.444, lng: -122.176}}
+        /> */}
+
+
     </div>
   );
 }

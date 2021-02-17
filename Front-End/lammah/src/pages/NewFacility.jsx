@@ -1,6 +1,6 @@
 import API_URL from '../apiConfig.js'
 import React from "react";
-import { Row, Form, Col, Button, Container, Alert } from "react-bootstrap";
+import { Row, Form, Col, Button, Container, Alert , Modal } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -13,59 +13,28 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
+import { useTranslation } from "react-i18next";
 import Image from '../components/Images'
 import WrappedMap from '../components/GoooglMap'
 import GoogleMapReact from 'google-map-react';
 
 
 var address = {}
-
-// function Map() {
-
-//     //const myLocation = "https://goo.gl/maps/JZS6aSpaY2hLbGdq7"
-//     const getLat = 25.57043310909312;
-//     const getLen = 46.5060904037667;
-
-//     // function handleMarkerClick(obj){ console.log(obj.x, obj.y, obj.lat, obj.lng, obj.event);}
-//     var latNew
-//     var lngNew
-
-//     function onClick(address) {
-//         //const { latLng } = coord;
-//         latNew = address.latLng.lat();
-//         lngNew = address.latLng.lng();
-//         address = address
-//         localStorage.setItem("address", JSON.stringify({ lat: address.latLng.lat(), lng: address.latLng.lng() }))
-//         console.log(address.latLng.lat(), address.latLng.lng())
-//     }
-
-//     return (<GoogleMap
-//         defaultZoom={5}
-//         defaultCenter={{ lat: getLat, lng: getLen }}
-//         onClick={onClick}
-//     >
-
-//       <Marker position={{ lat: latNew, lng: lngNew }} />          
-
-
-//     </GoogleMap>
-//     );
-
-
-// }
-
-// const WrappedMap = withScriptjs(withGoogleMap(Map));
-
-
-const validationSchema = Yup.object({
-    name: Yup.string().required(" Facility name is required "),
-    city: Yup.string().required("You must choose one "),
-    type: Yup.string().required("You must choose one "),
-    price: Yup.number().required("Facility price is required "),
-})
-
 export default function NewFacility(props) {
 
+        //For Translation
+        const { t } = useTranslation();
+
+    const validationSchema = Yup.object({
+        name: Yup.string().required(t("facility_name_is_required")),
+        city: Yup.string().required(t("you_must_choose_one")),
+        type: Yup.string().required(t("you_must_choose_one")),
+        price: Yup.number().required(t("facility_price_is_required")),
+    })
+    const userId = props.auth.currentUser._id;
+    const history = useHistory();
+    const [updateFacilityImg, setUpdateFacilityImg] = useState("");
+    const [show, setShow] = useState(false);
     const [address, setaddress] = useState({});
 
     //for upload array of images 
@@ -98,13 +67,6 @@ export default function NewFacility(props) {
     //................//
 
 
-
-
-    const userId = props.auth.currentUser._id;
-    const history = useHistory();
-    const [updateFacilityImg, setUpdateFacilityImg] = useState("");
-
-
     //For Text Editor
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
@@ -131,7 +93,22 @@ export default function NewFacility(props) {
                 history.push("/facilities");
                 alert("Wait for our confirmation to add your facility.Thank You !!");
             })
+
+           
             .catch((err) => console.log(err));
+          
+           
+    }
+
+    const handleClose = () => {setShow(false);
+    
+        history.push("/facilities");
+    }
+
+
+    const handleShow = () => {
+  
+      setShow(true);
     }
 
 
@@ -174,12 +151,12 @@ export default function NewFacility(props) {
 
                                 <Form.Group as={Row} controlId="formPlaintextName">
                                     <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", fontSize: "25px", textAlign: 'center' }} sm="2">
-                                        Facility Information :
+                                       {t("facility_info")} :
                                     </Form.Label>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="formPlaintextName">
                                     <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                        Name
+                                    {t("name")}
                                      </Form.Label>
                                     <Form.Control as={Field}
                                         placeholder="Facility Name" name="name" type="text" />
@@ -188,7 +165,7 @@ export default function NewFacility(props) {
                                 <ErrorMessage name="name" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
                                 <Form.Group as={Row} controlId="formPlaintextName" >
                                     <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                        Images
+                                    {t("images")}
                                     </Form.Label>
                                     <Form.Control type="file" multiple name="images" onChange={uploadImageHundler} />
                                     <img src={updateFacilityImg} height='100px' width='100px' alt="" />
@@ -200,12 +177,11 @@ export default function NewFacility(props) {
 
 
 
-                                {/* <Form.Group as={Row} controlId="formPlaintextNameLocation">
-                                    <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                        Location
+                            <Form.Group as={Row} controlId="formPlaintextCity">
+                                 
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" , minWidth: '100%'}} sm="2">
+                                    {t("city")} 
                                 </Form.Label>
-                                    <Form.Control as={Field} placeholder="Add Location Link" name="location" type="text" />
-                                </Form.Group> */}
                                 <h4>
                                     Location
                                 </h4>
@@ -217,73 +193,93 @@ export default function NewFacility(props) {
                                         mapElement={<div style={{ height: `100%` }} />}
 
                                     />
-                                    <p>{localStorage.getItem("address")}</p>
+                                 
 
                                 </div>
+                                <Field size="mm" as="select" name="city">
+                                    <option value="">{t("choose_city")}</option>
+                                    <option value="Riyadh">{t("riyadh")}</option>
+                                    <option value="Jeddah">{t("jeddah")}</option>
+                                    <option value="Dammam">{t("dammam")}</option>
+                                </Field>
+                            </Form.Group>
 
+                            <ErrorMessage name="city" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
 
+                            <Form.Group as={Row} controlId="formPlaintextType">
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold"  , minWidth: '100%'}} sm="2">
+                                    {t("type")}
+                            </Form.Label>
+                                <Field as="select" name="type">
+                                    <option value="">{t("choose_one")}</option>
+                                    <option value="Chalet">{t("chalet")}</option>
+                                    <option value="Camp">{t("camp")}</option>
+                                </Field>
+                            </Form.Group>
 
-                                <Form.Group as={Row} controlId="formPlaintextCity">
-                                    <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", minWidth: '100%' }} sm="2">
-                                        City
-                                    </Form.Label>
-                                    <Field size="mm" as="select" name="city">
-                                        <option>Choose City</option>
-                                        <option>Riyadh</option>
-                                        <option>Jeddah</option>
-                                        <option>Dammam</option>
-                                    </Field>
-                                </Form.Group>
+                            <ErrorMessage name="type" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
 
-                                <ErrorMessage name="city" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
+                            <Form.Group as={Row} controlId="formPlaintextPrice">
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                    {t("price")}
+                            </Form.Label>
+                                <Form.Control as={Field} placeholder="SR" name="price" type="text" />
+                            </Form.Group>
 
-                                <Form.Group as={Row} controlId="formPlaintextType">
-                                    <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", minWidth: '100%' }} sm="2">
-                                        Type
-                                    </Form.Label>
-                                    <Field as="select" name="type">
-                                        <option>Choose one</option>
-                                        <option>Chalet</option>
-                                        <option>Camp</option>
-                                    </Field>
-                                </Form.Group>
-
-                                <ErrorMessage name="type" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
-
-                                <Form.Group as={Row} controlId="formPlaintextPrice">
-                                    <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                        Price
-                                    </Form.Label>
-                                    <Form.Control as={Field} placeholder="SR" name="price" type="text" />
-                                </Form.Group>
-
-                                <ErrorMessage name="price" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
-
-                                <Form.Group as={Row} controlId="ControlDesciption">
-                                    <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">Desciption</Form.Label>
-                                    <Editor as={Field} name="description"
+                            <ErrorMessage name="price" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
+                                
+                            <Form.Group as={Row} controlId="ControlDesciption">
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="1">{t("desciption")}</Form.Label>
+                                <Editor as={Field} name="description"
                                         editorState={editorState}
                                         onEditorStateChange={handleEditorChange}
-                                        style={{ minWidth: '100%', maxHeight: '500px' }}
-                                    />
+                                        style={{ minWidth: '100%', maxHeight: '500px'}}
+                                />
+                                 
+                                {/* <Field as="textarea" cols={70} rows={10} name="description"
+                                style={{ minWidth: '100%'}} /> */}
+                            </Form.Group>
+                            <Row>
+                            <Button style={{
+                                 fontFamily: "serif",
+                                  margin: "160px auto 50px auto" ,
 
-
-                                </Form.Group>
-                                <Row>
-                                    <Button style={{
-                                        fontFamily: "serif",
-                                        margin: "160px auto 50px auto",
-
-                                    }} variant="secondary" type="submit">
-                                        Submite
+                                  }} variant="secondary" type="submit" onClick={handleShow}>
+                                  {t("submit")}
                             </Button>
-                                </Row>
-                            </Form>
-                        </Formik>
+                           </Row>
 
-                    </Col>
-                </Container>
+
+                           <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title></Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ display: "flex", justifyContent: 'center', margin: '5%' }}>
+
+
+                <p>  Please wiat for our confirmation to add your facility, Thank you!</p>
+            </Modal.Body>
+            <Modal.Footer>
+              
+              <Button variant="secondary" onClick={handleClose}>
+              {t("cancel")}
+         </Button>
+
+            </Modal.Footer>
+          </Modal>
+
+
+
+                        </Form>
+                    </Formik>
+                </Col>
+            </Container>
             </div>
         </>
-    );
+    )
 }

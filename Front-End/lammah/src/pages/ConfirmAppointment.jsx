@@ -1,7 +1,11 @@
 import React from 'react';
 import ShowConfirmApp from './ShowConfirmApp';
+import { useTranslation } from "react-i18next";
 
 export default function ConfirmAppointment(props) {
+
+    //For Translation
+    const { t } = useTranslation();
 
     //Get all facilities belong to user
     const allFacilities = props.facilities.map((facility, i) => {
@@ -11,49 +15,17 @@ export default function ConfirmAppointment(props) {
     })
 
     return (
-        <div style={{
-            marginTop: '5%'
+        <div className= "confirmed-res" style={{
+            
         }}>
 
-            <table
-                style={{
-                    width: "100%",
-                    border: '1px solid #282C36',
-                    borderCollapse: 'collapse',
-                }}
-            >
-                <tr
-                style={{
-                    textAlign: 'center',
-                    backgroundColor: '#282C36',
-                    border: '1px solid #282C36',
-                    color: 'white',
-                }}>
-                    <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }}>Facility</th>
-                    <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }}>User</th>
-                    <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }} >Email</th>
-                    <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }} >Phone</th>
-                     <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }} >Date</th>
+            <table >
+                <tr className="tb-title">
+                    <th>{t("facility")}</th>
+                    <th>{t("user")}</th>
+                    <th>{t("email")}</th>
+                    <th>{t("phone")}</th>
+                    <th>{t("date")}</th>
                 </tr>
                 {allFacilities}
 

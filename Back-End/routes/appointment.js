@@ -7,7 +7,7 @@ const Facility = require('../models/facility')
 const checkExpiredAppointments = async (req, res, next) =>{
   try{
     let response = await Appointment.deleteMany({createdAt: {
-      $lte: new Date(new Date().getTime()-60*120*1000).toISOString()
+      $lte: new Date(new Date().getTime()-60*180*1000).toISOString()
    }, status: "waiting"})
     console.log('deleted appointments last 5 min', response.deletedCount)
     next()
