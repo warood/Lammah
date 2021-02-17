@@ -37,6 +37,7 @@ User must be able to:
 * Admin can confirm adding facility
 * Admin can view users, facilities
 * Admin can delete users, facilities
+* Admin can grant permissions to other users
 
 ## Problem solving technique 
 Using Agile methodology
@@ -44,6 +45,7 @@ Using Agile methodology
 ## APIs Used
 * Using Mongoose and AXIOS to upload data to MongoDB
 * Google Map API
+* Cloudinary API
 
 ## Live link
 [Visit Lammah]()
