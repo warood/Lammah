@@ -13,6 +13,8 @@ import { GlobalStyles } from "./components/GlobalStyles";
 import { lightTheme, darkTheme } from "./components/Themes"
 import { CgSun } from "react-icons/cg";
 import { HiMoon } from "react-icons/hi";
+import './i18nextInit';
+
 //Pages
 import Facilities from './pages/Facilities';
 import { Home } from "./pages/Home";

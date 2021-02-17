@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import ManageAppointments from './ManageAppointments';
 import ConfirmAppointment from './ConfirmAppointment';
 import { Tabs, Tab } from 'react-bootstrap';
-
+import { useTranslation } from "react-i18next";
 
 export default function ManageBrand(props) {
     const userId = props.auth.currentUser._id;
@@ -15,6 +15,8 @@ export default function ManageBrand(props) {
     const [key, setKey] = useState('home');
     const [IdOfAppointment, setIdOfAppointment] = useState("");
 
+    //For Translation
+    const { t } = useTranslation();
 
     const history = useHistory();
 
@@ -29,18 +31,12 @@ export default function ManageBrand(props) {
     }, [])
 
 
-
-
-
-
-
-
     //Render Manage-Brand Page
     return (
         <>
             {props.auth.isLoggedIn ?
                 <div className="ManageBrand">
-                    <h1>Reservation Management</h1>
+                    <h1>{t("my_requests")}</h1>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit esse accusamus delectus reprehenderit asperiores, magnam accusantium sunt. Laboriosam provident, ullam error eveniet animi accusamus sit, corrupti ex ab officiis minima?</p>
                     <hr />
                     <Tabs className="tap"
@@ -49,7 +45,7 @@ export default function ManageBrand(props) {
                         onSelect={(k) => setKey(k)}
                         
                     >
-                        <Tab  className="tap" eventKey="home" title="Recent Appointement">
+                        <Tab  className="tap" eventKey="home" title={t("recent_appointement")}>
 
                             <ManageAppointments 
                             auth={props.auth}
@@ -58,7 +54,7 @@ export default function ManageBrand(props) {
                              />
 
                         </Tab>
-                        <Tab  className="tap" eventKey="profile" title="Your Facilities">
+                        <Tab  className="tap" eventKey="profile" title={t("your_facilities")}>
                             <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility} />
                             <br />
                         </Tab>

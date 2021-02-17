@@ -7,6 +7,7 @@ import { Button, Col, Container, Row, Form, Modal } from "react-bootstrap";
 import OneComment from '../components/OneComment'
 // import { Map, GoogleApiWrapper } from 'google-maps-react';
 import DOMPurify from 'dompurify';
+import { useTranslation } from "react-i18next";
 
 // material-ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,12 +46,16 @@ export default function OneFacility(props) {
   const [displayAllComments, setdisplayAllComments] = useState([])
   const [showOnerInfo, setShowOnerInfo] = useState(false);
 
+  //For Translation
+  const { t } = useTranslation();
 
+  //To display text as stored with styling
   const createMarkup = (html) => {
     return  {
       __html: DOMPurify.sanitize(html)
     }
   }
+
   // material-ui
   const classes = useStyles();
   // const [userId, setUserId] = useState(props.auth.currentUser._id)
@@ -220,14 +225,14 @@ return (
         }}>
           <h1> {name} </h1>
           <hr />
-          <p>Faclity: {type} </p>
+          <p>{t("facility")} : {type} </p>
 
-          <p>City: {city}</p>
-          <p>location:<a href="#"> {location}</a></p>
-          <p>Price: {price} SR</p>
+          <p>{t("city")} : {city}</p>
+          <p>{t("location")} : <a href="#"> {location}</a></p>
+          <p>{t("price")} : {price} {t("sr")}</p>
 
 
-          <button onClick={handleShow}>Book</button>
+          <button onClick={handleShow}>{t("book")}</button>
 
 
           <Modal
@@ -256,11 +261,11 @@ return (
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={onSubmit}>
-                Book
+                {t("book")}
           </Button>
 
               <Button variant="secondary" onClick={handleClose}>
-                Close
+                {t("close")}
          </Button>
 
             </Modal.Footer>
@@ -288,7 +293,7 @@ return (
         }}></div>
 
       </Row>
-      <h1>FeedBack</h1>
+      <h1>{t("feedback")}</h1>
       <Row style={{
         margin: '50px 0 100px 0',
         display: 'flex',
@@ -308,11 +313,11 @@ return (
             padding: '3%',
             boxShadow:' 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19)',
           }}>
-          <label for="fname">Rating</label><br></br>
+          <label for="fname">{t("rating")}</label><br></br>
           <div className={classes.root}>
             <Rating name="size-medium" defaultValue={2} value={rating} onChange={handleChange} />
           </div>
-          <label for="comment">Comment (optional)</label><br></br>
+          <label for="comment">{t("comment")}</label><br></br>
           <textarea
             name="comment"
             type="text"
@@ -323,7 +328,7 @@ return (
 
             }} />
           <input 
-          s type="submit" value="Submit" onClick={(e) => onSubmitRating(e)} />
+          s type="submit" value={t("submit")} onClick={(e) => onSubmitRating(e)} />
         </form>
 
       </Row>

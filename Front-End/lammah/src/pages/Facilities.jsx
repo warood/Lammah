@@ -7,12 +7,16 @@ import { Link } from 'react-router-dom';
 import Rating from '@material-ui/lab/Rating';
 import { ArrowRight, EyeFill } from 'react-bootstrap-icons';
 import { Radio } from 'react-bootstrap';
+import { useTranslation } from "react-i18next";
 
 
 export default function Facilities(props) {
     const [facilities, setFacilities] = useState([])
     const [Radiocity, setRadioCity] = useState("");
     let term = props.search;
+    
+    //For Translation
+    const { t } = useTranslation();
 
 
     const Radiocomponent = ({ value, setGender }) => (
@@ -54,7 +58,7 @@ export default function Facilities(props) {
 
 
                         <small className="fc-price"
-                        >{facility.price} SR</small>
+                        >{facility.price}{t("sr")}</small>
 
                         <Card.Text className="fc-stars">
 
@@ -102,7 +106,7 @@ export default function Facilities(props) {
 
 
                             <small className="fc-price"
-                            >{facility.price} SR</small>
+                            >{facility.price}{t("sr")}</small>
 
                             <Card.Text className="fc-stars">
 
@@ -147,7 +151,7 @@ export default function Facilities(props) {
 
 
                             <small className="fc-price"
-                            >{facility.price} SR</small>
+                            >{facility.price} {t("sr")}</small>
 
                             <Card.Text className="fc-stars">
 
@@ -194,7 +198,7 @@ export default function Facilities(props) {
 
 
                             <small className="fc-price"
-                            >{facility.price} SR</small>
+                            >{facility.price}{t("sr")}</small>
 
                             <Card.Text className="fc-stars">
 
@@ -234,13 +238,13 @@ export default function Facilities(props) {
                 alignItems: 'center',
             }}>
                 <input style={{ margin: '0 0 0 0' }} type="radio" id="jeddah" name="city" value="jeddah" onChange={(e) => { setRadioCity(e.target.value) }} />
-                <label style={{ margin: '0 0 0 1%' }} for="jeddah">Jeddah</label>
+                <label style={{ margin: '0 0 0 1%' }} for="jeddah">{t("jeddah")}</label>
                 <input style={{ margin: '0 0 0 2%' }} type="radio" id="dammam" name="city" value="dammam" onChange={(e) => { setRadioCity(e.target.value) }} />
-                <label style={{ margin: '0 0 0 1%' }} for="dammam">Dammam</label>
+                <label style={{ margin: '0 0 0 1%' }} for="dammam">{t("dammam")}</label>
                 <input style={{ margin: '0 0 0 2%' }} type="radio" id="riyadh" name="city" value="riyadh" onChange={(e) => { setRadioCity(e.target.value) }} />
-                <label style={{ margin: '0 0 0 1%' }} for="riyadh">Riyadh</label>
+                <label style={{ margin: '0 0 0 1%' }} for="riyadh">{t("riyadh")}</label>
                 <input style={{ margin: '0 0 0 2%' }} type="radio" id="all" name="city" value="" onChange={(e) => { setRadioCity(e.target.value) }} />
-                <label style={{ margin: '0 0 0 1%' }} for="all">All</label>
+                <label style={{ margin: '0 0 0 1%' }} for="all">{t("all")}</label>
             </div>
             <Container className="container">
 

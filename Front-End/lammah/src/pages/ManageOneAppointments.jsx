@@ -4,15 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { Button, Modal, Collapse, Table } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import Moment from 'react-moment';
-
+import { useTranslation } from "react-i18next";
 
 export default function ManageOneAppointments(props) {
     const history = useHistory();
     const [open, setOpen] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
     const [allUsersA, setAllUsersA] = useState(false);
-
-
+    
+    //For Translation
+    const { t } = useTranslation();
 
     var numberOfApoointmentWaiting = 0;
 
@@ -91,11 +92,11 @@ export default function ManageOneAppointments(props) {
                     <br />
                     <table className="fc-table">
                         <tr className="fc-titles">
-                            <th>User</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Date</th>
-                            <th colspan="2">Accept/Cancel</th>
+                            <th>{t("user")}</th>
+                            <th>{t("phone")}</th>
+                            <th>{t("email")}</th>
+                            <th>{t("date")}</th>
+                            <th colspan="2">{t("accept_cancel")}</th>
 
                         </tr>
                         {props.facility.appointment.slice(0).reverse().map((app, i) => {
@@ -120,14 +121,14 @@ export default function ManageOneAppointments(props) {
                                                                 props.setIdOfAppointment(app._id)
                                                                 handleShowConfirm()
                                                             }}
-                                                        >Confirm</td>
+                                                        >{t("confirm")}</td>
                                                         <td className="btn-delete-req"
                                                             variant="danger"
                                                             onClick={() => {
                                                                 props.setIdOfAppointment(app._id);
                                                                 handleShow();
                                                             }}
-                                                        >Cancel</td>
+                                                        >{t("cancel")}</td>
 
                                                     </tr>
 
@@ -155,19 +156,19 @@ export default function ManageOneAppointments(props) {
             {/* Confirm Modal */}
             <Modal show={showConfirm} onHide={handleCloseConfirm}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm Reservation</Modal.Title>
+                    <Modal.Title>{t("confirm_reservation")}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to accept this reservation</Modal.Body>
+                <Modal.Body>{t("are_you_sure_accept_this")}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseConfirm}>
-                        Close
+                        {t("close")}
                                                         </Button>
                     <Button variant="secondary" onClick={() => {
                         confirmAppointment(props.IdOfAppointment);
                         handleCloseConfirm();
 
                     }}>
-                        Confirm
+                        {t("confirm")}
                                                         </Button>
                 </Modal.Footer>
 
@@ -175,19 +176,19 @@ export default function ManageOneAppointments(props) {
             {/* Cancel Modal */}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm Delete</Modal.Title>
+                    <Modal.Title>{t("confirm_delete")}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to delete this reservation</Modal.Body>
+                <Modal.Body>{t("are_you_sure_to_delete_reservation")}</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        {t("close")}
                                                         </Button>
                     <Button variant="secondary" onClick={() => {
                         deleteAppointment(props.facility._id, props.IdOfAppointment);
                         handleClose();
 
                     }}>
-                        Delete
+                        {t("delete")}
                                                         </Button>
                 </Modal.Footer>
             </Modal>
