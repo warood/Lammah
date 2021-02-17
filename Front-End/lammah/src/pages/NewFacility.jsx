@@ -14,45 +14,49 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { convertToHTML } from 'draft-convert';
 import DOMPurify from 'dompurify';
 import Image from '../components/Images'
+import WrappedMap from '../components/GoooglMap'
+import GoogleMapReact from 'google-map-react';
+
+
 
 
 var address = {}
 
-function Map() {
+// function Map() {
 
-    //const myLocation = "https://goo.gl/maps/JZS6aSpaY2hLbGdq7"
-    const getLat = 25.57043310909312;
-    const getLen = 46.5060904037667;
+//     //const myLocation = "https://goo.gl/maps/JZS6aSpaY2hLbGdq7"
+//     const getLat = 25.57043310909312;
+//     const getLen = 46.5060904037667;
 
-    // function handleMarkerClick(obj){ console.log(obj.x, obj.y, obj.lat, obj.lng, obj.event);}
-    var latNew
-    var lngNew
+//     // function handleMarkerClick(obj){ console.log(obj.x, obj.y, obj.lat, obj.lng, obj.event);}
+//     var latNew
+//     var lngNew
 
-    function onClick(address) {
-        //const { latLng } = coord;
-        latNew = address.latLng.lat();
-        lngNew = address.latLng.lng();
-        address = address
-        localStorage.setItem("address", JSON.stringify({ lat: address.latLng.lat(), lng: address.latLng.lng() }))
-        console.log(address.latLng.lat(), address.latLng.lng())
-    }
+//     function onClick(address) {
+//         //const { latLng } = coord;
+//         latNew = address.latLng.lat();
+//         lngNew = address.latLng.lng();
+//         address = address
+//         localStorage.setItem("address", JSON.stringify({ lat: address.latLng.lat(), lng: address.latLng.lng() }))
+//         console.log(address.latLng.lat(), address.latLng.lng())
+//     }
 
-    return (<GoogleMap
-        defaultZoom={5}
-        defaultCenter={{ lat: getLat, lng: getLen }}
-        onClick={onClick}
-    >
-      
-      <Marker position={{ lat: latNew, lng: lngNew }} />          
-        
+//     return (<GoogleMap
+//         defaultZoom={5}
+//         defaultCenter={{ lat: getLat, lng: getLen }}
+//         onClick={onClick}
+//     >
 
-    </GoogleMap>
-    );
+//       <Marker position={{ lat: latNew, lng: lngNew }} />          
 
 
-}
+//     </GoogleMap>
+//     );
 
-const WrappedMap = withScriptjs(withGoogleMap(Map));
+
+// }
+
+// const WrappedMap = withScriptjs(withGoogleMap(Map));
 
 
 const validationSchema = Yup.object({
@@ -103,31 +107,29 @@ export default function NewFacility(props) {
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
 
 
-     //For Text Editor
-     const [editorState, setEditorState] = useState(
+    //For Text Editor
+    const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
-      );
-      const  [convertedContent, setConvertedContent] = useState(null);
-      const handleEditorChange = (state) => {
+    );
+    const [convertedContent, setConvertedContent] = useState(null);
+    const handleEditorChange = (state) => {
         setEditorState(state);
         convertContentToHTML();
-      }
-      const convertContentToHTML = () => {
+    }
+    const convertContentToHTML = () => {
         let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
         setConvertedContent(currentContentAsHTML);
-      }
-      const createMarkup = (html) => {
-        return  {
-          __html: DOMPurify.sanitize(html)
+    }
+    const createMarkup = (html) => {
+        return {
+            __html: DOMPurify.sanitize(html)
         }
-      }
+    }
 
     const onSubmit = (values) => {
-        console.log(values)
         axios
             .post(`${API_URL}/api/facility/new-facility`, values)
             .then((res) => {
-                console.log(res)
                 history.push("/facilities");
                 alert("Wait for our confirmation to add your facility.Thank You !!");
             })
@@ -138,20 +140,14 @@ export default function NewFacility(props) {
 
     const uploadImageHundler = (e) => {
         e.preventDefault();
-        console.log(e.target.files[0])
         var format = new FormData()
         format.append("file", e.target.files[0])
         format.append('upload_preset', 'lammah')
         axios.post("https://api.cloudinary.com/v1_1/dwyky6yt6/image/upload", format)
             .then(data => {
-                console.log("fffff", data.data.url)
                 setUpdateFacilityImg(data.data.url)
                 arrayImages = [...arrayImages, data.data.url]
-                console.log(arrayImages)
                 setArray([...array, data.data.url])
-                console.log(array)
-                console.log(data)
-                // setUpdateFacilityImg(data.data.url)
             })
 
 
@@ -183,13 +179,6 @@ export default function NewFacility(props) {
                                         Facility Information :
                                     </Form.Label>
                                 </Form.Group>
-
-                                <Form.Group as={Row} controlId="formPlaintextName">
-                                    <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", fontSize: "25px", textAlign: 'center' }} sm="2">
-                                        Facility Information :
-                                    </Form.Label>
-                                </Form.Group>
-
                                 <Form.Group as={Row} controlId="formPlaintextName">
                                     <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                                         Name
@@ -213,12 +202,15 @@ export default function NewFacility(props) {
 
 
 
-                                <Form.Group as={Row} controlId="formPlaintextNameLocation">
+                                {/* <Form.Group as={Row} controlId="formPlaintextNameLocation">
                                     <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
                                         Location
                                 </Form.Label>
                                     <Form.Control as={Field} placeholder="Add Location Link" name="location" type="text" />
-                                </Form.Group>
+                                </Form.Group> */}
+                                <h4>
+                                    Location
+                                </h4>
                                 <div style={{ height: "100vw", width: "100vh" }}>
                                     <WrappedMap
                                         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
@@ -227,7 +219,12 @@ export default function NewFacility(props) {
                                         mapElement={<div style={{ height: `100%` }} />}
 
                                     />
+                                    <p>{localStorage.getItem("address")}</p>
+
                                 </div>
+
+
+
                                 <Form.Group as={Row} controlId="formPlaintextCity">
                                     <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", minWidth: '100%' }} sm="2">
                                         City
@@ -272,8 +269,7 @@ export default function NewFacility(props) {
                                         style={{ minWidth: '100%', maxHeight: '500px' }}
                                     />
 
-                                    {/* <Field as="textarea" cols={70} rows={10} name="description"
-                                style={{ minWidth: '100%'}} /> */}
+
                                 </Form.Group>
                                 <Row>
                                     <Button style={{

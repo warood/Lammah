@@ -1,111 +1,239 @@
 /* Apply Style For The whole App*/
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
-
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
 }
 /* ========================= */
 
-
 /* Select Home Page */
-.Home{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    
+.Home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 /* The Header */
-.Home .header{  
-    width: 100%;
-    height: 700px;
-    background-image: url(/src/imges/home-header.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0px;
-    padding: 0px;
+.Home .header {
+  width: 100%;
+  height: 700px;
+  background-image: url(/src/imges/home-header.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0px;
+  padding: 0px;
 
-
-    display:flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items:  center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Hart of the header "Description" */
-.Home .container{
-    margin-top: 8%;
-    width: 80%;
-    height: 500px;
-    font-size: 2em;
+.Home .container {
+  margin-top: 8%;
+  width: 80%;
+  height: 500px;
+  font-size: 2em;
 }
 /* ========================= */
 
-
-
-
 /* Main Section */
-.Home .section{
-    
-    margin-top: 3%;
-    width: 65%;
-    height: 1000px;
-    display:flex;
-    flex-direction: column;
+.Home .section {
+  margin-top: 3%;
+  width: 65%;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Top Facilities 1st Section */
-.Home .top-facilities{
-    display:flex;
-    flex-wrap: wrap;
-
+.Home .top-facilities {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.Home .tf-description{
-    margin: 5%;
-    max-width: 500px;
-    padding: 3px;
+.Home .tf-description {
+  margin: 5%;
+  max-width: 500px;
+  padding: 3px;
 }
-.Home .tf-description p{
-   max-width: 100%;
+.Home .tf-description p {
+  max-width: 100%;
 }
 
-.Home .tf-title{
-padding: 5px;
-margin: 3%;
-font-size: 1em;
+.Home .tf-title {
+  padding: 5px;
+  margin: 3%;
+  font-size: 1em;
 }
-.Home .tf-img{
-    display:flex;
-    justify-content: center;
+.Home .tf-img {
+  display: flex;
+  justify-content: center;
 }
-.Home .tf-img img{
-    max-height: 300px;
+.Home .tf-img img {
+  max-height: 300px;
 }
-.Home .tf-items{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.Home .tf-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.Home .tf-items img{
-width: 230px;
-min-width: 150px;
-height: 400px;
-object-fit: cover;
-object-position: 50% 50%;
-margin: 5px;
+.Home .tf-items img {
+  width: 230px;
+  min-width: 150px;
+  height: 400px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  margin: 5px;
 }
-.Home{
-    color: rgba(255, 255, 255, 0.5)
-
+.Home {
+  color: rgba(255, 255, 255, 0.5);
 }
-.Home .tf-items .item2,.Home .tf-items .item4{
-    margin: 50px 30px 0 30px;
+.Home .tf-items .item2,
+.Home .tf-items .item4 {
+  margin: 50px 30px 0 30px;
 }
 
 /* ========================= */
+
+.Home .facility-col {
+  display: flex;
+  flex-wrap: wrap;
+}
+.Home .facility-card {
+  display: flex;
+  flex: 1 0 300px;
+  box-sizing: border-box;
+  margin: 0 20px 40px 20px;
+  flex-direction: column;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  min-width: 230px;
+  max-width: 330px;
+  height: 350px;
+}
+.Home .facility-card .fc-name {
+  position: absolute;
+  bottom: 18%;
+  color: white;
+  padding: 0 5% 0 5%;
+  max-width: 70%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 1.3rem;
+  max-height: 50px;
+  overflow: hidden;
+}
+.Home .facility-card .fc-city {
+  position: absolute;
+  bottom: 10%;
+  color: white;
+  padding: 0 5% 0 5%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.Home .facility-card .fc-price {
+  position: absolute;
+  bottom: 3%;
+  color: white;
+  padding: 0 5% 0 5%;
+  background-color: rgba(255, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.Home .facility-card .fc-stars {
+  position: absolute;
+  top: 2%;
+  left: 0;
+  color: white;
+  padding: 0 1% 0 5%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.Home .facility-card .fc-rating {
+  position: absolute;
+  top: 2%;
+  left: 0;
+  padding: 0 1% 0 40%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.Home .facility-card .fc-views {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  color: white;
+  padding: 0 1% 0 3%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 0.8em;
+}
+.Home .facility-card .fc-views {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  color: white;
+  padding: 0 1% 0 3%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 0.8em;
+}
+@media (max-width: 500px) {
+  .Home .facility-card {
+    min-width: 230px;
+    max-width: 330px;
+    height: 250px;
+  }
+  .Home .facility-card .fc-name {
+    font-size: 0.9rem;
+    bottom: 16%;
+  }
+  .Home .facility-card .fc-city {
+    bottom: 7%;
+    font-size: 0.7em;
+  }
+  .Home .facility-card .fc-price {
+    font-size: 1em;
+  }
+  .Home .facility-card .fc-stars {
+    font-size: 0.9em;
+  }
+  .Home .facility-card .fc-rating {
+    position: absolute;
+    top: 2%;
+    left: 0;
+    padding: 0 1% 0 40%;
+    background-color: rgba(0, 0, 0, 0.623);
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+  .Home .facility-card .fc-views {
+    position: absolute;
+    top: 8%;
+    left: 0;
+    color: white;
+    padding: 0 1% 0 4%;
+    background-color: rgba(0, 0, 0, 0.623);
+    font-weight: bold;
+    font-size: 0.5em;
+  }
+}
+.Home .facility-card .card-img {
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.Home .facility-card:hover {
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.623);
+}
+.Home img {
+  height: 200px;
+  background-size: cover;
+}
 /* ========================= */
 /* ========================= */

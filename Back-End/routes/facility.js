@@ -114,4 +114,16 @@ router.delete("/:facilityId", (req, res) => {
 });
 // ====================
 
+//Top Facility
+router.get("/topFacilities", (req, res) => {
+  Facility.find()
+    .populate("appointment")
+    .sort({ stars: -1 })
+    .exec()
+    .then((facilities) => {
+      res.json({ facilities: facilities });
+    })
+    .catch((err) => res.json({ msg: err }));
+});
+
 module.exports = router;

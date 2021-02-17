@@ -5,7 +5,6 @@ import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { Button, Col, Container, Row, Form, Modal } from "react-bootstrap";
 import OneComment from '../components/OneComment'
-// import { Map, GoogleApiWrapper } from 'google-maps-react';
 import DOMPurify from 'dompurify';
 
 // material-ui
@@ -15,43 +14,7 @@ import Rating from '@material-ui/lab/Rating';
 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-
-
-function Map() {
-  let [adress, setAdress] = useState({ lat: 25.095042882671507, lng: 46.12474465486534 })
-  const myLocation = "https://goo.gl/maps/JZS6aSpaY2hLbGdq7"
-
-
-  // useEffect(() => {
-  //   const id = "602aa11355888512448627af"
-
-  //   axios.get(`http://localhost:5000/api/facility/facilities/${id}`).then(data => {
-
-  //     console.log(data.data.facility.location)
-
-  //     setAdress(data.data.facility.location)
-
-  //   })
-
-  // }, [])
-
-
-  console.log("here", adress.lat)
-  return (<GoogleMap defaultZoom={12}
-    defaultCenter={{ lat: adress.lat, lng: adress.lng }}
-  >
-
-    <Marker position={{ lat: adress.lat, lng: adress.lng }} />
-  </GoogleMap>
-  );
-
-}
-
-
-const WrappedMap = withScriptjs(withGoogleMap(Map));
-
-
+import WrappedMap from '../components/GoooglMap'
 
 
 
@@ -85,7 +48,7 @@ export default function OneFacility(props) {
 
 
   const createMarkup = (html) => {
-    return  {
+    return {
       __html: DOMPurify.sanitize(html)
     }
   }
@@ -131,7 +94,6 @@ export default function OneFacility(props) {
 
     axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
       .then(res => {
-        //console.log(res)
         const addDate = res.data.facility.appointment.map((ele) => {
 
           return new Date(ele.date);
@@ -147,11 +109,9 @@ export default function OneFacility(props) {
     if (!city) {
       axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
         .then(res => {
-         // let facility = res.data.find((ele) => ele._id == id);
-         console.log(res.data.facility)
-         setSelectFacility(res.data.facility);
+          // let facility = res.data.find((ele) => ele._id == id);
+          setSelectFacility(res.data.facility);
           setFacility(res.data.facility._id);
-          console.log("from axios" )
 
           const addDate = res.data.facility.appointment.map((ele) => {
 
@@ -161,16 +121,16 @@ export default function OneFacility(props) {
           setDateOfAllApointment(addDate)
 
         })
-    
+
     }
     axios.get(`http://localhost:5000/api/rating/${id}/ratings`)
-    .then(res => {
-      setdisplayAllComments(res.data.ratings)
-    })
+      .then(res => {
+        setdisplayAllComments(res.data.ratings)
+      })
     axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
-    .then(res => {
-    })
-    
+      .then(res => {
+      })
+
   }, [refreshPage]);
 
 
@@ -182,13 +142,8 @@ export default function OneFacility(props) {
   //booking function 
   const onSubmit = () => {
 
-
-
-    //console.log('newAppointment',apointment)
-
     axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
       .then((res) => {
-        //console.log(res)
       })
       .catch((err) => console.log(err));
 
@@ -205,191 +160,172 @@ export default function OneFacility(props) {
   };
 
 
-
-
-
   const allComments = displayAllComments.map((comment, i) => {
     return (
       <OneComment
         comment={comment} key={i}
       />
     )
-})
+  })
 
-return (
+  return (
 
 
-  <div className="OneFacility" >
-    <Container className="mt-5" style={{
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-    }}>
-      <Row style={{ marginBottom: "50px" }}>
+    <div className="OneFacility" >
+      <Container className="mt-5" style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}>
+        <Row style={{ marginBottom: "50px" }}>
 
-        <Col col-md-3>
+          <Col col-md-3>
 
-          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-        </Col>
-        <div style={{ height: "100vw", width: "100vh" }}>
+            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+            <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+          </Col>
 
-<WrappedMap
-  googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
-  loadingElement={<div style={{ height: `100%` }} />}
-  containerElement={<div style={{ height: `400px` }} />}
-  mapElement={<div style={{ height: `100%` }} />}
-/>
-</div>
+          {/* main image */}
 
-        {/* main image */}
+          <Col col-md-6
+            style={{
+              minWidth: '300px',
+              maxWidth: '500px',
+              padding: '0',
+              width: '100%'
 
-        <Col col-md-6
-          style={{
-            minWidth: '300px',
+            }}>
+            <img className="mainIMG" src={images} alt="" srcset=""
+              style={{
+                width: '100%',
+                marginBottom: '10%',
+              }}
+            />
+          </Col>
+
+
+          {/* facility details */}
+          <Col col-md-3 style={{
+            minWidth: '250px',
             maxWidth: '500px',
-            padding: '0',
+            padding: '0 2% 2% 2%',
+            margin: '0 2% 2% 2%',
             width: '100%'
 
           }}>
-          <img className="mainIMG" src={images} alt="" srcset=""
-            style={{
-              width: '100%',
-              marginBottom: '10%',
-            }}
-          />
-        </Col>
+            <h1> {name} </h1>
+            <hr />
+            <p>Faclity: {type} </p>
 
+            <p>City: {city}</p>
+            <p>Price: {price} SR</p>
 
-        {/* facility details */}
-        <Col col-md-3 style={{
-          minWidth: '250px',
-          maxWidth: '500px',
-          padding: '0 2% 2% 2%',
-          margin: '0 2% 2% 2%',
-          width: '100%'
+            <button onClick={handleShow}>Book</button>
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="static"
+              keyboard={false}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title></Modal.Title>
+              </Modal.Header>
+              <Modal.Body style={{ display: "flex", justifyContent: 'center', margin: '5%' }}>
 
-        }}>
-          <h1> {name} </h1>
-          <hr />
-          <p>Faclity: {type} </p>
+                <Calendar onChange={onChange} value={date} minDate={new Date()}
+                  tileDisabled={({ date, view }) =>
+                    (view === 'month') && // Block day tiles only
+                    dateOfAllApointment.some(disabledDate =>
+                      date.getFullYear() === disabledDate.getFullYear() &&
+                      date.getMonth() === disabledDate.getMonth() &&
+                      date.getDate() === disabledDate.getDate()
+                    )}
 
-          <p>City: {city}</p>
-          <p>location:<a href="#"> {location}</a></p>
-          <p>Price: {price} SR</p>
-
-
-          <button onClick={handleShow}>Book</button>
-
-
-          <Modal
-            show={show}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title></Modal.Title>
-            </Modal.Header>
-            <Modal.Body style={{ display: "flex", justifyContent: 'center', margin: '5%' }}>
-
-              <Calendar onChange={onChange} value={date} minDate={new Date()}
-                tileDisabled={({ date, view }) =>
-                  (view === 'month') && // Block day tiles only
-                  dateOfAllApointment.some(disabledDate =>
-                    date.getFullYear() === disabledDate.getFullYear() &&
-                    date.getMonth() === disabledDate.getMonth() &&
-                    date.getDate() === disabledDate.getDate()
-                  )}
-
-              />
-
-
-
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={onSubmit}>
-                Book
+                />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={onSubmit}>
+                  Book
           </Button>
 
-              <Button variant="secondary" onClick={handleClose}>
-                Close
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
          </Button>
 
-            </Modal.Footer>
-          </Modal>
+              </Modal.Footer>
+            </Modal>
+          </Col>
+          <div style={{ height: "100vw", width: "100vh" }}>
+            <WrappedMap
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
 
+            />
+            <p>{localStorage.getItem("address")}</p>
 
-        </Col>
-
-
-      </Row>
-      <hr style={{
-        marginTop: "0px",
-        width: '100%'
-      }} />
-      <Row>
-
-        <div className="preview" dangerouslySetInnerHTML={createMarkup(description)}
-        style={{
-          padding: '3%',
-          width: '100%',
-          maxWidth: '90%',
-          overflow: 'hidden',
-          wordWrap: "break-word",
-
-        }}></div>
-
-      </Row>
-      <h1>FeedBack</h1>
-      <Row style={{
-        margin: '50px 0 100px 0',
-        display: 'flex',
-        flexDirection: 'column',
-        maxWidth: '100%'
-      }}>
-        {allComments}
-      </Row>
-
-      <Row style={{
-        margin: '0 0 200px 0',
-      }}>
-        <form
-          name="rating-form"
-          style={{
-            width: '100%',
-            padding: '3%',
-            boxShadow:' 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19)',
-          }}>
-          <label for="fname">Rating</label><br></br>
-          <div className={classes.root}>
-            <Rating name="size-medium" defaultValue={2} value={rating} onChange={handleChange} />
           </div>
-          <label for="comment">Comment (optional)</label><br></br>
-          <textarea
-            name="comment"
-            type="text"
-            onChange={handleCommentChange}
+        </Row>
+        <hr style={{
+          marginTop: "0px",
+          width: '100%'
+        }} />
+        <Row>
+
+          <div className="preview" dangerouslySetInnerHTML={createMarkup(description)}
+            style={{
+              padding: '3%',
+              width: '100%',
+              maxWidth: '90%',
+              overflow: 'hidden',
+              wordWrap: "break-word",
+
+            }}></div>
+
+        </Row>
+        <h1>FeedBack</h1>
+        <Row style={{
+          margin: '50px 0 100px 0',
+          display: 'flex',
+          flexDirection: 'column',
+          maxWidth: '100%'
+        }}>
+          {allComments}
+        </Row>
+
+
+        <Row style={{
+          margin: '0 0 200px 0',
+        }}>
+          <form
+            name="rating-form"
             style={{
               width: '100%',
-              minHeight: '200px'
+              padding: '3%',
+              boxShadow: ' 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19)',
+            }}>
+            <label for="fname">Rating</label><br></br>
+            <div className={classes.root}>
+              <Rating name="size-medium" defaultValue={2} value={rating} onChange={handleChange} />
+            </div>
+            <label for="comment">Comment (optional)</label><br></br>
+            <textarea
+              name="comment"
+              type="text"
+              onChange={handleCommentChange}
+              style={{
+                width: '100%',
+                minHeight: '200px'
 
-            }} />
-          <input 
-          s type="submit" value="Submit" onClick={(e) => onSubmitRating(e)} />
-        </form>
+              }} />
+            <input
+              s type="submit" value="Submit" onClick={(e) => onSubmitRating(e)} />
+          </form>
 
-      </Row>
-    </Container>
-    {/* <Map
-          google={this.props.google}
-          zoom={8}
-          style={mapStyles}
-          initialCenter={{ lat: 47.444, lng: -122.176}}
-        /> */}
-
-
-  </div>
-);
+        </Row>
+      </Container>
+    </div>
+  );
 }
