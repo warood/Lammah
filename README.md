@@ -33,6 +33,7 @@ User must be able to:
 * Owner can add a new facility
 * Owner can confirm an appointment
 * Owner can delete an appointment
+* Owner can edit facility
 * Admin can confirm adding facility
 * Admin can view users, facilities
 * Admin can delete users, facilities
