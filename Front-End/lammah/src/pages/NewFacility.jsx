@@ -24,7 +24,7 @@ export default function NewFacility(props) {
     const userId = props.auth.currentUser._id;
     const history = useHistory();
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
-
+    const [show, setShow] = useState(false);
     //For Text Editor
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
@@ -68,6 +68,13 @@ export default function NewFacility(props) {
             })
     }
 
+
+ const handleClose = () => setShow(false);
+
+
+  const handleShow = () => {
+
+    setShow(true);
     //Render NewFacility page
     return (
         <>
@@ -182,4 +189,5 @@ export default function NewFacility(props) {
             </div>
         </>
     )
+}
 }

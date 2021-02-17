@@ -44,7 +44,7 @@ export default function OneFacility(props) {
   const [refreshPage, setRefreshPage] = useState(false)
   const [displayAllComments, setdisplayAllComments] = useState([])
   const [showOnerInfo, setShowOnerInfo] = useState(false);
-
+  const [mainimage , setMainImage] = useState("")
 
   const createMarkup = (html) => {
     return  {
@@ -113,16 +113,16 @@ export default function OneFacility(props) {
           //let facility = res.data.find((ele) => ele._id == id);
           setSelectFacility(res.data.facility);
           setFacility(res.data.facility._id);
-
+          
           const addDate = res.data.facility.appointment.map((ele) => {
-
+            
             return new Date(ele.date);
 
           })
           setDateOfAllApointment(addDate)
 
         })
-    
+       
     }
     axios.get(`http://localhost:5000/api/rating/${id}/ratings`)
     .then(res => {
@@ -131,9 +131,10 @@ export default function OneFacility(props) {
     axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
     .then(res => {
     })
-    
+    setMainImage(images[0]);
   }, [refreshPage]);
 
+  
 
   const onChange = date => {
     setDate(date)
@@ -162,7 +163,7 @@ export default function OneFacility(props) {
 
 
   let arrayOfImages = ["http://static.holdinn.net/uploadfiles/40/madakhil-camp-115683.jpg", "https://www.visitsaudi.com/content/dam/no-dynamic-media-folder/manifest-newarticles-batch2/a-guide-to-al-ula/guide_to_al_ula_horiz_article_4.jpg", "https://sahary-al-ola-camp-villa.hotels-saudi-arabia.com/data/Photos/767x460/10098/1009837/1009837849.JPEG"]
-
+ 
 
 
   const allComments = displayAllComments.map((comment, i) => {
@@ -171,6 +172,10 @@ export default function OneFacility(props) {
         comment={comment} key={i}
       />
     )
+})
+
+let allFacilities = images.map((image, i) => {
+  <Row><img className="smallIMG" src = {image[i]} alt="" srcset="" onClick={(e)=>{setMainImage(e.target.src)}} /></Row>
 })
 
 return (
@@ -185,10 +190,7 @@ return (
       <Row style={{ marginBottom: "50px" }}>
 
         <Col col-md-3>
-
-          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
-          <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
+         {allFacilities}
         </Col>
 
         {/* main image */}
@@ -201,7 +203,11 @@ return (
             width: '100%'
 
           }}>
-          <img className="mainIMG" src={images} alt="" srcset=""
+            {console.log("main image is "   , mainimage ,"images" ,images[0])}
+        
+
+
+          <img className="mainIMG" src={mainimage} alt="" srcset=""
             style={{
               width: '100%',
               marginBottom: '10%',
