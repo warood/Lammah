@@ -88,7 +88,6 @@ export default function MyPage(props) {
     })
 
 
-
     return (
         <>
             {props.auth.isLoggedIn ?
@@ -119,13 +118,13 @@ export default function MyPage(props) {
 
                                     }}>
                                     <h4 style={{
-                                        color: "black",
+                                        
                                         fontFamily: "serif",
                                         fontWeight: "bold",
                                         flexGrow: '1',
                                     }}> Name :  {userInformation.name}  </h4>
-                                    <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email :  {userInformation.email} </h4>
-                                    <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone :  {userInformation.phone} </h4>
+                                    <h4 style={{ fontFamily: "serif", fontWeight: "bold" }}> Email :  {userInformation.email} </h4>
+                                    <h4 style={{fontFamily: "serif", fontWeight: "bold" }}> Phone :  {userInformation.phone} </h4>
 
                                 </Col>
                                 <Col className="pt-5"
