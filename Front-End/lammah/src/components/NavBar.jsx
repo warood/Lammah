@@ -6,7 +6,11 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
+import { useTranslation } from "react-i18next";
+import LanguageSelect from "./LanguageSelect";
 
 const validationSchema = Yup.object({
     email: Yup.string().required(" Enter your email ").email("example@example.com"),
@@ -16,6 +20,9 @@ const validationSchema = Yup.object({
 export const NavBar = (props) => {
     // Login functional
     const history = useHistory();
+
+    //For Translation
+    const { t } = useTranslation();
 
     const [show, setShow] = useState(false);
     const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -36,9 +43,9 @@ export const NavBar = (props) => {
 
     //login function
     const onSubmit = (event) => {
-        event.preventDefault();
-        axios
-            .post(`${API_URL}/api/user/login`, credentials)
+
+
+        axios.post(`${API_URL}/api/user/login`, credentials)
             .then((res) => {
 
                 const token = res.data.token;
@@ -62,45 +69,33 @@ export const NavBar = (props) => {
         <>
             <div className="NavBar">
                 <div className="frist-row">
-                    
+
                     {/* Brand Logo */}
-                    <Link to="/" className="logo menu-element">
+                    <Link to="/" className="logo">
 
                     </Link>
 
-                    <input
-                        style={{ height: '20px' }}
+                    <input className="menu-element search"
                         type="text" name="search" placeholder="Search" onChange={event => {
                             props.ToSetSearch(event.target.value)
                         }}></input>
-
-                    <div className="menu-element" >ENG</div>
-                    <div className="menu-element">ACCOUNT</div>
-                    <div className="menu-element">MY REQUESTS</div>
-                    <button onClick={props.themeToggler}> switch mode</button>
-
-                </div>
-                <div className="sec-row">
-
-
-                    {/* The Menu */}
-
-
-                    <Link to="/facilities" className="menu-element">FACILITIES</Link>
-
+                    <Link to="/facilities" className="menu-element">{t("facilities")}</Link>
+                    {/* <div className="menu-element" >ENG</div> */}
                     {props.auth.isLoggedIn ?
-                        <Link to="/manage-brand" className="menu-element">BRAND</Link>
+                        <Link to="/my-page" className="menu-element">{t("my_page")}</Link>
                         :
                         <></>}
-                    {props.auth.isLoggedIn ?
-                        <Link to="/my-page" className="menu-element">MY PAGE</Link>
-                        :
-                        <></>}
-                    {props.auth.isLoggedIn ?
-                        <Link to="/new-facility" className="menu-element">NEW FACILITY</Link>
-
-                        :
-                        <></>}
+                    <div className="language-select">
+                        <LanguageSelect />
+                    </div>
+                    <FormControlLabel
+                        value="Dark Theme"
+                        control={<Switch color="secondary" />}
+                        label="Dark Theme"
+                        labelPlacement="Dark Theme"
+                        style={{ color: 'white' }}
+                        onClick={props.themeToggler}
+                    />
                     {props.auth.isLoggedIn ?
                         <></>
                         :
@@ -110,8 +105,8 @@ export const NavBar = (props) => {
                                 handleShow()
                                 props.loginCallback()
                             }}>
-                            LOGIN
-                </Link>}
+                            {t("login")}
+                        </Link>}
                     {console.log(props.auth)}
 
                     {props.auth.isLoggedIn ?
@@ -124,66 +119,95 @@ export const NavBar = (props) => {
                                 history.push(`/`)
                                     ;
                             }}>
-                            LOGOUT
-                </Link>
+                            {t("logout")}
+                        </Link>
                         : <></>}
 
+                </div>
+
+                <div className="sec-row">
 
 
-                    {/* Login pop-up model */}
-                    <>
+                    {/* The Menu */}
 
 
-                        <Modal
-                            show={show}
-                            onHide={handleClose}
-                            backdrop="static"
-                            keyboard={false}
-                        >
-                            {!login && (
-                                <Alert variant={"danger"}>
-                                    Your email or password is wrong
-                                </Alert>
-                            )}
-                            <Modal.Header closeButton>
-                                <Modal.Title>Login</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Formik
-                                    validationSchema={validationSchema}
-                                >
-                                    <Container>
-                                        <FormikForm>
-                                            <Form.Group as={Row} controlId="formPlaintextEmail">
-                                                <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                    Email
+
+                    {props.auth.isLoggedIn ?
+                        <Link to="/manage-brand" className="menu-element">{t("my_requests")}</Link>
+                        :
+                        <></>}
+                    {props.auth.isLoggedIn ?
+                        <Link to="/my-page" className="menu-element">{t("my_page")}</Link>
+                        :
+                        <></>}
+                    {props.auth.isLoggedIn ?
+                        <Link to="/new-facility" className="menu-element">{t("new_facility")}</Link>
+
+                        :
+                        <></>}
+
+
+
+
+                {/* Login pop-up model */}
+                <>
+
+
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        {!login && (
+                            <Alert variant={"danger"}>
+                                Your email or password is wrong
+                            </Alert>
+                        )}
+                        <Modal.Header closeButton>
+                            <Modal.Title>{t("logout")}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Formik 
+                            initialValues ={{email:"" , password:""}}
+                            validationSchema={validationSchema}
+                            validateOnBlur = {false}
+                            validateOnChange={false}
+                            onSubmit = {(e) => onSubmit(e)}
+                            >
+                                <Container>
+                                    <FormikForm>
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                            {t("email")}
                                      </Form.Label>
 
-                                                <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
-                                                <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
-                                                    {msg}
-                                                </Alert>} />
-                                            </Form.Group>
-                                            <Form.Group as={Row} controlId="formPlaintextPassword">
-                                                <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                    Password
+                                            <Form.Control as={Field} name="email" onKeyUp={(e) => onChangeInput(e)} placeholder="email@example.com" />
+                                            <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
+                                                {msg}
+                                            </Alert>} />
+                                        </Form.Group>
+                                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                                            <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                            {t("password")}
                                     </Form.Label>
 
-                                                <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
-                                                <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
-                                                    {msg}
-                                                </Alert>} />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Col md={12}>
-                                                    <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
-                                                        Register
+                                            <Form.Control as={Field} name="password" onKeyUp={(e) => onChangeInput(e)} type="password" placeholder="Password" />
+                                            <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
+                                                {msg}
+                                            </Alert>} />
+                                        </Form.Group>
+                                        <Form.Group>
+                                            <Col md={12}>
+                                                <p style={{ color: "black", fontFamily: "serif" }}> {t("you_dont_have_account")}  <Link onClick={handleClose} eventKey={2} as={Link} to="/signup">
+                                                {t("register")}
+
                                        </Link>
                                                     </p>
 
-                                                    <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
-                                                </Col>
-                                            </Form.Group>
+                                                <Button type="submit" style={{ marginLeft: "150px" }} variant="secondary">{t("logout")}</Button>
+                                            </Col>
+                                        </Form.Group>
 
                                         </FormikForm>
                                     </Container>
@@ -192,8 +216,8 @@ export const NavBar = (props) => {
 
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={handleClose}>
-                                    Close
-                        </Button>
+                                    {t("close")}
+                                </Button>
 
                             </Modal.Footer>
                         </Modal>

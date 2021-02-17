@@ -11,7 +11,7 @@ const facilitySchema = new mongoose.Schema({
         ,
      
     location : {
-        type :String , 
+        type:Object , 
        
     } , 
     description : {

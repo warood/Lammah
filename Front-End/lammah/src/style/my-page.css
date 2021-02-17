@@ -1,14 +1,81 @@
 .MyPage {
-  width: 65%;
+  width: 85%;
   margin: 80px auto 0 auto;
- 
+}
+.MyPage .personal-info {
+  margin-bottom: 5%;
+}
+.MyPage .personal-info h1 {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.MyPage .info-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.MyPage .img-container {
+  max-width: 20%;
+  min-width: 100px;
+  
+}
+.MyPage .user-info {
+  flex-grow: 1;
+  min-width: 70%;
+}
+.MyPage .user-name,
+.MyPage .user-email,
+.MyPage .user-phone {
+  font-size: 1rem;
+}
+.MyPage .user-name {
+}
+.MyPage .user-email {
+}
+.MyPage .user-phone {
+}
+.MyPage .my-appoinment {
+  margin-top: 5%;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .MyPage .delete-appointment-btn {
-  color: rgb(223, 4, 4);                          
+  color: rgb(223, 4, 4);
   font-size: 1.5em;
   cursor: pointer;
 }
 .MyPage .delete-appointment-btn:hover {
-    color: rgb(250, 42, 42);                          
+  color: rgb(250, 42, 42);
+}
+
+.MyPage .appoitment-container {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  margin-top: 1%;
+}
+
+.MyPage .appoitment-container .app-card {
+  width: 100%;
+  max-width: 800px;
+
+}
+.MyPage .appoitment-container .card-img {
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  flex-grow: 1;
+  height: 100%;
+
+}
+.MyPage .appoitment-container .card-info p{
+  font-size: 1rem;
+  background: 
+
+}
+
+@media (max-width: 900px) {
+  .MyPage .img-container {
+    /* margin-bottom: 10%; */
+  }
 }

@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Col, Card, Row, Modal, Form, Button } from 'react-bootstrap'
 import Moment from 'react-moment';
 import axios from "axios";
-
+import { useTranslation } from "react-i18next";
 
 export default function OneCardOfApointment(props) {
 
+    //For Select Language
+    const { t } = useTranslation();
 
     const [show, setShow] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
@@ -42,36 +44,25 @@ export default function OneCardOfApointment(props) {
         <>
         {allUsersA &&
         <>
-            <Row className="mt-5" style={{
-                width: "100%",
-                justifyContent: 'center',
-                display: 'flex',
-
-            }}  >
-                <Card style={{
-                    width: "100%",
-                    maxWidth: '800px',
-
+            <Row className="appoitment-container">
+                <Card className="app-card" style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
                 }}>
-                    <Row style={{
+                    <Row className="card-row" style={{
                         height: "100%",
                         width: '100%',
                     }} >
                         <Col xs={6} md={5}  >
-                            <Card.Img style={{
-                                width: "100%",
-                                objectFit: 'cover',
-                                objectPosition: '50% 50%',
-                                flexGrow: '1',
-                            }} variant="top" src={props.facilityImage} />
+                            <Card.Img className="card-img" variant="top" src={props.facilityImage} />
 
                         </Col>
                         <Col >
-                            <Card.Body>
-                                <Row >
+                            <Card.Body >
+                                <Row className="card-info" >
 
                                     <p>{props.facilityName}</p>
-                                    <p style={{
+                                    <p className="card-date" style={{
                                         position: 'absolute',
                                         bottom: '0',
                                         right: '0',
@@ -84,24 +75,24 @@ export default function OneCardOfApointment(props) {
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
-                                    }}>Status: {props.status}</p>
+                                    }}>{t("status")}: {props.status}</p>
                                 </Row>
                                
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
-                                    }}>Owner: {findUser(props.facility.user)[0].name}</p>
+                                    }}>{t("owner")}: {findUser(props.facility.user)[0].name}</p>
                                 </Row>
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
-                                    }}>Phone: {findUser(props.facility.user)[0].phone}</p>
+                                    }}>{t("phone")}: {findUser(props.facility.user)[0].phone}</p>
                                 </Row>
 
                                 <Row>
                                     <p style={{
                                         fontSize: '0.8em'
-                                    }}>Apointment ID: {props.apointmentId}</p>
+                                    }}>{t("apointment_id")}: {props.apointmentId}</p>
 
                                 </Row>
 
@@ -137,20 +128,20 @@ export default function OneCardOfApointment(props) {
                 keyboard={false}>
 
                 <Modal.Header closeButton>
-                    <Modal.Title></Modal.Title>
+                    <Modal.Title>{t("confirm_delete")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Are You Sure Want To Cancel This Appointment ?
+                {t("are_you_sure_to_delete_reservation")}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        No
+                       {t("no")}
                 </Button>
-                    <Button variant="primary" onClick={() => {
+                    <Button variant="secondary" onClick={() => {
                         onSubmit(props.apointmentId);
                         props.setDeleteAppointment(!props.deleteAppointment);
 
-                    }}>Yes Cancel It</Button>
+                    }}>{t("yes")}</Button>
                 </Modal.Footer>
             </Modal>
         </>

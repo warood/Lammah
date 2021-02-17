@@ -20,7 +20,7 @@ export default function OneComment(props) {
                         <span className="time">
                         <Moment format=" YYYY/MM/DD   hh:mm">{props.comment.createdAt}</Moment>
                         </span>
-                        <p className="comment-content">{props.comment.comment} Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur magnam fuga laborum reiciendis quidem voluptatibus voluptatum quia eum perspiciatis libero hic repellendus omnis adipisci assumenda quam dicta, autem ex. Excepturi.</p>
+                        <p className="comment-content">{props.comment.comment} </p>
                     </div>
 
                 </div>
