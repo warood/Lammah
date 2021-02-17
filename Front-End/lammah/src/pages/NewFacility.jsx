@@ -18,8 +18,6 @@ import WrappedMap from '../components/GoooglMap'
 import GoogleMapReact from 'google-map-react';
 
 
-
-
 var address = {}
 
 // function Map() {
