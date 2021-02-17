@@ -1,7 +1,7 @@
 # Lammah
- 
+ is E-commerce website for viewing and renting chalts and camps. 
 ## Description
- Because we know how social life is important, so Lammah gives you the opportunity to access more than 100 chalets and camps around Saudi Arabia in an easy way to get comfortable meetings with your families and your friends, 
+ Because we know how social life is important, so Lammah gives you the opportunity to access more than 100 chalets and camps around Saudi Arabia in an easy way to get comfortable meetings with your families and your friends, in Lammah you can view, add, rate, book chalets, camps and more.
 
 ## Technologies used
 * MongoDB, Mongoose
@@ -12,7 +12,7 @@
 * JSX/CSS
 * Bootstrap 
 * Formik
-* google map API
+* Google map API
 
 ## Wireframes
 
