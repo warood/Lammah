@@ -43,9 +43,9 @@ export const NavBar = (props) => {
 
     //login function
     const onSubmit = (event) => {
-        event.preventDefault();
-        axios
-            .post(`${API_URL}/api/user/login`, credentials)
+
+
+        axios.post(`${API_URL}/api/user/login`, credentials)
             .then((res) => {
 
                 const token = res.data.token;
@@ -149,61 +149,65 @@ export const NavBar = (props) => {
 
 
 
+                {/* Login pop-up model */}
+                <>
 
-                    {/* Login pop-up model */}
-                    <>
 
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        {!login && (
+                            <Alert variant={"danger"}>
+                                Your email or password is wrong
+                            </Alert>
+                        )}
+                        <Modal.Header closeButton>
+                            <Modal.Title>{t("logout")}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Formik 
+                            initialValues ={{email:"" , password:""}}
+                            validationSchema={validationSchema}
+                            validateOnBlur = {false}
+                            validateOnChange={false}
+                            onSubmit = {(e) => onSubmit(e)}
+                            >
+                                <Container>
+                                    <FormikForm>
+                                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                                            <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                            {t("email")}
+                                     </Form.Label>
 
-                        <Modal
-                            show={show}
-                            onHide={handleClose}
-                            backdrop="static"
-                            keyboard={false}
-                        >
-                            {!login && (
-                                <Alert variant={"danger"}>
-                                    Your email or password is wrong
-                                </Alert>
-                            )}
-                            <Modal.Header closeButton>
-                                <Modal.Title>  {t("logout")}</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Formik
-                                    validationSchema={validationSchema}
-                                >
-                                    <Container>
-                                        <FormikForm>
-                                            <Form.Group as={Row} controlId="formPlaintextEmail">
-                                                <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                    {t("email")}
-                                                </Form.Label>
+                                            <Form.Control as={Field} name="email" onKeyUp={(e) => onChangeInput(e)} placeholder="email@example.com" />
+                                            <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
+                                                {msg}
+                                            </Alert>} />
+                                        </Form.Group>
+                                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                                            <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                            {t("password")}
+                                    </Form.Label>
 
-                                                <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
-                                                <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
-                                                    {msg}
-                                                </Alert>} />
-                                            </Form.Group>
-                                            <Form.Group as={Row} controlId="formPlaintextPassword">
-                                                <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                    {t("password")}
-                                                </Form.Label>
+                                            <Form.Control as={Field} name="password" onKeyUp={(e) => onChangeInput(e)} type="password" placeholder="Password" />
+                                            <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
+                                                {msg}
+                                            </Alert>} />
+                                        </Form.Group>
+                                        <Form.Group>
+                                            <Col md={12}>
+                                                <p style={{ color: "black", fontFamily: "serif" }}> {t("you_dont_have_account")}  <Link onClick={handleClose} eventKey={2} as={Link} to="/signup">
+                                                {t("register")}
 
-                                                <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
-                                                <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
-                                                    {msg}
-                                                </Alert>} />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Col md={12}>
-                                                    <p style={{ color: "black", fontFamily: "serif" }}> {t("you_dont_have_account")} <Link eventKey={2} as={Link} to="/signup">
-                                                        {t("register")}
-                                                    </Link>
+                                       </Link>
                                                     </p>
 
-                                                    <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">  {t("logout")}</Button>
-                                                </Col>
-                                            </Form.Group>
+                                                <Button type="submit" style={{ marginLeft: "150px" }} variant="secondary">{t("logout")}</Button>
+                                            </Col>
+                                        </Form.Group>
 
                                         </FormikForm>
                                     </Container>

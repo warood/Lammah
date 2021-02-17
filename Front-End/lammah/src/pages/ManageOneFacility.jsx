@@ -35,7 +35,7 @@ export default function ManageOneFacility(props) {
     const handleShow = () => setShow(true);
 
     //Update Facility 
-    const [updateFacility, setUpdateFacility] = useState({ name: props.facility.name, description: props.facility.description, images: props.facility.images, location: props.facility.location, price: props.facility.price });
+    const [updateFacility, setUpdateFacility] = useState({ name: props.facility.name, description: props.facility.description, images: props.facility.images, price: props.facility.price });
 
 
 
@@ -104,7 +104,6 @@ export default function ManageOneFacility(props) {
                             <p style={{
                                 maxWidth: '100%'
                             }}>{t("desciption")}: </p> <span dangerouslySetInnerHTML={createMarkup(props.facility.description)} ></span>
-                            <p>{t("location")}: {props.facility.location}</p>
                             <p>{t("requests")}: {props.facility.appointment.length}</p>
                             <p>{t("cost")}: {props.facility.price} {t("sr")}</p>
 
@@ -137,7 +136,7 @@ export default function ManageOneFacility(props) {
                         {t("name")}:  <input type="text" name="name" defaultValue={props.facility.name} onChange={(e) => onChangeFacility(e)} style={{ width: '70%' }} /> <br /> <br />
                         {t("desciption")}: <textarea rows="8" cols="80" type="text" name="description" defaultValue={props.facility.description} onChange={(e) => onChangeFacility(e)}
                             style={{ width: '100%' }} /> <br /> <br />
-                        {t("location")}: <input type="text" name="location" defaultValue={props.facility.location} onChange={(e) => onChangeFacility(e)}
+                        {t("location")}: <input type="text" name="location"  onChange={(e) => onChangeFacility(e)}
                             style={{ width: '50%' }} /> <br /> <br />
                         {t("price")}: <input type="text" name="price" defaultValue={props.facility.price} onChange={(e) => onChangeFacility(e)}
                             style={{ width: '20%' }} /> <br /> <br />

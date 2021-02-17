@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Form, Col, Button, Container, Alert } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom'
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -57,6 +57,9 @@ export default function SignUp() {
         </Alert>
       )}
 
+
+      
+
       <Formik
         initialValues={user}
         validationSchema={validtionSchima}
@@ -70,7 +73,7 @@ export default function SignUp() {
 
 
               <Form.Group as={Row} controlId="formPlaintextName">
-                <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{ fontWeight: "bold" }} sm="2">
                   Name
                </Form.Label>
 
@@ -83,7 +86,7 @@ export default function SignUp() {
 
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextPhone">
-                <Form.Label style={{color:"black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{ fontWeight: "bold" }} sm="2">
                   Phone Number
               </Form.Label>
 
@@ -94,7 +97,7 @@ export default function SignUp() {
 
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextEmail">
-                <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{ fontWeight: "bold" }} sm="2">
                   Email
               </Form.Label>
 
@@ -110,7 +113,7 @@ export default function SignUp() {
               </Form.Group>
 
               <Form.Group as={Row} controlId="formPlaintextPassword">
-                <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{ fontWeight: "bold" }} sm="2">
                   Password
               </Form.Label>
 
@@ -122,7 +125,7 @@ export default function SignUp() {
 
 
               <Form.Group as={Row} controlId="formPlaintextPassword">
-                <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                <Form.Label style={{ fontWeight: "bold" }}sm="2">
                 Confirm Password
               </Form.Label>
 
@@ -137,6 +140,8 @@ export default function SignUp() {
               Confirm
           </Button>
           </FormikForm>
+          
+
         </Container>
 
       </Formik>
