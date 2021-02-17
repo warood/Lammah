@@ -69,6 +69,10 @@ export default function NewFacility(props) {
     //................//
 
 
+
+
+
+
     //For Text Editor
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
@@ -92,8 +96,6 @@ export default function NewFacility(props) {
         axios
             .post(`${API_URL}/api/facility/new-facility`, values)
             .then((res) => {
-                history.push("/facilities");
-                alert("Wait for our confirmation to add your facility.Thank You !!");
             })
 
            
@@ -102,35 +104,35 @@ export default function NewFacility(props) {
            
     }
 
-    const handleClose = () => {setShow(false);
+    const handleClose = () => {
+        history.push("/facilities")
+        setShow(false);
+    }
     
-        history.push("/facilities");
-    }
-
-
+    
     const handleShow = () => {
-  
-      setShow(true);
+        
+        setShow(true);
     }
-
-
-
+    
+    
+    
     const uploadImageHundler = (e) => {
         e.preventDefault();
         var format = new FormData()
         format.append("file", e.target.files[0])
         format.append('upload_preset', 'lammah')
         axios.post("https://api.cloudinary.com/v1_1/dwyky6yt6/image/upload", format)
-            .then(data => {
-                setUpdateFacilityImg(data.data.url)
-                arrayImages = [...arrayImages, data.data.url]
-                setArray([...array, data.data.url])
-            })
+        .then(data => {
+            setUpdateFacilityImg(data.data.url)
+            arrayImages = [...arrayImages, data.data.url]
+            setArray([...array, data.data.url])
+        })
 
-
+        
     }
-
-
+    
+    
     //Render NewFacility page
     return (
         <>
@@ -138,7 +140,7 @@ export default function NewFacility(props) {
             <div className="NewFacility">
                 <Container className="justify-content-center" className=" pt-5" style={{
                     height: '1200px',
-                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+                    boxShadow: '0 4px 8px 0 gray, 0 6px 20px 0 gray',
                     padding: "10% 10% 1050px 10%",
                     margin: '50px auto 400px auto',
                     maxWidth: '700px'
@@ -148,7 +150,7 @@ export default function NewFacility(props) {
                             initialValues={{ name: "", description: convertedContent, city: "", price: "", type: "", userId: userId }}
                             validationSchema={validationSchema}
                             onSubmit={values => onSubmit({ ...values, location: JSON.parse(localStorage.getItem("address")), images: array, description: convertedContent })}
-                        >
+                            >
                             <Form as={FormikForm} className="form">
 
                                 <Form.Group as={Row} controlId="formPlaintextName">
@@ -193,8 +195,8 @@ export default function NewFacility(props) {
                                         loadingElement={<div style={{ height: `100%` }} />}
                                         containerElement={<div style={{ height: `400px` }} />}
                                         mapElement={<div style={{ height: `100%` }} />}
-
-                                    />
+                                        
+                                        />
                                  
 
                                 </div>
@@ -236,17 +238,17 @@ export default function NewFacility(props) {
                                         editorState={editorState}
                                         onEditorStateChange={handleEditorChange}
                                         style={{ minWidth: '100%', maxHeight: '500px'}}
-                                />
+                                        />
                                  
                                 {/* <Field as="textarea" cols={70} rows={10} name="description"
                                 style={{ minWidth: '100%'}} /> */}
                             </Form.Group>
                             <Row>
                             <Button style={{
-                                 fontFamily: "serif",
-                                  margin: "160px auto 50px auto" ,
-
-                                  }} variant="secondary" type="submit" onClick={handleShow}>
+                                fontFamily: "serif",
+                                margin: "160px auto 50px auto" ,
+                                
+                            }} variant="secondary" type="submit" onClick={handleShow}>
                                   {t("submit")}
                             </Button>
                            </Row>
@@ -257,7 +259,7 @@ export default function NewFacility(props) {
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
-          >
+            >
             <Modal.Header closeButton>
               <Modal.Title></Modal.Title>
             </Modal.Header>

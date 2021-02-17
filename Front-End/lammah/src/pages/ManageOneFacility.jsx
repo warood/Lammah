@@ -75,7 +75,7 @@ export default function ManageOneFacility(props) {
 
             <Row className="fc-card"
                 style={{
-                    background: `url('${props.facility.images}')`,
+                    background: `url('${props.facility.images[0]}')`,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',

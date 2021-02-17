@@ -62,7 +62,7 @@ export default function HomeSection() {
 
 
                 <div className="section">
-
+{/* 
                     {/* ========================================= */}
                     {/* 1st section "Top Facilities" 1st Row*/}
                     {/* ========================================= */}
@@ -71,7 +71,7 @@ export default function HomeSection() {
                             <h1>TOP FACILITIES</h1>
 
                             <h2
-                                style={{ color: 'gray', fontSize: '1em' }}
+                                style={{ color: 'black', fontSize: '1em' }}
                             >THIS Month</h2>
                         </div>
                         <div className="tf-description">
@@ -84,7 +84,7 @@ export default function HomeSection() {
 
                         </div>
 
-                        <Carousel style={{ height: "auto", width: "auto" }}>
+                        {/* <Carousel style={{ height: "auto", width: "auto" }}>
                             <Carousel.Item interval={1500}>
                                 <Link
                                     style={{ textDecoration: "none" }}>
@@ -189,7 +189,7 @@ export default function HomeSection() {
                                                 objectPosition: '50% 50%',
 
                                             }}
-                                            src={topFacility[1].images[0]} />
+                                            src={topFacility[0].images[0]} />
 
                                         <Card.Title
                                             style={{
@@ -204,7 +204,7 @@ export default function HomeSection() {
                                                 maxHeight: '50px',
                                                 overflow: 'hidden',
 
-                                            }}>{topFacility[1].name}</Card.Title>
+                                            }}>{topFacility[0].name}</Card.Title>
                                         <Card.Text
 
                                             style={{
@@ -218,7 +218,7 @@ export default function HomeSection() {
                                             }}
                                         >
 
-                                            {topFacility[1].city}
+                                            {topFacility[0].city}
                                         </Card.Text>
 
 
@@ -232,7 +232,7 @@ export default function HomeSection() {
                                                 fontWeight: 'bold',
                                                 fontSize: '1.5em',
 
-                                            }}>{topFacility[1].price} SR</small>
+                                            }}>{topFacility[0].price} SR</small>
 
                                         <Card.Text
 
@@ -247,7 +247,7 @@ export default function HomeSection() {
                                             }}
                                         >
 
-                                            <Rating readOnly value={topFacility[1].stars} />
+                                            <Rating readOnly value={topFacility[0].stars} />
                                         </Card.Text>
 
                                         <Card.Text
@@ -263,7 +263,7 @@ export default function HomeSection() {
                                             }}
                                         >
 
-                                            <span /><EyeFill color="white" size={20} /> {topFacility[1].views}
+                                            <span /><EyeFill color="white" size={20} /> {topFacility[0].views}
                                         </Card.Text>
 
                                     </Card>
@@ -282,7 +282,7 @@ export default function HomeSection() {
                                                 objectPosition: '50% 50%',
 
                                             }}
-                                            src={topFacility[2].images[0]} />
+                                            src={topFacility[0].images[0]} />
 
                                         <Card.Title
                                             style={{
@@ -297,7 +297,7 @@ export default function HomeSection() {
                                                 maxHeight: '50px',
                                                 overflow: 'hidden',
 
-                                            }}>{topFacility[2].name}</Card.Title>
+                                            }}>{topFacility[0].name}</Card.Title>
                                         <Card.Text
 
                                             style={{
@@ -311,7 +311,7 @@ export default function HomeSection() {
                                             }}
                                         >
 
-                                            {topFacility[2].city}
+                                            {topFacility[0].city}
                                         </Card.Text>
 
 
@@ -325,7 +325,7 @@ export default function HomeSection() {
                                                 fontWeight: 'bold',
                                                 fontSize: '1.5em',
 
-                                            }}>{topFacility[2].price} SR</small>
+                                            }}>{topFacility[0].price} SR</small>
 
                                         <Card.Text
 
@@ -340,7 +340,7 @@ export default function HomeSection() {
                                             }}
                                         >
 
-                                            <Rating readOnly value={topFacility[2].stars} />
+                                            <Rating readOnly value={topFacility[0].stars} />
                                         </Card.Text>
 
                                         <Card.Text
@@ -365,7 +365,7 @@ export default function HomeSection() {
 
 
 
-                        </Carousel>
+                        </Carousel> */}
 
                     </div>
 
@@ -387,7 +387,7 @@ export default function HomeSection() {
                             <img src={confirmedFacility[index4].images[0]} />
                         </div>
                     </div>
-                    {/* ========================================= */}
+                    ========================================= */}
 
 
                 </div>

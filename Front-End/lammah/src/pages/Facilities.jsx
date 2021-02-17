@@ -47,7 +47,7 @@ export default function Facilities(props) {
                     style={{ textDecoration: "none" }}>
                     <Card className="facility-card" >
                         <Card.Img className="card-img" variant="top"
-                            src={facility.images} />
+                            src={facility.images[0]} />
 
                         <Card.Title className="fc-name"
                         >{facility.name}</Card.Title>
@@ -95,7 +95,7 @@ export default function Facilities(props) {
                         style={{ textDecoration: "none" }}>
                         <Card className="facility-card" >
                             <Card.Img className="card-img" variant="top"
-                                src={facility.images} />
+                                src={facility.images[0]} />
 
                             <Card.Title className="fc-name"
                             >{facility.name}</Card.Title>
@@ -140,7 +140,7 @@ export default function Facilities(props) {
                         style={{ textDecoration: "none" }}>
                         <Card className="facility-card" >
                             <Card.Img className="card-img" variant="top"
-                                src={facility.images} />
+                                src={facility.images[0]} />
 
                             <Card.Title className="fc-name"
                             >{facility.name}</Card.Title>
@@ -187,7 +187,7 @@ export default function Facilities(props) {
                         style={{ textDecoration: "none" }}>
                         <Card className="facility-card" >
                             <Card.Img className="card-img" variant="top"
-                                src={facility.images} />
+                                src={facility.images[0]} />
 
                             <Card.Title className="fc-name"
                             >{facility.name}</Card.Title>

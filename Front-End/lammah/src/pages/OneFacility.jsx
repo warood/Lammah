@@ -46,6 +46,7 @@ export default function OneFacility(props) {
   const [refreshPage, setRefreshPage] = useState(false)
   const [displayAllComments, setdisplayAllComments] = useState([])
   const [showOnerInfo, setShowOnerInfo] = useState(false);
+  const [minImages, setMinImages] = useState([])
 
   //For Translation
   const { t } = useTranslation();
@@ -66,7 +67,7 @@ export default function OneFacility(props) {
   const [dateOfAllApointment, setDateOfAllApointment] = useState([])
 
 
-  const { name, images, location, description, city, price, type, appointment } = selectFacility;
+  const { name, images, description, city, price, type, appointment } = selectFacility;
 
 
   const handleChange = (e) => {
@@ -100,7 +101,6 @@ export default function OneFacility(props) {
 
     axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
       .then(res => {
-        //console.log(res)
         const addDate = res.data.facility.appointment.map((ele) => {
 
           return new Date(ele.date);
@@ -120,7 +120,8 @@ export default function OneFacility(props) {
           //let facility = res.data.find((ele) => ele._id == id);
           setSelectFacility(res.data.facility);
           setFacility(res.data.facility._id);
-
+          setMainImage(res.data.facility.images[0]);
+          setMinImages(res.data.facility.images)
           const addDate = res.data.facility.appointment.map((ele) => {
 
             return new Date(ele.date);
@@ -138,7 +139,7 @@ export default function OneFacility(props) {
     axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
       .then(res => {
       })
-    // setMainImage(images[0]);
+    
   }, [refreshPage]);
 
 
@@ -157,7 +158,6 @@ export default function OneFacility(props) {
 
     axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
       .then((res) => {
-        //console.log(res)
       })
       .catch((err) => console.log(err));
 
@@ -180,9 +180,11 @@ export default function OneFacility(props) {
     )
   })
 
-  // let allFacilities = images.map((image, i) => {
-  //   <Row><img className="smallIMG" src={image[i]} alt="" srcset="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
-  // })
+  let allFacilities = minImages.map((image, i) => {
+     return(
+     <Row><img className="smallIMG" src={image} alt="" srcset="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
+     )
+  })
 
   return (
 
@@ -196,7 +198,7 @@ export default function OneFacility(props) {
         <Row style={{ marginBottom: "50px" }}>
 
           <Col col-md-3>
-            {/* {allFacilities} */}
+            {allFacilities}
           </Col>
 
           {/* main image */}
@@ -234,7 +236,6 @@ export default function OneFacility(props) {
             <p>{t("facility")} : {type} </p>
 
             <p>{t("city")} : {city}</p>
-            <p>{t("location")} : <a href="#"> {location}</a></p>
             <p>{t("price")} : {price} {t("sr")}</p>
 
 

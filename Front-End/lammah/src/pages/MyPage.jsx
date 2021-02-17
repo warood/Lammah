@@ -12,7 +12,6 @@ import { useTranslation } from "react-i18next";
 export default function MyPage(props) {
     const history = useHistory();
     
-
     const { _id } = props.auth.currentUser;
 
     const [userInformation, setUserInformation] = useState({});
@@ -77,12 +76,13 @@ export default function MyPage(props) {
 
     //show all user aponintments
     const allApointment = apointments.map((apointment, index) => {
+        console.log(apointment)
         return <OneCardOfApointment
             apointmentsDate={apointment.date}
             status={apointment.status}
             apointmentId={apointment._id}
             facilityName={apointment.facility.name}
-            facilityImage={apointment.facility.images}
+            facilityImage={apointment.facility.images[0]}
             facilityId={apointment.facility._id}
             facility = {apointment.facility}
             setDeleteAppointment={setDeleteAppointment}
@@ -135,7 +135,7 @@ export default function MyPage(props) {
 
 
                                         }}>
-                                        <GearFill color="" size={30} />
+                                        <GearFill color="gray" size={30} />
 
                                     </Button>
                                 </Col>
