@@ -182,9 +182,9 @@ return (
       flexDirection: 'column',
       justifyContent: 'center',
     }}>
-      <Row style={{ marginBottom: "50px" }}>
+      <Row style={{ marginBottom: "50px"}}>
 
-        <Col col-md-3>
+        <Col col-md-3 style={{maxWidth: '100px'}}> 
 
           <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
           <Row><img className="smallIMG" src="https://pbs.twimg.com/media/C066sxKXEAAUV2t.jpg" alt="" srcset="" /></Row>
@@ -193,13 +193,12 @@ return (
 
         {/* main image */}
 
-        <Col col-md-6
+        <Col col-md-6 className="main-img-container"
           style={{
             minWidth: '300px',
             maxWidth: '500px',
             padding: '0',
-            width: '100%'
-
+            width: '100%',
           }}>
           <img className="mainIMG" src={images} alt="" srcset=""
             style={{

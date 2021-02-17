@@ -11,7 +11,6 @@ export default function ShowConfirmApp(props) {
     useEffect(() => {
         axios.get('http://localhost:5000/api/user/users')
             .then((res) => {
-                // console.log(res.data.msg)
                 setAllUsers(res.data.msg)
                 setAllUsersA(true)
             })
@@ -37,35 +36,12 @@ export default function ShowConfirmApp(props) {
                                 <>
                                     {(app.status == "confirmed") ?
 
-                                            <tr
-                                            style={{
-                                                textAlign: 'center'
-                                            }}>
-                                                <td
-                                                style={{
-                                                    border: '1px solid black',
-                                                    paddingLeft: '10px'
-                                                }}>{props.facility.name}</td>
-                                                <td
-                                                style={{
-                                                    border: '1px solid black',
-                                                    paddingLeft: '10px'
-                                                }}>{findUser(app.user)[0].name}</td>
-                                                <td
-                                                style={{
-                                                    border: '1px solid black',
-                                                    paddingLeft: '10px'
-                                                }}>{findUser(app.user)[0].email} </td>
-                                                <td
-                                                style={{
-                                                    border: '1px solid black',
-                                                    paddingLeft: '10px'
-                                                }}>{findUser(app.user)[0].phone} </td>
-                                                <td
-                                                style={{
-                                                    border: '1px solid black',
-                                                    paddingLeft: '10px'
-                                                }}>{<Moment format="YYYY/MM/DD">{app.date}</Moment>} </td>
+                                            <tr className="tb-row">
+                                                <td>{props.facility.name}</td>
+                                                <td>{findUser(app.user)[0].name}</td>
+                                                <td>{findUser(app.user)[0].email} </td>
+                                                <td>{findUser(app.user)[0].phone} </td>
+                                                <td>{<Moment format="YYYY/MM/DD">{app.date}</Moment>} </td>
                                             </tr>
                                             : <></>}
                                     </>

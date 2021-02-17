@@ -73,10 +73,10 @@ export default function NewFacility(props) {
         <>
         <div className="NewFacility">
             <Container className="justify-content-center" className=" pt-5" style={{
-                  height: '1200px',
+                  height: '1500px',
                   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
                   padding: "10% 10% 1050px 10%",
-                  margin: '50px auto 400px auto',
+                  margin: '50px auto 20% auto',
                   maxWidth: '700px'
                   }}>
                 <Col>
@@ -85,7 +85,7 @@ export default function NewFacility(props) {
                         validationSchema={validationSchema}
                         onSubmit={values => onSubmit({...values, images: updateFacilityImg, description: convertedContent})}
                     >
-                        <Form as={FormikForm} className="form">
+                        <Form as={FormikForm} className="form" >
 
                             <Form.Group as={Row} controlId="formPlaintextName">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold", fontSize: "25px"  , textAlign: 'center'}} sm="2">
@@ -156,7 +156,7 @@ export default function NewFacility(props) {
                             <ErrorMessage name="price" render={(msg) => <Alert variant={"danger"}> {msg} </Alert>} />
                                 
                             <Form.Group as={Row} controlId="ControlDesciption">
-                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">Desciption</Form.Label>
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="1">Desciption</Form.Label>
                                 <Editor as={Field} name="description"
                                         editorState={editorState}
                                         onEditorStateChange={handleEditorChange}

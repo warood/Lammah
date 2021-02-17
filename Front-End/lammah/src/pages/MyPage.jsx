@@ -95,37 +95,23 @@ export default function MyPage(props) {
                 <>
                     <div className="MyPage">
                         <Container >
-                            <Row style={{
-                                marginBottom: '5%',
-                            }}>
-                            <h1 style={{
-                                     fontWeight: 'bold',
-                                     fontSize: '1.7em',
-
-                                     }}>Personal Info</h1>
+                            <Row className="personal-info">
+                            <h1>Personal Info</h1>
                             </Row>
-                            <Row
-                            >
-                                <Col xs={4} xl={3} md={4}
+                            <Row className="info-container" style={{display: 'flex',
+                        flexWrap: 'wrap',}}>
+                                <Col className="img-container"xs={4} xl={3} md={4}>
+                                    <Image src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon.png"
                                     style={{
-                                        maxWidth: '150px',
-
-
-                                    }}>
-                                    <Image src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon.png" width="100%" />
+                                        width: '100%',
+                                        maxWidth: '100%',   
+                                    }}
+                                     />
                                 </Col>
-                                <Col xs={4} xl={6} md={4}
-                                    style={{
-
-                                    }}>
-                                    <h4 style={{
-                                        color: "black",
-                                        fontFamily: "serif",
-                                        fontWeight: "bold",
-                                        flexGrow: '1',
-                                    }}> Name :  {userInformation.name}  </h4>
-                                    <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Email :  {userInformation.email} </h4>
-                                    <h4 style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }}> Phone :  {userInformation.phone} </h4>
+                                <Col className="user-info" xs={4} xl={6} md={4}>
+                                    <p className='user-name'><b>Name : </b>{userInformation.name}  </p>
+                                    <p className="user-email"><b>Email : </b> {userInformation.email} </p>
+                                    <p className="user-phone"><b> Phone : </b>  {userInformation.phone} </p>
 
                                 </Col>
                                 <Col className="pt-5"
@@ -154,13 +140,9 @@ export default function MyPage(props) {
                             </Row>
                             <hr />
                             <Row className="justify-content-md-center">
-                                <h1 style={{
-                                     marginTop: '5%',
-                                     fontWeight: 'bold',
-                                     fontSize: '1.6em',
-                                     }}> My Apointments </h1>
+                                <h1 className="my-appoinment"> My Apointments </h1>
                             </Row>
-                            <Row>
+                            <Row >
                                 {allApointment}
 
                             </Row>

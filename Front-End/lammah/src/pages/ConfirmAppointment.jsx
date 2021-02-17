@@ -11,49 +11,17 @@ export default function ConfirmAppointment(props) {
     })
 
     return (
-        <div style={{
-            marginTop: '5%'
+        <div className= "confirmed-res" style={{
+            
         }}>
 
-            <table
-                style={{
-                    width: "100%",
-                    border: '1px solid #282C36',
-                    borderCollapse: 'collapse',
-                }}
-            >
-                <tr
-                style={{
-                    textAlign: 'center',
-                    backgroundColor: '#282C36',
-                    border: '1px solid #282C36',
-                    color: 'white',
-                }}>
-                    <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }}>Facility</th>
-                    <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }}>User</th>
-                    <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }} >Email</th>
-                    <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }} >Phone</th>
-                     <th
-                    style={{
-                        border: '1px solid #282C36',
-                        
-                    }} >Date</th>
+            <table >
+                <tr className="tb-title">
+                    <th>Facility</th>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Date</th>
                 </tr>
                 {allFacilities}
 

@@ -41,22 +41,15 @@ export default function ManageBrand(props) {
             {props.auth.isLoggedIn ?
                 <div className="ManageBrand">
                     <h1>Reservation Management</h1>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit esse accusamus delectus reprehenderit asperiores, magnam accusantium sunt. Laboriosam provident, ullam error eveniet animi accusamus sit, corrupti ex ab officiis minima?</p>
                     <hr />
-                    <Tabs
+                    <Tabs className="tap"
                         id="controlled-tab-example"
                         activeKey={key}
                         onSelect={(k) => setKey(k)}
-                        style={{
-                            backgroundColor: 'white',
-                        }}
+                        
                     >
-                        <Tab eventKey="home" title="Recent Appointement"
-                            style={{
-                                color: 'white',
-                                textDecoration: 'none',
-
-                            }}
-                        >
+                        <Tab  className="tap" eventKey="home" title="Recent Appointement">
 
                             <ManageAppointments 
                             auth={props.auth}
@@ -65,11 +58,11 @@ export default function ManageBrand(props) {
                              />
 
                         </Tab>
-                        <Tab eventKey="profile" title="Your Facilities">
+                        <Tab  className="tap" eventKey="profile" title="Your Facilities">
                             <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility} />
                             <br />
                         </Tab>
-                        <Tab eventKey="contact" title="Confirmed Reservations" >
+                        <Tab  className="tap" eventKey="contact" title="Confirmed Reservations" >
                             <ConfirmAppointment auth={props.auth} facilities={facilities} />
                         </Tab>
                     </Tabs>

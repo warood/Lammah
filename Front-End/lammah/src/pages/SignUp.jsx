@@ -64,8 +64,8 @@ export default function SignUp() {
 
       >
 
-        <Container className="justify-content-center  pt-5"  style={{ width: "70%", padding: "270px" }}>
-          <FormikForm className="mt-5">
+        <Container className="justify-content-center  pt-5"  style={{ width: "70%", padding: "10%", }}>
+          <FormikForm className="mt-5" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
             <Col>
 
 
@@ -133,8 +133,8 @@ export default function SignUp() {
               </Form.Group>
               
             </Col>
-            <Button type="submit" style={{ fontFamily: "serif", marginLeft: "140px" }} variant="secondary" active>
-              SignUp
+            <Button type="submit" style={{ margin: '10% auto 10% auto' }} variant="secondary" active>
+              Confirm
           </Button>
           </FormikForm>
         </Container>

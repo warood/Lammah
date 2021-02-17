@@ -11,7 +11,7 @@ export default function ManageOneAppointments(props) {
     const [open, setOpen] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
     const [allUsersA, setAllUsersA] = useState(false);
-    
+
 
 
     var numberOfApoointmentWaiting = 0;
@@ -73,81 +73,29 @@ export default function ManageOneAppointments(props) {
 
     })
     return (
-        <div
-            style={{ color: 'black' }}>
+        <div className="facilities">
 
-            <div
+            <div className="fc-bar"
                 onClick={() => setOpen(!open)}
                 aria-controls="example-collapse-text"
                 aria-expanded={open}
-                style={{
-                    borderBottom: '1px solid gray',
-                    display: 'flex',
-                    alignItems: 'center',
-                    backgroundColor: '#282C36',
-                    color: "white",
-                    borderRadius: '5px'
 
-                }}
             >
-                <p
-                    style={{
-                        margin: '1%',
-                        backgroundColor: 'red',
-                        width: '30px',
-                        borderRadius: '3px',
-                        textAlign: 'center',
-
-                    }}
-                >{numberOfApoointmentWaiting}</p>
-                <p style={{
-                    margin: '1%'
-                }}>{props.facility.name}</p>
+                <p className="fc-nav-num">{numberOfApoointmentWaiting}</p>
+                <p className="fc-name">
+                    {props.facility.name}</p>
 
             </div>
             <Collapse in={open}>
                 <div>
                     <br />
-                    <table style={{
-                        width: "100%",
-                        border: '1px solid #282C36',
-                        borderCollapse: 'collapse',
-
-
-                    }}>
-                        <tr
-                            style={{
-                                textAlign: 'center',
-                                backgroundColor: '#282C36',
-                                border: '1px solid #282C36',
-                                color: 'white',
-                            }}>
-                            <th
-                                style={{
-                                    border: '1px solid #282C36',
-
-                                }}>User</th>
-                            <th
-                                style={{
-                                    border: '1px solid #282C36',
-                                }}
-                            >Phone</th>
-                            <th
-                                style={{
-                                    border: '1px solid #282C36',
-                                }}
-                            >Email</th>
-                            <th
-                                style={{
-                                    border: '1px solid #282C36',
-                                }}
-                            >Date</th>
-                            <th
-                                colspan="2"
-                                style={{
-
-                                }}
-                            >Accept/Cancel</th>
+                    <table className="fc-table">
+                        <tr className="fc-titles">
+                            <th>User</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                            <th colspan="2">Accept/Cancel</th>
 
                         </tr>
                         {props.facility.appointment.slice(0).reverse().map((app, i) => {
@@ -158,69 +106,27 @@ export default function ManageOneAppointments(props) {
                                             {(app.status == "waiting") ?
                                                 <>
 
-                                                    <tr style={{
-                                                        textAlign: 'center'
-                                                    }}>
-                                                        <td
-                                                            style={{
-                                                                border: '1px solid #282C36',
-                                                                paddingLeft: '10px'
-                                                            }}
-
-                                                        > {findUser(app.user)[0].name}</td>
-                                                        <td
-                                                            style={{
-                                                                border: '1px solid #282C36',
-                                                                paddingLeft: '10px'
-                                                            }}
-
-                                                        >{findUser(app.user)[0].phone}</td>
-                                                        <td
-
-                                                            style={{
-                                                                border: '1px solid #282C36',
-                                                                paddingLeft: '10px'
-                                                            }}
-
-                                                        >{findUser(app.user)[0].email}</td>
-                                                        <td
-
-                                                            style={{
-                                                                border: '1px solid #282C36',
-                                                                paddingLeft: '10px'
-                                                            }}
-
-                                                        ><Moment format="YYYY/MM/DD">
-                                                                {
-                                                                    app.date
-                                                                }</Moment></td>
-                                                        <td
+                                                    <tr className="fc-t-row">
+                                                        <td> {findUser(app.user)[0].name}</td>
+                                                        <td>{findUser(app.user)[0].phone}</td>
+                                                        <td>{findUser(app.user)[0].email}</td>
+                                                        <td><Moment format="YYYY/MM/DD">
+                                                            {
+                                                                app.date
+                                                            }</Moment></td>
+                                                        <td className="btn-confirm-req"
                                                             variant="success"
                                                             onClick={() => {
                                                                 props.setIdOfAppointment(app._id)
                                                                 handleShowConfirm()
                                                             }}
-                                                            style={{
-                                                                border: '1px solid #282C36',
-                                                                paddingLeft: '10px',
-                                                                backgroundColor: 'rgb(66, 235, 51)',
-                                                                cursor: 'pointer',
-                                                            }}
-
                                                         >Confirm</td>
-                                                        <td
+                                                        <td className="btn-delete-req"
                                                             variant="danger"
-                                                             onClick={()=>{
+                                                            onClick={() => {
                                                                 props.setIdOfAppointment(app._id);
                                                                 handleShow();
-                                                             }}
-                                                            style={{
-                                                                border: '1px solid #282C36',
-                                                                paddingLeft: '10px',
-                                                                backgroundColor: 'red',
-                                                                cursor: 'pointer',
                                                             }}
-
                                                         >Cancel</td>
 
                                                     </tr>
@@ -256,7 +162,7 @@ export default function ManageOneAppointments(props) {
                     <Button variant="secondary" onClick={handleCloseConfirm}>
                         Close
                                                         </Button>
-                    <Button variant="primary" onClick={() => {
+                    <Button variant="secondary" onClick={() => {
                         confirmAppointment(props.IdOfAppointment);
                         handleCloseConfirm();
 
@@ -276,8 +182,8 @@ export default function ManageOneAppointments(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                                                         </Button>
-                    <Button variant="primary" onClick={() => {
-                        deleteAppointment(props.facility._id,props.IdOfAppointment);
+                    <Button variant="secondary" onClick={() => {
+                        deleteAppointment(props.facility._id, props.IdOfAppointment);
                         handleClose();
 
                     }}>

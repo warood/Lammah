@@ -42,36 +42,25 @@ export default function OneCardOfApointment(props) {
         <>
         {allUsersA &&
         <>
-            <Row className="mt-5" style={{
-                width: "100%",
-                justifyContent: 'center',
-                display: 'flex',
-
-            }}  >
-                <Card style={{
-                    width: "100%",
-                    maxWidth: '800px',
-
+            <Row className="appoitment-container">
+                <Card className="app-card" style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
                 }}>
-                    <Row style={{
+                    <Row className="card-row" style={{
                         height: "100%",
                         width: '100%',
                     }} >
                         <Col xs={6} md={5}  >
-                            <Card.Img style={{
-                                width: "100%",
-                                objectFit: 'cover',
-                                objectPosition: '50% 50%',
-                                flexGrow: '1',
-                            }} variant="top" src={props.facilityImage} />
+                            <Card.Img className="card-img" variant="top" src={props.facilityImage} />
 
                         </Col>
                         <Col >
-                            <Card.Body>
-                                <Row >
+                            <Card.Body >
+                                <Row className="card-info" >
 
                                     <p>{props.facilityName}</p>
-                                    <p style={{
+                                    <p className="card-date" style={{
                                         position: 'absolute',
                                         bottom: '0',
                                         right: '0',
@@ -137,16 +126,16 @@ export default function OneCardOfApointment(props) {
                 keyboard={false}>
 
                 <Modal.Header closeButton>
-                    <Modal.Title></Modal.Title>
+                    <Modal.Title>Cancel The Appointment</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Are You Sure Want To Cancel This Appointment ?
+                    Are you sure want to cancel this appointment ?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        No
+                        Cancel
                 </Button>
-                    <Button variant="primary" onClick={() => {
+                    <Button variant="secondary" onClick={() => {
                         onSubmit(props.apointmentId);
                         props.setDeleteAppointment(!props.deleteAppointment);
 

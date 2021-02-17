@@ -1,31 +1,144 @@
-.Facilities .container{
-    margin-top: 5%;
-    
-    width: 65%;
+.Facilities .container {
+  margin-top: 5%;
+  width: 85%;
 }
 
-.Facilities .facility-col{
-    display: flex;
-    flex-wrap: wrap;
+.Facilities .facility-col {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.Facilities .facility-card{
-    display: flex;
-    flex: 1 0 300px;
-    box-sizing: border-box;
-    margin: 0 20px 40px 20px;
-    flex-direction: column;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    width: 330px;
-    height: 350px;
+.Facilities .facility-card {
+  display: flex;
+  flex: 1 0 300px;
+  box-sizing: border-box;
+  margin: 0 20px 40px 20px;
+  flex-direction: column;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  min-width: 230px;
+  max-width: 330px;
+  height: 350px;
+}
+.Facilities .facility-card .fc-name {
+  position: absolute;
+  bottom: 18%;
+  color: white;
+  padding: 0 5% 0 5%;
+  max-width: 70%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 1.3rem;
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.Facilities .facility-card .fc-city {
+  position: absolute;
+  bottom: 10%;
+  color: white;
+  padding: 0 5% 0 5%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.Facilities .facility-card .fc-price {
+  position: absolute;
+  bottom: 3%;
+  color: white;
+  padding: 0 5% 0 5%;
+  background-color: rgba(255, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.Facilities .facility-card .fc-stars {
+    position: absolute;
+    top: 2%;
+    left: 0;
+    color: white;
+    padding: 0 1% 0 5%;
+    background-color: rgba(0, 0, 0, 0.623);
+    font-weight: bold;
+    font-size: 0.9em;
+}
+.Facilities .facility-card .fc-rating {
+    position: absolute;
+    top: 2%;
+    left: 0;
+    padding: 0 1% 0 40%;
+    background-color: rgba(0, 0, 0, 0.623);
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.Facilities .facility-card .fc-views {
+    position: absolute;
+    top: 10%; left: 0;
+    color: white;
+    padding: 0 1% 0 3%;
+    background-color: rgba(0, 0, 0, 0.623);
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.Facilities .facility-card .fc-views {
+  position: absolute;
+  top: 10%; left: 0;
+  color: white;
+  padding: 0 1% 0 3%;
+  background-color: rgba(0, 0, 0, 0.623);
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+@media (max-width: 500px) {
+  .Facilities .facility-card {
+    min-width: 230px;
+    max-width: 330px;
+    height: 250px;
+  }
+  .Facilities .facility-card .fc-name {
+    font-size: 0.9rem;
+    bottom: 16%;
+  }
+  .Facilities .facility-card .fc-city {
+    bottom: 7%;
+    font-size: 0.7em;
+  }
+  .Facilities .facility-card .fc-price {
+    font-size: 1em;
+  }
+  .Facilities .facility-card .fc-stars {
+    font-size: 0.9em;
+  }
+  .Facilities .facility-card .fc-rating {
+    position: absolute;
+    top: 2%;
+    left: 0;
+    padding: 0 1% 0 40%;
+    background-color: rgba(0, 0, 0, 0.623);
+    font-weight: bold;
+    font-size: 0.9em;
+}
+.Facilities .facility-card .fc-views {
+    position: absolute;
+    top: 8%; left: 0;
+    color: white;
+    padding: 0 1% 0 4%;
+    background-color: rgba(0, 0, 0, 0.623);
+    font-weight: bold;
+    font-size: 0.5em;
+}
+}
+
+.Facilities .facility-card .card-img {
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .Facilities .facility-card:hover {
-    
-    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.623);
+  box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.623);
 }
 
-.Facilities img{
-    height: 200px;
-    background-size: cover;
+.Facilities img {
+  height: 200px;
+  background-size: cover;
 }

@@ -34,9 +34,7 @@ export default function ManageAppointments(props) {
     })
 
     return (
-        <div style={{
-            marginTop: '5%'
-        }}>
+        <div className="main-lists">
             {allFacilities}
         </div>
     )

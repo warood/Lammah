@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 
 const validationSchema = Yup.object({
@@ -62,146 +64,157 @@ export const NavBar = (props) => {
         <>
             <div className="NavBar">
                 <div className="frist-row">
-                    
+
                     {/* Brand Logo */}
-                    <Link to="/" className="logo menu-element">
+                    <Link to="/" className="logo">
 
                     </Link>
 
-                    <input
-                        style={{ height: '20px' }}
+                    <input className="menu-element search"
                         type="text" name="search" placeholder="Search" onChange={event => {
                             props.ToSetSearch(event.target.value)
                         }}></input>
-
-                    <div className="menu-element" >ENG</div>
-                    <div className="menu-element">ACCOUNT</div>
-                    <div className="menu-element">MY REQUESTS</div>
-                    <button onClick={props.themeToggler}> switch mode</button>
-
-                </div>
-                <div className="sec-row">
-
-
-                    {/* The Menu */}
-
-
                     <Link to="/facilities" className="menu-element">FACILITIES</Link>
-
-                    {props.auth.isLoggedIn ?
-                        <Link to="/manage-brand" className="menu-element">BRAND</Link>
-                        :
-                        <></>}
+                    {/* <div className="menu-element" >ENG</div> */}
                     {props.auth.isLoggedIn ?
                         <Link to="/my-page" className="menu-element">MY PAGE</Link>
                         :
                         <></>}
-                    {props.auth.isLoggedIn ?
-                        <Link to="/new-facility" className="menu-element">NEW FACILITY</Link>
 
-                        :
-                        <></>}
-                    {props.auth.isLoggedIn ?
-                        <></>
-                        :
-                        <Link
-                            className="menu-element"
-                            onClick={() => {
-                                handleShow()
-                                props.loginCallback()
-                            }}>
-                            LOGIN
+                        <FormControlLabel
+                            value="Dark Theme"
+                            control={<Switch color="secondary" />}
+                            label="Dark Theme"
+                            labelPlacement="Dark Theme"
+                            style={{ color: 'white' }}
+                            onClick={props.themeToggler}
+                        />
+                        {props.auth.isLoggedIn ?
+                            <></>
+                            :
+                            <Link
+                                className="menu-element"
+                                onClick={() => {
+                                    handleShow()
+                                    props.loginCallback()
+                                }}>
+                                LOGIN
                 </Link>}
-                    {console.log(props.auth)}
+                        {console.log(props.auth)}
 
-                    {props.auth.isLoggedIn ?
-                        <Link
-                            className="menu-element"
-                            onClick={() => {
+                        {props.auth.isLoggedIn ?
+                            <Link
+                                className="menu-element"
+                                onClick={() => {
 
-                                localStorage.removeItem("jwtToken");
-                                props.loginCallback()
-                                history.push(`/`)
-                                    ;
-                            }}>
-                            LOGOUT
-                </Link>
-                        : <></>}
-
-
-
-                    {/* Login pop-up model */}
-                    <>
-
-
-                        <Modal
-                            show={show}
-                            onHide={handleClose}
-                            backdrop="static"
-                            keyboard={false}
-                        >
-                            {!login && (
-                                <Alert variant={"danger"}>
-                                    Your email or password is wrong
-                                </Alert>
-                            )}
-                            <Modal.Header closeButton>
-                                <Modal.Title>Login</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Formik
-                                    validationSchema={validationSchema}
-                                >
-                                    <Container>
-                                        <FormikForm>
-                                            <Form.Group as={Row} controlId="formPlaintextEmail">
-                                                <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                    Email
-                                     </Form.Label>
-
-                                                <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
-                                                <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
-                                                    {msg}
-                                                </Alert>} />
-                                            </Form.Group>
-                                            <Form.Group as={Row} controlId="formPlaintextPassword">
-                                                <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                                    Password
-                                    </Form.Label>
-
-                                                <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
-                                                <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
-                                                    {msg}
-                                                </Alert>} />
-                                            </Form.Group>
-                                            <Form.Group>
-                                                <Col md={12}>
-                                                    <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
-                                                        Register
-                                       </Link>
-                                                    </p>
-
-                                                    <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
-                                                </Col>
-                                            </Form.Group>
-
-                                        </FormikForm>
-                                    </Container>
-                                </Formik>
-                            </Modal.Body>
-
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={handleClose}>
-                                    Close
-                        </Button>
-
-                            </Modal.Footer>
-                        </Modal>
-                    </>
-                    {/* ==================== */}
+                                    localStorage.removeItem("jwtToken");
+                                    props.loginCallback()
+                                    history.push(`/`)
+                                        ;
+                                }}>
+                                LOGOUT
+</Link>
+                            : <></>}
 
                 </div>
-            </div>
+
+                    <div className="sec-row">
+
+
+                        {/* The Menu */}
+
+
+
+                        {props.auth.isLoggedIn ?
+                            <Link to="/manage-brand" className="menu-element">MANAGE FACILITIES</Link>
+                            :
+                            <></>}
+                        {props.auth.isLoggedIn ?
+                            <Link to="/my-page" className="menu-element">MY REQUESTS</Link>
+                            :
+                            <></>}
+                        {props.auth.isLoggedIn ?
+                            <Link to="/new-facility" className="menu-element">NEW FACILITY</Link>
+
+                            :
+                            <></>}
+
+
+
+
+
+                        {/* Login pop-up model */}
+                        <>
+
+
+                            <Modal
+                                show={show}
+                                onHide={handleClose}
+                                backdrop="static"
+                                keyboard={false}
+                            >
+                                {!login && (
+                                    <Alert variant={"danger"}>
+                                        Your email or password is wrong
+                                    </Alert>
+                                )}
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Login</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <Formik
+                                        validationSchema={validationSchema}
+                                    >
+                                        <Container>
+                                            <FormikForm>
+                                                <Form.Group as={Row} controlId="formPlaintextEmail">
+                                                    <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                                        Email
+                                     </Form.Label>
+
+                                                    <Form.Control as={Field} name="email" onChange={(e) => onChangeInput(e)} placeholder="email@example.com" />
+                                                    <ErrorMessage name="email" render={(msg) => <Alert variant={"danger"}>
+                                                        {msg}
+                                                    </Alert>} />
+                                                </Form.Group>
+                                                <Form.Group as={Row} controlId="formPlaintextPassword">
+                                                    <Form.Label style={{ color: "black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
+                                                        Password
+                                    </Form.Label>
+
+                                                    <Form.Control as={Field} name="password" onChange={(e) => onChangeInput(e)} type="password" placeholder="Password" />
+                                                    <ErrorMessage name="password" render={(msg) => <Alert variant={"danger"}>
+                                                        {msg}
+                                                    </Alert>} />
+                                                </Form.Group>
+                                                <Form.Group>
+                                                    <Col md={12}>
+                                                        <p style={{ color: "black", fontFamily: "serif" }}> You don't have an account? Please <Link eventKey={2} as={Link} to="/signup">
+                                                            Register
+                                       </Link>
+                                                        </p>
+
+                                                        <Button style={{ marginLeft: "150px" }} onClick={(e) => onSubmit(e)} variant="secondary">Login</Button>
+                                                    </Col>
+                                                </Form.Group>
+
+                                            </FormikForm>
+                                        </Container>
+                                    </Formik>
+                                </Modal.Body>
+
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleClose}>
+                                        Close
+                        </Button>
+
+                                </Modal.Footer>
+                            </Modal>
+                        </>
+                        {/* ==================== */}
+
+                    </div>
+                </div>
         </>
     )
 }
