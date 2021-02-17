@@ -1,6 +1,6 @@
 import API_URL from '../apiConfig.js'
 import React from "react";
-import { Row, Form, Col, Button, Container, Alert } from "react-bootstrap";
+import { Row, Form, Col, Button, Container, Alert , Modal } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -30,7 +30,7 @@ export default function NewFacility(props) {
     const userId = props.auth.currentUser._id;
     const history = useHistory();
     const [updateFacilityImg, setUpdateFacilityImg] = useState("");
-
+    const [show, setShow] = useState(false);
     //For Text Editor
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
@@ -55,11 +55,27 @@ export default function NewFacility(props) {
         axios
             .post(`${API_URL}/api/facility/new-facility`, values)
             .then((res) => {
-                console.log(res)
-                history.push("/facilities");
-             alert("Wait for our confirmation to add your facility.Thank You !!");
+                
+               
+              
+              
             })
+
+           
             .catch((err) => console.log(err));
+          
+           
+    }
+
+    const handleClose = () => {setShow(false);
+    
+        history.push("/facilities");
+    }
+
+
+    const handleShow = () => {
+  
+      setShow(true);
     }
 
     const uploadImageHundler = (e) => {
@@ -73,6 +89,9 @@ export default function NewFacility(props) {
                 setUpdateFacilityImg(data.data.url)
             })
     }
+
+
+  
 
     //Render NewFacility page
     return (
@@ -177,10 +196,37 @@ export default function NewFacility(props) {
                                  fontFamily: "serif",
                                   margin: "160px auto 50px auto" ,
 
-                                  }} variant="secondary" type="submit">
-                                {t("submit")}
+                                  }} variant="secondary" type="submit" onClick={handleShow}>
+                                  {t("submit")}
                             </Button>
                            </Row>
+
+
+                           <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title></Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ display: "flex", justifyContent: 'center', margin: '5%' }}>
+
+
+                <p>  Please wiat for our confirmation to add your facility, Thank you!</p>
+            </Modal.Body>
+            <Modal.Footer>
+              
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+         </Button>
+
+            </Modal.Footer>
+          </Modal>
+
+
+
                         </Form>
                     </Formik>
                 </Col>

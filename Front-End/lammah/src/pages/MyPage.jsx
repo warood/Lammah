@@ -91,7 +91,6 @@ export default function MyPage(props) {
     })
 
 
-
     return (
         <>
             {props.auth.isLoggedIn ?
