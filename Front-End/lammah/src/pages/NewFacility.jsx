@@ -19,8 +19,6 @@ import WrappedMap from '../components/GoooglMap'
 import GoogleMapReact from 'google-map-react';
 
 
-
-
 var address = {}
 export default function NewFacility(props) {
 

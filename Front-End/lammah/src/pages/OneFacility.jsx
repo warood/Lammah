@@ -118,6 +118,7 @@ export default function OneFacility(props) {
       axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
         .then(res => {
           //let facility = res.data.find((ele) => ele._id == id);
+          console.log(res)
           setSelectFacility(res.data.facility);
           setFacility(res.data.facility._id);
           setMainImage(res.data.facility.images[0]);

@@ -30,11 +30,11 @@ function GoooglMap() {
   React.useEffect(() => {
     if (id) {
       axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
-      .then((data) => {
-     
-          setMarker({getLat : data.data.facility.location.lat , getLen :  data.data.facility.location.lng});
+        .then((data) => {
+
+          setMarker({ getLat: data.data.facility.location.lat, getLen: data.data.facility.location.lng });
           setCantchangr(false);
-      });
+        });
     }
   }, []);
 
