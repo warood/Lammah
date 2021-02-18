@@ -133,8 +133,8 @@ export default function OneFacility(props) {
     .then(res => {
     })
     setMainImage(images[0]);
-    setShowImage(!show);
-  }, [refreshPage],[show]);
+    setShowImage(!showImage);
+  }, [refreshPage],[showImage]);
 
   
 
