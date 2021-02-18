@@ -71,7 +71,7 @@ export default function HomeSection() {
                             <h1>TOP FACILITIES</h1>
 
                             <h2
-                                style={{ color: 'black', fontSize: '1em' }}
+                                style={{  fontSize: '1em' }}
                             >THIS Month</h2>
                         </div>
                         <div className="tf-description">

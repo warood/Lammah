@@ -1,6 +1,12 @@
 /* Apply Style For The whole App*/
+
+@font-face {
+    font-family: 'Changa';
+    src: url('https://fonts.googleapis.com/css2?family=Changa:wght@200;300;400;500;600;700;800&display=swap');
+  }
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Changa', Arial, sans-serif;
   height: 100vh;
 }
 /* ========================= */
@@ -91,7 +97,7 @@ body {
   margin: 5px;
 }
 .Home {
-  color: rgba(255, 255, 255, 0.5);
+ 
 }
 .Home .tf-items .item2,
 .Home .tf-items .item4 {

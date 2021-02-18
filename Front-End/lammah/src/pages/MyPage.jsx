@@ -135,12 +135,12 @@ export default function MyPage(props) {
 
 
                                         }}>
-                                        <GearFill color="gray" size={30} />
+                                        <GearFill color="#A4A2A1" size={30}   />
 
                                     </Button>
                                 </Col>
                             </Row>
-                            <hr />
+                            <hr style={{ boxShadow: '0 4px 8px 0 gray, 0 6px 5px 0 orange',}}/>
                             <Row className="justify-content-md-center">
                                 <h1 className="my-appoinment">{t("my_appointments")} </h1>
                             </Row>
