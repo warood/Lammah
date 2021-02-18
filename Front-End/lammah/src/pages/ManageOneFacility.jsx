@@ -16,7 +16,7 @@ export default function ManageOneFacility(props) {
     //To display text as stored with styling
     const createMarkup = (html) => {
         return {
-            __html: DOMPurify.sanitize(html)
+            __html: DOMPurify.sanitize(html, {ALLOWED_TAGS: ['b']})
         }
     }
 
@@ -128,7 +128,7 @@ export default function ManageOneFacility(props) {
 
                 {/* Edit Modal */}
                 <Modal show={showEdit} onHide={handleCloseEdit}
-                    class="edit-fc-model">
+                    class="edit-fc-model" style= {{color: 'black'}}>
                     <Modal.Header closeButton>
                         <Modal.Title>{t("edit")} {t("facility")}</Modal.Title>
                     </Modal.Header>
@@ -157,7 +157,7 @@ export default function ManageOneFacility(props) {
                 </Modal>
 
                 {/* Delete Modal */}
-                <Modal show={show} onHide={handleClose}>
+                <Modal show={show} onHide={handleClose} style= {{color: 'black'}}>
                     <Modal.Header closeButton>
                         <Modal.Title>{t("confirm_delete")}</Modal.Title>
                     </Modal.Header>

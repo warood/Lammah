@@ -9,7 +9,7 @@ const checkExpiredAppointments = async (req, res, next) =>{
     let response = await Appointment.deleteMany({createdAt: {
       $lte: new Date(new Date().getTime()-60*180*1000).toISOString()
    }, status: "waiting"})
-    console.log('deleted appointments last 5 min', response.deletedCount)
+    // console.log('deleted appointments last 5 min', response.deletedCount)
     next()
   }catch(err){
     res.json({msg: "unknown server error"})
@@ -19,7 +19,7 @@ const checkExpiredAppointments = async (req, res, next) =>{
 
 // Add New Appointment API 
 router.post("/new-appointment", checkExpiredAppointments, (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { date, status, userId, facility } = req.body;
 
   Appointment.create({ date: date, status: status, user: userId, facility: facility }, (err, newAppointment) => {
@@ -42,34 +42,12 @@ router.put("/:appointmentId/confirm", checkExpiredAppointments, (req, res)=>{
   let appointmentId = req.params.appointmentId
   Appointment.findOne({_id: appointmentId})
   .then(appointment=>{
-    console.log(appointment)
+    // console.log(appointment)
     Appointment.updateOne({_id: appointmentId}, {status:"confirmed", expireAt: null}, (err, updateAppointment)=>{
       res.json({msg: "updated facility", updateAppointment})
     })
      })
 })
-
-
-//Update one Appointment from waiting to confirmed
-// router.put("/:appointmentId/confirm", checkExpiredAppointments, async (req, res)=>{
-//   try{
-//     let appointmentId = req.params.appointmentId
-//     let appointment = await Appointment.findById(appointmentId)
-//     appointment.status = "confirmed"
-//     appointment.save()
-
-//   }catch(err){
-//     res.status(500).json({msg: "error"})
-//   }
-  
-//   Appointment.findOne({_id: appointmentId})
-//   .then(appointment=>{
-//     console.log(appointment)
-//     Appointment.updateOne({_id: appointmentId}, {status:"confirmed", expireAt: null}, (err, updateAppointment)=>{
-//       res.json({msg: "updated facility", updateAppointment})
-//     })
-//      })
-// })
 
 
 

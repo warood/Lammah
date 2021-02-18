@@ -47,7 +47,7 @@ export default function OneFacility(props) {
   const [displayAllComments, setdisplayAllComments] = useState([])
   const [showOnerInfo, setShowOnerInfo] = useState(false);
   const [minImages, setMinImages] = useState([])
-  const [showImage , setShowImage]= useState(false);
+  const [showImage, setShowImage] = useState(false);
 
   //For Translation
   const { t } = useTranslation();
@@ -115,27 +115,27 @@ export default function OneFacility(props) {
 
   useEffect(() => {
     // if (!city) {
-      axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
-        .then(res => {
-          //let facility = res.data.find((ele) => ele._id == id);
-          console.log(res)
-          setSelectFacility(res.data.facility);
-          setFacility(res.data.facility._id);
-          setMainImage(res.data.facility.images[0]);
-          setMinImages(res.data.facility.images)
-          const addDate = res.data.facility.appointment.map((ele) => {
-            return new Date(ele.date);
-          })
-          setDateOfAllApointment(addDate)
+    axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
+      .then(res => {
+        //let facility = res.data.find((ele) => ele._id == id);
+        // console.log(res)
+        setSelectFacility(res.data.facility);
+        setFacility(res.data.facility._id);
+        setMainImage(res.data.facility.images[0]);
+        setMinImages(res.data.facility.images)
+        const addDate = res.data.facility.appointment.map((ele) => {
+          return new Date(ele.date);
         })
+        setDateOfAllApointment(addDate)
+      })
     // }
     axios.get(`http://localhost:5000/api/rating/${id}/ratings`)
-    .then(res => {
-      setdisplayAllComments(res.data.ratings)
-    })
+      .then(res => {
+        setdisplayAllComments(res.data.ratings)
+      })
 
     setShowImage(!showImage);
-  }, [refreshPage],[showImage]);
+  }, [refreshPage], [showImage]);
 
 
 
@@ -154,7 +154,7 @@ export default function OneFacility(props) {
     axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
       .then((res) => {
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{} );
 
     //to close the modal after book
     setShow(false);
@@ -176,9 +176,9 @@ export default function OneFacility(props) {
   })
 
   let allFacilities = minImages.map((image, i) => {
-     return(
-     <Row><img className="smallIMG" src={image} alt="" srcset="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
-     )
+    return (
+      <Row><img className="smallIMG" src={image} alt="" srcset="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
+    )
   })
 
   return (
@@ -192,7 +192,7 @@ export default function OneFacility(props) {
       }}>
         <Row style={{ marginBottom: "50px" }}>
 
-          <Col col-md-3 style={{maxWidth: '80px'}}>
+          <Col col-md-3 style={{ maxWidth: '80px' }}>
             {allFacilities}
           </Col>
 
@@ -242,6 +242,7 @@ export default function OneFacility(props) {
               onHide={handleClose}
               backdrop="static"
               keyboard={false}
+              style= {{color: 'black'}}
             >
               <Modal.Header closeButton>
                 <Modal.Title></Modal.Title>
@@ -272,15 +273,24 @@ export default function OneFacility(props) {
 
               </Modal.Footer>
             </Modal>
-
+            {(showOnerInfo) ?
+              <>
+                <div class="alert alert-success" role="alert" style={{marginTop: '30px'}}>
+                  <h4 class="alert-heading">{t("if_you_want_to_contant_facility_owner")}</h4>
+                  <p>{t("go_to_your_page_and_you_can_find_his_contact_information")}</p>
+                  {/* <p>Name: {user.name}</p>
+    <p class="mb-0">Phone: {user.phone}</p> */}
+                </div>
+              </> : <></>
+            }
 
           </Col>
 
-          <div style={{ height: "50vh", width: "100%", minWidth: '500px',  }}>
+          <div style={{ height: "25vh", width: "100%", minWidth: '500px', }}>
             <WrappedMap
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
               loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `200px` ,width: '80%', margin: 'auto'}} />}
+              containerElement={<div style={{ height: `200px`, width: '60%', margin: 'auto' }} />}
               mapElement={<div style={{ height: `100%` }} />}
 
             /></div>

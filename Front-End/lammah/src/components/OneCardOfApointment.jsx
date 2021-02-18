@@ -58,8 +58,8 @@ export default function OneCardOfApointment(props) {
 
                         </Col>
                         <Col >
-                            <Card.Body >
-                                <Row className="card-info" >
+                            <Card.Body style= {{color: 'black'}}>
+                                <Row className="card-info"  >
 
                                     <p>{props.facilityName}</p>
                                     <p className="card-date" style={{
@@ -125,7 +125,8 @@ export default function OneCardOfApointment(props) {
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
-                keyboard={false}>
+                keyboard={false}
+                style= {{color: 'black'}}>
 
                 <Modal.Header closeButton>
                     <Modal.Title>{t("confirm_delete")}</Modal.Title>

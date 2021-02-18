@@ -58,7 +58,7 @@ export default function ManageBrand(props) {
                             <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility} />
                             <br style={{ boxShadow: '0 4px 8px 0 gray, 0 6px 5px 0 orange',}}/>
                         </Tab>
-                        <Tab  className="tap" eventKey="contact" title="Confirmed Reservations" >
+                        <Tab  className="tap" eventKey="contact" title={t("confirmed_reservations")} >
                             <ConfirmAppointment auth={props.auth} facilities={facilities} />
                         </Tab>
                     </Tabs>

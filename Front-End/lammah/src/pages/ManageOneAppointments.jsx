@@ -154,7 +154,7 @@ export default function ManageOneAppointments(props) {
             <br />
 
             {/* Confirm Modal */}
-            <Modal show={showConfirm} onHide={handleCloseConfirm}>
+            <Modal show={showConfirm} onHide={handleCloseConfirm} style= {{color: 'black'}}>
                 <Modal.Header closeButton>
                     <Modal.Title>{t("confirm_reservation")}</Modal.Title>
                 </Modal.Header>
@@ -174,7 +174,7 @@ export default function ManageOneAppointments(props) {
 
             </Modal>
             {/* Cancel Modal */}
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} style= {{color: 'black'}}>
                 <Modal.Header closeButton>
                     <Modal.Title>{t("confirm_delete")}</Modal.Title>
                 </Modal.Header>

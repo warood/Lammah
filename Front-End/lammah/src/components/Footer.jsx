@@ -41,6 +41,12 @@ export default function Footer() {
               <a href="https://git.generalassemb.ly/asim-sami" target="_blank">Github</a><br/>
             </li>
 
+            <li>
+              <h6>Warood Saeed</h6>
+              <a href="https://www.linkedin.com/in/warood-saeed/" target="_blank">Linked In</a><br/>
+              <a href="https://github.com/warood" target="_blank">Github</a><br/>
+            </li>
+
           </ul>
         </Modal.Body>
         <Modal.Footer>

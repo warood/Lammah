@@ -258,6 +258,7 @@ export default function NewFacility(props) {
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
+            style= {{color: 'black'}}
             >
             <Modal.Header closeButton>
               <Modal.Title></Modal.Title>

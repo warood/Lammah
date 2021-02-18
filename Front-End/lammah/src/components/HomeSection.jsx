@@ -7,6 +7,7 @@ import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootst
 import { Link } from "react-router-dom";
 import { ArrowRight, EyeFill } from 'react-bootstrap-icons';
 import Rating from '@material-ui/lab/Rating';
+import { useTranslation } from "react-i18next";
 
 
 
@@ -14,10 +15,11 @@ export default function HomeSection() {
 
     const [dataLoading, setDataLoading] = useState(false)
 
-    const [confirmedFacility, setConfirmedFacility] = useState({})
+    const [confirmedFacility, setConfirmedFacility] = useState([])
 
-    const [topFacility, setTopFacility] = useState({})
-
+    const [topFacility, setTopFacility] = useState([])
+    //For Translation
+    const { t } = useTranslation();
 
     //genrate random numbers 
 
@@ -34,7 +36,6 @@ export default function HomeSection() {
             .then(res => {
 
                 const allFacilities = res.data.facilities.filter(facility => facility.status == 1);
-
                 setConfirmedFacility(allFacilities);
 
 
@@ -51,11 +52,14 @@ export default function HomeSection() {
     }, [])
 
 
-    let index1 = randomNumber(0, confirmedFacility.length)
-    let index2 = randomNumber(0, confirmedFacility.length)
-    let index3 = randomNumber(0, confirmedFacility.length)
-    let index4 = randomNumber(0, confirmedFacility.length)
-
+    // let index1 = Math.abs(randomNumber(0, confirmedFacility.length))
+    // let index2 = Math.abs(randomNumber(0, confirmedFacility.length))
+    // let index3 = Math.abs(randomNumber(0, confirmedFacility.length))
+    // let index4 = Math.abs(randomNumber(0, confirmedFacility.length))
+    // console.log(index1)
+    // console.log(index2)
+    // console.log(index3)
+    // console.log(index4)
 
     return (
         <>
@@ -63,17 +67,17 @@ export default function HomeSection() {
 
 
                 <div className="section">
-{/* 
+                    {/* 
                     {/* ========================================= */}
                     {/* 1st section "Top Facilities" 1st Row*/}
                     {/* ========================================= */}
                     <div className="top-facilities">
                         <div className="tf-title">
-                            <h1>TOP FACILITIES</h1>
+                            <h1>{t("top_facilities")}</h1>
 
                             <h2
                                 style={{ fontSize: '1em' }}
-                            >THIS Month</h2>
+                            >{t("this_month")}</h2>
                         </div>
                         <div className="tf-description">
                             <div>
@@ -91,290 +95,290 @@ export default function HomeSection() {
                             alignItems: 'center',
 
                         }}>
-                        <Carousel style={{  width: "auto" }}>
-                            <Carousel.Item interval={1500}>
-                                <Link
-                                    style={{ textDecoration: "none" }}>
-                                    <Card className="facility-card" >
-                                        <Card.Img variant="top"
-                                            style={{
-                                                height: '100%',
-                                                objectFit: 'cover',
-                                                objectPosition: '50% 50%',
+                            <Carousel style={{ width: "auto" }}>
+                                <Carousel.Item interval={1500}>
+                                    <Link
+                                        style={{ textDecoration: "none" }}>
+                                        <Card className="facility-card" >
+                                            <Card.Img variant="top"
+                                                style={{
+                                                    height: '100%',
+                                                    objectFit: 'cover',
+                                                    objectPosition: '50% 50%',
 
-                                            }}
-                                            src={topFacility[0].images[0]} />
+                                                }}
+                                                src={topFacility[0].images[0]} />
 
-                                        <Card.Title
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '20%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                maxWidth: '70%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.3em',
-                                                maxHeight: '50px',
-                                                overflow: 'hidden',
+                                            <Card.Title
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '20%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    maxWidth: '70%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '1.3em',
+                                                    maxHeight: '50px',
+                                                    overflow: 'hidden',
 
-                                            }}>{topFacility[0].name}</Card.Title>
-                                        <Card.Text
+                                                }}>{topFacility[0].name}</Card.Title>
+                                            <Card.Text
 
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '10%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '10%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
 
-                                            {topFacility[0].city}
-                                        </Card.Text>
-
-
-                                        <small
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '3%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                backgroundColor: 'rgba(255, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.5em',
-
-                                            }}>{topFacility[0].price} SR</small>
-
-                                        <Card.Text
-
-                                            style={{
-                                                position: 'absolute',
-                                                top: '2%', left: '0',
-                                                color: 'white',
-                                                padding: '0 1% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
-
-                                            <Rating readOnly value={topFacility[0].stars} />
-                                        </Card.Text>
-
-                                        <Card.Text
-
-                                            style={{
-                                                position: 'absolute',
-                                                top: '12%', left: '0',
-                                                color: 'white',
-                                                padding: '0 1% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
-
-                                            <span /><EyeFill color="white" size={20} /> {topFacility[0].views}
-                                        </Card.Text>
-
-                                    </Card>
-                                </Link>
-                                
-                            </Carousel.Item>
-                            <Carousel.Item interval={1500}>
-                                <Link
+                                                {topFacility[0].city}
+                                            </Card.Text>
 
 
-                                    style={{ textDecoration: "none" }}>
-                                    <Card className="facility-card" >
-                                        <Card.Img variant="top"
-                                            style={{
-                                                height: '100%',
-                                                objectFit: 'cover',
-                                                objectPosition: '50% 50%',
+                                            <small
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '3%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    backgroundColor: 'rgba(255, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '1.5em',
 
-                                            }}
-                                            src={topFacility[0].images[0]} />
+                                                }}>{topFacility[0].price} SR</small>
 
-                                        <Card.Title
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '20%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                maxWidth: '70%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.3em',
-                                                maxHeight: '50px',
-                                                overflow: 'hidden',
+                                            <Card.Text
 
-                                            }}>{topFacility[0].name}</Card.Title>
-                                        <Card.Text
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '2%', left: '0',
+                                                    color: 'white',
+                                                    padding: '0 1% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
 
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '10%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
+                                                <Rating readOnly value={topFacility[0].stars} />
+                                            </Card.Text>
 
-                                            {topFacility[0].city}
-                                        </Card.Text>
+                                            <Card.Text
 
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '12%', left: '0',
+                                                    color: 'white',
+                                                    padding: '0 1% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
 
-                                        <small
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '3%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                backgroundColor: 'rgba(255, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.5em',
+                                                <span /><EyeFill color="white" size={20} /> {topFacility[0].views}
+                                            </Card.Text>
 
-                                            }}>{topFacility[0].price} SR</small>
+                                        </Card>
+                                    </Link>
 
-                                        <Card.Text
-
-                                            style={{
-                                                position: 'absolute',
-                                                top: '2%', left: '0',
-                                                color: 'white',
-                                                padding: '0 1% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
-
-                                            <Rating readOnly value={topFacility[0].stars} />
-                                        </Card.Text>
-
-                                        <Card.Text
-
-                                            style={{
-                                                position: 'absolute',
-                                                top: '12%', left: '0',
-                                                color: 'white',
-                                                padding: '0 1% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
-
-                                            <span /><EyeFill color="white" size={20} /> {topFacility[0].views}
-                                        </Card.Text>
-
-                                    </Card>
-                                </Link>
-                            </Carousel.Item>
-                            <Carousel.Item interval={1500}>
-                                <Link
+                                </Carousel.Item>
+                                <Carousel.Item interval={1500}>
+                                    <Link
 
 
-                                    style={{ textDecoration: "none" }}>
-                                    <Card className="facility-card" >
-                                        <Card.Img variant="top"
-                                            style={{
-                                                height: '100%',
-                                                objectFit: 'cover',
-                                                objectPosition: '50% 50%',
+                                        style={{ textDecoration: "none" }}>
+                                        <Card className="facility-card" >
+                                            <Card.Img variant="top"
+                                                style={{
+                                                    height: '100%',
+                                                    objectFit: 'cover',
+                                                    objectPosition: '50% 50%',
 
-                                            }}
-                                            src={topFacility[0].images[0]} />
+                                                }}
+                                                src={topFacility[0].images[0]} />
 
-                                        <Card.Title
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '20%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                maxWidth: '70%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.3em',
-                                                maxHeight: '50px',
-                                                overflow: 'hidden',
+                                            <Card.Title
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '20%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    maxWidth: '70%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '1.3em',
+                                                    maxHeight: '50px',
+                                                    overflow: 'hidden',
 
-                                            }}>{topFacility[0].name}</Card.Title>
-                                        <Card.Text
+                                                }}>{topFacility[0].name}</Card.Title>
+                                            <Card.Text
 
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '10%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '10%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
 
-                                            {topFacility[0].city}
-                                        </Card.Text>
-
-
-                                        <small
-                                            style={{
-                                                position: 'absolute',
-                                                bottom: '3%',
-                                                color: 'white',
-                                                padding: '0 5% 0 5%',
-                                                backgroundColor: 'rgba(255, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.5em',
-
-                                            }}>{topFacility[0].price} SR</small>
-
-                                        <Card.Text
-
-                                            style={{
-                                                position: 'absolute',
-                                                top: '2%', left: '0',
-                                                color: 'white',
-                                                padding: '0 1% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
-
-                                            <Rating readOnly value={topFacility[0].stars} />
-                                        </Card.Text>
-
-                                        <Card.Text
-
-                                            style={{
-                                                position: 'absolute',
-                                                top: '12%', left: '0',
-                                                color: 'white',
-                                                padding: '0 1% 0 5%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.623)',
-                                                fontWeight: 'bold',
-                                                fontSize: '0.9em',
-                                            }}
-                                        >
-
-                                            <span /><EyeFill color="white" size={20} /> {topFacility[2].views}
-                                        </Card.Text>
-
-                                    </Card>
-                                </Link>
-                                
-                            </Carousel.Item>
+                                                {topFacility[0].city}
+                                            </Card.Text>
 
 
+                                            <small
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '3%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    backgroundColor: 'rgba(255, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '1.5em',
 
-                        </Carousel>
+                                                }}>{topFacility[0].price} SR</small>
+
+                                            <Card.Text
+
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '2%', left: '0',
+                                                    color: 'white',
+                                                    padding: '0 1% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
+
+                                                <Rating readOnly value={topFacility[0].stars} />
+                                            </Card.Text>
+
+                                            <Card.Text
+
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '12%', left: '0',
+                                                    color: 'white',
+                                                    padding: '0 1% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
+
+                                                <span /><EyeFill color="white" size={20} /> {topFacility[0].views}
+                                            </Card.Text>
+
+                                        </Card>
+                                    </Link>
+                                </Carousel.Item>
+                                <Carousel.Item interval={1500}>
+                                    <Link
+
+
+                                        style={{ textDecoration: "none" }}>
+                                        <Card className="facility-card" >
+                                            <Card.Img variant="top"
+                                                style={{
+                                                    height: '100%',
+                                                    objectFit: 'cover',
+                                                    objectPosition: '50% 50%',
+
+                                                }}
+                                                src={topFacility[0].images[0]} />
+
+                                            <Card.Title
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '20%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    maxWidth: '70%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '1.3em',
+                                                    maxHeight: '50px',
+                                                    overflow: 'hidden',
+
+                                                }}>{topFacility[0].name}</Card.Title>
+                                            <Card.Text
+
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '10%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
+
+                                                {topFacility[0].city}
+                                            </Card.Text>
+
+
+                                            <small
+                                                style={{
+                                                    position: 'absolute',
+                                                    bottom: '3%',
+                                                    color: 'white',
+                                                    padding: '0 5% 0 5%',
+                                                    backgroundColor: 'rgba(255, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '1.5em',
+
+                                                }}>{topFacility[0].price} SR</small>
+
+                                            <Card.Text
+
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '2%', left: '0',
+                                                    color: 'white',
+                                                    padding: '0 1% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
+
+                                                <Rating readOnly value={topFacility[0].stars} />
+                                            </Card.Text>
+
+                                            <Card.Text
+
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '12%', left: '0',
+                                                    color: 'white',
+                                                    padding: '0 1% 0 5%',
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.623)',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.9em',
+                                                }}
+                                            >
+
+                                                <span /><EyeFill color="white" size={20} /> {topFacility[2].views}
+                                            </Card.Text>
+
+                                        </Card>
+                                    </Link>
+
+                                </Carousel.Item>
+
+
+
+                            </Carousel>
                         </div>
                     </div>
 
@@ -384,20 +388,20 @@ export default function HomeSection() {
                     {/* ========================================= */}
                     {/* 1st section "Top Facilities" 2st Row */}
                     {/* ========================================= */}
-                    <div className="tf-items" style={{marginTop: '400px'}}>
+                    <div className="tf-items" style={{ marginTop: '400px' }}>
                         <div className="item1">
-                            <img src={confirmedFacility[index1].images[0]} />
+                            <img src="https://q-xx.bstatic.com/images/hotel/max1024x768/265/265080438.jpg" />
                         </div>
                         <div className="item2">
-                            <img src={confirmedFacility[index2].images[0]} />
+                            <img src="https://mostaql.hsoubcdn.com/uploads/thumbnails/621911/5f83610450284/1.jpg" />
                         </div><div className="item3">
-                            <img src={confirmedFacility[index3].images[0]} />
+                            <img src="https://cf.bstatic.com/images/hotel/max1024x768/236/236605809.jpg" />
                         </div><div className="item4">
-                            <img src={confirmedFacility[index4].images[0]} />
+                            <img src="https://cf.bstatic.com/images/hotel/max1024x768/257/257562657.jpg" /> 
                         </div>
                     </div>
-                   {/* ========================================= */}
-                   <div className="vs-section" />
+                    {/* ========================================= */}
+                    <div className="vs-section" />
                 </div>
 
             </>
