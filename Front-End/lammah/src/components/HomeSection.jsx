@@ -1,6 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { useTranslation } from "react-i18next";
 
 export default function HomeSection() {
+
+    //For Translation
+    const { t } = useTranslation();
+
     return (
         <div className="section">
 
@@ -9,7 +14,7 @@ export default function HomeSection() {
             {/* ========================================= */}
             <div className="top-facilities">
                 <div className="tf-title">
-                    <h1>TOP FACILITIES</h1>
+                    <h1>{t("top_facilities")}</h1>
                     <h2
                         style={{ color: 'gray', fontSize: '1em' }}
                     >THIS Month</h2>

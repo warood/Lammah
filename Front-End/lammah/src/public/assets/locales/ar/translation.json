@@ -76,5 +76,7 @@
     "your_email_or_password_is_wrong": "الايميل أو الرقم السري غير صحيح",
     "please_enter_your_email": "الرجاء إدخال البريد الإلكتروني",
     "if_you_want_to_contant_facility_owner": "للتواصل مع صاحب المنشأة",
-    "go_to_your_page_and_you_can_find_his_contact_information": "يمكنك ايجاد معلومات التواصل في صفحتك الشخصية"
+    "go_to_your_page_and_you_can_find_his_contact_information": "يمكنك ايجاد معلومات التواصل في صفحتك الشخصية",
+    "top_facilities": "المنشآت الأعلى تقييم",
+    "this_month": "الشهر الحالي"
   }
