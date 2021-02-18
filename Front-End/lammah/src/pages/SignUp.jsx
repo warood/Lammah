@@ -6,22 +6,28 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useTranslation } from "react-i18next";
 
 
-const validtionSchima = Yup.object({
-  name: Yup.string().required("This Field is Reqiured"),
-  email: Yup.string().required(" This Field is Reqiured!!").email("example@example.com"),
-  phone: Yup.string().required("This Field is Reqiured!!").min(10, "must be 10 numbers ").max(10),
-  password: Yup.string().required('Please Enter your password')
-  .matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  ),confirmPassword: Yup.string().required().oneOf([Yup.ref("password"), null], "Passwords not match")
 
-})
 
 export default function SignUp() {
   
+  //For Translation
+  const { t } = useTranslation();
+
+  const validtionSchima = Yup.object({
+  name: Yup.string().required(t("this_field_is_reqiured")),
+  email: Yup.string().required(t("this_field_is_reqiured")).email("example@example.com"),
+  phone: Yup.string().required(t("this_field_is_reqiured")).min(10, t("must_be_10_numbers")).max(10),
+  password: Yup.string().required(t("please_enter_your_password"))
+  .matches(
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    t("must_contain_8_characters")
+  ),confirmPassword: Yup.string().required().oneOf([Yup.ref("password"), null], t("passwords_not_match"))
+
+})
+
   const history = useHistory();
 
   // to show aleart
@@ -53,7 +59,7 @@ export default function SignUp() {
 
       {!register && (
         <Alert variant={"danger"}>
-          The email is already in use. Please change the email
+         {t("this_email_is_already_used")}
         </Alert>
       )}
 
@@ -71,7 +77,7 @@ export default function SignUp() {
 
               <Form.Group as={Row} controlId="formPlaintextName">
                 <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                  Name
+                  {t("name")}
                </Form.Label>
 
                 <Form.Control as={Field}
@@ -84,7 +90,7 @@ export default function SignUp() {
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextPhone">
                 <Form.Label style={{color:"black", fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                  Phone Number
+                  {t("phone")}
               </Form.Label>
 
                 <Form.Control as={Field} name="phone" placeholder="05XXXXXXXX" />
@@ -95,7 +101,7 @@ export default function SignUp() {
               </Form.Group>
               <Form.Group as={Row} controlId="formPlaintextEmail">
                 <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                  Email
+                  {t("email")}
               </Form.Label>
 
                 <Form.Control as={Field}
@@ -111,7 +117,7 @@ export default function SignUp() {
 
               <Form.Group as={Row} controlId="formPlaintextPassword">
                 <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                  Password
+                  {t("password")}
               </Form.Label>
 
                 <Form.Control as={Field} name="password" type="password" placeholder="Password" />
@@ -123,7 +129,7 @@ export default function SignUp() {
 
               <Form.Group as={Row} controlId="formPlaintextPassword">
                 <Form.Label style={{ color:"black",fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                Confirm Password
+                {t("confirm_password")}
               </Form.Label>
 
                 <Form.Control as={Field} name="confirmPassword" type="password" placeholder="Password" />
@@ -134,7 +140,7 @@ export default function SignUp() {
               
             </Col>
             <Button type="submit" style={{ margin: '10% auto 10% auto' }} variant="secondary" active>
-              Confirm
+              {t("confirm")}
           </Button>
           </FormikForm>
         </Container>

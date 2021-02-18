@@ -26,7 +26,7 @@ export default function Admin(props) {
         axios.get(`${API_URL}/api/admin/users`)
             .then(res => {
               
-                console.log("api admin users "+res.data)
+                // console.log("api admin users "+res.data)
                 setUsers(res.data.msg)
             })
 
@@ -39,7 +39,7 @@ export default function Admin(props) {
         if(e==false&&isAdmin==true || e==true&&isAdmin==false){
             axios.put(`${API_URL}/api/admin/${user._id}`, {isAdmin: isAdmin})
             .then(res=>{
-                console.log(res)
+                // console.log(res)
             })
         }
     }

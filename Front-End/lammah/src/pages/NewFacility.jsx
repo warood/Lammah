@@ -51,11 +51,11 @@ export default function NewFacility(props) {
       }
 
     const onSubmit = (values) => {
-        console.log(values)
+        // console.log(values)
         axios
             .post(`${API_URL}/api/facility/new-facility`, values)
             .then((res) => {
-                console.log(res)
+                // console.log(res)
                 history.push("/facilities");
              alert("Wait for our confirmation to add your facility.Thank You !!");
             })
@@ -63,13 +63,13 @@ export default function NewFacility(props) {
     }
 
     const uploadImageHundler = (e) => {
-        console.log(e.target.files[0])
+        // console.log(e.target.files[0])
         var format = new FormData()
         format.append("file", e.target.files[0])
         format.append('upload_preset', 'lammah')
         axios.post("https://api.cloudinary.com/v1_1/dwyky6yt6/image/upload", format)
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setUpdateFacilityImg(data.data.url)
             })
     }
@@ -120,7 +120,7 @@ export default function NewFacility(props) {
 
                             <Form.Group as={Row} controlId="formPlaintextNameLocation">
                                 <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" }} sm="2">
-                                    Location
+                                    {t("location")}
                                 </Form.Label>
                                 <Form.Control as={Field} placeholder="Add Location Link" name="location" type="text" />
                             </Form.Group>

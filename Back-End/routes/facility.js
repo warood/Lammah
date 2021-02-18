@@ -17,7 +17,7 @@ router.get("/facilities", (req, res) => {
 
 // add a new Facility
 router.post("/new-facility", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const {
     name,
     images,
@@ -41,7 +41,7 @@ router.post("/new-facility", (req, res) => {
       user: userId,
     },
     (err, newFacility) => {
-      console.log("new Facility: ", newFacility);
+      // console.log("new Facility: ", newFacility);
       res.json({ msg: "add Facility", newFacility });
     }
   );

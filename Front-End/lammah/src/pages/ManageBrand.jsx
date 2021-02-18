@@ -37,8 +37,8 @@ export default function ManageBrand(props) {
             {props.auth.isLoggedIn ?
                 <div className="ManageBrand">
                     <h1>{t("my_requests")}</h1>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit esse accusamus delectus reprehenderit asperiores, magnam accusantium sunt. Laboriosam provident, ullam error eveniet animi accusamus sit, corrupti ex ab officiis minima?</p>
-                    <hr />
+                    
+                    
                     <Tabs className="tap"
                         id="controlled-tab-example"
                         activeKey={key}
@@ -58,7 +58,7 @@ export default function ManageBrand(props) {
                             <ManageFacilities auth={props.auth} afterUpdateFacility={afterUpdateFacility} setAfterUpdateFacility={setAfterUpdateFacility} />
                             <br />
                         </Tab>
-                        <Tab  className="tap" eventKey="contact" title="Confirmed Reservations" >
+                        <Tab  className="tap" eventKey="contact" title={t("confirmed_reservations")} >
                             <ConfirmAppointment auth={props.auth} facilities={facilities} />
                         </Tab>
                     </Tabs>

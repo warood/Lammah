@@ -16,7 +16,7 @@ export default function ManageOneFacility(props) {
     //To display text as stored with styling
     const createMarkup = (html) => {
         return {
-            __html: DOMPurify.sanitize(html)
+            __html: DOMPurify.sanitize(html, {ALLOWED_TAGS: ['b']})
         }
     }
 

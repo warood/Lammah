@@ -65,5 +65,16 @@
     "yes": "Yes",
     "you_must_choose_one": "You must choose one",
     "facility_name_is_required": "Facility name is required",
-    "facility_price_is_required": "Facility price is required"
+    "facility_price_is_required": "Facility price is required",
+    "this_field_is_reqiured": "This Field is Reqiured",
+    "must_be_10_numbers": "must be 10 numbers ",
+    "please_enter_your_password": "Please Enter your password",
+    "passwords_not_match": "Passwords not match",
+    "must_contain_8_characters": "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character",
+    "this_email_is_already_used": "This email is already used. Please change it",
+    "confirm_password": "Confirm Password",
+    "your_email_or_password_is_wrong": "Your email or password is wrong",
+    "please_enter_your_email": "Please Enter your email",
+    "if_you_want_to_contant_facility_owner": "If you want to contant facility owner",
+    "go_to_your_page_and_you_can_find_his_contact_information": "Go to your Page and you can find his contact information"
   }

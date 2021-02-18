@@ -57,7 +57,9 @@ export default function MyPage(props) {
     const onSubmit = () => {
 
         axios.put(`${API_URL}/api/user/${_id}`, editProfile)
-            .then(res => console.log('from backend i recieved ', res))
+            .then(res => {
+                
+            })
 
         setShow(false);
 

@@ -65,5 +65,16 @@
     "yes": "نعم",
     "you_must_choose_one": "اختر واحد",
     "facility_name_is_required": "اسم المنشأة اجباري",
-    "facility_price_is_required": "السعر اجباري"
+    "facility_price_is_required": "السعر اجباري",
+    "this_field_is_reqiured": "هذا الحقل اجباري",
+    "must_be_10_numbers": "يجب أن يحتوي على 10 أرقام",
+    "please_enter_your_password": "الرجاء ادخال الرقم السري",
+    "passwords_not_match": "الرقم السري غير متطابق",
+    "must_contain_8_characters": "يجب ان يحتوي على ارقام، حرف كبير وصغير، ورمز خاص",
+    "this_email_is_already_used": "هذا الايميل مستخدم من قبل",
+    "confirm_password": "تأكيد كلمة المرور",
+    "your_email_or_password_is_wrong": "الايميل أو الرقم السري غير صحيح",
+    "please_enter_your_email": "الرجاء إدخال البريد الإلكتروني",
+    "if_you_want_to_contant_facility_owner": "للتواصل مع صاحب المنشأة",
+    "go_to_your_page_and_you_can_find_his_contact_information": "يمكنك ايجاد معلومات التواصل في صفحتك الشخصية"
   }

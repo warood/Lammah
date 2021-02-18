@@ -113,20 +113,20 @@ router.post('/forgot', (req, res) => {
   User.findOne({ email: req.body.email }, function (err, foundUser) {
 
     password = req.body.password;
-    console.log(foundUser);
+    // console.log(foundUser);
     bcrypt.genSalt((err, salt) => {
       // changes every time
-      console.log("bcrypt salt:", salt);
+      // console.log("bcrypt salt:", salt);
       bcrypt.hash(password, salt, (err, passwordHash) => {
-        console.log("password:", password);
-        console.log("passwordHash:", passwordHash);
+        // console.log("password:", password);
+        // console.log("passwordHash:", passwordHash);
         User.updateOne({ email: req.body.email }, { password: passwordHash }, (err, newUser) => {
 
         });
       });
     });
     if (!foundUser) {
-      console.log('No user with email ' + email);
+      // console.log('No user with email ' + email);
     }
   })
 })
@@ -136,7 +136,7 @@ const checkExpiredAppointments = async (req, res, next) =>{
     let response = await Appointment.deleteMany({createdAt: {
       $lte: new Date(new Date().getTime()-60*120*1000).toISOString()
    }, status: "waiting"})
-    console.log('deleted appointments last 5 min', response.deletedCount)
+    // console.log('deleted appointments last 5 min', response.deletedCount)
     next()
   }catch(err){
     res.json({msg: "unknown server error"})

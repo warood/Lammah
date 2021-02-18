@@ -274,6 +274,20 @@ return (
 
         </Col>
 
+        {(showOnerInfo) ?
+
+<>
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">{t("if_you_want_to_contant_facility_owner")}</h4>
+
+    <p>{t("go_to_your_page_and_you_can_find_his_contact_information")}</p>
+    {/* <p>Name: {user.name}</p>
+    <p class="mb-0">Phone: {user.phone}</p> */}
+  </div>
+
+</> : <></>
+}
+
 
       </Row>
       <hr style={{
@@ -315,7 +329,7 @@ return (
           }}>
           <label for="fname">{t("rating")}</label><br></br>
           <div className={classes.root}>
-            <Rating name="size-medium" defaultValue={2} value={rating} onChange={handleChange} />
+            <Rating name="size-medium" defaultValue={2} value={rating} onChange={handleChange} dir="ltr" />
           </div>
           <label for="comment">{t("comment")}</label><br></br>
           <textarea
