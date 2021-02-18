@@ -47,6 +47,7 @@ export default function OneFacility(props) {
   const [displayAllComments, setdisplayAllComments] = useState([])
   const [showOnerInfo, setShowOnerInfo] = useState(false);
   const [minImages, setMinImages] = useState([])
+  const [showImage , setShowImage]= useState(false);
 
   //For Translation
   const { t } = useTranslation();
@@ -113,8 +114,7 @@ export default function OneFacility(props) {
 
 
   useEffect(() => {
-
-    if (!city) {
+    // if (!city) {
       axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
         .then(res => {
           //let facility = res.data.find((ele) => ele._id == id);
@@ -123,21 +123,18 @@ export default function OneFacility(props) {
           setMainImage(res.data.facility.images[0]);
           setMinImages(res.data.facility.images)
           const addDate = res.data.facility.appointment.map((ele) => {
-
             return new Date(ele.date);
-
           })
           setDateOfAllApointment(addDate)
-
         })
-
-    }
+    // }
     axios.get(`http://localhost:5000/api/rating/${id}/ratings`)
-      .then(res => {
-        setdisplayAllComments(res.data.ratings)
-      })
+    .then(res => {
+      setdisplayAllComments(res.data.ratings)
+    })
 
-  }, [refreshPage]);
+    setShowImage(!showImage);
+  }, [refreshPage],[showImage]);
 
 
 

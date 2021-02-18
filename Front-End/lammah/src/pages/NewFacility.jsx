@@ -140,7 +140,7 @@ export default function NewFacility(props) {
             <div className="NewFacility">
                 <Container className="justify-content-center" className=" pt-5" style={{
                     height: '1800px',
-                    boxShadow: '0 4px 8px 0 gray, 0 6px 20px 0 gray',
+                    boxShadow: '0 4px 8px 0 gray, 0 6px 20px 0 orange',
                     padding: "10% 10% 1050px 10%",
                     margin: '50px auto 400px auto',
                     maxWidth: '700px'
