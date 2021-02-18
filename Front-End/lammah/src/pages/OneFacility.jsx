@@ -134,6 +134,12 @@ export default function OneFacility(props) {
         setdisplayAllComments(res.data.ratings)
       })
 
+      axios.get(`${API_URL}/api/facility/facilities/${id}/view`)
+      .then(res => {
+        //let facility = res.data.find((ele) => ele._id == id);
+        // console.log(res)
+      })
+
     setShowImage(!showImage);
   }, [refreshPage], [showImage]);
 
@@ -151,7 +157,7 @@ export default function OneFacility(props) {
 
     //console.log('newAppointment',apointment)
 
-    axios.post("http://localhost:5000/api/appointment/new-appointment", apointment)
+    axios.post(`${API_URL}/api/appointment/new-appointment`, apointment)
       .then((res) => {
       })
       .catch((err) =>{} );
@@ -260,7 +266,6 @@ export default function OneFacility(props) {
 
                 />
 
-
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={onSubmit}>
@@ -286,7 +291,7 @@ export default function OneFacility(props) {
 
           </Col>
 
-          <div style={{ height: "25vh", width: "100%", minWidth: '500px', }}>
+          <div style={{ height: "25vh", width: "100%", minWidth: '300px', }}>
             <WrappedMap
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
               loadingElement={<div style={{ height: `100%` }} />}

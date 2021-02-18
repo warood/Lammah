@@ -54,6 +54,21 @@ router.get("/facilities/:id", (req, res) => {
   Facility.findById(id)
     .populate("appointment").populate('user')
     .then((facility) => {
+      
+        res.json({ facility });
+
+    });
+});
+// =====================
+
+// ====================
+
+// add view
+router.get("/facilities/:id/view", (req, res) => {
+  let id = req.params.id;
+  Facility.findById(id)
+    .populate("appointment").populate('user')
+    .then((facility) => {
       var views = 1
       views += facility.views
       Facility.updateOne({ _id: id },{ views: views})

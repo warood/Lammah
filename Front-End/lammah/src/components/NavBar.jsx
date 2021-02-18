@@ -136,10 +136,7 @@ export const NavBar = (props) => {
                         <Link to="/manage-brand" className="menu-element">{t("my_requests")}</Link>
                         :
                         <></>}
-                    {props.auth.isLoggedIn ?
-                        <Link to="/my-page" className="menu-element">{t("my_page")}</Link>
-                        :
-                        <></>}
+
                     {props.auth.isLoggedIn ?
                         <Link to="/new-facility" className="menu-element">{t("new_facility")}</Link>
 
