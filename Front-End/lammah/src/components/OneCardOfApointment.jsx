@@ -17,7 +17,7 @@ export default function OneCardOfApointment(props) {
     const handleClose = () => setShow(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/user/users')
+        axios.get(`${API_URL}/api/user/users`)
             .then((res) => {
                 // console.log(res.data.msg)
                 setAllUsers(res.data.msg)

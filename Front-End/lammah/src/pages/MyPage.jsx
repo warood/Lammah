@@ -64,7 +64,7 @@ export default function MyPage(props) {
 
 
         //to show new changes in user profile 
-        axios.get(`http://localhost:5000/api/user/my-page/${_id}`)
+        axios.get(`${API_URL}/api/user/my-page/${_id}`)
 
             .then((res) => {
                 setUserInformation(res.data.user_info)

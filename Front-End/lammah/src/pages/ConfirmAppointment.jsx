@@ -1,3 +1,5 @@
+import API_URL from '../apiConfig.js'
+
 import React from 'react';
 import ShowConfirmApp from './ShowConfirmApp';
 import { useTranslation } from "react-i18next";

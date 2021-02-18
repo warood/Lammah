@@ -82,7 +82,7 @@ export default function OneFacility(props) {
 
   const onSubmitRating = (e) => {
     e.preventDefault()
-    axios.post(`http://localhost:5000/api/rating/${id}/new-rating`,
+    axios.post(`${API_URL}/api/rating/${id}/new-rating`,
       { stars: rating, comment: commentChange, userId: props.auth.currentUser._id })
       .then(res => {
         // make comment areatext empty
@@ -100,7 +100,7 @@ export default function OneFacility(props) {
     setShow(true);
     // setApointment({ date: date, facility: selectFacility, status: "waiting", userId: userId })
 
-    axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
+    axios.get(`${API_URL}/api/facility/facilities/${id}`)
       .then(res => {
         const addDate = res.data.facility.appointment.map((ele) => {
 
@@ -115,7 +115,7 @@ export default function OneFacility(props) {
 
   useEffect(() => {
     // if (!city) {
-    axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
+    axios.get(`${API_URL}/api/facility/facilities/${id}`)
       .then(res => {
         //let facility = res.data.find((ele) => ele._id == id);
         // console.log(res)
@@ -129,7 +129,7 @@ export default function OneFacility(props) {
         setDateOfAllApointment(addDate)
       })
     // }
-    axios.get(`http://localhost:5000/api/rating/${id}/ratings`)
+    axios.get(`${API_URL}/api/rating/${id}/ratings`)
       .then(res => {
         setdisplayAllComments(res.data.ratings)
       })

@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";

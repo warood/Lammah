@@ -15,11 +15,11 @@ export default function Footer() {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Horizon Team 
+          Exploreres Team 
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>This site created by © Horizon Team  2021-1 </p>
+          <p>This site created by © Exploreres Team  2021-1 </p>
           <p>Members:</p>
           <ul>
 
