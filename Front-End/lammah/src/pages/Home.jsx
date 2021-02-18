@@ -14,8 +14,9 @@ export const Home = (props) => {
 
 
         <div className="Home">
-            <HomeHeader loginCallback={props.loginCallback} auth={props.auth} />
+            <HomeHeader loginCallback={props.loginCallback} auth={props.auth}/>
             <HomeSection />
+
         </div>
 
     );

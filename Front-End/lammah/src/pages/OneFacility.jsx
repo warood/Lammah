@@ -136,10 +136,7 @@ export default function OneFacility(props) {
       .then(res => {
         setdisplayAllComments(res.data.ratings)
       })
-    axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
-      .then(res => {
-      })
-    
+
   }, [refreshPage]);
 
 
@@ -197,7 +194,7 @@ export default function OneFacility(props) {
       }}>
         <Row style={{ marginBottom: "50px" }}>
 
-          <Col col-md-3>
+          <Col col-md-3 style={{maxWidth: '80px'}}>
             {allFacilities}
           </Col>
 
@@ -281,11 +278,11 @@ export default function OneFacility(props) {
 
           </Col>
 
-          <div style={{ height: "100vw", width: "100vh" }}>
+          <div style={{ height: "50vh", width: "100%", minWidth: '500px',  }}>
             <WrappedMap
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
               loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `400px` }} />}
+              containerElement={<div style={{ height: `200px` ,width: '80%', margin: 'auto'}} />}
               mapElement={<div style={{ height: `100%` }} />}
 
             /></div>

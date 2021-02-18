@@ -71,20 +71,26 @@ export default function HomeSection() {
                             <h1>TOP FACILITIES</h1>
 
                             <h2
-                                style={{ color: 'black', fontSize: '1em' }}
+                                style={{ fontSize: '1em' }}
                             >THIS Month</h2>
                         </div>
                         <div className="tf-description">
-                            <p>
+                            <div>
                                 Because we Know how social life is important, so Lammah gives you
                                 the opportunity to access more than 100 chalets and camps around
                                 Kingdom of Saudi Arabia in an easy way to get comfortable meetings
                                 with your families and your friends .
-                        </p>
-
                         </div>
 
-                        {/* <Carousel style={{ height: "auto", width: "auto" }}>
+                        </div>
+                        <div style={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+
+                        }}>
+                        <Carousel style={{  width: "auto" }}>
                             <Carousel.Item interval={1500}>
                                 <Link
                                     style={{ textDecoration: "none" }}>
@@ -175,6 +181,7 @@ export default function HomeSection() {
 
                                     </Card>
                                 </Link>
+                                
                             </Carousel.Item>
                             <Carousel.Item interval={1500}>
                                 <Link
@@ -361,12 +368,13 @@ export default function HomeSection() {
 
                                     </Card>
                                 </Link>
+                                
                             </Carousel.Item>
 
 
 
-                        </Carousel> */}
-
+                        </Carousel>
+                        </div>
                     </div>
 
                     {/* ========================================= */}
@@ -375,7 +383,7 @@ export default function HomeSection() {
                     {/* ========================================= */}
                     {/* 1st section "Top Facilities" 2st Row */}
                     {/* ========================================= */}
-                    <div className="tf-items">
+                    <div className="tf-items" style={{marginTop: '400px'}}>
                         <div className="item1">
                             <img src={confirmedFacility[index1].images[0]} />
                         </div>
@@ -387,9 +395,8 @@ export default function HomeSection() {
                             <img src={confirmedFacility[index4].images[0]} />
                         </div>
                     </div>
-                    ========================================= */}
-
-
+                   {/* ========================================= */}
+                   <div className="vs-section" />
                 </div>
 
             </>

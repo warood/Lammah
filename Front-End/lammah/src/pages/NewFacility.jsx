@@ -139,7 +139,7 @@ export default function NewFacility(props) {
 
             <div className="NewFacility">
                 <Container className="justify-content-center" className=" pt-5" style={{
-                    height: '1200px',
+                    height: '1800px',
                     boxShadow: '0 4px 8px 0 gray, 0 6px 20px 0 gray',
                     padding: "10% 10% 1050px 10%",
                     margin: '50px auto 400px auto',
@@ -183,23 +183,24 @@ export default function NewFacility(props) {
 
                             <Form.Group as={Row} controlId="formPlaintextCity">
                                  
-                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" , minWidth: '100%'}} sm="2">
-                                    {t("city")} 
-                                </Form.Label>
+                                
                                 <h4>
                                     Location
                                 </h4>
-                                <div style={{ height: "100vw", width: "100vh" }}>
+                                <div style={{  marginBottom: '30px',width: "100vh" }}>
                                     <WrappedMap
                                         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
                                         loadingElement={<div style={{ height: `100%` }} />}
-                                        containerElement={<div style={{ height: `400px` }} />}
+                                        containerElement={<div style={{ height: `200px` }} />}
                                         mapElement={<div style={{ height: `100%` }} />}
                                         
                                         />
                                  
 
                                 </div>
+                                <Form.Label style={{ fontFamily: "serif", fontWeight: "bold" , minWidth: '100%'}} sm="2">
+                                    {t("city")} 
+                                </Form.Label>
                                 <Field size="mm" as="select" name="city">
                                     <option value="">{t("choose_city")}</option>
                                     <option value="Riyadh">{t("riyadh")}</option>

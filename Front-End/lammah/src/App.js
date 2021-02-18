@@ -23,6 +23,7 @@ import MyPage from './pages/MyPage'
 import ManageBrand from "./pages/ManageBrand";
 import Facility from "./pages/OneFacility";
 import Admin from "./pages/Admin";
+import Footer from "./components/Footer";
 
 //Styles
 import './style/facilities.css';
@@ -32,7 +33,7 @@ import './style/OneFacility.css';
 import "./style/admin.css";
 import "./style/my-page.css";
 import "./style/OneComment.css";
-
+import "./style/footer.css";
 // styles
 import "./css/home.css";
 import "./css/nav-bar.css";
@@ -90,7 +91,7 @@ function App() {
     
     <GlobalStyles/>
       <div className="App">
-       
+      
         
 {dataLoading &&
 
@@ -152,15 +153,15 @@ function App() {
           
           </>}
           
-
+         
         </Router>
 } 
 
 
+<Footer />
 
 
     </div> 
-
     </>
     </ThemeProvider>
   );

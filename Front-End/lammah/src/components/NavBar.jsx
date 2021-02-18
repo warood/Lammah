@@ -86,7 +86,7 @@ export const NavBar = (props) => {
                         :
                         <></>}
                     <div className="language-select">
-                        <LanguageSelect />
+                        <LanguageSelect  />
                     </div>
                     <FormControlLabel
                         value="Dark Theme"
