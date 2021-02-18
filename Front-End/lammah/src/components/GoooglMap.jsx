@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React from "react";
 import {
   withScriptjs,
@@ -29,12 +30,12 @@ function GoooglMap() {
 
   React.useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:5000/api/facility/facilities/${id}`)
-      .then((data) => {
-     
-          setMarker({getLat : data.data.facility.location.lat , getLen :  data.data.facility.location.lng});
+      axios.get(`${API_URL}/api/facility/facilities/${id}`)
+        .then((data) => {
+
+          setMarker({ getLat: data.data.facility.location.lat, getLen: data.data.facility.location.lng });
           setCantchangr(false);
-      });
+        });
     }
   }, []);
 

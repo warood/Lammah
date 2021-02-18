@@ -1,3 +1,5 @@
+import API_URL from '../apiConfig.js'
+
 import React from 'react'
 import Moment from 'react-moment';
 // material-ui

@@ -56,13 +56,15 @@ export default function MyPage(props) {
     const onSubmit = () => {
 
         axios.put(`${API_URL}/api/user/${_id}`, editProfile)
-            .then(res => console.log('from backend i recieved ', res))
+            .then(res => {
+                
+            })
 
         setShow(false);
 
 
         //to show new changes in user profile 
-        axios.get(`http://localhost:5000/api/user/my-page/${_id}`)
+        axios.get(`${API_URL}/api/user/my-page/${_id}`)
 
             .then((res) => {
                 setUserInformation(res.data.user_info)
@@ -76,7 +78,7 @@ export default function MyPage(props) {
 
     //show all user aponintments
     const allApointment = apointments.map((apointment, index) => {
-        console.log(apointment)
+        // console.log(apointment)
         return <OneCardOfApointment
             apointmentsDate={apointment.date}
             status={apointment.status}
@@ -152,7 +154,7 @@ export default function MyPage(props) {
 
 
 
-                        <Modal show={show} onHide={handleClose}>
+                        <Modal show={show} onHide={handleClose} style= {{color: 'black'}}>
                             <Modal.Header closeButton >
                                 <Modal.Title style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}>{t("edit_your_info")}</Modal.Title>
                             </Modal.Header>

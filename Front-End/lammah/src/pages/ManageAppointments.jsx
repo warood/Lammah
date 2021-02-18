@@ -12,7 +12,7 @@ export default function ManageAppointments(props) {
     useEffect(() => {
         axios.get(`${API_URL}/api/user/manage-brand/${userId}`)
             .then((res) => {
-                console.log(res)
+                // console.log(res)
                 setFacilities(res.data.facilities)
 
             })

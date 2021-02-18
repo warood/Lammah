@@ -32,7 +32,7 @@ export default function ManageOneAppointments(props) {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/user/users')
+        axios.get(`${API_URL}/api/user/users`)
             .then((res) => {
 
                 // console.log(res.data.msg)
@@ -50,7 +50,7 @@ export default function ManageOneAppointments(props) {
 
     //Confirm Appointment
     const confirmAppointment = (appointmentId) => {
-        axios.put(`http://localhost:5000/api/appointment/${appointmentId}/confirm`)
+        axios.put(`${API_URL}/api/appointment/${appointmentId}/confirm`)
             .then(data => {
                 props.setAfterConfirm(!props.afterConfirm);
             })
@@ -59,7 +59,7 @@ export default function ManageOneAppointments(props) {
 
     //Delete Appointment
     const deleteAppointment = (facilityId, appointmentId) => {
-        axios.delete(`http://localhost:5000/api/appointment/${appointmentId}/${facilityId}`)
+        axios.delete(`${API_URL}/api/appointment/${appointmentId}/${facilityId}`)
             .then(data => {
                 props.setAfterCancel(!props.afterCancel)
             })
@@ -154,7 +154,7 @@ export default function ManageOneAppointments(props) {
             <br />
 
             {/* Confirm Modal */}
-            <Modal show={showConfirm} onHide={handleCloseConfirm}>
+            <Modal show={showConfirm} onHide={handleCloseConfirm} style= {{color: 'black'}}>
                 <Modal.Header closeButton>
                     <Modal.Title>{t("confirm_reservation")}</Modal.Title>
                 </Modal.Header>
@@ -174,7 +174,7 @@ export default function ManageOneAppointments(props) {
 
             </Modal>
             {/* Cancel Modal */}
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} style= {{color: 'black'}}>
                 <Modal.Header closeButton>
                     <Modal.Title>{t("confirm_delete")}</Modal.Title>
                 </Modal.Header>

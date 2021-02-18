@@ -1,3 +1,4 @@
+
 import API_URL from '../apiConfig.js'
 import React from "react";
 import HomeHeader from '../components/HomeHeader'
@@ -14,8 +15,9 @@ export const Home = (props) => {
 
 
         <div className="Home">
-            <HomeHeader loginCallback={props.loginCallback} auth={props.auth} />
+            <HomeHeader loginCallback={props.loginCallback} auth={props.auth}/>
             <HomeSection />
+
         </div>
 
     );

@@ -12,17 +12,17 @@ import Switch from '@material-ui/core/Switch';
 import { useTranslation } from "react-i18next";
 import LanguageSelect from "./LanguageSelect";
 
-const validationSchema = Yup.object({
-    email: Yup.string().required(" Enter your email ").email("example@example.com"),
-    password: Yup.string().required(" Enter password "),
-})
-
 export const NavBar = (props) => {
     // Login functional
     const history = useHistory();
 
     //For Translation
     const { t } = useTranslation();
+
+    const validationSchema = Yup.object({
+        email: Yup.string().required(t("please_enter_your_email")).email("example@example.com"),
+        password: Yup.string().required(t("please_enter_your_password")),
+    })
 
     const [show, setShow] = useState(false);
     const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -86,7 +86,7 @@ export const NavBar = (props) => {
                         :
                         <></>}
                     <div className="language-select">
-                        <LanguageSelect />
+                        <LanguageSelect  />
                     </div>
                     <FormControlLabel
                         value="Dark Theme"
@@ -107,7 +107,7 @@ export const NavBar = (props) => {
                             }}>
                             {t("login")}
                         </Link>}
-                    {console.log(props.auth)}
+                    {/* {console.log(props.auth)} */}
 
                     {props.auth.isLoggedIn ?
                         <Link
@@ -158,14 +158,16 @@ export const NavBar = (props) => {
                         onHide={handleClose}
                         backdrop="static"
                         keyboard={false}
+                        style= {{color: 'black'}}
                     >
                         {!login && (
                             <Alert variant={"danger"}>
-                                Your email or password is wrong
+                                {t("your_email_or_password_is_wrong")}
                             </Alert>
                         )}
-                        <Modal.Header closeButton>
-                            <Modal.Title>{t("logout")}</Modal.Title>
+                        <Modal.Header closeButton
+                        style= {{color: 'black'}}>
+                            <Modal.Title>{t("login")}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Formik 
@@ -205,7 +207,7 @@ export const NavBar = (props) => {
                                        </Link>
                                                     </p>
 
-                                                <Button type="submit" style={{ marginLeft: "150px" }} variant="secondary">{t("logout")}</Button>
+                                                <Button type="submit" style={{ marginLeft: "150px" }} variant="secondary">{t("login")}</Button>
                                             </Col>
                                         </Form.Group>
 

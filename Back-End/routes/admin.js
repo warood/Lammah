@@ -42,7 +42,7 @@ router.put('/:userId', (req, res)=>{
     User.findOne({_id: userId})
     .then(user=>{
         User.updateOne({_id: userId}, {isAdmin: !isAdmin}, (err, updateUser)=>{
-            console.log("user isAdmin", updateUser)
+            // console.log("user isAdmin", updateUser)
             res.json({msg: "update user", updateUser})
         })
     })

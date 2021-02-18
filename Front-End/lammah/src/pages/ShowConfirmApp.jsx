@@ -1,3 +1,4 @@
+import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import axios from 'axios';
@@ -9,7 +10,7 @@ export default function ShowConfirmApp(props) {
     const [allUsersA, setAllUsersA] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/user/users')
+        axios.get(`${API_URL}/api/user/users`)
             .then((res) => {
                 setAllUsers(res.data.msg)
                 setAllUsersA(true)

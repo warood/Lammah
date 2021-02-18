@@ -1,3 +1,4 @@
+
 import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -14,7 +15,7 @@ export default function Facilities(props) {
     const [facilities, setFacilities] = useState([])
     const [Radiocity, setRadioCity] = useState("");
     let term = props.search;
-    
+
     //For Translation
     const { t } = useTranslation();
 
@@ -220,10 +221,6 @@ export default function Facilities(props) {
 
 
     }
-
-
-
-
 
     //Render Facilities page
     return (
