@@ -37,6 +37,7 @@ export default function HomeSection() {
 
                 setConfirmedFacility(allFacilities);
 
+
             })
 
         axios.get(`${API_URL}/api/facility/topFacilities`)
