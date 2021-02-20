@@ -53,6 +53,9 @@ export default function OneFacility(props) {
   const { t } = useTranslation();
   const [mainimage, setMainImage] = useState("")
 
+  
+  var mainImage_url = 'https'+mainimage.substring(mainimage.indexOf(":"))
+
   //To display text as stored with styling
   const createMarkup = (html) => {
     return {
@@ -182,8 +185,9 @@ export default function OneFacility(props) {
   })
 
   let allFacilities = minImages.map((image, i) => {
+    var image_url = 'https'+image.substring(image.indexOf(":"))
     return (
-      <Row key={i}><img className="smallIMG" src={image} alt="" srcSet="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
+      <Row key={i}><img className="smallIMG" src={image_url} alt="" srcSet="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
     )
   })
 
@@ -214,7 +218,7 @@ export default function OneFacility(props) {
 
 
 
-            <img className="mainIMG" src={mainimage} alt="" srcSet=""
+            <img className="mainIMG" src={mainImage_url} alt="" srcSet=""
               style={{
                 width: '100%',
                 marginBottom: '10%',
