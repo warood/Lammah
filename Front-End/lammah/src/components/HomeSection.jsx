@@ -81,10 +81,7 @@ export default function HomeSection() {
                         </div>
                         <div className="tf-description">
                             <div>
-                                Because we Know how social life is important, so Lammah gives you
-                                the opportunity to access more than 100 chalets and camps around
-                                Kingdom of Saudi Arabia in an easy way to get comfortable meetings
-                                with your families and your friends .
+                               {t("top_facilities_description")}
                         </div>
 
                         </div>

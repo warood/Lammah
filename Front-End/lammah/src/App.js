@@ -1,5 +1,3 @@
-import API_URL from "./apiConfig.js";
-
 // Others
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,8 +9,6 @@ import jwt_decode from "jwt-decode";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/GlobalStyles";
 import { lightTheme, darkTheme } from "./components/Themes";
-import { CgSun } from "react-icons/cg";
-import { HiMoon } from "react-icons/hi";
 import "./i18nextInit";
 
 //Pages
@@ -34,9 +30,8 @@ import "./style/admin.css";
 import "./style/my-page.css";
 import "./style/OneComment.css";
 import "./style/footer.css";
-// styles
-import "./css/home.css";
-import "./css/nav-bar.css";
+import "./style/home.css";
+import "./style/nav-bar.css";
 
 // components
 import { NavBar } from "./components/NavBar";

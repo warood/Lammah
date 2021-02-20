@@ -1,6 +1,5 @@
 import API_URL from '../apiConfig.js'
 import React, { useEffect, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import axios from 'axios';
 import Moment from 'react-moment';
 

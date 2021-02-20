@@ -1,5 +1,5 @@
 import API_URL from '../apiConfig.js'
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Row, Form, Col, Button, Container, Alert } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
