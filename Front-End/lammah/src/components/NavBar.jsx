@@ -89,28 +89,27 @@ export const NavBar = (props) => {
                         <LanguageSelect  />
                     </div>
                     <FormControlLabel
-                        value="Dark Theme"
+                        value="Dark Mode"
                         control={<Switch color="secondary" />}
-                        label="Dark Theme"
-                        labelPlacement="Dark Theme"
+                        label="Dark Mode"
                         style={{ color: 'white' }}
                         onClick={props.themeToggler}
                     />
                     {props.auth.isLoggedIn ?
                         <></>
                         :
-                        <Link
+                        <div
                             className="menu-element"
                             onClick={() => {
                                 handleShow()
                                 props.loginCallback()
                             }}>
                             {t("login")}
-                        </Link>}
+                        </div>}
                     {/* {console.log(props.auth)} */}
 
                     {props.auth.isLoggedIn ?
-                        <Link
+                        <div
                             className="menu-element"
                             onClick={() => {
 
@@ -120,7 +119,7 @@ export const NavBar = (props) => {
                                     ;
                             }}>
                             {t("logout")}
-                        </Link>
+                        </div>
                         : <></>}
 
                 </div>

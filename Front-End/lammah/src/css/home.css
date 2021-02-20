@@ -188,6 +188,7 @@ body {
   font-weight: bold;
   font-size: 0.8em;
 }
+
 @media (max-width: 500px) {
   .Home .facility-card {
     min-width: 230px;

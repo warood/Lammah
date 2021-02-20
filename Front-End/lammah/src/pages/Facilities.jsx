@@ -235,13 +235,13 @@ export default function Facilities(props) {
                 alignItems: 'center',
             }}>
                 <input style={{ margin: '0 0 0 0' }} type="radio" id="jeddah" name="city" value="jeddah" onChange={(e) => { setRadioCity(e.target.value) }} />
-                <label style={{ margin: '0 0 0 1%' }} for="jeddah">{t("jeddah")}</label>
+                <label style={{ margin: '0 0 0 1%' }} htmlFor="jeddah">{t("jeddah")}</label>
                 <input style={{ margin: '0 0 0 2%' }} type="radio" id="dammam" name="city" value="dammam" onChange={(e) => { setRadioCity(e.target.value) }} />
-                <label style={{ margin: '0 0 0 1%' }} for="dammam">{t("dammam")}</label>
+                <label style={{ margin: '0 0 0 1%' }} htmlFor="dammam">{t("dammam")}</label>
                 <input style={{ margin: '0 0 0 2%' }} type="radio" id="riyadh" name="city" value="riyadh" onChange={(e) => { setRadioCity(e.target.value) }} />
-                <label style={{ margin: '0 0 0 1%' }} for="riyadh">{t("riyadh")}</label>
+                <label style={{ margin: '0 0 0 1%' }} htmlFor="riyadh">{t("riyadh")}</label>
                 <input style={{ margin: '0 0 0 2%' }} type="radio" id="all" name="city" value="" onChange={(e) => { setRadioCity(e.target.value) }} />
-                <label style={{ margin: '0 0 0 1%' }} for="all">{t("all")}</label>
+                <label style={{ margin: '0 0 0 1%' }} htmlFor="all">{t("all")}</label>
             </div>
             <Container className="container">
 

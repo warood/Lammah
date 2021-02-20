@@ -80,7 +80,7 @@ function App() {
 
     setDataloading(true)
   };
-  console.log("The current User is: ", auth.currentUser, "data loading", dataLoading);
+  // console.log("The current User is: ", auth.currentUser, "data loading", dataLoading);
   useEffect(userLogin, []);
 
   const ToSetSearch = (text)=>{ setSearch(text)}

@@ -183,7 +183,7 @@ export default function OneFacility(props) {
 
   let allFacilities = minImages.map((image, i) => {
     return (
-      <Row><img className="smallIMG" src={image} alt="" srcset="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
+      <Row key={i}><img className="smallIMG" src={image} alt="" srcSet="" onClick={(e) => { setMainImage(e.target.src) }} /></Row>
     )
   })
 
@@ -198,7 +198,7 @@ export default function OneFacility(props) {
       }}>
         <Row style={{ marginBottom: "50px" }}>
 
-          <Col col-md-3 style={{ maxWidth: '80px' }}>
+          <Col style={{ maxWidth: '80px' }}>
             {allFacilities}
           </Col>
 
@@ -214,7 +214,7 @@ export default function OneFacility(props) {
 
 
 
-            <img className="mainIMG" src={mainimage} alt="" srcset=""
+            <img className="mainIMG" src={mainimage} alt="" srcSet=""
               style={{
                 width: '100%',
                 marginBottom: '10%',
@@ -224,7 +224,7 @@ export default function OneFacility(props) {
 
 
           {/* facility details */}
-          <Col col-md-3 style={{
+          <Col  style={{
             minWidth: '250px',
             maxWidth: '500px',
             padding: '0 2% 2% 2%',

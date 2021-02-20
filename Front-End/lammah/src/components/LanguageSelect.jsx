@@ -46,8 +46,9 @@ const LanguageSelect = () => {
         <div>
           <List>
             <ListSubheader>{t("select_language")}</ListSubheader>
-            {Object.keys(languageMap)?.map(item => (
+            {Object.keys(languageMap)?.map((item,i) => (
               <ListItem
+                key={i}
                 button
                 key={item}
                 onClick={() => {

@@ -84,11 +84,11 @@ export default function Admin(props) {
     
 
     /*    *****    MAP ALL Facilities    *****       */
-    const allFacilities = facilities.map(facility => {
+    const allFacilities = facilities.map((facility,i) => {
 
         return (
             <>
-                <div className='content-container'>
+                <div className='content-container' key={i}>
                     <img
                         src={facility.images[0]}
                         alt=""
@@ -101,11 +101,11 @@ export default function Admin(props) {
         )
     })
     /*    *****    MAP ALL USERS    *****       */
-    const allUsers = users.map(user => {
+    const allUsers = users.map((user,i) => {
 
         return (
             <>
-                <div className='content-container'>
+                <div className='content-container' key={i}>
                     <img
                         src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
                         alt=""
@@ -131,10 +131,10 @@ export default function Admin(props) {
 
     let newAdd = facilities.filter(function (facility) { 
         return facility.status == 0; 
-    }).map(function (facility) { 
+    }).map(function (facility,i) { 
         return (
             <>
-                <div className='content-container'>
+                <div className='content-container' key={i}>
                     <img
                         src={facility.images[0]}
                         alt=""

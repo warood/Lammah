@@ -98,6 +98,7 @@ export default function HomeSection() {
                             <Carousel style={{ width: "auto" }}>
                                 <Carousel.Item interval={1500}>
                                     <Link
+                                        to="/"
                                         style={{ textDecoration: "none" }}>
                                         <Card className="facility-card" >
                                             <Card.Img variant="top"
@@ -191,7 +192,7 @@ export default function HomeSection() {
                                 <Carousel.Item interval={1500}>
                                     <Link
 
-
+                                        to="/"
                                         style={{ textDecoration: "none" }}>
                                         <Card className="facility-card" >
                                             <Card.Img variant="top"
@@ -284,7 +285,7 @@ export default function HomeSection() {
                                 <Carousel.Item interval={1500}>
                                     <Link
 
-
+                                        to="/"
                                         style={{ textDecoration: "none" }}>
                                         <Card className="facility-card" >
                                             <Card.Img variant="top"

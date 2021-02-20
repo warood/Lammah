@@ -65,6 +65,7 @@ export default function ManageBrand(props) {
 
 
                 </div>
+                
                 : <>
                     {
                         history.push(`/`)

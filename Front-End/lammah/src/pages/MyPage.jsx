@@ -37,7 +37,7 @@ export default function MyPage(props) {
             .then((res) => {
                 setUserInformation(res.data.user_info)
                 setEditProfile(res.data.user_info)
-                  console.log('res ', res)
+                console.log('res ', res)
                 setApointments(res.data.appointments)
             })
     }, [deleteAppointment, infoUpdate])
@@ -80,7 +80,7 @@ export default function MyPage(props) {
 
 
 
-    const allApointment = apointments.map((apointment, index) => {
+    const allApointment = apointments.map((apointment) => {
         // console.log(apointment)
         if (apointments.length !== 0) {
             console.log(apointment)
@@ -104,110 +104,112 @@ export default function MyPage(props) {
         <>
             {props.auth.isLoggedIn ?
                 <>
-                    {apointments.length !== 0 ? <>
-                        <div className="MyPage">
 
-                            <Container >
-                                <Row className="personal-info">
-                                    <h1>{t("personal_info")}</h1>
-                                </Row>
-                                <Row className="info-container" style={{
-                                    display: 'flex',
-                                    flexWrap: 'wrap',
-                                }}>
-                                    <Col className="img-container" xs={4} xl={3} md={4}>
-                                        <Image src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon.png"
-                                            style={{
-                                                width: '100%',
-                                                maxWidth: '100%',
-                                            }}
-                                        />
-                                    </Col>
-                                    <Col className="user-info" xs={4} xl={6} md={4}>
-                                        <p className='user-name'><b>{t("name")} : </b>{userInformation.name}  </p>
-                                        <p className="user-email"><b>{t("email")} : </b> {userInformation.email} </p>
-                                        <p className="user-phone"><b> {t("phone")} : </b>  {userInformation.phone} </p>
+                    <div className="MyPage">
 
-                                    </Col>
-                                    <Col className="pt-5"
+                        <Container >
+                            <Row className="personal-info">
+                                <h1>{t("personal_info")}</h1>
+                            </Row>
+                            <Row className="info-container" style={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                            }}>
+                                <Col className="img-container" xs={4} xl={3} md={4}>
+                                    <Image src="https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon.png"
                                         style={{
-                                            position: 'realtive',
-                                            right: '0',
-                                            paddingBottom: '0',
+                                            width: '100%',
+                                            maxWidth: '100%',
+                                        }}
+                                    />
+                                </Col>
+                                <Col className="user-info" xs={4} xl={6} md={4}>
+                                    <p className='user-name'><b>{t("name")} : </b>{userInformation.name}  </p>
+                                    <p className="user-email"><b>{t("email")} : </b> {userInformation.email} </p>
+                                    <p className="user-phone"><b> {t("phone")} : </b>  {userInformation.phone} </p>
+
+                                </Col>
+                                <Col className="pt-5"
+                                    style={{
+                                        position: 'realtive',
+                                        right: '0',
+                                        paddingBottom: '0',
+                                        width: '100%',
+
+                                    }}>
+                                    <Button onClick={handleShow} variant="white"
+                                        style={{
+                                            position: 'relative',
+                                            top: '0',
+                                            margin: '0',
+                                            padding: '0',
                                             width: '100%',
 
+
+
                                         }}>
-                                        <Button onClick={handleShow} variant="white"
-                                            style={{
-                                                position: 'relative',
-                                                top: '0',
-                                                margin: '0',
-                                                padding: '0',
-                                                width: '100%',
+                                        <GearFill color="#A4A2A1" size={30} />
 
-
-
-                                            }}>
-                                            <GearFill color="#A4A2A1" size={30} />
-
-                                        </Button>
-                                    </Col>
-                                </Row>
-                                <hr style={{ boxShadow: '0 4px 8px 0 gray, 0 6px 5px 0 orange', }} />
-                                <Row className="justify-content-md-center">
-                                    <h1 className="my-appoinment">{t("my_appointments")} </h1>
-                                </Row>
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <hr style={{ boxShadow: '0 4px 8px 0 gray, 0 6px 5px 0 orange', }} />
+                            <Row className="justify-content-md-center">
+                                <h1 className="my-appoinment">{t("my_appointments")} </h1>
+                            </Row>
+                            {apointments.length !== 0 ? <>
                                 <Row >
                                     {allApointment}
                                 </Row>
-                            </Container>
+                            </> : <>
+                                 <p style={{textAlign: 'center', marginTop: '5%'}}>{t("you_dont_have_any_appointment_yet")}</p>
+                                </>}
+                        </Container>
 
 
 
-                            <Modal show={show} onHide={handleClose} style={{ color: 'black' }}>
-                                <Modal.Header closeButton >
-                                    <Modal.Title style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}>{t("edit_your_info")}</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <Form.Group as={Col}>
-                                        <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("name")} : </h4>
-                                        <Form.Control name="name"
-                                            onChange={(e) => onChangeInput(e)}
-                                            defaultValue={userInformation.name}
-                                            type="text" />
-                                    </Form.Group>
-                                    <Form.Group as={Col}>
-                                        <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("email")} : </h4>
-                                        <Form.Control
-                                            name="email"
-                                            onChange={(e) => onChangeInput(e)}
-                                            defaultValue={userInformation.email}
-                                            type="text" />
-                                    </Form.Group>
-                                    <Form.Group as={Col}>
-                                        <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("phone")} : </h4>
-                                        <Form.Control name="phone"
-                                            onChange={(e) => onChangeInput(e)}
-                                            defaultValue={userInformation.phone}
-                                            type="text" />
-                                    </Form.Group>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleClose}>
-                                        {t("close")}
-                                    </Button>
-                                    <Button variant="secondary" onClick={(e) => {
-                                        onSubmit(e);
-                                        setInfoUpdate(!infoUpdate);
-                                    }}>
-                                        {t("save_changes")}
-                                    </Button>
-                                </Modal.Footer>
-                            </Modal>
-                        </div>
-                    </> : <>
+                        <Modal show={show} onHide={handleClose} style={{ color: 'black' }}>
+                            <Modal.Header closeButton >
+                                <Modal.Title style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}>{t("edit_your_info")}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form.Group as={Col}>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("name")} : </h4>
+                                    <Form.Control name="name"
+                                        onChange={(e) => onChangeInput(e)}
+                                        defaultValue={userInformation.name}
+                                        type="text" />
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("email")} : </h4>
+                                    <Form.Control
+                                        name="email"
+                                        onChange={(e) => onChangeInput(e)}
+                                        defaultValue={userInformation.email}
+                                        type="text" />
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <h4 style={{ fontSize: "23px", color: "black", fontFamily: "serif", fontWeight: "bold" }}> {t("phone")} : </h4>
+                                    <Form.Control name="phone"
+                                        onChange={(e) => onChangeInput(e)}
+                                        defaultValue={userInformation.phone}
+                                        type="text" />
+                                </Form.Group>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    {t("close")}
+                                </Button>
+                                <Button variant="secondary" onClick={(e) => {
+                                    onSubmit(e);
+                                    setInfoUpdate(!infoUpdate);
+                                }}>
+                                    {t("save_changes")}
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
 
-                        </>}
                 </>
 
 
