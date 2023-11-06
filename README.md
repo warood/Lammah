@@ -49,9 +49,7 @@ Using Agile methodology
 
 ## Live link
 https://proj4-lammah.herokuapp.com/
-cd 
-## Work distribution
-![Work distribution](/tasks.png)
+ 
 ## Created by 
 * Asim Sami
 * Tala Alghamdi
